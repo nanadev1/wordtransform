@@ -1446,18 +1446,20 @@
             <div class="hero-fallback-bg" id="heroFallback"></div>
             <!-- Floating particles -->
             <div class="hero-particles" id="heroParticles"></div>
-            <!-- Free stock video — crowd, worship, people with hands raised -->
+            <!-- Free stock video — church worship, hands raised, choir -->
             <video
                 id="heroVideo"
                 class="hero-yt-frame"
                 autoplay muted loop playsinline
                 preload="auto"
                 poster="worship1.jpg">
-                <!-- Mixkit free videos — direct MP4, no login, no CORS restrictions -->
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-at-a-music-concert-with-their-hands-4608-large.mp4" type="video/mp4">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-group-of-people-with-hands-raised-at-a-concert-4607-large.mp4" type="video/mp4">
+                <!-- Mixkit free-license worship/church videos — no CORS issues -->
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-gospel-choir-singing-in-a-church-42894-large.mp4" type="video/mp4">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-people-raising-hands-in-a-concert-42610-large.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-at-a-music-concert-with-their-hands-4608-large.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-group-of-people-with-hands-raised-at-a-concert-4607-large.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-cheering-and-celebrating-4639-large.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-people-waving-their-hands-at-a-live-music-event-11-large.mp4" type="video/mp4">
             </video>
             <div class="hero-video-overlay"></div>
         </div>
@@ -2059,7 +2061,12 @@
             </div>
             <hr>
             <div class="text-center">
-                <p class="text-white-50 mb-0">&copy; 2024 Word Transformation Church. All rights reserved.</p>
+                <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+                <p class="mt-2" style="font-size:0.85rem;">
+                    <a href="privacy.html" class="text-white-50 me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-white-50 me-3">Terms &amp; Conditions</a>
+                    <a href="sitemap.html" class="text-white-50">Sitemap</a>
+                </p>
             </div>
         </div>
     </footer>
@@ -2198,17 +2205,36 @@
         var vid = document.getElementById('heroVideo');
         var fallback = document.getElementById('heroFallback');
         if (vid) {
-            // When video starts playing, smoothly fade out the static poster
+            // Collect all <source> srcs for manual cycling
+            var sources = Array.from(vid.querySelectorAll('source')).map(function(s){ return s.src; });
+            var srcIdx = 0;
+
+            function tryNextSource() {
+                srcIdx++;
+                if (srcIdx < sources.length) {
+                    vid.src = sources[srcIdx];
+                    vid.load();
+                    vid.play().catch(function(){});
+                } else {
+                    console.log('All hero video sources exhausted — showing animated fallback');
+                }
+            }
+
             vid.addEventListener('playing', function(){
                 if (fallback) {
                     fallback.style.transition = 'opacity 1.8s ease';
                     fallback.style.opacity = '0';
                 }
             });
-            // If all sources fail, fallback stays visible with its Ken Burns animation
-            vid.addEventListener('error', function(){
-                console.log('Hero video source failed — showing animated fallback');
-            });
+
+            vid.addEventListener('error', tryNextSource);
+
+            // Also set a timeout — if nothing plays in 5s try next
+            var playTimeout = setTimeout(function(){
+                if (vid.readyState < 2) tryNextSource();
+            }, 5000);
+
+            vid.addEventListener('playing', function(){ clearTimeout(playTimeout); });
         }
     })();
     </script>
