@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Location | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-color:#8B5E3C;--primary-dark:#6B4A2E;--secondary-color:#D4AF37;--accent-color:#2C5F2D;--light-bg:#F9F6F0;--dark-bg:#1A1A1A;--deep-brown:#4A3728;--text-dark:#333333;--text-light:#666666;--white:#FFFFFF;--heading-font:'Playfair Display',serif;--body-font:'Inter',sans-serif;--border-radius:8px;}
+        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;scroll-padding-top:70px;}
+        body{font-family:var(--body-font);color:var(--text-dark);background:var(--white);line-height:1.6;}
+        h1,h2,h3,h4,h5,h6{font-family:var(--heading-font);font-weight:600;line-height:1.3;}
+        a{text-decoration:none;transition:all 0.3s ease;}
+        .navbar{background-color:var(--deep-brown);padding:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+        .navbar-brand{font-family:var(--heading-font);font-size:1.4rem;font-weight:600;color:var(--white)!important;}
+        .navbar-brand i{color:var(--secondary-color);margin-right:0.5rem;}
+        .navbar-nav .nav-link{color:rgba(255,255,255,0.88)!important;font-weight:500;padding:0.5rem 1rem!important;border-radius:var(--border-radius);transition:all 0.3s ease;}
+        .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--white)!important;background:rgba(255,255,255,0.1);}
+        .btn-give{background:var(--secondary-color);color:var(--deep-brown);border:none;padding:0.45rem 1.25rem;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;}
+        .btn-give:hover{background:#b8972e;transform:translateY(-2px);}
+        .page-hero{background:linear-gradient(135deg,var(--deep-brown) 0%,#2E1F14 100%);padding:5rem 0 4rem;text-align:center;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.12) 0%,transparent 60%);}
+        .page-hero-content{position:relative;}
+        .eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1rem;display:block;}
+        .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:300;color:#F5F0E8;margin-bottom:1rem;}
+        .page-hero p{font-size:1.05rem;color:rgba(245,240,232,0.72);max-width:520px;margin:0 auto;}
+        .hero-div{display:flex;align-items:center;justify-content:center;gap:10px;margin:1.5rem auto 0;max-width:200px;}
+        .hero-div-line{flex:1;height:1px;background:rgba(212,175,55,0.4);}
+        .hero-div-dot{width:5px;height:5px;background:var(--secondary-color);border-radius:50%;flex-shrink:0;}
+
+        /* Quick info bar */
+        .info-bar{background:var(--deep-brown);padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+        .info-bar-item{display:flex;align-items:center;gap:10px;color:rgba(245,240,232,0.85);font-size:0.88rem;justify-content:center;}
+        .info-bar-item i{color:var(--secondary-color);font-size:1.1rem;}
+
+        /* Map section */
+        .map-section{padding:0;}
+        .map-frame{width:100%;height:400px;background:linear-gradient(135deg,#EDE4D3,#DDD4C5);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
+        .map-placeholder-icon{font-size:3rem;color:#C9A87A;}
+        .map-placeholder-text{font-size:0.9rem;color:var(--text-light);text-align:center;}
+        .map-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);background:var(--deep-brown);color:var(--secondary-color);width:44px;height:44px;border-radius:50% 50% 50% 0;rotate:-45deg;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+        .map-pin i{rotate:45deg;font-size:1.1rem;}
+        .map-frame iframe{width:100%;height:100%;border:none;}
+        .map-btn-row{display:flex;gap:10px;justify-content:center;padding:1.25rem;background:var(--light-bg);border-top:1px solid #EDE4D3;}
+        .btn-map{padding:0.55rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;border:none;}
+        .btn-map-primary{background:var(--deep-brown);color:#F5F0E8;}
+        .btn-map-primary:hover{background:var(--primary-dark);}
+        .btn-map-outline{background:transparent;color:var(--deep-brown);border:1px solid #DDD4C5!important;}
+        .btn-map-outline:hover{background:var(--deep-brown);color:#F5F0E8;border-color:var(--deep-brown)!important;}
+
+        /* Contact grid */
+        .contact-section{padding:80px 0;}
+        .info-card{background:var(--light-bg);border:1px solid #EDE4D3;border-radius:12px;padding:1.75rem;height:100%;transition:all 0.3s ease;}
+        .info-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(139,94,60,0.08);}
+        .info-icon{width:52px;height:52px;background:var(--white);border:1px solid #EDE4D3;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--primary-color);margin-bottom:1.25rem;}
+        .info-card h4{font-size:1rem;color:var(--deep-brown);margin-bottom:0.75rem;}
+        .info-card p,.info-card a{font-size:0.88rem;color:var(--text-light);line-height:1.7;}
+        .info-card a:hover{color:var(--primary-color);}
+
+        /* Service times */
+        .times-section{background:var(--light-bg);padding:60px 0;}
+        .times-card{background:var(--white);border:1px solid #EDE4D3;border-radius:12px;overflow:hidden;}
+        .times-header{background:var(--deep-brown);padding:1.5rem;display:flex;align-items:center;gap:12px;}
+        .times-header i{font-size:1.5rem;color:var(--secondary-color);}
+        .times-header h3{font-size:1.2rem;color:#F5F0E8;margin:0;}
+        .time-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid #F5F0E8;}
+        .time-row:last-child{border-bottom:none;}
+        .time-day{font-weight:500;color:var(--text-dark);font-size:0.9rem;}
+        .time-service{font-size:0.82rem;color:var(--text-light);}
+        .time-val{font-family:var(--heading-font);font-size:1rem;color:var(--deep-brown);}
+
+        /* Form */
+        .form-section{padding:80px 0;background:var(--white);}
+        .form-card{background:var(--white);border:1px solid #EDE4D3;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(139,94,60,0.07);}
+        .form-header{background:linear-gradient(135deg,var(--deep-brown),#2E1F14);padding:2rem 2.5rem;}
+        .form-header h2{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#F5F0E8;margin-bottom:0.3rem;}
+        .form-header p{font-size:0.85rem;color:rgba(245,240,232,0.65);margin:0;}
+        .form-body{padding:2rem 2.5rem;}
+        .form-group{margin-bottom:1.1rem;}
+        .form-group label{display:block;font-size:0.75rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.4rem;}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:0.65rem 0.9rem;border:1.5px solid #DDD4C5;border-radius:8px;font-size:0.92rem;color:var(--text-dark);outline:none;transition:border-color 0.2s;font-family:var(--body-font);}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--secondary-color);}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+        .btn-send{padding:0.75rem 2rem;background:var(--deep-brown);color:#F5F0E8;border:none;border-radius:50px;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+        .btn-send:hover{background:var(--primary-dark);transform:translateY(-1px);}
+
+        /* Plan visit */
+        .visit-section{background:linear-gradient(135deg,var(--deep-brown),#2E1F14);padding:5rem 0;text-align:center;}
+        .visit-section h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:#F5F0E8;margin-bottom:1rem;}
+        .visit-section p{color:rgba(245,240,232,0.7);max-width:540px;margin:0 auto 2rem;font-size:0.95rem;}
+        .visit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:700px;margin:0 auto;}
+        .visit-card{background:rgba(255,255,255,0.07);border:1px solid rgba(212,175,55,0.2);border-radius:10px;padding:1.25rem;text-align:center;}
+        .visit-card i{font-size:1.4rem;color:var(--secondary-color);margin-bottom:0.5rem;display:block;}
+        .visit-card h5{font-size:0.88rem;color:#F5F0E8;margin-bottom:0.35rem;}
+        .visit-card p{font-size:0.78rem;color:rgba(245,240,232,0.6);margin:0;}
+
+        /* Toast */
+        #toast{position:fixed;bottom:2rem;right:2rem;background:var(--deep-brown);color:#F5F0E8;padding:0.75rem 1.25rem;border-radius:8px;font-size:0.88rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,0.2);opacity:0;transform:translateY(12px);transition:all 0.3s ease;z-index:9999;}
+
+        .footer{background-color:var(--dark-bg);color:var(--white);padding:60px 0 30px;}
+        .footer h5{color:var(--white);margin-bottom:1.5rem;}
+        .footer a{color:rgba(255,255,255,0.7);}
+        .footer a:hover{color:var(--secondary-color);}
+        .footer hr{opacity:0.2;margin:2rem 0;}
+        @media(max-width:768px){.visit-cards{grid-template-columns:1fr;max-width:320px;}.form-row{grid-template-columns:1fr;}.form-header,.form-body{padding:1.5rem;}.info-bar .row{gap:0.75rem;}.navbar-collapse{background:var(--deep-brown);padding:1rem;border-radius:var(--border-radius);margin-top:0.5rem;}}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="devotional.html">Devotional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="smallgroups.html">Small Groups</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <div class="container"><div class="page-hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>Contact & Location</h1>
+            <p>We would love to hear from you. Come visit us or reach out anytime.</p>
+            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+        </div></div>
+    </div>
+
+    <!-- Quick info bar -->
+    <div class="info-bar">
+        <div class="container">
+            <div class="row g-3 justify-content-center">
+                <div class="col-md-auto"><div class="info-bar-item"><i class="bi bi-geo-alt-fill"></i> 14 Church Avenue, East Legon, Accra</div></div>
+                <div class="col-md-auto"><div class="info-bar-item"><i class="bi bi-telephone-fill"></i> +233 20 000 0000</div></div>
+                <div class="col-md-auto"><div class="info-bar-item"><i class="bi bi-envelope-fill"></i> info@wordtransformation.org</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-section">
+        <div class="map-frame">
+            <!-- Replace src with your actual Google Maps embed URL -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.658!2d-0.1769!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMzYnMTMuMyJOIDDCsDEwJzM2LjgiVw!5e0!3m2!1sen!2sgh!4v1000000000!5m2!1sen!2sgh" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Church Location"></iframe>
+        </div>
+        <div class="map-btn-row">
+            <a href="https://maps.google.com/?q=East+Legon+Accra+Ghana" target="_blank" class="btn-map btn-map-primary"><i class="bi bi-map-fill"></i> Open in Google Maps</a>
+            <a href="https://maps.google.com/maps/dir/?api=1&destination=East+Legon+Accra+Ghana" target="_blank" class="btn-map btn-map-outline"><i class="bi bi-arrow-right-circle"></i> Get Directions</a>
+        </div>
+    </div>
+
+    <!-- Contact info -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4"><div class="info-card">
+                    <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                    <h4>Our Address</h4>
+                    <p>14 Church Avenue<br>East Legon, Accra<br>Greater Accra Region, Ghana</p>
+                    <a href="https://maps.google.com/?q=East+Legon+Accra" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:0.75rem;font-size:0.82rem;color:var(--primary-color);font-weight:500;"><i class="bi bi-box-arrow-up-right"></i> View on map</a>
+                </div></div>
+                <div class="col-md-4"><div class="info-card">
+                    <div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
+                    <h4>Phone & Email</h4>
+                    <p>Main line: <a href="tel:+233200000000">+233 20 000 0000</a><br>
+                    Pastor's office: <a href="tel:+233200000001">+233 20 000 0001</a><br><br>
+                    General: <a href="mailto:info@wordtransformation.org">info@wordtransformation.org</a><br>
+                    Prayer: <a href="mailto:prayer@wordtransformation.org">prayer@wordtransformation.org</a></p>
+                </div></div>
+                <div class="col-md-4"><div class="info-card">
+                    <div class="info-icon"><i class="bi bi-clock-fill"></i></div>
+                    <h4>Office Hours</h4>
+                    <p>Monday – Friday<br>8:00 AM – 5:00 PM<br><br>
+                    Saturday<br>9:00 AM – 1:00 PM<br><br>
+                    Sunday: Services only</p>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Times & Directions -->
+    <section class="times-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="times-card">
+                        <div class="times-header"><i class="bi bi-clock-fill"></i><h3>Service Times</h3></div>
+                        <div class="time-row"><div><div class="time-day">Sunday</div><div class="time-service">First Service</div></div><div class="time-val">9:00 AM</div></div>
+                        <div class="time-row"><div><div class="time-day">Sunday</div><div class="time-service">Second Service</div></div><div class="time-val">11:00 AM</div></div>
+                        <div class="time-row"><div><div class="time-day">Wednesday</div><div class="time-service">Midweek Bible Study</div></div><div class="time-val">7:00 PM</div></div>
+                        <div class="time-row"><div><div class="time-day">Friday</div><div class="time-service">Prayer & Worship Night</div></div><div class="time-val">6:30 PM</div></div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <h3 style="font-size:1.5rem;color:var(--deep-brown);margin-bottom:1.25rem;">Getting Here</h3>
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div style="display:flex;gap:14px;"><div style="width:40px;height:40px;background:var(--light-bg);border:1px solid #EDE4D3;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-car-front-fill" style="color:var(--primary-color);"></i></div><div><div style="font-weight:500;font-size:0.9rem;color:var(--text-dark);margin-bottom:3px;">By Car</div><div style="font-size:0.85rem;color:var(--text-light);">Take the Accra–Tema Motorway and exit at the East Legon interchange. Head north on the main East Legon road, then turn right onto Church Avenue. Parking is available on-site.</div></div></div>
+                        <div style="display:flex;gap:14px;"><div style="width:40px;height:40px;background:var(--light-bg);border:1px solid #EDE4D3;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-bus-front-fill" style="color:var(--primary-color);"></i></div><div><div style="font-weight:500;font-size:0.9rem;color:var(--text-dark);margin-bottom:3px;">By Bus / Trotro</div><div style="font-size:0.85rem;color:var(--text-light);">Take any trotro heading to East Legon from Accra Central or Madina. Alight at the East Legon main junction. The church is a 5-minute walk down Church Avenue.</div></div></div>
+                        <div style="display:flex;gap:14px;"><div style="width:40px;height:40px;background:var(--light-bg);border:1px solid #EDE4D3;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-phone-fill" style="color:var(--primary-color);"></i></div><div><div style="font-weight:500;font-size:0.9rem;color:var(--text-dark);margin-bottom:3px;">Uber / Bolt</div><div style="font-size:0.85rem;color:var(--text-light);">Search "Word Transformation Church, East Legon, Accra" on Uber or Bolt. Both services are widely available in the area.</div></div></div>
+                        <div style="display:flex;gap:14px;"><div style="width:40px;height:40px;background:var(--light-bg);border:1px solid #EDE4D3;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-p-circle-fill" style="color:var(--primary-color);"></i></div><div><div style="font-weight:500;font-size:0.9rem;color:var(--text-dark);margin-bottom:3px;">Parking</div><div style="font-size:0.85rem;color:var(--text-light);">Free parking is available in our compound and on the street. Parking attendants are on duty during Sunday services. Arrive 15 minutes early for best availability.</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="form-section" id="message">
+        <div class="container" style="max-width:760px;">
+            <div class="form-card">
+                <div class="form-header">
+                    <h2>Send Us a Message</h2>
+                    <p>We read and respond to every message within 2 business days.</p>
+                </div>
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-group"><label>First name</label><input type="text" id="c-first" placeholder="Kwame"></div>
+                        <div class="form-group"><label>Last name</label><input type="text" id="c-last" placeholder="Mensah"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Email address</label><input type="email" id="c-email" placeholder="you@example.com"></div>
+                        <div class="form-group"><label>Phone number</label><input type="tel" placeholder="024 000 0000"></div>
+                    </div>
+                    <div class="form-group"><label>Subject</label>
+                        <select id="c-subject">
+                            <option value="">Select a topic...</option>
+                            <option>General enquiry</option>
+                            <option>Plan a visit</option>
+                            <option>Prayer request</option>
+                            <option>Pastoral care</option>
+                            <option>Membership</option>
+                            <option>Volunteering</option>
+                            <option>Venue booking</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Message</label><textarea rows="5" id="c-message" placeholder="How can we help you?"></textarea></div>
+                    <button class="btn-send" onclick="submitContact()"><i class="bi bi-send"></i> Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan your visit -->
+    <section class="visit-section">
+        <div class="container">
+            <h2>Planning your first visit?</h2>
+            <p>We want to make your first Sunday as easy and welcoming as possible. Here is what to expect.</p>
+            <div class="visit-cards">
+                <div class="visit-card"><i class="bi bi-clock"></i><h5>Arrive a little early</h5><p>Services start promptly. Doors open 30 minutes before.</p></div>
+                <div class="visit-card"><i class="bi bi-person-heart"></i><h5>Come as you are</h5><p>There is no dress code. You are welcome exactly as you are.</p></div>
+                <div class="visit-card"><i class="bi bi-cup-hot"></i><h5>Stay for tea</h5><p>Join us after service for refreshments and fellowship.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast"><i class="bi bi-check-circle-fill"></i><span id="toast-text">Message sent!</span></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+                <div class="col-md-2 mb-4"><h5>Pages</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="about.html">About</a></li><li class="mb-2"><a href="contact.html">Contact</a></li><li class="mb-2"><a href="portal.html">My Account</a></li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
+            </div>
+            <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showToast(msg){var t=document.getElementById('toast');document.getElementById('toast-text').textContent=msg;t.style.opacity='1';t.style.transform='translateY(0)';setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';},3200);}
+        function submitContact(){
+            var first=document.getElementById('c-first').value.trim();
+            var email=document.getElementById('c-email').value.trim();
+            var msg=document.getElementById('c-message').value.trim();
+            if(!first||!email||!msg){alert('Please fill in your name, email, and message.');return;}
+            showToast('Message sent! We will get back to you within 2 business days.');
+            document.getElementById('c-first').value='';document.getElementById('c-last').value='';document.getElementById('c-email').value='';document.getElementById('c-message').value='';document.getElementById('c-subject').value='';
+        }
+    </script>
+</body>
+</html>

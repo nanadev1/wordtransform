@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Devotional | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-color:#8B5E3C;--primary-dark:#6B4A2E;--secondary-color:#D4AF37;--accent-color:#2C5F2D;--light-bg:#F9F6F0;--dark-bg:#1A1A1A;--deep-brown:#4A3728;--text-dark:#333333;--text-light:#666666;--white:#FFFFFF;--heading-font:'Playfair Display',serif;--body-font:'Inter',sans-serif;--border-radius:8px;}
+        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+        body{font-family:var(--body-font);color:var(--text-dark);background:var(--light-bg);line-height:1.6;}
+        h1,h2,h3,h4,h5,h6{font-family:var(--heading-font);font-weight:600;line-height:1.3;}
+        a{text-decoration:none;transition:all 0.3s ease;}
+        .navbar{background-color:var(--deep-brown);padding:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+        .navbar-brand{font-family:var(--heading-font);font-size:1.4rem;font-weight:600;color:var(--white)!important;}
+        .navbar-brand i{color:var(--secondary-color);margin-right:0.5rem;}
+        .navbar-nav .nav-link{color:rgba(255,255,255,0.88)!important;font-weight:500;padding:0.5rem 1rem!important;border-radius:var(--border-radius);transition:all 0.3s ease;}
+        .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--white)!important;background:rgba(255,255,255,0.1);}
+        .btn-give{background:var(--secondary-color);color:var(--deep-brown);border:none;padding:0.45rem 1.25rem;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;}
+        .btn-give:hover{background:#b8972e;transform:translateY(-2px);}
+
+        /* Layout */
+        .devo-wrap{max-width:1100px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+        .devo-grid{display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start;}
+
+        /* Main Card */
+        .devo-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(139,94,60,0.08);border:1px solid #EDE4D3;}
+        .devo-card-header{background:linear-gradient(135deg,var(--deep-brown),#2E1F14);padding:2.5rem 2.5rem 2rem;position:relative;overflow:hidden;}
+        .devo-card-header::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(212,175,55,0.08);}
+        .devo-date-badge{display:inline-flex;align-items:center;gap:6px;font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1.25rem;}
+        .devo-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#F5F0E8;margin-bottom:1rem;line-height:1.2;}
+        .devo-verse-ref{font-size:0.8rem;color:rgba(245,240,232,0.6);display:flex;align-items:center;gap:6px;}
+
+        .devo-body{padding:2rem 2.5rem;}
+        .devo-key-verse{background:var(--light-bg);border-left:4px solid var(--secondary-color);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin-bottom:1.75rem;}
+        .devo-key-verse-label{font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:0.5rem;}
+        .devo-key-verse blockquote{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--deep-brown);margin:0;line-height:1.5;}
+        .devo-key-verse cite{font-size:0.8rem;color:var(--text-light);font-style:normal;margin-top:6px;display:block;}
+
+        .devo-content p{font-size:0.96rem;color:var(--text-dark);line-height:1.85;margin-bottom:1.1rem;}
+        .devo-content p:last-child{margin-bottom:0;}
+
+        .devo-reflection{margin-top:2rem;padding-top:1.75rem;border-top:1px solid #EDE4D3;}
+        .devo-reflection-title{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1rem;}
+        .reflection-item{display:flex;gap:10px;margin-bottom:0.85rem;font-size:0.92rem;color:var(--text-dark);}
+        .reflection-num{width:24px;height:24px;border-radius:50%;background:var(--light-bg);border:1px solid #DDD4C5;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--primary-color);flex-shrink:0;margin-top:2px;}
+
+        .devo-prayer{background:linear-gradient(135deg,#F0EAE0,var(--light-bg));border-radius:10px;padding:1.5rem;margin-top:1.75rem;}
+        .devo-prayer-label{font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--primary-color);margin-bottom:0.75rem;}
+        .devo-prayer p{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--deep-brown);line-height:1.7;margin:0;}
+
+        .devo-actions{display:flex;gap:10px;padding:1.5rem 2.5rem;border-top:1px solid #EDE4D3;flex-wrap:wrap;}
+        .btn-devo{padding:0.55rem 1.3rem;border-radius:50px;font-size:0.82rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:6px;border:none;}
+        .btn-devo-primary{background:var(--deep-brown);color:#F5F0E8;}
+        .btn-devo-primary:hover{background:var(--primary-dark);}
+        .btn-devo-outline{background:transparent;color:var(--deep-brown);border:1px solid #DDD4C5!important;}
+        .btn-devo-outline:hover{background:var(--light-bg);border-color:var(--primary-color)!important;}
+
+        /* Sidebar */
+        .sidebar-card{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid #EDE4D3;margin-bottom:1.25rem;box-shadow:0 2px 10px rgba(139,94,60,0.05);}
+        .sidebar-card-header{padding:1rem 1.25rem;border-bottom:1px solid #EDE4D3;display:flex;align-items:center;justify-content:space-between;}
+        .sidebar-card-header h5{font-size:0.88rem;color:var(--deep-brown);margin:0;}
+        .sidebar-card-body{padding:1.25rem;}
+
+        /* Subscribe */
+        .subscribe-card{background:linear-gradient(135deg,var(--deep-brown),#2E1F14);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;}
+        .subscribe-card h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#F5F0E8;margin-bottom:0.5rem;}
+        .subscribe-card p{font-size:0.82rem;color:rgba(245,240,232,0.65);margin-bottom:1rem;}
+        .subscribe-input{width:100%;padding:0.6rem 0.9rem;border-radius:8px;border:none;font-size:0.88rem;margin-bottom:8px;outline:none;background:rgba(255,255,255,0.1);color:#F5F0E8;}
+        .subscribe-input::placeholder{color:rgba(245,240,232,0.4);}
+        .subscribe-input:focus{background:rgba(255,255,255,0.15);}
+        .btn-subscribe{width:100%;padding:0.6rem;background:var(--secondary-color);color:var(--deep-brown);border:none;border-radius:8px;font-weight:600;font-size:0.88rem;cursor:pointer;transition:all 0.2s;}
+        .btn-subscribe:hover{background:#b8972e;}
+
+        /* Archive list */
+        .archive-item{display:flex;align-items:flex-start;gap:10px;padding:0.75rem 0;border-bottom:1px solid #F5F0E8;cursor:pointer;transition:all 0.2s;}
+        .archive-item:last-child{border-bottom:none;padding-bottom:0;}
+        .archive-item:hover{padding-left:4px;}
+        .archive-date{width:44px;flex-shrink:0;background:var(--light-bg);border-radius:6px;text-align:center;padding:0.3rem;}
+        .archive-date .d{font-family:var(--heading-font);font-size:1.1rem;color:var(--deep-brown);line-height:1;}
+        .archive-date .m{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-light);}
+        .archive-info h6{font-size:0.85rem;color:var(--text-dark);margin-bottom:2px;line-height:1.3;}
+        .archive-info small{font-size:0.72rem;color:var(--text-light);}
+
+        /* Verse of week */
+        .votw{background:var(--light-bg);border-radius:10px;padding:1.25rem;text-align:center;}
+        .votw blockquote{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--deep-brown);line-height:1.5;margin-bottom:0.5rem;}
+        .votw cite{font-size:0.78rem;color:var(--secondary-color);font-style:normal;font-weight:500;}
+
+        .footer{background-color:var(--dark-bg);color:var(--white);padding:60px 0 30px;}
+        .footer h5{color:var(--white);margin-bottom:1.5rem;}
+        .footer a{color:rgba(255,255,255,0.7);}
+        .footer a:hover{color:var(--secondary-color);}
+        .footer hr{opacity:0.2;margin:2rem 0;}
+        @media(max-width:900px){.devo-grid{grid-template-columns:1fr;}.devo-card-header,.devo-body,.devo-actions{padding-left:1.5rem;padding-right:1.5rem;}.navbar-collapse{background:var(--deep-brown);padding:1rem;border-radius:var(--border-radius);margin-top:0.5rem;}}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="devotional.html">Devotional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="smallgroups.html">Small Groups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="devo-wrap">
+        <div class="devo-grid">
+            <!-- Main devotional -->
+            <div>
+                <div class="devo-card">
+                    <div class="devo-card-header">
+                        <div class="devo-date-badge"><i class="bi bi-calendar3"></i> <span id="devo-date">Friday, March 13, 2026</span></div>
+                        <h1 class="devo-title">His Mercies Are New Every Morning</h1>
+                        <p class="devo-verse-ref"><i class="bi bi-book"></i> Lamentations 3:22–23 &nbsp;·&nbsp; By Pastor James Boateng</p>
+                    </div>
+                    <div class="devo-body">
+                        <div class="devo-key-verse">
+                            <p class="devo-key-verse-label">Today's key verse</p>
+                            <blockquote>"The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness."</blockquote>
+                            <cite>— Lamentations 3:22–23 (ESV)</cite>
+                        </div>
+                        <div class="devo-content">
+                            <p>Every morning you wake up, you are greeted by a fresh supply of God's mercy. Yesterday's mistakes do not carry forward into today's account. Yesterday's failures do not define today's possibilities. God's mercies reset — new, full, and freely given — with every sunrise.</p>
+                            <p>The writer of Lamentations penned these words in the middle of unimaginable grief. Jerusalem had fallen. The temple was destroyed. Yet in the rubble of catastrophe, he found something that could not be destroyed: the faithfulness of God. "Great is your faithfulness," he wrote — not because his circumstances were great, but because God was.</p>
+                            <p>This is the miracle of grace. It is not earned by our performance or lost by our failures. It is rooted in the unchanging character of a God who loves relentlessly. Each morning He says to you: start again. I have not run out. I have not given up. My mercies for you are new.</p>
+                            <p>Whatever you are carrying from yesterday — guilt, regret, disappointment, weariness — you do not have to bring it into today. Receive the mercy that God is extending to you this morning. His faithfulness is the ground beneath your feet.</p>
+                        </div>
+                        <div class="devo-reflection">
+                            <p class="devo-reflection-title">Reflection questions</p>
+                            <div class="reflection-item"><div class="reflection-num">1</div><p>What from yesterday are you tempted to carry into today that God is asking you to leave behind?</p></div>
+                            <div class="reflection-item"><div class="reflection-num">2</div><p>How does knowing that God's mercies are new every morning change the way you approach today?</p></div>
+                            <div class="reflection-item"><div class="reflection-num">3</div><p>In what area of your life do you most need to experience God's faithfulness right now?</p></div>
+                        </div>
+                        <div class="devo-prayer">
+                            <p class="devo-prayer-label">Prayer</p>
+                            <p>Heavenly Father, thank You that Your mercies are new this morning. I choose to receive Your grace afresh today. Where I have fallen short, forgive me. Where I am weary, renew me. Where I have lost hope, restore me. Great is Your faithfulness. Let me walk in that truth today. In Jesus' name, Amen.</p>
+                        </div>
+                    </div>
+                    <div class="devo-actions">
+                        <button class="btn-devo btn-devo-primary" onclick="shareDevo()"><i class="bi bi-share"></i> Share</button>
+                        <button class="btn-devo btn-devo-outline" onclick="copyDevo()"><i class="bi bi-clipboard"></i> Copy verse</button>
+                        <button class="btn-devo btn-devo-outline"><i class="bi bi-printer"></i> Print</button>
+                        <button class="btn-devo btn-devo-outline" onclick="markRead()"><i class="bi bi-bookmark-plus"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <div class="subscribe-card">
+                    <h4>Get the daily word</h4>
+                    <p>Receive today's devotional in your inbox every morning at 6:00 AM.</p>
+                    <input type="email" class="subscribe-input" placeholder="Your email address">
+                    <button class="btn-subscribe" onclick="showToast('You\'re subscribed! Check your inbox.')">Subscribe — it\'s free</button>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header"><h5>Verse of the week</h5></div>
+                    <div class="sidebar-card-body">
+                        <div class="votw">
+                            <blockquote>"I can do all things through Christ who strengthens me."</blockquote>
+                            <cite>Philippians 4:13</cite>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header"><h5>Recent devotionals</h5><a href="#" style="font-size:0.78rem;color:var(--primary-color);">View all</a></div>
+                    <div class="sidebar-card-body" style="padding-top:0.5rem;padding-bottom:0.5rem;">
+                        <div class="archive-item"><div class="archive-date"><div class="d">12</div><div class="m">Mar</div></div><div class="archive-info"><h6>When God Seems Silent</h6><small>Psalm 46:10</small></div></div>
+                        <div class="archive-item"><div class="archive-date"><div class="d">11</div><div class="m">Mar</div></div><div class="archive-info"><h6>The God Who Provides</h6><small>Philippians 4:19</small></div></div>
+                        <div class="archive-item"><div class="archive-date"><div class="d">10</div><div class="m">Mar</div></div><div class="archive-info"><h6>Strength in Surrender</h6><small>Matthew 11:28–29</small></div></div>
+                        <div class="archive-item"><div class="archive-date"><div class="d">9</div><div class="m">Mar</div></div><div class="archive-info"><h6>Chosen and Loved</h6><small>Ephesians 1:4–5</small></div></div>
+                        <div class="archive-item"><div class="archive-date"><div class="d">8</div><div class="m">Mar</div></div><div class="archive-info"><h6>Walking by Faith</h6><small>2 Corinthians 5:7</small></div></div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header"><h5>Browse by topic</h5></div>
+                    <div class="sidebar-card-body" style="display:flex;flex-wrap:wrap;gap:6px;">
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Faith</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Prayer</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Grace</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Identity</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Purpose</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Healing</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Family</span>
+                        <span style="padding:4px 12px;border-radius:50px;background:var(--light-bg);border:1px solid #EDE4D3;font-size:0.75rem;color:var(--text-light);cursor:pointer;">Worship</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" style="position:fixed;bottom:2rem;right:2rem;background:var(--deep-brown);color:#F5F0E8;padding:0.75rem 1.25rem;border-radius:8px;font-size:0.88rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,0.2);opacity:0;transform:translateY(12px);transition:all 0.3s ease;z-index:9999;"><i class="bi bi-check-circle-fill"></i><span id="toast-text"></span></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+                <div class="col-md-2 mb-4"><h5>Pages</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="about.html">About</a></li><li class="mb-2"><a href="devotional.html">Devotional</a></li><li class="mb-2"><a href="sermons.html">Sermons</a></li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
+            </div>
+            <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('devo-date').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+        function showToast(msg){var t=document.getElementById('toast');document.getElementById('toast-text').textContent=msg;t.style.opacity='1';t.style.transform='translateY(0)';setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';},3200);}
+        function shareDevo(){if(navigator.share){navigator.share({title:"Today's Devotional — Word Transformation Church",text:"His Mercies Are New Every Morning",url:window.location.href});}else{navigator.clipboard.writeText(window.location.href);showToast('Link copied to clipboard!');}}
+        function copyDevo(){navigator.clipboard.writeText('"The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness." — Lamentations 3:22–23');showToast('Verse copied to clipboard!');}
+        function markRead(){showToast('Devotional saved to your reading list!');}
+    </script>
+</body>
+</html>
