@@ -1097,13 +1097,121 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-            transform: translateY(-2px);
+        /* ── Search ── */
+        .nav-search-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.05rem;
+            padding: 0.35rem 0.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
         }
-    
+        .nav-search-btn:hover { color: var(--secondary-color); }
 
+        .search-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 9999;
+            background: rgba(20,12,6,0.72);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 80px 1rem 1rem;
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .search-overlay.open { display: flex; }
+
+        .search-box {
+            background: var(--white);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 640px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: searchDrop 0.2s ease;
+        }
+        @keyframes searchDrop {
+            from { opacity: 0; transform: translateY(-16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .search-input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #EDE4D3;
+        }
+        .search-icon-inner { font-size: 1.05rem; color: var(--secondary-color); flex-shrink: 0; }
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-family: var(--body-font);
+            color: var(--text-dark);
+            background: transparent;
+        }
+        .search-input::placeholder { color: #bbb; }
+        .search-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.2rem;
+            transition: color 0.2s;
+            flex-shrink: 0;
+        }
+        .search-close-btn:hover { color: var(--text-dark); }
+
+        .search-results { max-height: 360px; overflow-y: auto; }
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid #F4EEE6;
+            text-decoration: none;
+            transition: background 0.15s ease;
+            cursor: pointer;
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover { background: var(--light-bg); }
+        .search-result-icon {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: rgba(212,175,55,0.12);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .search-result-icon.green { background: rgba(44,95,45,0.1); color: var(--accent-color); }
+        .search-result-icon.brown { background: rgba(74,55,40,0.1); color: var(--deep-brown); }
+        .search-result-icon.red   { background: rgba(220,38,38,0.08); color: #dc2626; }
+        .search-result-text { flex: 1; min-width: 0; }
+        .search-result-title { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .search-result-sub   { font-size: 0.76rem; color: var(--text-light); }
+        .search-result-arrow { color: #DDD4C5; font-size: 0.85rem; }
+        .search-empty { padding: 1.75rem 1.25rem; text-align: center; color: var(--text-light); font-size: 0.88rem; }
+        .search-empty i { font-size: 1.75rem; display: block; margin-bottom: 0.5rem; color: #DDD4C5; }
+        .search-hints { padding: 0.75rem 1.25rem; }
+        .search-hint-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.6rem; display: block; }
+        .search-quick-links { display: flex; flex-wrap: wrap; gap: 6px; }
+        .search-quick-link {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 12px; border-radius: 50px;
+            border: 1px solid #DDD4C5;
+            font-size: 0.78rem; font-weight: 500;
+            color: var(--text-dark); text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .search-quick-link:hover { border-color: var(--secondary-color); color: var(--deep-brown); background: rgba(212,175,55,0.07); }
     </style>
 </head>
 <body>
@@ -1124,6 +1232,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="prayer.html">Prayer</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="sermons.html">Sermons</a>
@@ -1154,7 +1266,12 @@
                         </ul>
                     </li>
 
-                    <!-- Action Buttons -->
+                    <!-- Search + Action Buttons -->
+                    <li class="nav-item ms-lg-1">
+                        <button class="nav-search-btn" onclick="toggleSearch()" title="Search site">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </li>
                     <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
                         <a href="livestream.html" class="btn-live-nav">
                             <span class="live-dot"></span> Join Live
@@ -1169,6 +1286,18 @@
             </div>
         </div>
     </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearchOnBg(event)">
+        <div class="search-box">
+            <div class="search-input-row">
+                <i class="bi bi-search search-icon-inner"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search sermons, events, blog posts…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)">
+                <button class="search-close-btn" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
@@ -1775,6 +1904,112 @@
             </div>
         </div>
     </footer>
+
+    <!-- Search JS -->
+    <script>
+    const SITE_PAGES = [
+        { title: 'Home',            url: 'index.html',       icon: 'bi-house-fill',           cat: 'Page',     iconClass: 'brown' },
+        { title: 'About Us',        url: 'about.html',       icon: 'bi-info-circle-fill',      cat: 'Page',     iconClass: 'brown' },
+        { title: 'Ministries',      url: 'ministries.html',  icon: 'bi-people-fill',           cat: 'Page',     iconClass: 'green' },
+        { title: 'Small Groups',    url: 'smallgroups.html', icon: 'bi-diagram-3-fill',        cat: 'Page',     iconClass: 'green' },
+        { title: 'Sermons',         url: 'sermons.html',     icon: 'bi-mic-fill',              cat: 'Page',     iconClass: 'brown' },
+        { title: 'Blog',            url: 'blog.html',        icon: 'bi-journal-text',          cat: 'Page',     iconClass: '' },
+        { title: 'Devotional',      url: 'devotional.html',  icon: 'bi-journal-bookmark-fill', cat: 'Page',     iconClass: 'green' },
+        { title: 'Events',          url: 'index.html#events',icon: 'bi-calendar-event-fill',   cat: 'Section',  iconClass: '' },
+        { title: 'Gallery',         url: 'gallery.html',     icon: 'bi-images',                cat: 'Page',     iconClass: '' },
+        { title: 'Volunteer',       url: 'volunteer.html',   icon: 'bi-hand-thumbs-up-fill',   cat: 'Page',     iconClass: 'green' },
+        { title: 'Contact Us',      url: 'contact.html',     icon: 'bi-envelope-fill',         cat: 'Page',     iconClass: 'brown' },
+        { title: 'Prayer Wall',     url: 'prayer.html',      icon: 'bi-hand-index-thumb-fill', cat: 'Page',     iconClass: 'green' },
+        { title: 'Join Live Stream',url: 'livestream.html',  icon: 'bi-youtube',               cat: 'Page',     iconClass: 'red'   },
+        { title: 'Give Online',     url: '#give',            icon: 'bi-heart-fill',            cat: 'Action',   iconClass: 'red'   },
+        { title: 'My Account',      url: 'portal.html',      icon: 'bi-person-circle',         cat: 'Page',     iconClass: 'brown' },
+        // Sermons
+        { title: 'When God\'s Silence Is His Answer', url: 'blog.html', icon: 'bi-book-fill', cat: 'Sermon', iconClass: 'brown', sub: 'John 11:1–44' },
+        { title: 'All Things Work Together',          url: 'blog.html', icon: 'bi-book-fill', cat: 'Sermon', iconClass: 'brown', sub: 'Romans 8:28' },
+        { title: 'Step Out of the Boat',              url: 'blog.html', icon: 'bi-book-fill', cat: 'Sermon', iconClass: 'brown', sub: 'Matthew 14:22–33' },
+        { title: 'The Power of Persistent Prayer',    url: 'prayer.html',icon: 'bi-book-fill',cat: 'Sermon', iconClass: 'brown', sub: 'Luke 18:1–8' },
+        // Services
+        { title: 'Sunday Service — 9:00 AM',  url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
+        { title: 'Sunday Service — 11:00 AM', url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
+        { title: 'Wednesday Bible Study — 7:00 PM', url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
+        { title: 'Friday Prayer Night — 6:30 PM',   url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
+    ];
+
+    function toggleSearch() {
+        const overlay = document.getElementById('searchOverlay');
+        const input   = document.getElementById('searchInput');
+        const isOpen  = overlay.classList.toggle('open');
+        if (isOpen) {
+            input.value = '';
+            document.getElementById('searchResults').innerHTML = renderHints();
+            setTimeout(() => input.focus(), 80);
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+
+    function closeSearchOnBg(e) {
+        if (e.target === document.getElementById('searchOverlay')) toggleSearch();
+    }
+
+    function handleSearchKey(e) {
+        if (e.key === 'Escape') toggleSearch();
+    }
+
+    function runSearch(q) {
+        const results = document.getElementById('searchResults');
+        q = q.trim().toLowerCase();
+        if (!q) { results.innerHTML = renderHints(); return; }
+
+        const matches = SITE_PAGES.filter(p =>
+            p.title.toLowerCase().includes(q) ||
+            (p.cat  && p.cat.toLowerCase().includes(q)) ||
+            (p.sub  && p.sub.toLowerCase().includes(q))
+        ).slice(0, 7);
+
+        if (!matches.length) {
+            results.innerHTML = `<div class="search-empty"><i class="bi bi-search"></i>No results for "<strong>${escQ(q)}</strong>"<br><span style="font-size:0.8rem;">Try: sermons, prayer, events, give…</span></div>`;
+            return;
+        }
+
+        results.innerHTML = matches.map(p => `
+            <a class="search-result-item" href="${p.url}">
+                <div class="search-result-icon ${p.iconClass||''}"><i class="bi ${p.icon}"></i></div>
+                <div class="search-result-text">
+                    <div class="search-result-title">${highlight(p.title, q)}</div>
+                    <div class="search-result-sub">${p.sub || p.cat}</div>
+                </div>
+                <i class="bi bi-arrow-right search-result-arrow"></i>
+            </a>`).join('');
+    }
+
+    function renderHints() {
+        return `<div class="search-hints">
+            <span class="search-hint-label">Quick Links</span>
+            <div class="search-quick-links">
+                <a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a>
+                <a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a>
+                <a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live Stream</a>
+                <a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a>
+                <a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a>
+                <a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a>
+                <a class="search-quick-link" href="contact.html"><i class="bi bi-envelope-fill"></i> Contact</a>
+            </div>
+        </div>`;
+    }
+
+    function highlight(text, q) {
+        const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+        return text.replace(re, '<mark style="background:rgba(212,175,55,0.3);border-radius:3px;padding:0 2px;">$1</mark>');
+    }
+    function escQ(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // Close on Escape key globally
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && document.getElementById('searchOverlay').classList.contains('open')) toggleSearch();
+    });
+    </script>
 
     <!-- Hero Image Loader with fallbacks -->
     <script>
