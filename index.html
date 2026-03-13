@@ -489,6 +489,317 @@
             .cd-grid { gap: 8px; }
             .cd-info { gap: 1rem; }
         }
+
+        /* ========================================
+           Give Button & Giving Modal
+           ======================================== */
+        .btn-give {
+            background-color: var(--secondary-color);
+            color: #4A3728;
+            border: none;
+            padding: 0.45rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+            transition: all 0.3s ease;
+        }
+        .btn-give:hover {
+            background-color: #b8972e;
+            color: #3a2a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212,175,55,0.35);
+        }
+
+        .giving-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(26,20,14,0.65);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .giving-modal {
+            background: #FDFAF5;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: giveSlideIn 0.3s ease;
+        }
+
+        @keyframes giveSlideIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .giving-close {
+            position: absolute;
+            top: 14px; right: 16px;
+            background: none; border: none;
+            font-size: 1.6rem; line-height: 1;
+            color: #8B6B4A; cursor: pointer;
+            padding: 0; z-index: 10;
+        }
+        .giving-close:hover { color: #4A3728; }
+
+        .giving-header {
+            background: #4A3728;
+            padding: 2rem 2rem 1.5rem;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+
+        .giving-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 400;
+            color: #F5F0E8;
+            margin-bottom: 0.4rem;
+        }
+
+        .giving-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.88rem;
+            color: rgba(245,240,232,0.7);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .giving-body { padding: 1.75rem 2rem 2rem; }
+
+        .give-field { margin-bottom: 1.2rem; }
+
+        .give-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #8B6B4A;
+            margin-bottom: 0.5rem;
+        }
+
+        .give-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .give-tab {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            background: #F0EAE0;
+            border: 1.5px solid transparent;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #8B6B4A;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .give-tab:hover { background: #E8DDD0; }
+        .give-tab.active {
+            background: #fff;
+            border-color: var(--secondary-color);
+            color: #4A3728;
+        }
+
+        .give-amount-wrap {
+            position: relative;
+        }
+        .give-currency {
+            position: absolute;
+            left: 14px; top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #8B6B4A;
+            font-size: 1rem;
+            pointer-events: none;
+        }
+        .give-amount-input { padding-left: 52px !important; }
+
+        .give-input {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 1.5px solid #DDD4C5;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #333;
+            background: #fff;
+            transition: border-color 0.2s ease;
+            outline: none;
+            font-family: var(--body-font);
+        }
+        .give-input:focus { border-color: var(--secondary-color); }
+
+        .give-next-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #4A3728;
+            color: #F5F0E8;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+        .give-next-btn:hover { background: #6B4A2E; transform: translateY(-1px); }
+
+        .give-summary-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #F0EAE0;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .give-summary-tag {
+            background: #4A3728;
+            color: #F5F0E8;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 50px;
+        }
+        .give-summary-amount {
+            font-size: 1.1rem;
+            color: #4A3728;
+        }
+
+        .give-method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 1.2rem;
+        }
+        .give-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 1rem 0.5rem;
+            background: #F0EAE0;
+            border: 1.5px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .give-method span { font-size: 0.88rem; font-weight: 500; color: #4A3728; }
+        .give-method small { font-size: 0.72rem; color: #8B6B4A; }
+        .give-method:hover { background: #E8DDD0; }
+        .give-method.active {
+            background: #fff;
+            border-color: var(--secondary-color);
+        }
+        .give-method-icon { font-size: 1.4rem; color: #8B6B4A; }
+
+        .give-bank-info {
+            background: #F0EAE0;
+            border-radius: 8px;
+            padding: 1rem 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .give-bank-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8B6B4A;
+            margin-bottom: 0.75rem;
+        }
+        .give-bank-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid rgba(139,107,74,0.15);
+            color: #4A3728;
+        }
+        .give-bank-row:last-of-type { border-bottom: none; }
+        .give-bank-row span { color: #8B6B4A; }
+        .give-bank-note {
+            font-size: 0.78rem;
+            color: #8B6B4A;
+            margin-top: 0.75rem;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .give-btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+        .give-back-btn {
+            padding: 0.75rem 1.25rem;
+            background: #F0EAE0;
+            color: #4A3728;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .give-back-btn:hover { background: #E8DDD0; }
+        .give-submit-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--secondary-color);
+            color: #4A3728;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .give-submit-btn:hover { background: #b8972e; transform: translateY(-1px); }
+
+        .give-success {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .give-success-icon {
+            width: 64px; height: 64px;
+            background: #2C5F2D;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 2rem;
+            color: #fff;
+        }
+        .give-success-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #4A3728;
+            margin-bottom: 0.75rem;
+        }
+        .give-success-msg {
+            font-size: 0.92rem;
+            color: #6B4A2E;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 480px) {
+            .giving-body { padding: 1.25rem 1.25rem 1.5rem; }
+            .giving-header { padding: 1.5rem 1.25rem 1.25rem; }
+            .give-method-grid { grid-template-columns: 1fr 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -502,7 +813,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
                         <a class="nav-link active" href="#home">Home</a>
                     </li>
@@ -514,6 +825,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <button class="btn btn-give" onclick="document.getElementById('givingModal').style.display='flex'">
+                            <i class="bi bi-heart-fill me-1"></i> Give
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -748,6 +1064,140 @@
         </div>
     </section>
 
+    <!-- Giving Modal -->
+    <div id="givingModal" class="giving-overlay" onclick="if(event.target===this)closeGiving()">
+        <div class="giving-modal">
+            <button class="giving-close" onclick="closeGiving()" aria-label="Close">&times;</button>
+
+            <div class="giving-header">
+                <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 0.75rem;">
+                    <rect x="11" y="0" width="6" height="34" rx="2" fill="#D4AF37"/>
+                    <rect x="0" y="10" width="28" height="6" rx="2" fill="#D4AF37"/>
+                </svg>
+                <h2 class="giving-title">Give Online</h2>
+                <p class="giving-sub">"Each of you should give what you have decided in your heart." — 2 Cor 9:7</p>
+            </div>
+
+            <div class="giving-body">
+
+                <!-- Step 1: Amount & Category -->
+                <div class="give-step" id="step-1">
+                    <div class="give-field">
+                        <label class="give-label">Giving category</label>
+                        <div class="give-tabs">
+                            <button class="give-tab active" onclick="selectTab(this,'Tithe')">Tithe</button>
+                            <button class="give-tab" onclick="selectTab(this,'Offering')">Offering</button>
+                            <button class="give-tab" onclick="selectTab(this,'Missions')">Missions</button>
+                        </div>
+                        <input type="hidden" id="give-category" value="Tithe">
+                    </div>
+
+                    <div class="give-field">
+                        <label class="give-label">Amount (GH₵)</label>
+                        <div class="give-amount-wrap">
+                            <span class="give-currency">GH₵</span>
+                            <input type="number" id="give-amount" class="give-input give-amount-input" placeholder="0.00" min="1" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="give-field">
+                        <label class="give-label">Your name</label>
+                        <input type="text" id="give-name" class="give-input" placeholder="Full name">
+                    </div>
+
+                    <div class="give-field">
+                        <label class="give-label">Email address</label>
+                        <input type="email" id="give-email" class="give-input" placeholder="you@example.com">
+                    </div>
+
+                    <button class="give-next-btn" onclick="goToStep2()">
+                        Continue <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                </div>
+
+                <!-- Step 2: Payment Method -->
+                <div class="give-step" id="step-2" style="display:none;">
+                    <div class="give-summary-box">
+                        <span id="summary-category" class="give-summary-tag">Tithe</span>
+                        <span class="give-summary-amount">GH₵ <strong id="summary-amount">0.00</strong></span>
+                    </div>
+
+                    <div class="give-field">
+                        <label class="give-label">Select payment method</label>
+                        <div class="give-method-grid">
+                            <button class="give-method active" onclick="selectMethod(this,'momo')" id="method-momo">
+                                <i class="bi bi-phone-fill give-method-icon"></i>
+                                <span>Mobile Money</span>
+                                <small>MTN · Vodafone · AirtelTigo</small>
+                            </button>
+                            <button class="give-method" onclick="selectMethod(this,'bank')" id="method-bank">
+                                <i class="bi bi-bank give-method-icon"></i>
+                                <span>Bank Transfer</span>
+                                <small>Direct bank deposit</small>
+                            </button>
+                        </div>
+                        <input type="hidden" id="give-method" value="momo">
+                    </div>
+
+                    <!-- Mobile Money fields -->
+                    <div id="momo-fields">
+                        <div class="give-field">
+                            <label class="give-label">Mobile network</label>
+                            <select id="give-network" class="give-input">
+                                <option value="">Select network</option>
+                                <option value="MTN">MTN Mobile Money</option>
+                                <option value="Vodafone">Vodafone Cash</option>
+                                <option value="AirtelTigo">AirtelTigo Money</option>
+                            </select>
+                        </div>
+                        <div class="give-field">
+                            <label class="give-label">Mobile Money number</label>
+                            <input type="tel" id="give-phone" class="give-input" placeholder="e.g. 024 000 0000">
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer fields -->
+                    <div id="bank-fields" style="display:none;">
+                        <div class="give-bank-info">
+                            <p class="give-bank-label">Transfer to this account</p>
+                            <div class="give-bank-row"><span>Bank</span><strong>GCB Bank Ghana</strong></div>
+                            <div class="give-bank-row"><span>Account name</span><strong>Word Transformation Church</strong></div>
+                            <div class="give-bank-row"><span>Account number</span><strong>1234567890</strong></div>
+                            <div class="give-bank-row"><span>Branch</span><strong>Accra Main Branch</strong></div>
+                            <p class="give-bank-note">Use your name as the payment reference, then fill in the reference number below after transfer.</p>
+                        </div>
+                        <div class="give-field">
+                            <label class="give-label">Transaction / reference number</label>
+                            <input type="text" id="give-reference" class="give-input" placeholder="e.g. TXN123456789">
+                        </div>
+                    </div>
+
+                    <div class="give-btn-row">
+                        <button class="give-back-btn" onclick="goToStep1()">
+                            <i class="bi bi-arrow-left me-1"></i> Back
+                        </button>
+                        <button class="give-submit-btn" onclick="submitGiving()">
+                            <i class="bi bi-heart-fill me-1"></i> Complete Gift
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Confirmation -->
+                <div class="give-step" id="step-3" style="display:none;">
+                    <div class="give-success">
+                        <div class="give-success-icon">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                        <h3 class="give-success-title">God bless you!</h3>
+                        <p class="give-success-msg">Your giving of <strong>GH₵ <span id="confirm-amount"></span></strong> for <strong><span id="confirm-category"></span></strong> has been received. A confirmation will be sent to <span id="confirm-email"></span>.</p>
+                        <button class="give-next-btn" onclick="closeGiving()" style="margin-top:1.5rem;">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -847,6 +1297,73 @@
 
         cdTick();
         setInterval(cdTick, 1000);
+
+        // Giving modal
+        function closeGiving() {
+            document.getElementById('givingModal').style.display = 'none';
+            resetGiving();
+        }
+        function resetGiving() {
+            document.getElementById('step-1').style.display = 'block';
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-3').style.display = 'none';
+            document.getElementById('give-amount').value = '';
+            document.getElementById('give-name').value = '';
+            document.getElementById('give-email').value = '';
+            document.getElementById('give-phone').value = '';
+            document.getElementById('give-network').value = '';
+            document.getElementById('give-category').value = 'Tithe';
+            document.getElementById('give-method').value = 'momo';
+            document.querySelectorAll('.give-tab').forEach(function(t,i){ t.classList.toggle('active', i===0); });
+            document.querySelectorAll('.give-method').forEach(function(m,i){ m.classList.toggle('active', i===0); });
+            document.getElementById('momo-fields').style.display = 'block';
+            document.getElementById('bank-fields').style.display = 'none';
+        }
+        function selectTab(el, val) {
+            document.querySelectorAll('.give-tab').forEach(function(t){ t.classList.remove('active'); });
+            el.classList.add('active');
+            document.getElementById('give-category').value = val;
+        }
+        function selectMethod(el, val) {
+            document.querySelectorAll('.give-method').forEach(function(m){ m.classList.remove('active'); });
+            el.classList.add('active');
+            document.getElementById('give-method').value = val;
+            document.getElementById('momo-fields').style.display = val === 'momo' ? 'block' : 'none';
+            document.getElementById('bank-fields').style.display  = val === 'bank' ? 'block' : 'none';
+        }
+        function goToStep2() {
+            var amount = document.getElementById('give-amount').value;
+            var name   = document.getElementById('give-name').value.trim();
+            var email  = document.getElementById('give-email').value.trim();
+            if (!amount || parseFloat(amount) <= 0) { alert('Please enter a valid amount.'); return; }
+            if (!name)  { alert('Please enter your name.'); return; }
+            if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+            document.getElementById('summary-amount').textContent = parseFloat(amount).toFixed(2);
+            document.getElementById('summary-category').textContent = document.getElementById('give-category').value;
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
+        }
+        function goToStep1() {
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-1').style.display = 'block';
+        }
+        function submitGiving() {
+            var method = document.getElementById('give-method').value;
+            if (method === 'momo') {
+                if (!document.getElementById('give-network').value) { alert('Please select your mobile network.'); return; }
+                if (!document.getElementById('give-phone').value.trim()) { alert('Please enter your Mobile Money number.'); return; }
+            } else {
+                if (!document.getElementById('give-reference').value.trim()) { alert('Please enter your transaction reference number.'); return; }
+            }
+            document.getElementById('confirm-amount').textContent   = parseFloat(document.getElementById('give-amount').value).toFixed(2);
+            document.getElementById('confirm-category').textContent = document.getElementById('give-category').value;
+            document.getElementById('confirm-email').textContent    = document.getElementById('give-email').value.trim();
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-3').style.display = 'block';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeGiving();
+        });
     </script>
 </body>
 </html>
