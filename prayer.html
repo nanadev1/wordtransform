@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="claudestyle.css">
+    <style>
+        body { background: var(--white); }
+
+        /* ── Page Hero ── */
+        .page-hero {
+            background: linear-gradient(135deg, #0d0500 0%, var(--deep-brown) 50%, #2C5F2D 100%);
+            padding: 5.5rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.13) 0%, transparent 60%),
+                              radial-gradient(ellipse at 20% 80%, rgba(44,95,45,0.12) 0%, transparent 50%);
+        }
+        .hero-content { position: relative; }
+        .eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem,5vw,3.8rem); font-weight: 300; color: #F5F0E8; margin-bottom: 1rem; }
+        .page-hero p { font-size: 1.05rem; color: rgba(245,240,232,0.72); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+        .hero-div { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 1.5rem auto 0; max-width: 200px; }
+        .hero-div-line { flex: 1; height: 1px; background: rgba(212,175,55,0.4); }
+        .hero-div-dot  { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; }
+
+        /* ── Daily Scripture ── */
+        .scripture-section { background: var(--light-bg); padding: 3.5rem 0; border-bottom: 1px solid #EDE4D3; }
+        .section-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--secondary-color); display: block; margin-bottom: 0.5rem; }
+        .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 300; color: var(--deep-brown); margin-bottom: 0; }
+
+        .scripture-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(74,55,40,0.07);
+        }
+        .scripture-card::before {
+            content: '\201C';
+            position: absolute; top: -10px; left: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem; line-height: 1;
+            color: rgba(212,175,55,0.12);
+            pointer-events: none;
+        }
+        .scripture-date { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 6px; }
+        .scripture-date i { font-size: 0.85rem; }
+        .scripture-verse { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.25rem,2.5vw,1.65rem); font-weight: 300; font-style: italic; color: var(--deep-brown); line-height: 1.65; margin-bottom: 1rem; }
+        .scripture-ref { font-size: 0.82rem; font-weight: 600; color: var(--accent-color); letter-spacing: 0.1em; text-transform: uppercase; }
+        .scripture-reflection { font-size: 0.9rem; color: var(--text-light); line-height: 1.75; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #EDE4D3; }
+        .scripture-reflection strong { color: var(--text-dark); }
+
+        .devotional-nav { display: flex; gap: 8px; margin-top: 1.5rem; }
+        .dev-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.45rem 1rem; border-radius: 50px; border: 1.5px solid #DDD4C5; background: transparent; font-size: 0.82rem; font-weight: 500; color: var(--text-light); cursor: pointer; transition: all 0.2s ease; }
+        .dev-btn:hover, .dev-btn.active { border-color: var(--secondary-color); color: var(--deep-brown); background: rgba(212,175,55,0.08); }
+
+        /* ── Prayer Request Form ── */
+        .form-section { background: var(--white); padding: 4rem 0; }
+
+        .form-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(74,55,40,0.07);
+        }
+        .form-icon { font-size: 2rem; color: var(--accent-color); margin-bottom: 0.75rem; display: block; }
+        .form-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.4rem; }
+        .form-card > p { font-size: 0.88rem; color: var(--text-light); margin-bottom: 1.75rem; }
+
+        .form-label-custom { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8B6B4A; margin-bottom: 0.4rem; display: block; }
+        .form-control-custom {
+            width: 100%;
+            background: var(--light-bg);
+            border: 1.5px solid #DDD4C5;
+            border-radius: 10px;
+            padding: 0.65rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-family: var(--body-font);
+            outline: none;
+            transition: border-color 0.25s;
+        }
+        .form-control-custom:focus { border-color: var(--accent-color); background: var(--white); }
+        .form-control-custom::placeholder { color: #bbb; }
+        textarea.form-control-custom { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+        .prayer-type-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .prayer-type-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.45rem 1rem; border-radius: 50px;
+            border: 1.5px solid #DDD4C5;
+            background: transparent;
+            font-size: 0.82rem; font-weight: 500;
+            color: var(--text-light); cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .prayer-type-btn.selected { border-color: var(--accent-color); background: rgba(44,95,45,0.1); color: var(--accent-color); }
+
+        .anonymous-row { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .anonymous-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-color); cursor: pointer; }
+        .anonymous-label { font-size: 0.86rem; color: var(--text-light); }
+
+        .btn-submit-prayer {
+            background: var(--accent-color); color: #fff;
+            border: none; padding: 0.75rem 2.25rem;
+            border-radius: 50px; font-size: 0.92rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-submit-prayer:hover { background: #234d24; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(44,95,45,0.25); }
+
+        .prayer-success-msg {
+            display: none;
+            background: rgba(44,95,45,0.08);
+            border: 1px solid rgba(44,95,45,0.25);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            align-items: center;
+            gap: 10px;
+        }
+        .prayer-success-msg.show { display: flex; }
+
+        /* ── Prayer Wall ── */
+        .wall-section { background: var(--light-bg); padding: 4rem 0; }
+
+        .wall-filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+        .wall-filter-btn {
+            padding: 0.4rem 1.1rem; border-radius: 50px;
+            border: 1.5px solid #DDD4C5;
+            background: var(--white); font-size: 0.82rem; font-weight: 500;
+            color: var(--text-light); cursor: pointer; transition: all 0.2s ease;
+        }
+        .wall-filter-btn.active { background: var(--deep-brown); border-color: var(--deep-brown); color: #F5F0E8; }
+        .wall-filter-btn:hover:not(.active) { border-color: #C8B89A; color: var(--text-dark); }
+
+        .prayer-card-item {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .prayer-card-item:hover { box-shadow: 0 6px 20px rgba(74,55,40,0.1); transform: translateY(-2px); }
+        .prayer-card-item.answered { border-left: 4px solid var(--accent-color); }
+        .prayer-card-item.urgent   { border-left: 4px solid var(--secondary-color); }
+
+        .prayer-item-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 0.75rem; }
+        .prayer-item-left { display: flex; align-items: center; gap: 10px; }
+        .prayer-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+        .prayer-item-name { font-size: 0.88rem; font-weight: 600; color: var(--text-dark); }
+        .prayer-item-time { font-size: 0.72rem; color: var(--text-light); }
+        .prayer-tag { font-size: 0.68rem; font-weight: 600; padding: 2px 9px; border-radius: 50px; }
+        .tag-healing    { background: rgba(212,175,55,0.15); color: #7A5A00; }
+        .tag-family     { background: rgba(44,95,45,0.12);   color: var(--accent-color); }
+        .tag-finance    { background: rgba(74,55,40,0.1);    color: var(--deep-brown); }
+        .tag-answered   { background: rgba(44,95,45,0.15);   color: var(--accent-color); }
+        .tag-guidance   { background: rgba(28,60,120,0.1);   color: #1c3c78; }
+        .tag-general    { background: rgba(180,160,140,0.15);color: #8B6B4A; }
+
+        .prayer-text { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1rem; }
+        .prayer-actions { display: flex; align-items: center; gap: 10px; }
+        .pray-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 0.35rem 0.9rem; border-radius: 50px;
+            border: 1.5px solid #DDD4C5;
+            background: transparent; font-size: 0.78rem; font-weight: 600;
+            color: var(--text-light); cursor: pointer; transition: all 0.2s ease;
+        }
+        .pray-btn:hover, .pray-btn.prayed { border-color: var(--accent-color); color: var(--accent-color); background: rgba(44,95,45,0.07); }
+        .pray-count { font-size: 0.78rem; color: var(--text-light); }
+        .answered-badge { font-size: 0.72rem; font-weight: 600; color: var(--accent-color); display: flex; align-items: center; gap: 4px; margin-left: auto; }
+
+        .load-more-btn {
+            display: block; width: 100%; max-width: 260px; margin: 1.5rem auto 0;
+            padding: 0.65rem 1.5rem; border-radius: 50px;
+            border: 1.5px solid #DDD4C5;
+            background: var(--white); font-size: 0.88rem; font-weight: 500;
+            color: var(--text-dark); cursor: pointer; transition: all 0.25s ease; text-align: center;
+        }
+        .load-more-btn:hover { border-color: var(--secondary-color); color: var(--deep-brown); }
+
+        /* ── Join Prayer Team CTA ── */
+        .join-cta { background: linear-gradient(135deg, var(--deep-brown), #1A1008); padding: 4rem 0; text-align: center; }
+        .join-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 300; color: #F5F0E8; margin-bottom: 0.75rem; }
+        .join-cta p { color: rgba(245,240,232,0.65); font-size: 1rem; max-width: 500px; margin: 0 auto 1.75rem; line-height: 1.7; }
+        .btn-cta-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--secondary-color); color: var(--deep-brown); padding: 0.75rem 2rem; border-radius: 50px; font-size: 0.92rem; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; }
+        .btn-cta-gold:hover { background: #b8972e; color: var(--deep-brown); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
+        .btn-cta-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(245,240,232,0.8); padding: 0.75rem 2rem; border-radius: 50px; font-size: 0.92rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 1.5px solid rgba(245,240,232,0.3); margin-left: 1rem; }
+        .btn-cta-outline:hover { border-color: rgba(245,240,232,0.7); color: #F5F0E8; }
+
+        @media(max-width:768px) {
+            .form-card { padding: 1.5rem; }
+            .scripture-card { padding: 1.5rem; }
+            .btn-cta-outline { margin-left: 0; margin-top: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill me-2"></i>Ministries</a></li>
+                        <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill me-2"></i>Small Groups</a></li>
+                        <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill me-2"></i>Devotional</a></li>
+                        <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill me-2"></i>Volunteer</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images me-2"></i>Gallery</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle me-2"></i>My Account</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-1">
+                    <button class="nav-search-btn" onclick="toggleSearch()"><i class="bi bi-search"></i></button>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearchOnBg(event)">
+    <div class="search-box">
+        <div class="search-input-row">
+            <i class="bi bi-search search-icon-inner"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search sermons, events, blog posts…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)">
+            <button class="search-close-btn" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container">
+        <div class="hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>A House of Prayer</h1>
+            <p>Bring your burdens, your praise, and your faith. Together we stand in the presence of God.</p>
+            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Daily Scripture & Devotional -->
+<section class="scripture-section" id="devotional">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-4">
+                <span class="section-eyebrow">Updated Daily</span>
+                <h2 class="section-heading">Today's Prayer Scripture</h2>
+                <p style="font-size:0.9rem;color:var(--text-light);margin-top:0.75rem;line-height:1.75;">Start your day grounded in God's Word. Each day we share a scripture and a short reflection to guide your prayer time.</p>
+                <div class="devotional-nav mt-3" id="devotionalNav">
+                    <button class="dev-btn active" onclick="showDevotional(0, this)"><i class="bi bi-sunrise-fill"></i> Today</button>
+                    <button class="dev-btn" onclick="showDevotional(1, this)"><i class="bi bi-calendar2-week"></i> This Week</button>
+                    <button class="dev-btn" onclick="showDevotional(2, this)"><i class="bi bi-archive-fill"></i> Archive</button>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="scripture-card" id="scriptureCard">
+                    <!-- filled by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Prayer Request Form -->
+<section class="form-section" id="submit-prayer">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card">
+                    <i class="bi bi-send-heart-fill form-icon"></i>
+                    <h3>Submit a Prayer Request</h3>
+                    <p>Our prayer team prays over every request submitted. You are not alone — we are believing with you.</p>
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label-custom">Your Name</label>
+                            <input type="text" class="form-control-custom" id="prayerName" placeholder="Enter your name">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label-custom">Email (optional)</label>
+                            <input type="email" class="form-control-custom" id="prayerEmail" placeholder="For follow-up from our team">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label-custom">Prayer Category</label>
+                            <div class="prayer-type-row" id="prayerTypeRow">
+                                <button class="prayer-type-btn" onclick="selectType(this)">🙏 General</button>
+                                <button class="prayer-type-btn" onclick="selectType(this)">💊 Healing</button>
+                                <button class="prayer-type-btn" onclick="selectType(this)">👨‍👩‍👧 Family</button>
+                                <button class="prayer-type-btn" onclick="selectType(this)">💼 Finance</button>
+                                <button class="prayer-type-btn" onclick="selectType(this)">🧭 Guidance</button>
+                                <button class="prayer-type-btn" onclick="selectType(this)">🙌 Salvation</button>
+                                <button class="prayer-type-btn" onclick="selectType(this)">✝️ Spiritual Growth</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label-custom">Your Prayer Request</label>
+                            <textarea class="form-control-custom" id="prayerText" placeholder="Share what's on your heart. Our prayer team reads every request with care…"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="anonymous-row">
+                                <input type="checkbox" id="anonymousCheck">
+                                <span class="anonymous-label">Post anonymously on the prayer wall (only your first name will show)</span>
+                            </label>
+                        </div>
+                        <div class="col-12 mt-1">
+                            <div class="prayer-success-msg" id="prayerSuccessMsg">
+                                <i class="bi bi-check-circle-fill" style="font-size:1.25rem;"></i>
+                                <span>Your prayer request has been received. Our team will be praying for you. God bless you 🙏</span>
+                            </div>
+                            <button class="btn-submit-prayer" id="submitBtn" onclick="submitPrayer()">
+                                <i class="bi bi-send-fill"></i> Send Prayer Request
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Prayer Wall -->
+<section class="wall-section" id="prayer-wall">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <span class="section-eyebrow">Community</span>
+                <h2 class="section-heading" style="margin-bottom:0.4rem;">Live Prayer Wall</h2>
+                <p style="font-size:0.88rem;color:var(--text-light);margin-top:0.4rem;">Stand in agreement with your brothers and sisters. Click "Praying" to let them know they are covered. 🙏</p>
+            </div>
+            <div class="col-lg-6 d-flex align-items-end justify-content-lg-end mt-3 mt-lg-0">
+                <a href="#submit-prayer" class="btn-submit-prayer" style="font-size:0.85rem;padding:0.55rem 1.4rem;">
+                    <i class="bi bi-plus-lg"></i> Add Your Request
+                </a>
+            </div>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="wall-filter-bar">
+            <button class="wall-filter-btn active" onclick="filterWall('all', this)">All Requests</button>
+            <button class="wall-filter-btn" onclick="filterWall('healing', this)">💊 Healing</button>
+            <button class="wall-filter-btn" onclick="filterWall('family', this)">👨‍👩‍👧 Family</button>
+            <button class="wall-filter-btn" onclick="filterWall('finance', this)">💼 Finance</button>
+            <button class="wall-filter-btn" onclick="filterWall('guidance', this)">🧭 Guidance</button>
+            <button class="wall-filter-btn" onclick="filterWall('answered', this)">✅ Answered</button>
+        </div>
+
+        <!-- Prayer items -->
+        <div id="prayerWall"></div>
+
+        <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()">
+            <i class="bi bi-arrow-down-circle me-2"></i> Load More Requests
+        </button>
+    </div>
+</section>
+
+<!-- Join Prayer Team CTA -->
+<section class="join-cta">
+    <div class="container">
+        <h2>Join Our Prayer Team</h2>
+        <p>Are you called to intercede? Our prayer team gathers every Friday at 6:30 PM and covers the congregation in prayer throughout the week.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="volunteer.html" class="btn-cta-gold"><i class="bi bi-people-fill"></i> Join the Team</a>
+            <a href="contact.html" class="btn-cta-outline"><i class="bi bi-envelope-fill"></i> Contact Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5>Word Transformation Church</h5>
+                <p class="text-white-50">Transforming lives through the power of God's Word.</p>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="index.html">Home</a></li>
+                    <li class="mb-2"><a href="about.html">About</a></li>
+                    <li class="mb-2"><a href="blog.html">Blog</a></li>
+                    <li class="mb-2"><a href="prayer.html">Prayer</a></li>
+                    <li class="mb-2"><a href="livestream.html">Live Stream</a></li>
+                    <li class="mb-2"><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Service Times</h5>
+                <ul class="list-unstyled text-white-50">
+                    <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
+                    <li class="mb-2">Wednesday: 7:00 PM</li>
+                    <li class="mb-2">Friday: 6:30 PM</li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Follow Us</h5>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+/* ══════════════════════════════════════
+   DAILY DEVOTIONALS DATA
+══════════════════════════════════════ */
+const DEVOTIONALS = [
+    {
+        label: 'Today',
+        date: new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' }),
+        verse: '"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."',
+        ref: 'Philippians 4:6',
+        reflection: '<strong>Today\'s Reflection:</strong> Anxiety tells us to hold on tight and figure things out on our own. But God\'s Word invites us to release every worry into His hands through prayer. When you pray today, come with thanksgiving — not just asking, but trusting that He who has been faithful will continue to be. You are not carrying this alone.'
+    },
+    {
+        label: 'This Week',
+        date: 'This Week\'s Theme: Faith in the Storm',
+        verse: '"Call to me and I will answer you and tell you great and unsearchable things you do not know."',
+        ref: 'Jeremiah 33:3',
+        reflection: '<strong>This Week\'s Focus:</strong> God is not distant. He is personally inviting you to call on Him — not as a last resort, but as your first response. This week, before you pick up the phone, open a browser or ask a friend, pause and call to God first. He promises not silence, but revelation.'
+    },
+    {
+        label: 'Archive',
+        date: 'Last Week — March 3–9, 2025',
+        verse: '"Therefore I tell you, whatever you ask for in prayer, believe that you have received it, and it will be yours."',
+        ref: 'Mark 11:24',
+        reflection: '<strong>Last Week\'s Reflection:</strong> Faith-filled prayer is not wishful thinking — it is anchoring your heart to what God has already spoken. Praying in faith means you trust God\'s character more than you fear your circumstances. What has God promised you that you need to pray with fresh faith today?'
+    }
+];
+
+function showDevotional(idx, btn) {
+    const d = DEVOTIONALS[idx];
+    document.getElementById('scriptureCard').innerHTML = `
+        <div class="scripture-date"><i class="bi bi-calendar3"></i> ${d.date}</div>
+        <p class="scripture-verse">${d.verse}</p>
+        <p class="scripture-ref">${d.ref}</p>
+        <p class="scripture-reflection">${d.reflection}</p>`;
+    document.querySelectorAll('.dev-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+// init
+showDevotional(0, document.querySelector('.dev-btn'));
+
+/* ══════════════════════════════════════
+   PRAYER WALL DATA
+══════════════════════════════════════ */
+const WALL_DATA = [
+    { id:1, name:'Abena K.',    anon:false, tag:'healing',  text:'Please pray for my father who is undergoing surgery next week. We trust in God\'s healing hand.', time:'2h ago',   prayCount:28, prayed:false, answered:false, color:'#2C5F2D' },
+    { id:2, name:'Emmanuel O.', anon:false, tag:'family',   text:'Asking for prayers for peace and reconciliation in my family. God is able to restore what was broken.', time:'4h ago',   prayCount:19, prayed:false, answered:false, color:'#4A3728' },
+    { id:3, name:'Anonymous',   anon:true,  tag:'finance',  text:'Going through a very difficult financial season. Trusting God as my provider. Please agree with me in prayer.', time:'5h ago',   prayCount:34, prayed:false, answered:false, color:'#1A3A5C' },
+    { id:4, name:'Grace M.',    anon:false, tag:'answered', text:'Praise God! I shared last month that I was believing for a job. God came through! I start my new role next week. Thank you all for praying with me! 🙌', time:'1d ago',   prayCount:52, prayed:false, answered:true,  color:'#2C5F2D' },
+    { id:5, name:'Kofi A.',     anon:false, tag:'guidance', text:'Please pray for wisdom as I make a major career decision. I want to walk in God\'s purpose for my life.', time:'1d ago',   prayCount:17, prayed:false, answered:false, color:'#7A5A00' },
+    { id:6, name:'Maame A.',    anon:false, tag:'healing',  text:'Believing God for complete healing for my daughter who has been sick for several weeks. His Word says by His stripes we are healed.', time:'2d ago',   prayCount:41, prayed:false, answered:false, color:'#5C1A3A' },
+    { id:7, name:'Pastor Kwame',anon:false, tag:'family',   text:'Praying for every family in this congregation — for unity, love, and God\'s protection over every home.', time:'2d ago',   prayCount:63, prayed:false, answered:false, color:'#4A3728' },
+    { id:8, name:'Anonymous',   anon:true,  tag:'guidance', text:'Going through a crossroads in my relationship. Please pray that God gives me clarity, peace, and courage to follow His lead.', time:'3d ago',   prayCount:22, prayed:false, answered:false, color:'#1A3A5C' },
+];
+
+let visibleCount = 5;
+let activeFilter = 'all';
+
+function getTagClass(tag) {
+    const map = { healing:'tag-healing', family:'tag-family', finance:'tag-finance', answered:'tag-answered', guidance:'tag-guidance', general:'tag-general' };
+    return map[tag] || 'tag-general';
+}
+function getTagLabel(tag) {
+    const map = { healing:'💊 Healing', family:'👨‍👩‍👧 Family', finance:'💼 Finance', answered:'✅ Answered', guidance:'🧭 Guidance', general:'🙏 General' };
+    return map[tag] || '🙏 General';
+}
+
+function renderWall() {
+    const wall = document.getElementById('prayerWall');
+    const filtered = activeFilter === 'all' ? WALL_DATA : WALL_DATA.filter(p => p.tag === activeFilter);
+    const visible  = filtered.slice(0, visibleCount);
+
+    wall.innerHTML = visible.map(p => `
+        <div class="prayer-card-item ${p.answered ? 'answered' : ''}" id="pitem-${p.id}">
+            <div class="prayer-item-header">
+                <div class="prayer-item-left">
+                    <div class="prayer-avatar" style="background:${p.color}">${p.name.charAt(0)}</div>
+                    <div>
+                        <div class="prayer-item-name">${p.name}</div>
+                        <div class="prayer-item-time">${p.time}</div>
+                    </div>
+                </div>
+                <span class="prayer-tag ${getTagClass(p.tag)}">${getTagLabel(p.tag)}</span>
+            </div>
+            <p class="prayer-text">${p.text}</p>
+            <div class="prayer-actions">
+                <button class="pray-btn ${p.prayed?'prayed':''}" onclick="togglePray(${p.id})">
+                    🙏 <span id="praybtn-label-${p.id}">${p.prayed?'Praying':'Pray'}</span>
+                </button>
+                <span class="pray-count" id="pray-count-${p.id}">${p.prayCount} praying</span>
+                ${p.answered ? `<span class="answered-badge ms-auto"><i class="bi bi-check-circle-fill"></i> Answered Prayer</span>` : ''}
+            </div>
+        </div>`).join('');
+
+    const loadBtn = document.getElementById('loadMoreBtn');
+    loadBtn.style.display = filtered.length > visibleCount ? 'block' : 'none';
+}
+
+function filterWall(tag, btn) {
+    activeFilter = tag;
+    visibleCount = 5;
+    document.querySelectorAll('.wall-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderWall();
+}
+
+function loadMore() {
+    visibleCount += 3;
+    renderWall();
+}
+
+function togglePray(id) {
+    const item = WALL_DATA.find(p => p.id === id);
+    if (!item) return;
+    item.prayed = !item.prayed;
+    item.prayCount += item.prayed ? 1 : -1;
+    document.getElementById('praybtn-label-' + id).textContent = item.prayed ? 'Praying' : 'Pray';
+    document.getElementById('pray-count-' + id).textContent = item.prayCount + ' praying';
+    const btn = document.querySelector(`#pitem-${id} .pray-btn`);
+    if (btn) btn.classList.toggle('prayed', item.prayed);
+}
+
+renderWall();
+
+/* ══════════════════════════════════════
+   PRAYER REQUEST FORM
+══════════════════════════════════════ */
+function selectType(btn) {
+    document.querySelectorAll('.prayer-type-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+
+function submitPrayer() {
+    const text = document.getElementById('prayerText').value.trim();
+    const name = document.getElementById('prayerName').value.trim();
+    if (!text) { alert('Please write your prayer request before sending.'); return; }
+
+    // Add to top of wall
+    const anon  = document.getElementById('anonymousCheck').checked;
+    const types = [...document.querySelectorAll('.prayer-type-btn.selected')].map(b => b.textContent.trim());
+    const tag   = types.length ? types[0].split(' ').pop().toLowerCase() : 'general';
+    const newPrayer = {
+        id: Date.now(), name: anon ? 'Anonymous' : (name || 'A Member'),
+        anon, tag, text, time: 'Just now', prayCount: 0, prayed: false, answered: false,
+        color: '#2C5F2D'
+    };
+    WALL_DATA.unshift(newPrayer);
+
+    // Reset form
+    document.getElementById('prayerText').value = '';
+    document.getElementById('prayerName').value = '';
+    document.getElementById('prayerEmail').value = '';
+    document.getElementById('anonymousCheck').checked = false;
+    document.querySelectorAll('.prayer-type-btn').forEach(b => b.classList.remove('selected'));
+
+    const msg = document.getElementById('prayerSuccessMsg');
+    msg.classList.add('show');
+    document.getElementById('submitBtn').style.display = 'none';
+    setTimeout(() => { msg.classList.remove('show'); document.getElementById('submitBtn').style.display = 'inline-flex'; }, 5000);
+
+    renderWall();
+    document.getElementById('prayer-wall').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ══════════════════════════════════════
+   SEARCH (shared across pages)
+══════════════════════════════════════ */
+const SITE_PAGES = [
+    { title:'Home',            url:'index.html',        icon:'bi-house-fill',           cat:'Page',    iconClass:'brown' },
+    { title:'About Us',        url:'about.html',        icon:'bi-info-circle-fill',     cat:'Page',    iconClass:'brown' },
+    { title:'Ministries',      url:'ministries.html',   icon:'bi-people-fill',          cat:'Page',    iconClass:'green' },
+    { title:'Small Groups',    url:'smallgroups.html',  icon:'bi-diagram-3-fill',       cat:'Page',    iconClass:'green' },
+    { title:'Sermons',         url:'sermons.html',      icon:'bi-mic-fill',             cat:'Page',    iconClass:'brown' },
+    { title:'Blog',            url:'blog.html',         icon:'bi-journal-text',         cat:'Page',    iconClass:'' },
+    { title:'Prayer Wall',     url:'prayer.html',       icon:'bi-hand-index-thumb-fill',cat:'Page',    iconClass:'green' },
+    { title:'Devotional',      url:'devotional.html',   icon:'bi-journal-bookmark-fill',cat:'Page',    iconClass:'green' },
+    { title:'Events',          url:'index.html#events', icon:'bi-calendar-event-fill',  cat:'Section', iconClass:'' },
+    { title:'Gallery',         url:'gallery.html',      icon:'bi-images',               cat:'Page',    iconClass:'' },
+    { title:'Volunteer',       url:'volunteer.html',    icon:'bi-hand-thumbs-up-fill',  cat:'Page',    iconClass:'green' },
+    { title:'Contact Us',      url:'contact.html',      icon:'bi-envelope-fill',        cat:'Page',    iconClass:'brown' },
+    { title:'Join Live Stream',url:'livestream.html',   icon:'bi-youtube',              cat:'Page',    iconClass:'red' },
+    { title:'My Account',      url:'portal.html',       icon:'bi-person-circle',        cat:'Page',    iconClass:'brown' },
+];
+
+function toggleSearch() {
+    const overlay = document.getElementById('searchOverlay');
+    const input   = document.getElementById('searchInput');
+    const isOpen  = overlay.classList.toggle('open');
+    if (isOpen) {
+        input.value = '';
+        document.getElementById('searchResults').innerHTML = renderHints();
+        setTimeout(() => input.focus(), 80);
+        document.body.style.overflow = 'hidden';
+    } else { document.body.style.overflow = ''; }
+}
+function closeSearchOnBg(e) { if (e.target === document.getElementById('searchOverlay')) toggleSearch(); }
+function handleSearchKey(e) { if (e.key === 'Escape') toggleSearch(); }
+
+function runSearch(q) {
+    const results = document.getElementById('searchResults');
+    q = q.trim().toLowerCase();
+    if (!q) { results.innerHTML = renderHints(); return; }
+    const matches = SITE_PAGES.filter(p => p.title.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q)).slice(0,7);
+    if (!matches.length) {
+        results.innerHTML = `<div class="search-empty"><i class="bi bi-search"></i>No results for "<strong>${q}</strong>"</div>`;
+        return;
+    }
+    results.innerHTML = matches.map(p => `
+        <a class="search-result-item" href="${p.url}">
+            <div class="search-result-icon ${p.iconClass||''}"><i class="bi ${p.icon}"></i></div>
+            <div class="search-result-text">
+                <div class="search-result-title">${highlight(p.title, q)}</div>
+                <div class="search-result-sub">${p.cat}</div>
+            </div>
+            <i class="bi bi-arrow-right search-result-arrow"></i>
+        </a>`).join('');
+}
+function renderHints() {
+    return `<div class="search-hints">
+        <span class="search-hint-label">Quick Links</span>
+        <div class="search-quick-links">
+            <a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a>
+            <a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a>
+            <a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live Stream</a>
+            <a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a>
+            <a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a>
+            <a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a>
+        </div>
+    </div>`;
+}
+function highlight(text, q) {
+    const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    return text.replace(re, '<mark style="background:rgba(212,175,55,0.3);border-radius:3px;padding:0 2px;">$1</mark>');
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('searchOverlay').classList.contains('open')) toggleSearch();
+});
+
+/* Search styles (inline for page portability) */
+const searchStyles = `
+    .nav-search-btn { background:none;border:none;color:rgba(255,255,255,0.8);font-size:1.05rem;padding:0.35rem 0.5rem;cursor:pointer;transition:color 0.2s ease;display:flex;align-items:center; }
+    .nav-search-btn:hover { color:var(--secondary-color); }
+    .search-overlay { position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(20,12,6,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:80px 1rem 1rem;display:none;justify-content:center;align-items:flex-start; }
+    .search-overlay.open { display:flex; }
+    .search-box { background:var(--white);border-radius:14px;width:100%;max-width:640px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:searchDrop 0.2s ease; }
+    @keyframes searchDrop { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+    .search-input-row { display:flex;align-items:center;gap:10px;padding:1rem 1.25rem;border-bottom:1px solid #EDE4D3; }
+    .search-icon-inner { font-size:1.05rem;color:var(--secondary-color);flex-shrink:0; }
+    .search-input { flex:1;border:none;outline:none;font-size:1rem;font-family:var(--body-font);color:var(--text-dark);background:transparent; }
+    .search-input::placeholder { color:#bbb; }
+    .search-close-btn { background:none;border:none;color:var(--text-light);font-size:1rem;cursor:pointer;padding:0.2rem;transition:color 0.2s;flex-shrink:0; }
+    .search-close-btn:hover { color:var(--text-dark); }
+    .search-results { max-height:360px;overflow-y:auto; }
+    .search-result-item { display:flex;align-items:center;gap:12px;padding:0.85rem 1.25rem;border-bottom:1px solid #F4EEE6;text-decoration:none;transition:background 0.15s ease;cursor:pointer; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:var(--light-bg); }
+    .search-result-icon { width:36px;height:36px;border-radius:8px;background:rgba(212,175,55,0.12);display:flex;align-items:center;justify-content:center;color:var(--secondary-color);font-size:1rem;flex-shrink:0; }
+    .search-result-icon.green { background:rgba(44,95,45,0.1);color:var(--accent-color); }
+    .search-result-icon.brown { background:rgba(74,55,40,0.1);color:var(--deep-brown); }
+    .search-result-icon.red   { background:rgba(220,38,38,0.08);color:#dc2626; }
+    .search-result-text { flex:1;min-width:0; }
+    .search-result-title { font-size:0.9rem;font-weight:600;color:var(--text-dark);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .search-result-sub   { font-size:0.76rem;color:var(--text-light); }
+    .search-result-arrow { color:#DDD4C5;font-size:0.85rem; }
+    .search-empty { padding:1.75rem 1.25rem;text-align:center;color:var(--text-light);font-size:0.88rem; }
+    .search-empty i { font-size:1.75rem;display:block;margin-bottom:0.5rem;color:#DDD4C5; }
+    .search-hints { padding:0.75rem 1.25rem; }
+    .search-hint-label { font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:0.6rem;display:block; }
+    .search-quick-links { display:flex;flex-wrap:wrap;gap:6px; }
+    .search-quick-link { display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;border:1px solid #DDD4C5;font-size:0.78rem;font-weight:500;color:var(--text-dark);text-decoration:none;transition:all 0.2s ease; }
+    .search-quick-link:hover { border-color:var(--secondary-color);color:var(--deep-brown);background:rgba(212,175,55,0.07); }
+    .dropdown-menu { background-color:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem 0;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+    .dropdown-item { color:rgba(255,255,255,0.85);font-size:0.9rem;font-weight:500;padding:0.55rem 1.25rem;transition:all 0.2s ease; }
+    .dropdown-item:hover { background-color:rgba(255,255,255,0.08);color:#fff; }
+    .dropdown-item i { color:var(--secondary-color); }
+    .dropdown-divider { border-color:rgba(255,255,255,0.1);margin:0.35rem 0; }
+`;
+const styleTag = document.createElement('style');
+styleTag.textContent = searchStyles;
+document.head.appendChild(styleTag);
+</script>
+</body>
+</html>
