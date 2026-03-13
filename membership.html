@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B5E3C;
+            --primary-dark: #6B4A2E;
+            --secondary-color: #D4AF37;
+            --accent-color: #2C5F2D;
+            --light-bg: #F9F6F0;
+            --dark-bg: #1A1A1A;
+            --deep-brown: #4A3728;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        body { font-family: var(--body-font); color: var(--text-dark); background: var(--white); line-height: 1.6; }
+        h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); font-weight: 600; line-height: 1.3; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+
+        /* ── Navbar ── */
+        .navbar { background-color: #0D0A07; padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .navbar-brand { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 600; color: var(--white) !important; }
+        .navbar-brand i { color: var(--secondary-color); margin-right: 0.5rem; }
+        .navbar-nav .nav-link { color: rgba(255,255,255,0.85) !important; font-weight: 500; padding: 0.5rem 1rem !important; border-radius: var(--border-radius); transition: all 0.3s ease; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--white) !important; background: rgba(255,255,255,0.08); }
+        .btn-give { background: var(--secondary-color); color: var(--deep-brown); border: none; padding: 0.45rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; }
+        .btn-give:hover { background: #b8972e; transform: translateY(-2px); }
+        .btn-live-nav { display:inline-flex; align-items:center; gap:6px; padding:0.42rem 1rem; border-radius:50px; border:1.5px solid rgba(220,38,38,0.7); color:rgba(255,255,255,0.88)!important; font-size:0.82rem; font-weight:500; transition:all 0.3s ease; }
+        .btn-live-nav:hover { background:rgba(220,38,38,0.15); border-color:#dc2626; color:#fff!important; }
+        .live-dot { width:7px; height:7px; background:#dc2626; border-radius:50%; animation:livePulse 1.5s infinite; }
+        @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.3);} }
+        .more-menu { border:1px solid rgba(212,175,55,0.25); border-radius:10px; background:#0D0A07; padding:0.5rem 0; box-shadow:0 12px 40px rgba(0,0,0,0.4); min-width:200px; }
+        .more-menu .dropdown-item { color:rgba(245,240,232,0.82); font-size:0.88rem; font-weight:500; padding:0.6rem 1.25rem; transition:all 0.15s ease; display:flex; align-items:center; }
+        .more-menu .dropdown-item i { color:var(--secondary-color); }
+        .more-menu .dropdown-item:hover { background:rgba(212,175,55,0.1); color:#F5F0E8; }
+        .more-menu .dropdown-divider { border-color:rgba(212,175,55,0.15); margin:0.35rem 0; }
+
+        /* ── Hero ── */
+        .page-hero {
+            background: linear-gradient(135deg, #0D0A07 0%, #2E1A0E 60%, #1A3A1A 100%);
+            padding: 5.5rem 0 4.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 60%, rgba(212,175,55,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 40%, rgba(44,95,45,0.09) 0%, transparent 55%);
+        }
+        .page-hero-content { position: relative; }
+        .eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 300; color: #F5F0E8; margin-bottom: 1.1rem; }
+        .page-hero p { font-size: 1.05rem; color: rgba(245,240,232,0.7); max-width: 540px; margin: 0 auto; }
+        .hero-div { display:flex; align-items:center; justify-content:center; gap:10px; margin: 1.5rem auto 0; max-width: 200px; }
+        .hero-div-line { flex:1; height:1px; background:rgba(212,175,55,0.4); }
+        .hero-div-dot { width:5px; height:5px; background:var(--secondary-color); border-radius:50%; flex-shrink:0; }
+
+        /* ── Steps Bar ── */
+        .steps-bar { background: var(--light-bg); border-bottom: 1px solid #EDE4D3; padding: 1.5rem 0; }
+        .steps-row { display: flex; justify-content: center; align-items: center; gap: 0; max-width: 680px; margin: 0 auto; }
+        .step-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative; }
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 18px; left: calc(50% + 18px);
+            width: calc(100% - 36px);
+            height: 2px;
+            background: #DDD4C5;
+        }
+        .step-item.active:not(:last-child)::after,
+        .step-item.done:not(:last-child)::after { background: var(--secondary-color); }
+        .step-circle {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 2px solid #DDD4C5;
+            background: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .step-item.active .step-circle { border-color: var(--secondary-color); background: var(--secondary-color); color: var(--deep-brown); }
+        .step-item.done   .step-circle { border-color: var(--accent-color); background: var(--accent-color); color: var(--white); }
+        .step-label { font-size: 0.72rem; font-weight: 500; color: var(--text-light); text-align: center; }
+        .step-item.active .step-label { color: var(--deep-brown); font-weight: 600; }
+        .step-item.done   .step-label { color: var(--accent-color); }
+
+        /* ── Main Layout ── */
+        .membership-wrap { padding: 60px 0 80px; }
+        .form-section-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(139,94,60,0.07);
+        }
+        .form-section-header {
+            background: linear-gradient(135deg, var(--deep-brown), #2E1F14);
+            padding: 1.75rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .form-section-header-icon {
+            width: 44px; height: 44px;
+            background: rgba(212,175,55,0.18);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+        .form-section-header h3 { font-size: 1.15rem; color: #F5F0E8; margin: 0; }
+        .form-section-header p { font-size: 0.8rem; color: rgba(245,240,232,0.6); margin: 0; }
+        .form-section-body { padding: 2rem; }
+
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+
+        /* Form fields */
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1.5px solid #DDD4C5;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            background: var(--white);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: var(--body-font);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+        }
+        .form-group .hint { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; }
+        .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+        /* Membership tiers */
+        .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 1.5rem; }
+        .tier-card {
+            border: 2px solid #DDD4C5;
+            border-radius: 12px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            background: var(--white);
+        }
+        .tier-card:hover { border-color: var(--primary-color); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(139,94,60,0.1); }
+        .tier-card.selected { border-color: var(--secondary-color); background: #FFFBF0; box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
+        .tier-card.selected::after {
+            content: '\F26B';
+            font-family: 'bootstrap-icons';
+            position: absolute;
+            top: 10px; right: 12px;
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+        .tier-popular {
+            position: absolute;
+            top: -10px; left: 50%; transform: translateX(-50%);
+            background: var(--secondary-color);
+            color: var(--deep-brown);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 12px;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+        .tier-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+        .tier-name { font-size: 1rem; font-weight: 600; color: var(--deep-brown); margin-bottom: 0.25rem; }
+        .tier-sub { font-size: 0.75rem; color: var(--text-light); margin-bottom: 0.75rem; }
+        .tier-features { list-style: none; padding: 0; text-align: left; font-size: 0.78rem; color: var(--text-light); }
+        .tier-features li { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 4px; }
+        .tier-features i { color: var(--accent-color); font-size: 0.72rem; margin-top: 3px; flex-shrink: 0; }
+
+        /* Interest checkboxes */
+        .interest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .interest-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 0.85rem;
+            border: 1.5px solid #DDD4C5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-light);
+            background: var(--white);
+            user-select: none;
+        }
+        .interest-chip:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .interest-chip.selected { border-color: var(--secondary-color); background: #FFFBF0; color: var(--deep-brown); }
+        .interest-chip i { font-size: 0.9rem; color: var(--secondary-color); }
+
+        /* Section divider */
+        .form-divider {
+            display: flex; align-items: center; gap: 10px;
+            margin: 1.75rem 0 1.25rem;
+            font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--secondary-color);
+        }
+        .form-divider::before, .form-divider::after {
+            content: ''; flex: 1; height: 1px; background: #EDE4D3;
+        }
+
+        /* Commitment section */
+        .commitment-box {
+            background: var(--light-bg);
+            border: 1px solid #EDE4D3;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .commitment-box h5 { font-size: 0.95rem; color: var(--deep-brown); margin-bottom: 0.75rem; }
+        .commitment-box p { font-size: 0.87rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1rem; }
+        .commitment-check {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.87rem; color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+        }
+        .commitment-check input[type=checkbox] { margin-top: 3px; accent-color: var(--secondary-color); width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* Navigation buttons */
+        .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+        .btn-form-next {
+            padding: 0.7rem 2rem;
+            background: var(--deep-brown);
+            color: #F5F0E8;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-form-next:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-form-back {
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid #DDD4C5;
+            border-radius: 50px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-form-back:hover { background: var(--light-bg); color: var(--text-dark); }
+        .btn-form-submit {
+            padding: 0.75rem 2.5rem;
+            background: var(--secondary-color);
+            color: var(--deep-brown);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-form-submit:hover { background: #b8972e; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.3); }
+
+        /* Review section */
+        .review-section { background: var(--light-bg); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
+        .review-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.75rem; }
+        .review-row { display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0; border-bottom: 1px solid #EDE4D3; font-size: 0.88rem; }
+        .review-row:last-child { border-bottom: none; }
+        .review-row span:first-child { color: var(--text-light); }
+        .review-row span:last-child { color: var(--text-dark); font-weight: 500; }
+
+        /* Success state */
+        .success-screen { text-align: center; padding: 3rem 2rem; display: none; }
+        .success-icon {
+            width: 72px; height: 72px;
+            background: rgba(44,95,45,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin: 0 auto 1.5rem;
+            animation: successPop 0.4s ease;
+        }
+        @keyframes successPop {
+            0%   { transform: scale(0.4); opacity: 0; }
+            70%  { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-screen h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--deep-brown); margin-bottom: 0.75rem; }
+        .success-screen p { font-size: 0.95rem; color: var(--text-light); max-width: 440px; margin: 0 auto 1.5rem; line-height: 1.7; }
+        .next-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 560px; margin: 0 auto; }
+        .next-step { background: var(--light-bg); border-radius: 10px; padding: 1.1rem; text-align: center; }
+        .next-step i { font-size: 1.3rem; color: var(--secondary-color); margin-bottom: 0.5rem; display: block; }
+        .next-step p { font-size: 0.78rem; color: var(--text-light); margin: 0; }
+
+        /* Sidebar */
+        .info-sidebar { position: sticky; top: 80px; }
+        .sidebar-widget {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 10px rgba(139,94,60,0.04);
+        }
+        .sidebar-widget-header {
+            padding: 1rem 1.4rem;
+            border-bottom: 1px solid #EDE4D3;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            background: var(--light-bg);
+        }
+        .sidebar-widget-body { padding: 1.25rem 1.4rem; }
+        .benefit-item {
+            display: flex; align-items: flex-start; gap: 10px;
+            margin-bottom: 0.85rem;
+        }
+        .benefit-item:last-child { margin-bottom: 0; }
+        .benefit-icon {
+            width: 32px; height: 32px;
+            background: var(--light-bg);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.88rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        .benefit-text h6 { font-size: 0.85rem; color: var(--text-dark); margin-bottom: 2px; }
+        .benefit-text p { font-size: 0.78rem; color: var(--text-light); margin: 0; }
+
+        .quote-widget {
+            background: linear-gradient(135deg, var(--deep-brown), #2E1F14);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .quote-widget blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #F5F0E8;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+        .quote-widget cite { font-size: 0.75rem; color: rgba(245,240,232,0.55); font-style: normal; }
+        .quote-widget .gold-line {
+            width: 40px; height: 2px; background: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .faq-item { margin-bottom: 0.75rem; }
+        .faq-q {
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer;
+            font-size: 0.88rem; font-weight: 500; color: var(--text-dark);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #EDE4D3;
+            transition: color 0.2s;
+        }
+        .faq-q:hover { color: var(--primary-color); }
+        .faq-q i { font-size: 0.7rem; color: var(--secondary-color); transition: transform 0.2s; }
+        .faq-q.open i { transform: rotate(180deg); }
+        .faq-a { font-size: 0.82rem; color: var(--text-light); line-height: 1.7; padding: 0.5rem 0 0.75rem; display: none; }
+        .faq-a.open { display: block; }
+
+        /* Footer */
+        .footer { background-color: var(--dark-bg); color: var(--white); padding: 60px 0 30px; margin-top: 0; }
+        .footer h5 { color: var(--white); margin-bottom: 1.5rem; }
+        .footer a { color: rgba(255,255,255,0.7); }
+        .footer a:hover { color: var(--secondary-color); }
+        .footer hr { opacity: 0.2; margin: 2rem 0; }
+
+        @media (max-width: 991px) {
+            .tier-grid { grid-template-columns: 1fr; }
+            .interest-grid { grid-template-columns: 1fr 1fr; }
+            .next-steps { grid-template-columns: 1fr; }
+            .info-sidebar { position: static; }
+        }
+        @media (max-width: 768px) {
+            .form-row-2, .form-row-3 { grid-template-columns: 1fr; }
+            .interest-grid { grid-template-columns: 1fr; }
+            .form-section-body { padding: 1.5rem; }
+            .steps-row { gap: 4px; }
+            .step-label { display: none; }
+            .navbar-collapse { background: #0D0A07; padding: 1rem; border-radius: var(--border-radius); margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="membership.html">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown">More</a>
+                        <ul class="dropdown-menu dropdown-menu-end more-menu">
+                            <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill me-2"></i>About Us</a></li>
+                            <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill me-2"></i>Ministries</a></li>
+                            <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill me-2"></i>Small Groups</a></li>
+                            <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill me-2"></i>Devotional</a></li>
+                            <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill me-2"></i>Prayer</a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text me-2"></i>Blog</a></li>
+                            <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images me-2"></i>Gallery</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle me-2"></i>My Account</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a href="livestream__1_.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="eyebrow">Word Transformation Church</span>
+                <h1>Become a Member</h1>
+                <p>This is more than signing a form. It is choosing a family, a purpose, and a community to do life with.</p>
+                <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Steps bar -->
+    <div class="steps-bar" id="stepsBar">
+        <div class="container">
+            <div class="steps-row">
+                <div class="step-item active" id="stepIndicator1">
+                    <div class="step-circle" id="stepCircle1">1</div>
+                    <span class="step-label">Your Details</span>
+                </div>
+                <div class="step-item" id="stepIndicator2">
+                    <div class="step-circle" id="stepCircle2">2</div>
+                    <span class="step-label">Membership Type</span>
+                </div>
+                <div class="step-item" id="stepIndicator3">
+                    <div class="step-circle" id="stepCircle3">3</div>
+                    <span class="step-label">Faith & Interests</span>
+                </div>
+                <div class="step-item" id="stepIndicator4">
+                    <div class="step-circle" id="stepCircle4">4</div>
+                    <span class="step-label">Commitment</span>
+                </div>
+                <div class="step-item" id="stepIndicator5">
+                    <div class="step-circle" id="stepCircle5">5</div>
+                    <span class="step-label">Review & Submit</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="membership-wrap">
+        <div class="container">
+            <div class="row g-4 align-items-start">
+
+                <!-- Form -->
+                <div class="col-lg-8">
+                    <div class="form-section-card" id="mainFormCard">
+
+                        <!-- Step 1: Personal Details -->
+                        <div class="form-step active" id="formStep1">
+                            <div class="form-section-header">
+                                <div class="form-section-header-icon"><i class="bi bi-person-fill"></i></div>
+                                <div>
+                                    <h3>Personal Details</h3>
+                                    <p>Tell us a little about yourself.</p>
+                                </div>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label>First name *</label>
+                                        <input type="text" id="m-first" placeholder="Kwame">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Last name *</label>
+                                        <input type="text" id="m-last" placeholder="Mensah">
+                                    </div>
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label>Email address *</label>
+                                        <input type="email" id="m-email" placeholder="you@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone number *</label>
+                                        <input type="tel" id="m-phone" placeholder="024 000 0000">
+                                    </div>
+                                </div>
+                                <div class="form-row-3">
+                                    <div class="form-group">
+                                        <label>Date of birth</label>
+                                        <input type="date" id="m-dob">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select id="m-gender">
+                                            <option value="">Select...</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Prefer not to say</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Marital status</label>
+                                        <select id="m-marital">
+                                            <option value="">Select...</option>
+                                            <option>Single</option>
+                                            <option>Married</option>
+                                            <option>Widowed</option>
+                                            <option>Divorced</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-divider">Contact & Address</div>
+                                <div class="form-group">
+                                    <label>Home address</label>
+                                    <input type="text" id="m-address" placeholder="Your residential address">
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label>City / Town</label>
+                                        <input type="text" id="m-city" placeholder="Accra">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Occupation</label>
+                                        <input type="text" id="m-occupation" placeholder="Your profession">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Emergency contact name & phone</label>
+                                    <input type="text" id="m-emergency" placeholder="Name — 024 000 0000">
+                                    <p class="hint">Used only in case of emergency during church activities.</p>
+                                </div>
+                                <div class="form-nav">
+                                    <div></div>
+                                    <button class="btn-form-next" onclick="goStep(2)">Next — Membership Type <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Membership Type -->
+                        <div class="form-step" id="formStep2">
+                            <div class="form-section-header">
+                                <div class="form-section-header-icon"><i class="bi bi-award-fill"></i></div>
+                                <div>
+                                    <h3>Membership Type</h3>
+                                    <p>Choose the membership that fits your season.</p>
+                                </div>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="tier-grid" id="tierGrid">
+                                    <div class="tier-card" onclick="selectTier(this, 'Regular Member')">
+                                        <span class="tier-icon">🙏</span>
+                                        <div class="tier-name">Regular Member</div>
+                                        <div class="tier-sub">For active attendees</div>
+                                        <ul class="tier-features">
+                                            <li><i class="bi bi-check-circle-fill"></i>Full membership rights</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Voting at AGM</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Access to all ministries</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Member portal access</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Pastoral care & support</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tier-card" onclick="selectTier(this, 'Associate Member')">
+                                        <span class="tier-popular">Most chosen</span>
+                                        <span class="tier-icon">✨</span>
+                                        <div class="tier-name">Associate Member</div>
+                                        <div class="tier-sub">For newcomers & students</div>
+                                        <ul class="tier-features">
+                                            <li><i class="bi bi-check-circle-fill"></i>All Regular benefits</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>New members class</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Mentorship matching</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Small group priority</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Welcome pack</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tier-card" onclick="selectTier(this, 'Family Membership')">
+                                        <span class="tier-icon">👨‍👩‍👧</span>
+                                        <div class="tier-name">Family Membership</div>
+                                        <div class="tier-sub">For married couples & families</div>
+                                        <ul class="tier-features">
+                                            <li><i class="bi bi-check-circle-fill"></i>All Associate benefits</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Children enrolled automatically</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Family counselling access</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Couples small group</li>
+                                            <li><i class="bi bi-check-circle-fill"></i>Family events priority</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>How long have you been attending Word Transformation?</label>
+                                    <select id="m-tenure">
+                                        <option value="">Select...</option>
+                                        <option>This is my first time</option>
+                                        <option>Less than 3 months</option>
+                                        <option>3–6 months</option>
+                                        <option>6 months – 1 year</option>
+                                        <option>1–3 years</option>
+                                        <option>3+ years</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Have you been baptised (by immersion)?</label>
+                                    <select id="m-baptised">
+                                        <option value="">Select...</option>
+                                        <option>Yes, here at Word Transformation</option>
+                                        <option>Yes, at another church</option>
+                                        <option>No — I would like to be baptised</option>
+                                        <option>Not yet decided</option>
+                                    </select>
+                                </div>
+                                <div class="form-nav">
+                                    <button class="btn-form-back" onclick="goStep(1)"><i class="bi bi-arrow-left"></i> Back</button>
+                                    <button class="btn-form-next" onclick="goStep(3)">Next — Faith & Interests <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Faith & Interests -->
+                        <div class="form-step" id="formStep3">
+                            <div class="form-section-header">
+                                <div class="form-section-header-icon"><i class="bi bi-heart-fill"></i></div>
+                                <div>
+                                    <h3>Faith & Interests</h3>
+                                    <p>Help us connect you to the right places.</p>
+                                </div>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="form-group">
+                                    <label>Briefly share your testimony or faith journey</label>
+                                    <textarea id="m-testimony" rows="4" placeholder="How did you come to faith? What has God done in your life? (optional but encouraged)"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>What brought you to Word Transformation?</label>
+                                    <select id="m-how">
+                                        <option value="">Select...</option>
+                                        <option>Friend or family member</option>
+                                        <option>Social media</option>
+                                        <option>Online search</option>
+                                        <option>Drove/walked past the church</option>
+                                        <option>Outreach or event</option>
+                                        <option>God led me here</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-divider">Areas of Interest</div>
+                                <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1rem;">Select all that apply — we will invite you to the right groups and teams.</p>
+                                <div class="interest-grid" id="interestGrid">
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-music-note-beamed"></i>Worship & Music</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-people-fill"></i>Small Groups</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-balloon-fill"></i>Children's Ministry</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-lightning-fill"></i>Youth Ministry</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-globe2"></i>Outreach & Missions</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-camera-fill"></i>Media & Creative</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-book-fill"></i>Bible Study</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-chat-heart-fill"></i>Prayer Ministry</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-display-fill"></i>Tech & AV</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-flower1"></i>Women's Ministry</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-shield-fill"></i>Men's Ministry</div>
+                                    <div class="interest-chip" onclick="toggleInterest(this)"><i class="bi bi-clipboard-fill"></i>Administration</div>
+                                </div>
+                                <div class="form-group" style="margin-top:1.25rem;">
+                                    <label>Any spiritual gifts you are aware of?</label>
+                                    <input type="text" id="m-gifts" placeholder="e.g. Teaching, intercession, hospitality, leadership…">
+                                </div>
+                                <div class="form-nav">
+                                    <button class="btn-form-back" onclick="goStep(2)"><i class="bi bi-arrow-left"></i> Back</button>
+                                    <button class="btn-form-next" onclick="goStep(4)">Next — Commitment <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Commitment -->
+                        <div class="form-step" id="formStep4">
+                            <div class="form-section-header">
+                                <div class="form-section-header-icon"><i class="bi bi-patch-check-fill"></i></div>
+                                <div>
+                                    <h3>Commitment</h3>
+                                    <p>Membership is a covenant, not just a registration.</p>
+                                </div>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="commitment-box">
+                                    <h5>Our Membership Covenant</h5>
+                                    <p>At Word Transformation Church, membership is a sacred commitment to God, to the leadership, and to the body of Christ. As a member, you are joining a family — and families are built on love, trust, and accountability. We ask that every member honour this covenant from the heart.</p>
+                                    <label class="commitment-check" id="c1"><input type="checkbox"> I am committed to attending Sunday services regularly and investing in the life of the church.</label>
+                                    <label class="commitment-check" id="c2"><input type="checkbox"> I will honour the leadership of Word Transformation Church and serve in unity with the body.</label>
+                                    <label class="commitment-check" id="c3"><input type="checkbox"> I commit to growing in my faith through the Word of God, prayer, and discipleship.</label>
+                                    <label class="commitment-check" id="c4"><input type="checkbox"> I will serve others, support the mission of the church, and give as God leads me.</label>
+                                    <label class="commitment-check" id="c5"><input type="checkbox"> I understand that membership may be reviewed if I am consistently absent without contact for more than 3 months.</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Prayer request or personal note to the pastoral team (optional)</label>
+                                    <textarea id="m-prayer" rows="3" placeholder="Is there anything you would like the pastoral team to pray for you or know about you?"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>How would you like to be contacted?</label>
+                                    <select id="m-contact-pref">
+                                        <option>Email</option>
+                                        <option>Phone call</option>
+                                        <option>WhatsApp</option>
+                                        <option>Any method</option>
+                                    </select>
+                                </div>
+                                <div class="form-nav">
+                                    <button class="btn-form-back" onclick="goStep(3)"><i class="bi bi-arrow-left"></i> Back</button>
+                                    <button class="btn-form-next" onclick="goStep(5)">Review My Application <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Review & Submit -->
+                        <div class="form-step" id="formStep5">
+                            <div class="form-section-header">
+                                <div class="form-section-header-icon"><i class="bi bi-check2-all"></i></div>
+                                <div>
+                                    <h3>Review & Submit</h3>
+                                    <p>Check your details before submitting.</p>
+                                </div>
+                            </div>
+                            <div class="form-section-body">
+                                <div class="review-section">
+                                    <div class="review-label">Personal Details</div>
+                                    <div class="review-row"><span>Full name</span><span id="rv-name">—</span></div>
+                                    <div class="review-row"><span>Email</span><span id="rv-email">—</span></div>
+                                    <div class="review-row"><span>Phone</span><span id="rv-phone">—</span></div>
+                                    <div class="review-row"><span>City</span><span id="rv-city">—</span></div>
+                                </div>
+                                <div class="review-section">
+                                    <div class="review-label">Membership</div>
+                                    <div class="review-row"><span>Membership type</span><span id="rv-tier">—</span></div>
+                                    <div class="review-row"><span>Attending since</span><span id="rv-tenure">—</span></div>
+                                    <div class="review-row"><span>Baptised</span><span id="rv-baptised">—</span></div>
+                                </div>
+                                <div class="review-section">
+                                    <div class="review-label">Interests & Commitment</div>
+                                    <div class="review-row"><span>Ministry interests</span><span id="rv-interests" style="text-align:right;max-width:60%;">—</span></div>
+                                    <div class="review-row"><span>Commitment signed</span><span id="rv-commitment">—</span></div>
+                                </div>
+                                <div class="form-nav">
+                                    <button class="btn-form-back" onclick="goStep(4)"><i class="bi bi-arrow-left"></i> Back</button>
+                                    <button class="btn-form-submit" onclick="submitMembership()">
+                                        <i class="bi bi-send-fill"></i> Submit Application
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Success Screen (outside card, shown after submit) -->
+                    <div class="form-section-card success-screen" id="successScreen">
+                        <div class="form-section-body" style="padding:3rem 2rem;">
+                            <div class="success-icon"><i class="bi bi-check-lg"></i></div>
+                            <h2>Welcome to the family!</h2>
+                            <p>Your membership application has been received. Our team will review it and reach out to you within <strong>3–5 business days</strong> to welcome you personally and guide your next steps.</p>
+                            <div class="next-steps">
+                                <div class="next-step"><i class="bi bi-envelope-fill"></i><p>Check your email for a confirmation</p></div>
+                                <div class="next-step"><i class="bi bi-calendar3-event-fill"></i><p>You will be invited to New Members' Class</p></div>
+                                <div class="next-step"><i class="bi bi-person-circle"></i><p>Your member portal will be activated</p></div>
+                            </div>
+                            <div style="margin-top:2rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                                <a href="index.html" class="btn-form-next" style="text-decoration:none;"><i class="bi bi-house"></i> Back to Home</a>
+                                <a href="portal.html" class="btn-form-back" style="text-decoration:none;"><i class="bi bi-person-circle"></i> Go to My Account</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="info-sidebar">
+
+                        <div class="quote-widget">
+                            <div class="gold-line"></div>
+                            <blockquote>"You are no longer foreigners and strangers, but fellow citizens with God's people and members of his household."</blockquote>
+                            <cite>— Ephesians 2:19</cite>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <div class="sidebar-widget-header">Why become a member?</div>
+                            <div class="sidebar-widget-body">
+                                <div class="benefit-item">
+                                    <div class="benefit-icon"><i class="bi bi-people-fill"></i></div>
+                                    <div class="benefit-text"><h6>Belong to a family</h6><p>Move from visitor to family. Be known, loved, and cared for.</p></div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon"><i class="bi bi-book-fill"></i></div>
+                                    <div class="benefit-text"><h6>Grow deeper</h6><p>Access discipleship classes, Bible studies, and mentorship.</p></div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon"><i class="bi bi-hand-index-thumb-fill"></i></div>
+                                    <div class="benefit-text"><h6>Serve with purpose</h6><p>Find your place in the body and use your gifts meaningfully.</p></div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon"><i class="bi bi-shield-check"></i></div>
+                                    <div class="benefit-text"><h6>Pastoral covering</h6><p>Receive prayer, counselling, and care from our pastoral team.</p></div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon"><i class="bi bi-person-circle"></i></div>
+                                    <div class="benefit-text"><h6>Member portal access</h6><p>Track giving, register for events, submit prayer requests online.</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <div class="sidebar-widget-header">Frequently asked questions</div>
+                            <div class="sidebar-widget-body" style="padding-bottom:0.5rem;">
+                                <div class="faq-item">
+                                    <div class="faq-q" onclick="toggleFaq(this)"><span>Do I need to be baptised to join?</span><i class="bi bi-chevron-down"></i></div>
+                                    <div class="faq-a">You do not need to be baptised to apply. However, we encourage all members to take the step of baptism as a declaration of faith. We will journey with you through this.</div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-q" onclick="toggleFaq(this)"><span>Is membership free?</span><i class="bi bi-chevron-down"></i></div>
+                                    <div class="faq-a">Yes — membership at Word Transformation Church is completely free. We believe giving should come from the heart, not as a condition of belonging.</div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-q" onclick="toggleFaq(this)"><span>How long does the process take?</span><i class="bi bi-chevron-down"></i></div>
+                                    <div class="faq-a">After submitting your application, our team will contact you within 3–5 days. You will then be invited to a New Members' Class (usually 4 sessions) before formal membership is confirmed.</div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-q" onclick="toggleFaq(this)"><span>Can I transfer from another church?</span><i class="bi bi-chevron-down"></i></div>
+                                    <div class="faq-a">Absolutely. We honour your spiritual history and journey. Please mention your previous church in the application and we will guide the transition respectfully.</div>
+                                </div>
+                                <div class="faq-item" style="margin-bottom:0.5rem;">
+                                    <div class="faq-q" onclick="toggleFaq(this)"><span>Can I bring my whole family?</span><i class="bi bi-chevron-down"></i></div>
+                                    <div class="faq-a">Yes! Select the Family Membership option and your spouse and children will be included. Children under 12 are automatically enrolled in our Children's Ministry.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <div class="sidebar-widget-header">Need to talk first?</div>
+                            <div class="sidebar-widget-body" style="text-align:center;">
+                                <i class="bi bi-telephone-fill" style="font-size:1.8rem;color:var(--secondary-color);margin-bottom:0.75rem;display:block;"></i>
+                                <p style="font-size:0.87rem;color:var(--text-light);margin-bottom:1rem;">Have questions before you apply? Our team is happy to chat.</p>
+                                <a href="contact.html" style="display:inline-flex;align-items:center;gap:6px;padding:0.6rem 1.4rem;background:var(--deep-brown);color:#F5F0E8;border-radius:50px;font-size:0.85rem;font-weight:500;transition:all 0.3s;"><i class="bi bi-chat-fill"></i> Contact Us</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+                <div class="col-md-2 mb-4"><h5>Pages</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="about.html">About</a></li><li class="mb-2"><a href="membership.html">Membership</a></li><li class="mb-2"><a href="portal.html">My Account</a></li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
+            </div>
+            <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var currentStep = 1;
+        var selectedTierName = '';
+        var selectedInterests = [];
+
+        // ── Step navigation ──
+        function goStep(n) {
+            if (n > currentStep && !validateStep(currentStep)) return;
+            document.getElementById('formStep' + currentStep).classList.remove('active');
+            document.getElementById('formStep' + n).classList.add('active');
+
+            // Update step indicators
+            for (var i = 1; i <= 5; i++) {
+                var ind = document.getElementById('stepIndicator' + i);
+                var circ = document.getElementById('stepCircle' + i);
+                ind.classList.remove('active','done');
+                if (i < n) { ind.classList.add('done'); circ.innerHTML = '<i class="bi bi-check-lg" style="font-size:0.75rem;"></i>'; }
+                else if (i === n) { ind.classList.add('active'); circ.textContent = i; }
+                else { circ.textContent = i; }
+            }
+            currentStep = n;
+            if (n === 5) populateReview();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── Validation ──
+        function validateStep(step) {
+            if (step === 1) {
+                var first = document.getElementById('m-first').value.trim();
+                var last  = document.getElementById('m-last').value.trim();
+                var email = document.getElementById('m-email').value.trim();
+                var phone = document.getElementById('m-phone').value.trim();
+                if (!first || !last || !email || !phone) {
+                    shake('formStep1');
+                    alert('Please fill in your name, email, and phone number before continuing.');
+                    return false;
+                }
+            }
+            if (step === 2 && !selectedTierName) {
+                shake('formStep2');
+                alert('Please select a membership type before continuing.');
+                return false;
+            }
+            if (step === 4) {
+                var all = true;
+                for (var i = 1; i <= 5; i++) {
+                    if (!document.querySelector('#c' + i + ' input').checked) { all = false; break; }
+                }
+                if (!all) {
+                    shake('formStep4');
+                    alert('Please read and check all commitment statements before proceeding.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function shake(id) {
+            var el = document.getElementById(id);
+            el.style.animation = 'none';
+            el.offsetHeight;
+            el.style.animation = 'shake 0.4s ease';
+            setTimeout(function(){ el.style.animation = ''; }, 400);
+        }
+
+        // Add shake keyframe
+        var shakeStyle = document.createElement('style');
+        shakeStyle.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}';
+        document.head.appendChild(shakeStyle);
+
+        // ── Tier selection ──
+        function selectTier(card, name) {
+            document.querySelectorAll('.tier-card').forEach(function(c){ c.classList.remove('selected'); });
+            card.classList.add('selected');
+            selectedTierName = name;
+        }
+
+        // ── Interest chips ──
+        function toggleInterest(chip) {
+            var name = chip.textContent.trim();
+            chip.classList.toggle('selected');
+            if (chip.classList.contains('selected')) {
+                if (!selectedInterests.includes(name)) selectedInterests.push(name);
+            } else {
+                selectedInterests = selectedInterests.filter(function(i){ return i !== name; });
+            }
+        }
+
+        // ── FAQ ──
+        function toggleFaq(el) {
+            var answer = el.nextElementSibling;
+            el.classList.toggle('open');
+            answer.classList.toggle('open');
+        }
+
+        // ── Populate review ──
+        function populateReview() {
+            var first = document.getElementById('m-first').value.trim();
+            var last  = document.getElementById('m-last').value.trim();
+            document.getElementById('rv-name').textContent     = first + ' ' + last;
+            document.getElementById('rv-email').textContent    = document.getElementById('m-email').value.trim() || '—';
+            document.getElementById('rv-phone').textContent    = document.getElementById('m-phone').value.trim() || '—';
+            document.getElementById('rv-city').textContent     = document.getElementById('m-city').value.trim()  || '—';
+            document.getElementById('rv-tier').textContent     = selectedTierName || '—';
+            document.getElementById('rv-tenure').textContent   = document.getElementById('m-tenure').value  || '—';
+            document.getElementById('rv-baptised').textContent = document.getElementById('m-baptised').value || '—';
+            document.getElementById('rv-interests').textContent = selectedInterests.length ? selectedInterests.join(', ') : 'None selected';
+            var committed = [1,2,3,4,5].every(function(i){ return document.querySelector('#c' + i + ' input').checked; });
+            document.getElementById('rv-commitment').textContent = committed ? '✓ All 5 signed' : 'Incomplete';
+        }
+
+        // ── Submit ──
+        function submitMembership() {
+            document.getElementById('mainFormCard').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+            document.getElementById('stepsBar').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // TODO: POST /api/membership with form data
+        }
+    </script>
+</body>
+</html>
