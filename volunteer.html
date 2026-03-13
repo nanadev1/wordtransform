@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-color:#8B5E3C;--primary-dark:#6B4A2E;--secondary-color:#D4AF37;--accent-color:#2C5F2D;--light-bg:#F9F6F0;--dark-bg:#1A1A1A;--deep-brown:#4A3728;--text-dark:#333333;--text-light:#666666;--white:#FFFFFF;--heading-font:'Playfair Display',serif;--body-font:'Inter',sans-serif;--border-radius:8px;}
+        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;scroll-padding-top:70px;}
+        body{font-family:var(--body-font);color:var(--text-dark);background:var(--white);line-height:1.6;}
+        h1,h2,h3,h4,h5,h6{font-family:var(--heading-font);font-weight:600;line-height:1.3;}
+        a{text-decoration:none;transition:all 0.3s ease;}
+        .navbar{background-color:var(--deep-brown);padding:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+        .navbar-brand{font-family:var(--heading-font);font-size:1.4rem;font-weight:600;color:var(--white)!important;}
+        .navbar-brand i{color:var(--secondary-color);margin-right:0.5rem;}
+        .navbar-nav .nav-link{color:rgba(255,255,255,0.88)!important;font-weight:500;padding:0.5rem 1rem!important;border-radius:var(--border-radius);transition:all 0.3s ease;}
+        .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--white)!important;background:rgba(255,255,255,0.1);}
+        .btn-give{background:var(--secondary-color);color:var(--deep-brown);border:none;padding:0.45rem 1.25rem;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;}
+        .btn-give:hover{background:#b8972e;transform:translateY(-2px);}
+        .page-hero{background:linear-gradient(135deg,var(--deep-brown) 0%,#2E1F14 100%);padding:5rem 0 4rem;text-align:center;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.12) 0%,transparent 60%);}
+        .page-hero-content{position:relative;}
+        .eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1rem;display:block;}
+        .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:300;color:#F5F0E8;margin-bottom:1rem;}
+        .page-hero p{font-size:1.05rem;color:rgba(245,240,232,0.72);max-width:520px;margin:0 auto;}
+        .hero-div{display:flex;align-items:center;justify-content:center;gap:10px;margin:1.5rem auto 0;max-width:200px;}
+        .hero-div-line{flex:1;height:1px;background:rgba(212,175,55,0.4);}
+        .hero-div-dot{width:5px;height:5px;background:var(--secondary-color);border-radius:50%;flex-shrink:0;}
+
+        /* Impact */
+        .impact-section{background:var(--light-bg);padding:60px 0;}
+        .impact-card{background:var(--white);border:1px solid #EDE4D3;border-radius:10px;padding:1.75rem;text-align:center;height:100%;}
+        .impact-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--secondary-color);line-height:1;}
+        .impact-label{font-size:0.82rem;color:var(--text-light);margin-top:6px;}
+
+        /* Teams grid */
+        .teams-section{padding:80px 0;}
+        .section-label{font-size:0.72rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;}
+        .section-label::after{content:'';flex:1;height:1px;background:#EDE4D3;}
+        .team-card{background:var(--white);border:1px solid #EDE4D3;border-radius:12px;padding:1.75rem;height:100%;transition:all 0.3s ease;cursor:pointer;position:relative;}
+        .team-card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(139,94,60,0.1);border-color:var(--secondary-color);}
+        .team-card.selected{border-color:var(--secondary-color);background:var(--light-bg);}
+        .team-card.selected::after{content:'\F26B';font-family:'bootstrap-icons';position:absolute;top:12px;right:14px;color:var(--secondary-color);font-size:1.1rem;}
+        .team-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
+        .team-card h4{font-size:1rem;color:var(--deep-brown);margin-bottom:0.5rem;}
+        .team-card p{font-size:0.85rem;color:var(--text-light);line-height:1.6;margin-bottom:1rem;}
+        .team-need{font-size:0.72rem;font-weight:500;color:var(--primary-color);display:flex;align-items:center;gap:4px;}
+        .t-worship{background:#F3E8FB;color:#a855f7;}
+        .t-welcome{background:#FBF3DC;color:#7A5A00;}
+        .t-tech{background:#E8F0FB;color:#1a5fa5;}
+        .t-children{background:#FBE8DC;color:#c05a00;}
+        .t-outreach{background:#E4F0E4;color:#2C5F2D;}
+        .t-prayer{background:#F0EAE0;color:#8B5E3C;}
+        .t-media{background:#E8F0FB;color:#1a4fa5;}
+        .t-admin{background:#FBF3DC;color:#7A5A00;}
+        .t-parking{background:#F0EAE0;color:#8B5E3C;}
+
+        /* Application form */
+        .apply-section{background:var(--light-bg);padding:80px 0;}
+        .apply-card{background:var(--white);border:1px solid #EDE4D3;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(139,94,60,0.07);}
+        .apply-header{background:linear-gradient(135deg,var(--deep-brown),#2E1F14);padding:2rem 2.5rem;}
+        .apply-header h2{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#F5F0E8;margin-bottom:0.3rem;}
+        .apply-header p{font-size:0.85rem;color:rgba(245,240,232,0.65);margin:0;}
+        .apply-body{padding:2rem 2.5rem;}
+        .form-group{margin-bottom:1.1rem;}
+        .form-group label{display:block;font-size:0.75rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.4rem;}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:0.65rem 0.9rem;border:1.5px solid #DDD4C5;border-radius:8px;font-size:0.92rem;color:var(--text-dark);outline:none;transition:border-color 0.2s;font-family:var(--body-font);}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--secondary-color);}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+        .selected-teams-display{min-height:48px;padding:0.65rem 0.9rem;border:1.5px solid #DDD4C5;border-radius:8px;font-size:0.88rem;color:var(--text-light);background:#FAFAFA;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start;}
+        .team-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;background:var(--light-bg);border:1px solid #EDE4D3;border-radius:50px;font-size:0.75rem;color:var(--deep-brown);}
+        .btn-submit{padding:0.75rem 2rem;background:var(--deep-brown);color:#F5F0E8;border:none;border-radius:50px;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;gap:8px;}
+        .btn-submit:hover{background:var(--primary-dark);transform:translateY(-1px);}
+
+        .footer{background-color:var(--dark-bg);color:var(--white);padding:60px 0 30px;}
+        .footer h5{color:var(--white);margin-bottom:1.5rem;}
+        .footer a{color:rgba(255,255,255,0.7);}
+        .footer a:hover{color:var(--secondary-color);}
+        .footer hr{opacity:0.2;margin:2rem 0;}
+        @media(max-width:768px){.form-row{grid-template-columns:1fr;}.apply-header,.apply-body{padding:1.5rem;}.navbar-collapse{background:var(--deep-brown);padding:1rem;border-radius:var(--border-radius);margin-top:0.5rem;}}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="devotional.html">Devotional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="volunteer.html">Volunteer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="smallgroups.html">Small Groups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <div class="container"><div class="page-hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>Serve & Volunteer</h1>
+            <p>You were made for more than a seat. Find your place to serve and make a difference.</p>
+            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+        </div></div>
+    </div>
+
+    <section class="impact-section">
+        <div class="container">
+            <div class="row g-4 justify-content-center text-center">
+                <div class="col-6 col-md-3"><div class="impact-card"><div class="impact-num">180+</div><div class="impact-label">Active volunteers</div></div></div>
+                <div class="col-6 col-md-3"><div class="impact-card"><div class="impact-num">9</div><div class="impact-label">Service teams</div></div></div>
+                <div class="col-6 col-md-3"><div class="impact-card"><div class="impact-num">500+</div><div class="impact-label">People served weekly</div></div></div>
+                <div class="col-6 col-md-3"><div class="impact-card"><div class="impact-num">15+</div><div class="impact-label">Years of service</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="teams-section">
+        <div class="container">
+            <div class="section-label">Choose your team</div>
+            <p style="color:var(--text-light);font-size:0.92rem;margin-bottom:2rem;">Click any team to select it. You can choose more than one. Your selections will appear in the application form below.</p>
+            <div class="row g-3" id="teamsGrid">
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Worship Team')" data-team="Worship Team"><div class="team-icon t-worship"><i class="bi bi-music-note-beamed"></i></div><h4>Worship Team</h4><p>Singers, musicians, and sound engineers who lead the congregation in worship every Sunday.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Vocalists, Drummer, Pianist</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Welcome & Ushering')" data-team="Welcome & Ushering"><div class="team-icon t-welcome"><i class="bi bi-door-open-fill"></i></div><h4>Welcome & Ushering</h4><p>The first face people see. Create a warm, welcoming atmosphere for every person who walks through our doors.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: 8 ushers urgently</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Tech & AV')" data-team="Tech & AV"><div class="team-icon t-tech"><i class="bi bi-display-fill"></i></div><h4>Tech & AV</h4><p>Manage sound, lighting, projection, live streaming, and video recording for services and events.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Live stream operator</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Children\'s Ministry')" data-team="Children's Ministry"><div class="team-icon t-children"><i class="bi bi-balloon-fill"></i></div><h4>Children's Ministry</h4><p>Teach and care for children during Sunday services. Training provided. Background check required.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Sunday school teachers</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Community Outreach')" data-team="Community Outreach"><div class="team-icon t-outreach"><i class="bi bi-globe2"></i></div><h4>Community Outreach</h4><p>Food distribution, street evangelism, hospital visits, and community development projects.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Monthly drivers</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Prayer Ministry')" data-team="Prayer Ministry"><div class="team-icon t-prayer"><i class="bi bi-chat-heart-fill"></i></div><h4>Prayer Ministry</h4><p>Pray for members after services, intercede during events, and join our weekly prayer watch.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Altar prayer team</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Media & Creative')" data-team="Media & Creative"><div class="team-icon t-media"><i class="bi bi-camera-fill"></i></div><h4>Media & Creative</h4><p>Photography, videography, graphic design, and social media management for the church's online presence.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Photographer, designer</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Administration')" data-team="Administration"><div class="team-icon t-admin"><i class="bi bi-clipboard-fill"></i></div><h4>Administration</h4><p>Support the church office with coordination, planning, data management, and member communications.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Office assistant</div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-card" onclick="toggleTeam(this,'Parking & Security')" data-team="Parking & Security"><div class="team-icon t-parking"><i class="bi bi-shield-fill-check"></i></div><h4>Parking & Security</h4><p>Ensure safe and orderly parking and overall safety for church members during all services and events.</p><div class="team-need"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i>Needs: Sunday morning team</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="apply-section" id="apply">
+        <div class="container" style="max-width:780px;">
+            <div class="apply-card">
+                <div class="apply-header">
+                    <h2>Volunteer Application</h2>
+                    <p>Complete this form and our team will be in touch within 3 business days.</p>
+                </div>
+                <div class="apply-body">
+                    <div class="form-row">
+                        <div class="form-group"><label>First name</label><input type="text" id="v-first" placeholder="Kwame"></div>
+                        <div class="form-group"><label>Last name</label><input type="text" id="v-last" placeholder="Mensah"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Email address</label><input type="email" id="v-email" placeholder="you@example.com"></div>
+                        <div class="form-group"><label>Phone number</label><input type="tel" id="v-phone" placeholder="024 000 0000"></div>
+                    </div>
+                    <div class="form-group"><label>Teams you are interested in</label><div class="selected-teams-display" id="selectedTeamsDisplay"><span style="color:var(--text-light);font-size:0.85rem;">Select teams above — they will appear here</span></div></div>
+                    <div class="form-group"><label>How long have you attended Word Transformation?</label><select id="v-tenure"><option value="">Select...</option><option>Less than 3 months</option><option>3–6 months</option><option>6–12 months</option><option>1–3 years</option><option>3+ years</option></select></div>
+                    <div class="form-group"><label>Availability</label><select id="v-avail"><option value="">Select...</option><option>Sundays only</option><option>Weekdays evenings</option><option>Weekends (Sat & Sun)</option><option>Flexible / any time</option></select></div>
+                    <div class="form-group"><label>Tell us about yourself and your gifts</label><textarea rows="4" placeholder="Share a little about your background, skills, or why you want to serve..."></textarea></div>
+                    <button class="btn-submit" onclick="submitVolunteer()"><i class="bi bi-send"></i> Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+                <div class="col-md-2 mb-4"><h5>Pages</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="ministries.html">Ministries</a></li><li class="mb-2"><a href="volunteer.html">Volunteer</a></li><li class="mb-2"><a href="contact.html">Contact</a></li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
+            </div>
+            <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var selectedTeams=[];
+        function toggleTeam(card,name){
+            var idx=selectedTeams.indexOf(name);
+            if(idx===-1){selectedTeams.push(name);card.classList.add('selected');}
+            else{selectedTeams.splice(idx,1);card.classList.remove('selected');}
+            updateTeamsDisplay();
+        }
+        function updateTeamsDisplay(){
+            var display=document.getElementById('selectedTeamsDisplay');
+            if(selectedTeams.length===0){display.innerHTML='<span style="color:var(--text-light);font-size:0.85rem;">Select teams above — they will appear here</span>';return;}
+            display.innerHTML=selectedTeams.map(function(t){return '<span class="team-chip"><i class="bi bi-check2"></i>'+t+'</span>';}).join('');
+        }
+        function submitVolunteer(){
+            var first=document.getElementById('v-first').value.trim();
+            var email=document.getElementById('v-email').value.trim();
+            if(!first||!email){alert('Please fill in your name and email address.');return;}
+            if(selectedTeams.length===0){alert('Please select at least one team you are interested in.');return;}
+            alert('Thank you, '+first+'! Your application has been received. Our team will contact you within 3 business days. God bless you!');
+        }
+    </script>
+</body>
+</html>
