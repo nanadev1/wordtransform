@@ -7,231 +7,354 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="claudestyle.css">
     <style>
-        body { background-color: var(--white); }
+        :root {
+            --primary-color: #8B5E3C;
+            --primary-dark: #6B4A2E;
+            --secondary-color: #D4AF37;
+            --accent-color: #2C5F2D;
+            --light-bg: #F9F6F0;
+            --dark-bg: #1A1A1A;
+            --deep-brown: #4A3728;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 8px;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:var(--body-font); color:var(--text-dark); background:var(--white); line-height:1.6; overflow-x:hidden; }
+        h1,h2,h3,h4,h5,h6 { font-family:var(--heading-font); font-weight:600; line-height:1.3; }
+        a { text-decoration:none; transition:all 0.3s ease; }
+
+        /* ── Navbar ── */
+        .navbar { background-color:var(--deep-brown); padding:1rem 0; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+        .navbar-brand { font-family:var(--heading-font); font-size:1.4rem; font-weight:600; color:var(--white)!important; }
+        .navbar-brand i { color:var(--secondary-color); margin-right:0.5rem; }
+        .navbar-nav .nav-link { color:rgba(255,255,255,0.88)!important; font-weight:500; padding:0.5rem 1rem!important; border-radius:var(--border-radius); transition:all 0.3s ease; }
+        .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active { color:var(--white)!important; background:rgba(255,255,255,0.1); }
+        .btn-give { background:var(--secondary-color); color:var(--deep-brown); border:none; padding:0.45rem 1.25rem; border-radius:50px; font-weight:600; font-size:0.9rem; cursor:pointer; transition:all 0.3s ease; }
+        .btn-give:hover { background:#b8972e; transform:translateY(-2px); }
+        .btn-live-nav { display:inline-flex; align-items:center; gap:6px; padding:0.42rem 1rem; border-radius:50px; border:1.5px solid rgba(220,38,38,0.7); color:rgba(255,255,255,0.88)!important; font-size:0.82rem; font-weight:500; transition:all 0.3s ease; }
+        .btn-live-nav:hover { background:rgba(220,38,38,0.15); border-color:#dc2626; color:#fff!important; }
+        .live-dot { width:7px; height:7px; background:#dc2626; border-radius:50%; animation:livePulse 1.5s infinite; }
+        @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.3);} }
 
         /* ── Live Banner ── */
-        .live-banner { background: var(--accent-color); padding: 0.55rem 0; text-align: center; }
-        .live-banner-inner { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.82rem; font-weight: 600; color: #fff; letter-spacing: 0.06em; text-transform: uppercase; }
-        .live-banner-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: livePulse 1.2s infinite; }
+        .live-banner { background:linear-gradient(90deg,#1a3d1b,#2C5F2D,#1a3d1b); padding:0.5rem 0; text-align:center; }
+        .live-banner-inner { display:flex; align-items:center; justify-content:center; gap:10px; font-size:0.82rem; font-weight:600; color:#fff; letter-spacing:0.06em; text-transform:uppercase; }
 
         /* ── Page Hero ── */
-        .page-hero { background: linear-gradient(135deg, var(--deep-brown) 0%, #2E1F14 100%); padding: 4.5rem 0 3.5rem; text-align: center; position: relative; overflow: hidden; }
-        .page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%); }
-        .page-hero-content { position: relative; }
-        .eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
-        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5vw,3.4rem); font-weight: 300; color: #F5F0E8; margin-bottom: 0.75rem; }
-        .page-hero p { font-size: 1rem; color: rgba(245,240,232,0.72); max-width: 520px; margin: 0 auto; }
-        .hero-div { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 1.25rem auto 0; max-width: 200px; }
-        .hero-div-line { flex: 1; height: 1px; background: rgba(212,175,55,0.4); }
-        .hero-div-dot { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; flex-shrink: 0; }
+        .page-hero { background:linear-gradient(135deg,var(--deep-brown) 0%,#2E1F14 100%); padding:3.5rem 0 2.5rem; text-align:center; position:relative; overflow:hidden; }
+        .page-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.12) 0%,transparent 60%); }
+        .hero-content { position:relative; }
+        .eyebrow { font-size:0.72rem; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:var(--secondary-color); margin-bottom:1rem; display:block; }
+        .page-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:#F5F0E8; margin-bottom:0.75rem; }
+        .page-hero p { font-size:1rem; color:rgba(245,240,232,0.72); max-width:520px; margin:0 auto; }
+        .hero-div { display:flex; align-items:center; justify-content:center; gap:10px; margin:1.25rem auto 0; max-width:200px; }
+        .hero-div-line { flex:1; height:1px; background:rgba(212,175,55,0.4); }
+        .hero-div-dot { width:5px; height:5px; background:var(--secondary-color); border-radius:50%; flex-shrink:0; }
 
-        /* ── Main Stream Layout ── */
-        .stream-section { background: var(--white); padding: 2.5rem 0 3.5rem; }
-        .stream-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); display: block; margin-bottom: 0.4rem; }
-        .stream-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 300; color: var(--deep-brown); margin-bottom: 0.3rem; }
-        .stream-subtitle { font-size: 0.88rem; color: var(--text-light); margin-bottom: 1.25rem; }
+        /* ══════════════════════════════
+           MAIN STREAM LAYOUT
+        ══════════════════════════════ */
+        .stream-layout { background:var(--light-bg); padding:2rem 0 4rem; }
+        .stream-col { display:flex; flex-direction:column; gap:1.25rem; }
 
-        /* ── Video Player ── */
-        .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background: #1A1008; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(74,55,40,0.18); border: 1px solid #EDE4D3; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .video-offline { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--deep-brown), #1A1008); color: rgba(245,240,232,0.7); text-align: center; padding: 2rem; }
-        .video-offline i { font-size: 3.5rem; color: #FF0000; margin-bottom: 1rem; opacity: 0.85; }
-        .video-offline h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: #F5F0E8; margin-bottom: 0.6rem; }
-        .video-offline p { font-size: 0.85rem; color: rgba(245,240,232,0.55); max-width: 360px; line-height: 1.7; margin-bottom: 1.25rem; }
-        .btn-yt { display: inline-flex; align-items: center; gap: 8px; background: #FF0000; color: #fff; padding: 0.6rem 1.4rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; text-decoration: none; }
-        .btn-yt:hover { background: #cc0000; color: #fff; transform: translateY(-2px); }
+        /* ── Stream Mode Switcher ── */
+        .mode-switcher { background:var(--white); border:1px solid #EDE4D3; border-radius:12px; padding:1rem 1.25rem; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+        .mode-label { font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); margin-right:4px; flex-shrink:0; }
+        .mode-btn { display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1.1rem; border-radius:50px; font-size:0.82rem; font-weight:500; cursor:pointer; border:1.5px solid #DDD4C5; background:transparent; color:var(--text-light); transition:all 0.25s ease; white-space:nowrap; }
+        .mode-btn:hover { border-color:var(--deep-brown); color:var(--deep-brown); }
+        .mode-btn.active { background:var(--deep-brown); border-color:var(--deep-brown); color:#F5F0E8; }
+        .mode-btn .mode-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+        .mode-btn.active .mode-dot { background:var(--secondary-color); animation:livePulse 1.5s infinite; }
+        .mode-btn:not(.active) .mode-dot { background:currentColor; opacity:0.4; }
+
+        /* ── Video Wrapper ── */
+        .video-card { background:var(--white); border:1px solid #EDE4D3; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(74,55,40,0.08); }
+        .video-wrapper { position:relative; width:100%; padding-bottom:56.25%; background:#1A1008; }
+        .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+        .video-offline { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--deep-brown),#1A1008); color:rgba(245,240,232,0.7); text-align:center; padding:2rem; }
+        .video-offline i { font-size:3.5rem; margin-bottom:1rem; opacity:0.85; }
+        .video-offline h3 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; color:#F5F0E8; margin-bottom:0.6rem; }
+        .video-offline p { font-size:0.85rem; color:rgba(245,240,232,0.55); max-width:360px; line-height:1.7; margin-bottom:1.25rem; }
+
+        /* ── Google Meet Panel ── */
+        .meet-panel { background:var(--white); border:1px solid #EDE4D3; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(74,55,40,0.08); }
+        .meet-header { background:linear-gradient(135deg,#1a73e8,#0d47a1); padding:1.25rem 1.5rem; display:flex; align-items:center; gap:12px; }
+        .meet-header-icon { width:44px; height:44px; background:rgba(255,255,255,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; color:#fff; flex-shrink:0; }
+        .meet-header h4 { color:#fff; font-size:1rem; margin:0; }
+        .meet-header p { color:rgba(255,255,255,0.75); font-size:0.75rem; margin:0; }
+        .meet-body { padding:1.5rem; }
+        .meet-join-card { background:var(--light-bg); border:1px solid #EDE4D3; border-radius:10px; padding:1.5rem; text-align:center; margin-bottom:1.25rem; }
+        .meet-join-card i { font-size:2.5rem; color:#1a73e8; margin-bottom:0.75rem; display:block; }
+        .meet-join-card h5 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:400; color:var(--deep-brown); margin-bottom:0.4rem; }
+        .meet-join-card p { font-size:0.84rem; color:var(--text-light); margin-bottom:1.25rem; line-height:1.6; }
+        .meet-link-row { display:flex; gap:8px; margin-bottom:1rem; }
+        .meet-link-input { flex:1; border:1.5px solid #DDD4C5; border-radius:8px; padding:0.55rem 0.9rem; font-size:0.84rem; color:var(--text-dark); outline:none; background:var(--white); transition:border-color 0.25s; }
+        .meet-link-input:focus { border-color:#1a73e8; }
+        .btn-meet-join { display:inline-flex; align-items:center; gap:7px; background:#1a73e8; color:#fff; padding:0.6rem 1.4rem; border-radius:50px; font-size:0.88rem; font-weight:600; border:none; cursor:pointer; transition:all 0.3s ease; white-space:nowrap; }
+        .btn-meet-join:hover { background:#1557b0; transform:translateY(-1px); }
+        .btn-meet-launch { width:100%; display:flex; align-items:center; justify-content:center; gap:8px; background:#1a73e8; color:#fff; padding:0.7rem; border-radius:10px; font-size:0.9rem; font-weight:600; border:none; cursor:pointer; transition:all 0.3s ease; margin-bottom:0.75rem; }
+        .btn-meet-launch:hover { background:#1557b0; }
+        .meet-alt-row { display:flex; gap:8px; }
+        .btn-meet-alt { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:0.55rem; border-radius:8px; font-size:0.78rem; font-weight:500; border:1.5px solid #DDD4C5; background:transparent; color:var(--text-dark); cursor:pointer; transition:all 0.25s ease; }
+        .btn-meet-alt:hover { background:var(--light-bg); }
+        .meet-schedule { background:var(--light-bg); border-radius:8px; padding:1rem; }
+        .meet-schedule-label { font-size:0.7rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); margin-bottom:0.75rem; display:block; }
+        .meet-sched-item { display:flex; align-items:center; gap:10px; padding:0.5rem 0; border-bottom:1px solid #EDE4D3; font-size:0.82rem; }
+        .meet-sched-item:last-child { border-bottom:none; }
+        .meet-sched-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+        .meet-sched-dot.live { background:#2C5F2D; animation:livePulse 1.5s infinite; }
+        .meet-sched-dot.upcoming { background:#DDD4C5; }
+        .meet-sched-time { color:var(--secondary-color); font-weight:600; font-size:0.78rem; min-width:80px; }
+        .meet-sched-name { color:var(--text-dark); }
 
         /* ── Config Panel ── */
-        .config-panel { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 10px; padding: 1.1rem 1.4rem; margin-top: 1rem; }
-        .config-panel label { font-size: 0.76rem; font-weight: 500; color: #8B6B4A; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
-        .config-input { background: var(--white); border: 1.5px solid #DDD4C5; border-radius: 8px; padding: 0.5rem 0.9rem; font-size: 0.86rem; color: var(--text-dark); width: 100%; outline: none; transition: border-color 0.25s; font-family: var(--body-font); }
-        .config-input:focus { border-color: var(--secondary-color); }
-        .config-input::placeholder { color: #bbb; }
-        .btn-load { background: var(--deep-brown); color: #F5F0E8; border: none; padding: 0.5rem 1.1rem; border-radius: 8px; font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
-        .btn-load:hover { background: var(--primary-dark); transform: translateY(-1px); }
-        .config-hint { font-size: 0.72rem; color: var(--text-light); margin-top: 0.35rem; }
+        .config-panel { background:var(--light-bg); border:1px solid #EDE4D3; border-radius:10px; padding:1.1rem 1.4rem; }
+        .config-label { font-size:0.76rem; font-weight:500; color:#8B6B4A; letter-spacing:0.06em; text-transform:uppercase; display:block; margin-bottom:0.4rem; }
+        .config-input { background:var(--white); border:1.5px solid #DDD4C5; border-radius:8px; padding:0.5rem 0.9rem; font-size:0.86rem; color:var(--text-dark); width:100%; outline:none; transition:border-color 0.25s; font-family:var(--body-font); }
+        .config-input:focus { border-color:var(--secondary-color); }
+        .btn-load { background:var(--deep-brown); color:#F5F0E8; border:none; padding:0.5rem 1.1rem; border-radius:8px; font-size:0.84rem; font-weight:600; cursor:pointer; transition:all 0.3s ease; white-space:nowrap; }
+        .btn-load:hover { background:var(--primary-dark); transform:translateY(-1px); }
+        .config-hint { font-size:0.72rem; color:var(--text-light); margin-top:0.35rem; }
 
-        /* ── Chat Tabs ── */
-        .chat-section { margin-top: 1.75rem; }
-        .chat-tabs { display: flex; gap: 0; border-bottom: 2px solid #EDE4D3; margin-bottom: 0; }
-        .chat-tab-btn { flex: 1; padding: 0.65rem 1rem; background: transparent; border: none; font-size: 0.84rem; font-weight: 600; color: var(--text-light); cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 7px; border-bottom: 2px solid transparent; margin-bottom: -2px; }
-        .chat-tab-btn.active { color: var(--deep-brown); border-bottom-color: var(--secondary-color); }
-        .chat-tab-btn:hover:not(.active) { color: var(--text-dark); background: var(--light-bg); }
-        .chat-tab-btn i { font-size: 1rem; }
-        .chat-tab-btn .tab-badge { background: #FF0000; color: #fff; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 50px; }
+        /* ══════════════════════════════
+           ENGAGEMENT HUB (RIGHT SIDEBAR)
+        ══════════════════════════════ */
 
-        /* ── YouTube Chat Pane ── */
-        .chat-pane { display: none; }
-        .chat-pane.active { display: block; }
+        /* ── Engagement Tabs ── */
+        .engagement-hub { background:var(--white); border:1px solid #EDE4D3; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(74,55,40,0.07); }
+        .hub-tabs { display:flex; border-bottom:2px solid #EDE4D3; overflow-x:auto; }
+        .hub-tab { flex:1; min-width:60px; padding:0.75rem 0.4rem; background:transparent; border:none; font-size:0.75rem; font-weight:600; color:var(--text-light); cursor:pointer; transition:all 0.25s ease; display:flex; flex-direction:column; align-items:center; gap:4px; border-bottom:2px solid transparent; margin-bottom:-2px; white-space:nowrap; }
+        .hub-tab i { font-size:1.1rem; }
+        .hub-tab.active { color:var(--deep-brown); border-bottom-color:var(--secondary-color); }
+        .hub-tab:hover:not(.active) { color:var(--text-dark); background:var(--light-bg); }
+        .hub-badge { background:#FF0000; color:#fff; font-size:0.6rem; font-weight:700; padding:1px 5px; border-radius:50px; line-height:1.4; }
+        .hub-panel { display:none; }
+        .hub-panel.active { display:flex; flex-direction:column; }
 
-        .yt-chat-frame { width: 100%; height: 480px; border: 1px solid #EDE4D3; border-radius: 0 0 12px 12px; overflow: hidden; background: var(--light-bg); }
-        .yt-chat-frame iframe { width: 100%; height: 100%; border: none; }
-        .yt-chat-placeholder { height: 480px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 0 0 12px 12px; text-align: center; padding: 2rem; }
-        .yt-chat-placeholder i { font-size: 3rem; color: #FF0000; opacity: 0.6; margin-bottom: 1rem; }
-        .yt-chat-placeholder h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.5rem; }
-        .yt-chat-placeholder p { font-size: 0.84rem; color: var(--text-light); max-width: 320px; line-height: 1.65; }
+        /* ── Church Chat ── */
+        .chat-gate { padding:1.75rem 1.25rem; text-align:center; background:var(--light-bg); }
+        .chat-gate i { font-size:2.2rem; color:var(--secondary-color); margin-bottom:0.6rem; display:block; }
+        .chat-gate h4 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:400; color:var(--deep-brown); margin-bottom:0.35rem; }
+        .chat-gate p { font-size:0.82rem; color:var(--text-light); margin-bottom:1.1rem; }
+        .chat-gate-form { display:flex; gap:7px; max-width:320px; margin:0 auto; }
+        .gate-input { flex:1; border:1.5px solid #DDD4C5; border-radius:8px; padding:0.5rem 0.85rem; font-size:0.86rem; color:var(--text-dark); outline:none; font-family:var(--body-font); background:var(--white); }
+        .gate-input:focus { border-color:var(--secondary-color); }
+        .btn-join-chat { background:var(--deep-brown); color:#F5F0E8; border:none; padding:0.5rem 1.1rem; border-radius:8px; font-size:0.84rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:all 0.25s ease; }
+        .btn-join-chat:hover { background:var(--primary-dark); }
 
-        /* ── Church Chat Room ── */
-        .church-chat-wrap { border: 1px solid #EDE4D3; border-radius: 0 0 12px 12px; overflow: hidden; background: var(--white); }
+        .chat-room { display:none; flex-direction:column; height:480px; }
+        .chat-room.visible { display:flex; }
+        .chat-topbar { display:flex; align-items:center; justify-content:space-between; padding:0.6rem 1rem; background:var(--light-bg); border-bottom:1px solid #EDE4D3; font-size:0.78rem; }
+        .viewer-count { display:flex; align-items:center; gap:6px; color:var(--text-light); font-weight:500; }
+        .viewer-dot { width:7px; height:7px; background:var(--accent-color); border-radius:50%; animation:livePulse 1.5s infinite; }
+        .chat-messages { flex:1; overflow-y:auto; padding:0.85rem; display:flex; flex-direction:column; gap:9px; scroll-behavior:smooth; }
+        .chat-messages::-webkit-scrollbar { width:3px; }
+        .chat-messages::-webkit-scrollbar-thumb { background:#DDD4C5; border-radius:2px; }
+        .chat-msg { display:flex; flex-direction:column; gap:3px; animation:msgIn 0.25s ease; }
+        @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .chat-msg-header { display:flex; align-items:center; gap:6px; }
+        .chat-avatar { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:#fff; flex-shrink:0; }
+        .chat-name { font-size:0.78rem; font-weight:600; color:var(--deep-brown); }
+        .chat-time { font-size:0.68rem; color:var(--text-light); margin-left:auto; }
+        .chat-tag { font-size:0.62rem; font-weight:600; padding:1px 7px; border-radius:50px; }
+        .tag-prayer { background:rgba(44,95,45,0.12); color:var(--accent-color); }
+        .tag-praise { background:rgba(212,175,55,0.15); color:#7A5A00; }
+        .chat-bubble { background:var(--light-bg); border:1px solid #EDE4D3; border-radius:0 9px 9px 9px; padding:0.5rem 0.8rem; font-size:0.84rem; color:var(--text-dark); line-height:1.5; margin-left:32px; }
+        .chat-bubble.own { background:rgba(212,175,55,0.12); border-color:rgba(212,175,55,0.3); border-radius:9px 0 9px 9px; }
+        .reaction-bar { display:flex; gap:4px; margin-left:32px; margin-top:2px; flex-wrap:wrap; }
+        .reaction-pill { display:inline-flex; align-items:center; gap:3px; background:var(--white); border:1px solid #EDE4D3; border-radius:50px; padding:2px 7px; font-size:0.76rem; cursor:pointer; transition:all 0.2s ease; user-select:none; }
+        .reaction-pill:hover { background:var(--light-bg); transform:scale(1.1); }
+        .reaction-pill.reacted { background:rgba(212,175,55,0.12); border-color:rgba(212,175,55,0.4); }
+        .reaction-count { font-size:0.7rem; font-weight:600; color:var(--text-light); }
+        .chat-input-area { padding:0.75rem; border-top:1px solid #EDE4D3; background:var(--white); }
+        .chat-tag-row { display:flex; gap:5px; margin-bottom:0.5rem; flex-wrap:wrap; }
+        .tag-btn { display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:50px; border:1.5px solid #DDD4C5; background:transparent; font-size:0.72rem; font-weight:500; color:var(--text-light); cursor:pointer; transition:all 0.2s ease; }
+        .tag-btn:hover { border-color:var(--secondary-color); color:var(--deep-brown); }
+        .tag-btn.selected { background:rgba(44,95,45,0.1); border-color:var(--accent-color); color:var(--accent-color); }
+        .tag-btn.selected.praise-tag { background:rgba(212,175,55,0.1); border-color:var(--secondary-color); color:#7A5A00; }
+        .emoji-row { display:flex; gap:5px; margin-bottom:0.5rem; }
+        .emoji-btn { background:var(--light-bg); border:1px solid #EDE4D3; border-radius:7px; padding:4px 8px; font-size:0.95rem; cursor:pointer; transition:all 0.2s ease; }
+        .emoji-btn:hover { background:#F0EAE0; transform:scale(1.15); }
+        .chat-input-row { display:flex; gap:7px; align-items:flex-end; }
+        .chat-textarea { flex:1; border:1.5px solid #DDD4C5; border-radius:9px; padding:0.5rem 0.8rem; font-size:0.86rem; color:var(--text-dark); font-family:var(--body-font); outline:none; resize:none; min-height:40px; max-height:90px; transition:border-color 0.25s; line-height:1.5; }
+        .chat-textarea:focus { border-color:var(--secondary-color); }
+        .btn-send { background:var(--deep-brown); color:#F5F0E8; border:none; width:40px; height:40px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; cursor:pointer; transition:all 0.25s ease; flex-shrink:0; }
+        .btn-send:hover { background:var(--primary-dark); transform:translateY(-1px); }
 
-        /* Name gate */
-        .chat-gate { padding: 2rem 1.5rem; text-align: center; background: var(--light-bg); }
-        .chat-gate i { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 0.75rem; display: block; }
-        .chat-gate h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.4rem; }
-        .chat-gate p { font-size: 0.84rem; color: var(--text-light); margin-bottom: 1.25rem; }
-        .chat-gate-form { display: flex; gap: 8px; max-width: 360px; margin: 0 auto; }
-        .gate-input { flex: 1; border: 1.5px solid #DDD4C5; border-radius: 8px; padding: 0.55rem 0.9rem; font-size: 0.88rem; color: var(--text-dark); outline: none; transition: border-color 0.25s; font-family: var(--body-font); background: var(--white); }
-        .gate-input:focus { border-color: var(--secondary-color); }
-        .btn-join-chat { background: var(--deep-brown); color: #F5F0E8; border: none; padding: 0.55rem 1.25rem; border-radius: 8px; font-size: 0.86rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.25s ease; }
-        .btn-join-chat:hover { background: var(--primary-dark); }
+        /* ── Live Poll Panel ── */
+        .poll-panel-body { padding:1.25rem; display:flex; flex-direction:column; gap:1rem; }
+        .poll-card { background:var(--light-bg); border:1px solid #EDE4D3; border-radius:10px; padding:1.25rem; }
+        .poll-status { display:inline-flex; align-items:center; gap:5px; font-size:0.68rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; padding:2px 10px; border-radius:50px; margin-bottom:0.75rem; }
+        .poll-status.live { background:rgba(44,95,45,0.15); color:var(--accent-color); }
+        .poll-status.ended { background:#F0EAE0; color:#8B5E3C; }
+        .poll-status.upcoming { background:#FBF3DC; color:#7A5A00; }
+        .poll-question { font-size:0.95rem; font-weight:600; color:var(--deep-brown); margin-bottom:1rem; line-height:1.4; }
+        .poll-option { margin-bottom:0.6rem; cursor:pointer; }
+        .poll-option-label { display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; color:var(--text-dark); margin-bottom:4px; font-weight:500; }
+        .poll-option-pct { font-weight:600; color:var(--secondary-color); }
+        .poll-bar-wrap { height:8px; background:#EDE4D3; border-radius:4px; overflow:hidden; }
+        .poll-bar { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--deep-brown),var(--secondary-color)); transition:width 0.8s ease; }
+        .poll-bar.selected { background:linear-gradient(90deg,var(--accent-color),#5aac5c); }
+        .poll-total { font-size:0.72rem; color:var(--text-light); margin-top:0.75rem; }
+        .poll-option-btn { width:100%; padding:0.55rem 0.9rem; background:var(--white); border:1.5px solid #DDD4C5; border-radius:8px; font-size:0.84rem; font-weight:500; color:var(--text-dark); cursor:pointer; transition:all 0.25s ease; text-align:left; margin-bottom:0.5rem; display:flex; align-items:center; gap:8px; }
+        .poll-option-btn:hover { border-color:var(--secondary-color); background:rgba(212,175,55,0.06); }
+        .poll-option-btn.voted { border-color:var(--accent-color); background:rgba(44,95,45,0.08); color:var(--accent-color); }
+        .poll-voted-label { font-size:0.72rem; color:var(--accent-color); margin-top:0.5rem; font-weight:500; display:flex; align-items:center; gap:5px; }
+        .poll-create-btn { display:flex; align-items:center; gap:6px; padding:0.55rem 1.1rem; background:var(--deep-brown); color:#F5F0E8; border:none; border-radius:50px; font-size:0.82rem; font-weight:500; cursor:pointer; transition:all 0.25s; align-self:flex-start; }
+        .poll-create-btn:hover { background:var(--primary-dark); }
 
-        /* Chat room */
-        .chat-room { display: none; flex-direction: column; height: 480px; }
-        .chat-room.visible { display: flex; }
+        /* ── Sermon Notes Panel ── */
+        .notes-panel-body { padding:1.25rem; display:flex; flex-direction:column; gap:1rem; height:480px; overflow-y:auto; }
+        .notes-header-row { display:flex; align-items:center; justify-content:space-between; }
+        .notes-title { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:400; color:var(--deep-brown); }
+        .btn-notes-action { display:inline-flex; align-items:center; gap:5px; padding:0.35rem 0.8rem; border-radius:50px; font-size:0.75rem; font-weight:500; border:1.5px solid #DDD4C5; background:transparent; color:var(--text-light); cursor:pointer; transition:all 0.2s; }
+        .btn-notes-action:hover { border-color:var(--deep-brown); color:var(--deep-brown); }
+        .notes-scripture { background:linear-gradient(135deg,var(--light-bg),#F0EAE0); border-left:4px solid var(--secondary-color); padding:1rem 1.1rem; border-radius:0 8px 8px 0; margin-bottom:0.5rem; }
+        .notes-scripture-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); margin-bottom:0.35rem; }
+        .notes-scripture blockquote { font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:var(--deep-brown); margin:0; line-height:1.5; }
+        .notes-key-points { display:flex; flex-direction:column; gap:6px; }
+        .notes-kp-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); }
+        .notes-kp-item { display:flex; gap:8px; align-items:flex-start; padding:0.6rem; background:var(--light-bg); border-radius:8px; font-size:0.84rem; color:var(--text-dark); }
+        .notes-kp-num { width:22px; height:22px; background:var(--deep-brown); color:#F5F0E8; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; flex-shrink:0; }
+        .notes-personal { display:flex; flex-direction:column; gap:8px; }
+        .notes-personal-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); }
+        .notes-textarea { width:100%; border:1.5px solid #DDD4C5; border-radius:9px; padding:0.65rem 0.85rem; font-size:0.84rem; color:var(--text-dark); font-family:var(--body-font); resize:vertical; min-height:80px; outline:none; background:var(--light-bg); transition:border-color 0.25s; line-height:1.6; }
+        .notes-textarea:focus { border-color:var(--secondary-color); background:var(--white); }
+        .btn-save-notes { display:inline-flex; align-items:center; gap:6px; padding:0.5rem 1.2rem; background:var(--secondary-color); color:var(--deep-brown); border:none; border-radius:50px; font-size:0.82rem; font-weight:600; cursor:pointer; transition:all 0.25s; align-self:flex-start; }
+        .btn-save-notes:hover { background:#b8972e; }
+        .notes-saved-msg { font-size:0.78rem; color:var(--accent-color); font-weight:500; display:none; }
+        .notes-saved-msg.show { display:flex; align-items:center; gap:5px; }
 
-        /* Viewer count bar */
-        .chat-topbar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: var(--light-bg); border-bottom: 1px solid #EDE4D3; font-size: 0.78rem; }
-        .viewer-count { display: flex; align-items: center; gap: 6px; color: var(--text-light); font-weight: 500; }
-        .viewer-dot { width: 7px; height: 7px; background: var(--accent-color); border-radius: 50%; animation: livePulse 1.5s infinite; }
-        .mod-badge { font-size: 0.7rem; background: var(--secondary-color); color: var(--deep-brown); padding: 2px 8px; border-radius: 50px; font-weight: 600; cursor: pointer; }
-        .mod-badge:hover { background: #b8972e; }
+        /* ── Reaction Feed Panel ── */
+        .reactions-panel-body { padding:1rem; height:480px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+        .reaction-feed-area { flex:1; overflow:hidden; position:relative; }
+        .reaction-float { position:absolute; bottom:0; animation:floatReaction 3s ease-out forwards; font-size:1.6rem; pointer-events:none; user-select:none; }
+        @keyframes floatReaction { 0%{bottom:0;opacity:1;transform:translateY(0) scale(1)} 50%{opacity:0.9;transform:translateY(-60%) scale(1.2)} 100%{bottom:100%;opacity:0;transform:translateY(-100%) scale(0.8)} }
+        .reaction-summary { background:var(--light-bg); border-radius:10px; padding:1rem; margin-bottom:1rem; }
+        .reaction-summary-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); margin-bottom:0.75rem; display:block; }
+        .reaction-counts { display:flex; gap:10px; flex-wrap:wrap; }
+        .reaction-count-item { display:flex; align-items:center; gap:5px; background:var(--white); border:1px solid #EDE4D3; border-radius:50px; padding:4px 12px; font-size:0.82rem; }
+        .reaction-count-emoji { font-size:1.1rem; }
+        .reaction-count-num { font-weight:600; color:var(--deep-brown); }
+        .reaction-fire-btn-row { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; padding:0.75rem 0 0; border-top:1px solid #EDE4D3; }
+        .reaction-fire-btn { font-size:1.5rem; padding:6px 10px; background:var(--light-bg); border:1.5px solid #EDE4D3; border-radius:10px; cursor:pointer; transition:all 0.2s ease; }
+        .reaction-fire-btn:hover { transform:scale(1.25); background:#F0EAE0; border-color:#C8B89A; }
+        .reaction-fire-btn:active { transform:scale(0.95); }
+        .reaction-log { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:6px; }
+        .reaction-log-item { display:flex; align-items:center; gap:8px; padding:0.5rem 0.75rem; background:var(--light-bg); border-radius:8px; font-size:0.8rem; animation:msgIn 0.2s ease; }
+        .reaction-log-emoji { font-size:1.1rem; }
+        .reaction-log-name { font-weight:500; color:var(--deep-brown); }
+        .reaction-log-msg { color:var(--text-light); }
+        .reaction-log-time { margin-left:auto; font-size:0.7rem; color:var(--text-light); }
 
-        /* Messages area */
-        .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
-        .chat-messages::-webkit-scrollbar { width: 4px; }
-        .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #DDD4C5; border-radius: 2px; }
+        /* ── Attendance Panel ── */
+        .attendance-panel-body { padding:1.25rem; display:flex; flex-direction:column; gap:1rem; height:480px; overflow-y:auto; }
+        .attendance-check-card { background:linear-gradient(135deg,var(--deep-brown),#2E1F14); border-radius:12px; padding:1.5rem; text-align:center; }
+        .attendance-check-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:#F5F0E8; margin-bottom:0.5rem; }
+        .attendance-check-card p { font-size:0.82rem; color:rgba(245,240,232,0.65); margin-bottom:1.1rem; }
+        .btn-check-in { display:inline-flex; align-items:center; gap:8px; padding:0.7rem 1.75rem; background:var(--secondary-color); color:var(--deep-brown); border:none; border-radius:50px; font-size:0.92rem; font-weight:700; cursor:pointer; transition:all 0.3s ease; }
+        .btn-check-in:hover { background:#b8972e; transform:translateY(-2px); box-shadow:0 6px 20px rgba(212,175,55,0.3); }
+        .btn-check-in.checked { background:var(--accent-color); color:#fff; cursor:default; }
+        .btn-check-in.checked:hover { transform:none; box-shadow:none; }
+        .attendance-streak { background:var(--light-bg); border-radius:10px; padding:1rem; }
+        .streak-label { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--secondary-color); margin-bottom:0.75rem; display:block; }
+        .streak-dots { display:flex; gap:6px; flex-wrap:wrap; }
+        .streak-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:600; border:2px solid #EDE4D3; }
+        .streak-dot.present { background:var(--accent-color); border-color:var(--accent-color); color:#fff; }
+        .streak-dot.absent { background:#F0EAE0; color:var(--text-light); }
+        .streak-dot.today { border-color:var(--secondary-color); background:var(--white); color:var(--deep-brown); animation:pulse-ring 2s infinite; }
+        @keyframes pulse-ring { 0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,0.4)} 50%{box-shadow:0 0 0 6px rgba(212,175,55,0)} }
+        .attendance-stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .att-stat { background:var(--white); border:1px solid #EDE4D3; border-radius:10px; padding:1rem; text-align:center; }
+        .att-stat-num { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--secondary-color); line-height:1; }
+        .att-stat-label { font-size:0.72rem; color:var(--text-light); margin-top:4px; }
+        .recent-services { display:flex; flex-direction:column; gap:6px; }
+        .service-record { display:flex; align-items:center; gap:10px; padding:0.6rem; background:var(--light-bg); border-radius:8px; font-size:0.82rem; }
+        .service-record-date { color:var(--text-light); min-width:80px; }
+        .service-record-name { flex:1; color:var(--text-dark); font-weight:500; }
+        .service-record-badge { font-size:0.68rem; padding:2px 8px; border-radius:50px; font-weight:600; }
+        .badge-attended { background:rgba(44,95,45,0.1); color:var(--accent-color); }
+        .badge-online { background:rgba(26,115,232,0.1); color:#1a73e8; }
 
-        /* Individual message */
-        .chat-msg { display: flex; flex-direction: column; gap: 3px; animation: msgIn 0.25s ease; }
-        @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        /* ── Sidebar Cards ── */
+        .sidebar-card { background:var(--white); border:1px solid #EDE4D3; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(74,55,40,0.05); }
+        .sidebar-card-header { padding:0.9rem 1.25rem; border-bottom:1px solid #EDE4D3; display:flex; align-items:center; justify-content:space-between; }
+        .sidebar-card-header h5 { font-size:0.88rem; color:var(--deep-brown); margin:0; }
+        .sidebar-card-body { padding:1.1rem 1.25rem; }
+        .info-row { display:flex; align-items:flex-start; gap:10px; padding:0.55rem 0; border-bottom:1px solid #F5F0E8; font-size:0.84rem; color:var(--text-light); }
+        .info-row:last-child { border-bottom:none; }
+        .info-row i { color:var(--secondary-color); font-size:0.9rem; flex-shrink:0; margin-top:2px; }
+        .info-row strong { color:var(--text-dark); display:block; font-size:0.78rem; }
+        .share-btn { display:flex; align-items:center; gap:10px; width:100%; padding:0.55rem 0.9rem; border-radius:8px; border:1px solid #DDD4C5; background:var(--white); color:var(--text-dark); font-size:0.82rem; font-weight:500; cursor:pointer; transition:all 0.25s ease; margin-bottom:0.5rem; }
+        .share-btn:last-child { margin-bottom:0; }
+        .share-btn:hover { background:var(--light-bg); border-color:#C8B89A; color:var(--deep-brown); }
+        .i-fb{color:#1877F2;} .i-wa{color:#25D366;} .i-tw{color:#1DA1F2;} .i-link{color:var(--secondary-color);}
+        .i-meet { color:#1a73e8; }
 
-        .chat-msg-header { display: flex; align-items: center; gap: 7px; }
-        .chat-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
-        .chat-name { font-size: 0.8rem; font-weight: 600; color: var(--deep-brown); }
-        .chat-time { font-size: 0.7rem; color: var(--text-light); margin-left: auto; }
-        .chat-tag { font-size: 0.65rem; font-weight: 600; padding: 1px 7px; border-radius: 50px; }
-        .tag-prayer { background: rgba(44,95,45,0.12); color: var(--accent-color); }
-        .tag-praise { background: rgba(212,175,55,0.15); color: #7A5A00; }
-
-        .chat-bubble { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 0 10px 10px 10px; padding: 0.55rem 0.85rem; font-size: 0.86rem; color: var(--text-dark); line-height: 1.55; margin-left: 35px; position: relative; }
-        .chat-bubble.own { background: rgba(212,175,55,0.12); border-color: rgba(212,175,55,0.3); border-radius: 10px 0 10px 10px; margin-left: 35px; }
-        .chat-bubble.pending { opacity: 0.55; border-style: dashed; }
-
-        /* Reaction bar on bubble */
-        .reaction-bar { display: flex; gap: 5px; margin-left: 35px; margin-top: 3px; flex-wrap: wrap; }
-        .reaction-pill { display: inline-flex; align-items: center; gap: 3px; background: var(--white); border: 1px solid #EDE4D3; border-radius: 50px; padding: 2px 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s ease; user-select: none; }
-        .reaction-pill:hover { background: var(--light-bg); border-color: #C8B89A; transform: scale(1.1); }
-        .reaction-pill.reacted { background: rgba(212,175,55,0.12); border-color: rgba(212,175,55,0.4); }
-        .reaction-count { font-size: 0.72rem; font-weight: 600; color: var(--text-light); }
-
-        /* Pending moderation notice */
-        .pending-notice { font-size: 0.72rem; color: #8B6B4A; font-style: italic; margin-left: 35px; }
-
-        /* Moderation queue */
-        .mod-panel { display: none; position: fixed; inset: 0; background: rgba(26,20,14,0.55); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
-        .mod-panel.open { display: flex; }
-        .mod-modal { background: var(--white); border-radius: 14px; width: 100%; max-width: 520px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-        .mod-header { background: var(--deep-brown); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
-        .mod-header h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: #F5F0E8; margin: 0; }
-        .mod-close { background: none; border: none; color: #F5F0E8; font-size: 1.3rem; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
-        .mod-close:hover { opacity: 1; }
-        .mod-queue { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 10px; }
-        .mod-item { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 10px; padding: 0.85rem 1rem; }
-        .mod-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
-        .mod-item-name { font-size: 0.82rem; font-weight: 600; color: var(--deep-brown); }
-        .mod-item-time { font-size: 0.7rem; color: var(--text-light); margin-left: auto; }
-        .mod-item-text { font-size: 0.86rem; color: var(--text-dark); line-height: 1.5; margin-bottom: 0.75rem; }
-        .mod-item-actions { display: flex; gap: 8px; }
-        .btn-approve { background: var(--accent-color); color: #fff; border: none; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
-        .btn-approve:hover { background: #234d24; }
-        .btn-reject { background: #F0EAE0; color: #8B6B4A; border: none; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
-        .btn-reject:hover { background: #E8DDD0; color: var(--deep-brown); }
-        .mod-empty { text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.88rem; }
-        .mod-empty i { font-size: 2rem; display: block; margin-bottom: 0.75rem; color: #DDD4C5; }
-
-        /* Chat input area */
-        .chat-input-area { padding: 0.85rem 1rem; border-top: 1px solid #EDE4D3; background: var(--white); }
-        .chat-tag-row { display: flex; gap: 6px; margin-bottom: 0.6rem; flex-wrap: wrap; }
-        .tag-btn { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 50px; border: 1.5px solid #DDD4C5; background: transparent; font-size: 0.74rem; font-weight: 500; color: var(--text-light); cursor: pointer; transition: all 0.2s ease; }
-        .tag-btn:hover { border-color: var(--secondary-color); color: var(--deep-brown); }
-        .tag-btn.selected { background: rgba(44,95,45,0.1); border-color: var(--accent-color); color: var(--accent-color); }
-        .tag-btn.selected.praise-tag { background: rgba(212,175,55,0.1); border-color: var(--secondary-color); color: #7A5A00; }
-        .emoji-row { display: flex; gap: 6px; margin-bottom: 0.6rem; }
-        .emoji-btn { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 8px; padding: 4px 10px; font-size: 1rem; cursor: pointer; transition: all 0.2s ease; }
-        .emoji-btn:hover { background: #F0EAE0; transform: scale(1.15); }
-        .chat-input-row { display: flex; gap: 8px; align-items: flex-end; }
-        .chat-textarea { flex: 1; border: 1.5px solid #DDD4C5; border-radius: 10px; padding: 0.55rem 0.9rem; font-size: 0.88rem; color: var(--text-dark); font-family: var(--body-font); outline: none; resize: none; min-height: 42px; max-height: 100px; transition: border-color 0.25s; line-height: 1.5; }
-        .chat-textarea:focus { border-color: var(--secondary-color); }
-        .chat-textarea::placeholder { color: #bbb; }
-        .btn-send { background: var(--deep-brown); color: #F5F0E8; border: none; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; transition: all 0.25s ease; flex-shrink: 0; }
-        .btn-send:hover { background: var(--primary-dark); transform: translateY(-1px); }
-
-        /* ── Sidebar ── */
-        .sidebar-card { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; }
-        .sidebar-card:last-child { margin-bottom: 0; }
-        .sidebar-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
-        .info-row { display: flex; align-items: flex-start; gap: 10px; padding: 0.6rem 0; border-bottom: 1px solid #EDE4D3; font-size: 0.86rem; color: var(--text-light); }
-        .info-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .info-row i { color: var(--secondary-color); font-size: 0.92rem; flex-shrink: 0; margin-top: 2px; }
-        .info-row strong { color: var(--text-dark); display: block; font-size: 0.8rem; }
-        .schedule-item { display: flex; align-items: center; gap: 12px; padding: 0.6rem 0; border-bottom: 1px solid #EDE4D3; }
-        .schedule-item:last-child { border-bottom: none; }
-        .schedule-dot { width: 8px; height: 8px; border-radius: 50%; background: #DDD4C5; flex-shrink: 0; }
-        .schedule-dot.active { background: var(--accent-color); box-shadow: 0 0 8px rgba(44,95,45,0.4); animation: livePulse 1.5s infinite; }
-        .schedule-day { font-size: 0.82rem; font-weight: 600; color: var(--text-dark); width: 100px; flex-shrink: 0; }
-        .schedule-time { font-size: 0.82rem; color: var(--text-light); }
-        .share-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid #DDD4C5; background: var(--white); color: var(--text-dark); font-size: 0.84rem; font-weight: 500; cursor: pointer; transition: all 0.25s ease; margin-bottom: 0.5rem; text-align: left; }
-        .share-btn:last-child { margin-bottom: 0; }
-        .share-btn:hover { background: var(--light-bg); border-color: #C8B89A; color: var(--deep-brown); }
-        .share-btn i { font-size: 1.05rem; }
-        .i-fb { color: #1877F2; } .i-wa { color: #25D366; } .i-tw { color: #1DA1F2; } .i-link { color: var(--secondary-color); }
-
-        /* ── Scripture Bar ── */
-        .scripture-bar { background: var(--light-bg); border-top: 1px solid #EDE4D3; border-bottom: 1px solid #EDE4D3; padding: 2.5rem 0; text-align: center; }
-        .scripture-bar p { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; font-weight: 300; color: var(--deep-brown); max-width: 680px; margin: 0 auto 0.5rem; line-height: 1.6; }
-        .scripture-bar cite { font-size: 0.8rem; color: var(--secondary-color); font-style: normal; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+        /* ── Scripture Banner ── */
+        .scripture-bar { background:var(--light-bg); border-top:1px solid #EDE4D3; border-bottom:1px solid #EDE4D3; padding:2.5rem 0; text-align:center; }
+        .scripture-bar p { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-style:italic; font-weight:300; color:var(--deep-brown); max-width:680px; margin:0 auto 0.5rem; line-height:1.6; }
+        .scripture-bar cite { font-size:0.8rem; color:var(--secondary-color); font-style:normal; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; }
 
         /* ── Recent Sermons ── */
-        .recent-section { background: var(--white); padding: 3.5rem 0; }
-        .section-label-sm { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--secondary-color); display: block; margin-bottom: 0.5rem; }
-        .section-heading { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--deep-brown); margin-bottom: 2rem; }
-        .past-card { background: var(--white); border: 1px solid #EDE4D3; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(139,94,60,0.06); }
-        .past-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(139,94,60,0.13); border-color: rgba(212,175,55,0.4); }
-        .past-thumb { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; }
-        .t1 { background: linear-gradient(135deg, var(--deep-brown), #1A1008); }
-        .t2 { background: linear-gradient(135deg, #1A3A5C, #0D2240); }
-        .t3 { background: linear-gradient(135deg, var(--accent-color), #1A3D1B); }
-        .play-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
-        .past-card:hover .play-overlay { opacity: 1; }
-        .play-overlay i { font-size: 2.5rem; color: #fff; }
-        .past-duration { position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.7rem; padding: 2px 7px; border-radius: 4px; font-weight: 500; }
-        .past-body { padding: 1rem 1.2rem 1.3rem; flex: 1; display: flex; flex-direction: column; }
-        .past-date { font-size: 0.72rem; color: var(--text-light); margin-bottom: 0.35rem; }
-        .past-title { font-size: 0.94rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; line-height: 1.35; }
-        .past-scripture { font-size: 0.76rem; color: var(--secondary-color); display: flex; align-items: center; gap: 5px; margin-top: auto; }
-        .btn-watch { display: inline-flex; align-items: center; gap: 6px; padding: 0.42rem 0.9rem; background: #FF0000; color: #fff; border-radius: 50px; font-size: 0.78rem; font-weight: 500; margin-top: 0.75rem; transition: all 0.25s ease; text-decoration: none; }
-        .btn-watch:hover { background: #cc0000; color: #fff; }
+        .recent-section { background:var(--white); padding:3.5rem 0; }
+        .section-label-sm { font-size:0.7rem; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--secondary-color); display:block; margin-bottom:0.5rem; }
+        .section-heading { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--deep-brown); margin-bottom:2rem; }
+        .past-card { background:var(--white); border:1px solid #EDE4D3; border-radius:12px; overflow:hidden; transition:all 0.3s ease; height:100%; display:flex; flex-direction:column; box-shadow:0 2px 8px rgba(139,94,60,0.06); }
+        .past-card:hover { transform:translateY(-5px); box-shadow:0 12px 28px rgba(139,94,60,0.13); border-color:rgba(212,175,55,0.4); }
+        .past-thumb { height:150px; display:flex; align-items:center; justify-content:center; font-size:2.5rem; position:relative; }
+        .t1{background:linear-gradient(135deg,var(--deep-brown),#1A1008);}
+        .t2{background:linear-gradient(135deg,#1A3A5C,#0D2240);}
+        .t3{background:linear-gradient(135deg,var(--accent-color),#1A3D1B);}
+        .play-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s; }
+        .past-card:hover .play-overlay { opacity:1; }
+        .past-duration { position:absolute; bottom:8px; right:10px; background:rgba(0,0,0,0.65); color:#fff; font-size:0.7rem; padding:2px 7px; border-radius:4px; font-weight:500; }
+        .past-body { padding:1rem 1.2rem 1.3rem; flex:1; display:flex; flex-direction:column; }
+        .past-date { font-size:0.72rem; color:var(--text-light); margin-bottom:0.35rem; }
+        .past-title { font-size:0.94rem; font-weight:600; color:var(--text-dark); margin-bottom:0.5rem; line-height:1.35; }
+        .past-scripture { font-size:0.76rem; color:var(--secondary-color); display:flex; align-items:center; gap:5px; margin-top:auto; }
+        .btn-watch { display:inline-flex; align-items:center; gap:6px; padding:0.42rem 0.9rem; background:#FF0000; color:#fff; border-radius:50px; font-size:0.78rem; font-weight:500; margin-top:0.75rem; transition:all 0.25s ease; text-decoration:none; }
+        .btn-watch:hover { background:#cc0000; color:#fff; }
+        .btn-yt { display:inline-flex; align-items:center; gap:8px; background:#FF0000; color:#fff; padding:0.6rem 1.4rem; border-radius:50px; font-size:0.88rem; font-weight:600; transition:all 0.3s ease; border:none; cursor:pointer; text-decoration:none; }
+        .btn-yt:hover { background:#cc0000; color:#fff; transform:translateY(-2px); }
 
         /* ── Prayer Section ── */
-        .prayer-section { background: var(--light-bg); padding: 3.5rem 0; }
-        .prayer-card { background: var(--white); border: 1px solid #EDE4D3; border-radius: 14px; padding: 2.25rem; text-align: center; max-width: 620px; margin: 0 auto; box-shadow: 0 4px 20px rgba(139,94,60,0.08); }
-        .prayer-icon { font-size: 2.25rem; color: var(--accent-color); margin-bottom: 1rem; display: block; }
-        .prayer-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.65rem; }
-        .prayer-card > p { font-size: 0.88rem; color: var(--text-light); margin-bottom: 1.4rem; }
-        .prayer-form { display: flex; flex-direction: column; gap: 10px; text-align: left; }
-        .prayer-input { background: var(--light-bg); border: 1.5px solid #DDD4C5; border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.87rem; color: var(--text-dark); font-family: var(--body-font); outline: none; resize: vertical; min-height: 95px; transition: border-color 0.25s; }
-        .prayer-input:focus { border-color: var(--accent-color); }
-        .prayer-input::placeholder { color: #bbb; }
-        .prayer-input.name-field { min-height: auto; resize: none; }
-        .btn-pray { background: var(--accent-color); color: #fff; border: none; padding: 0.65rem 1.6rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; align-self: center; display: flex; align-items: center; gap: 8px; }
-        .btn-pray:hover { background: #234d24; transform: translateY(-1px); }
-        .prayer-success { display: none; color: var(--accent-color); font-size: 0.88rem; text-align: center; padding: 0.5rem 0; font-weight: 500; }
+        .prayer-section { background:var(--light-bg); padding:3.5rem 0; }
+        .prayer-card { background:var(--white); border:1px solid #EDE4D3; border-radius:14px; padding:2.25rem; text-align:center; max-width:620px; margin:0 auto; box-shadow:0 4px 20px rgba(139,94,60,0.08); }
+        .prayer-icon { font-size:2.25rem; color:var(--accent-color); margin-bottom:1rem; display:block; }
+        .prayer-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:400; color:var(--deep-brown); margin-bottom:0.65rem; }
+        .prayer-card > p { font-size:0.88rem; color:var(--text-light); margin-bottom:1.4rem; }
+        .prayer-form { display:flex; flex-direction:column; gap:10px; text-align:left; }
+        .prayer-input { background:var(--light-bg); border:1.5px solid #DDD4C5; border-radius:8px; padding:0.6rem 1rem; font-size:0.87rem; color:var(--text-dark); font-family:var(--body-font); outline:none; resize:vertical; min-height:95px; transition:border-color 0.25s; }
+        .prayer-input:focus { border-color:var(--accent-color); }
+        .prayer-input.name-field { min-height:auto; resize:none; }
+        .btn-pray { background:var(--accent-color); color:#fff; border:none; padding:0.65rem 1.6rem; border-radius:50px; font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.3s ease; align-self:center; display:flex; align-items:center; gap:8px; }
+        .btn-pray:hover { background:#234d24; transform:translateY(-1px); }
+        .prayer-success { display:none; color:var(--accent-color); font-size:0.88rem; text-align:center; padding:0.5rem 0; font-weight:500; }
 
-        @media(max-width:992px){ .chat-section { margin-top: 2rem; } }
-        @media(max-width:768px){ .navbar-collapse { background-color: var(--primary-color); padding: 1rem; border-radius: var(--border-radius); margin-top: 0.5rem; } .prayer-card { padding: 1.5rem 1.1rem; } }
+        /* ── Toast ── */
+        #toast { position:fixed; bottom:2rem; right:2rem; background:var(--deep-brown); color:#F5F0E8; padding:0.75rem 1.25rem; border-radius:8px; font-size:0.88rem; display:flex; align-items:center; gap:8px; box-shadow:0 4px 16px rgba(0,0,0,0.2); opacity:0; transform:translateY(12px); transition:all 0.3s ease; z-index:9999; pointer-events:none; }
+
+        /* ── Footer ── */
+        .footer { background-color:var(--dark-bg); color:var(--white); padding:60px 0 30px; }
+        .footer h5 { color:var(--white); margin-bottom:1.5rem; }
+        .footer a { color:rgba(255,255,255,0.7); }
+        .footer a:hover { color:var(--secondary-color); }
+        .footer hr { opacity:0.2; margin:2rem 0; }
+
+        @media(max-width:992px) { .stream-col { gap:1rem; } }
+        @media(max-width:768px) {
+            .navbar-collapse { background-color:var(--deep-brown); padding:1rem; border-radius:var(--border-radius); margin-top:0.5rem; }
+            .hub-tab span { display:none; }
+            .chat-room { height:400px; }
+            .mode-switcher { gap:6px; }
+        }
     </style>
 </head>
 <body>
@@ -239,9 +362,9 @@
 <!-- Live Banner -->
 <div class="live-banner" id="liveBanner">
     <div class="live-banner-inner">
-        <span class="live-banner-dot"></span>
+        <span style="width:8px;height:8px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.2s infinite;"></span>
         We're Live Now — Join Sunday Service in Progress
-        <span class="live-banner-dot"></span>
+        <span style="width:8px;height:8px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.2s infinite;"></span>
     </div>
 </div>
 
@@ -249,24 +372,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
                 <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
-                <li class="nav-item ms-lg-2">
-                    <a class="btn-live-nav" href="livestream.html"><span class="live-dot"></span> Live Now</a>
-                </li>
-                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                    <button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
-                </li>
+                <li class="nav-item ms-lg-2"><a class="btn-live-nav" href="livestream.html"><span class="live-dot"></span> Live Now</a></li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
             </ul>
         </div>
     </div>
@@ -275,199 +392,341 @@
 <!-- Page Hero -->
 <div class="page-hero">
     <div class="container">
-        <div class="page-hero-content">
+        <div class="hero-content">
             <span class="eyebrow">Word Transformation Church</span>
             <h1>Join Us Live</h1>
-            <p>Stream our Sunday service on YouTube and connect with the congregation in real time.</p>
+            <p>Watch on YouTube, join our audio room on Google Meet, chat, react, and worship together — from anywhere in the world.</p>
             <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
         </div>
     </div>
 </div>
 
-<!-- Stream + Chat Section -->
-<section class="stream-section">
+<!-- ═══ MAIN STREAM LAYOUT ═══ -->
+<section class="stream-layout">
     <div class="container">
         <div class="row g-4">
 
-            <!-- LEFT: Video + Chat -->
+            <!-- LEFT: Video + Meet + Config -->
             <div class="col-lg-8">
-                <span class="stream-eyebrow">Live Stream · Every Sunday</span>
-                <h2 class="stream-title">Sunday Morning Worship Service</h2>
-                <p class="stream-subtitle">Joining from home? You're still part of the family. Welcome.</p>
+                <div class="stream-col">
 
-                <!-- Video -->
-                <div class="video-wrapper" id="videoWrapper">
-                    <div class="video-offline" id="videoOffline">
-                        <i class="bi bi-youtube"></i>
-                        <h3>Service Not Yet Live</h3>
-                        <p>Our next service begins Sunday at 9:00 AM. Enter your YouTube Channel ID below to connect the stream.</p>
-                        <a href="https://www.youtube.com" target="_blank" id="ytDirectLink" class="btn-yt">
-                            <i class="bi bi-youtube"></i> Visit Our YouTube Channel
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Config Panel -->
-                <div class="config-panel">
-                    <div class="row g-2 align-items-end">
-                        <div class="col-sm">
-                            <label>YouTube Channel ID or Video ID</label>
-                            <input type="text" class="config-input" id="ytInput" placeholder="e.g. UCxxxxxxxxxxxxxxxx or a video ID">
-                            <p class="config-hint">YouTube Studio → Settings → Channel → Advanced Settings → Channel ID</p>
-                        </div>
-                        <div class="col-sm-auto">
-                            <button class="btn-load" onclick="loadStream()"><i class="bi bi-play-fill me-1"></i> Load Stream</button>
-                        </div>
-                    </div>
-                    <div class="row g-2 align-items-end mt-2">
-                        <div class="col-sm">
-                            <label>YouTube Channel URL (for direct link)</label>
-                            <input type="text" class="config-input" id="ytChannelUrl" placeholder="https://www.youtube.com/@YourChannel">
-                        </div>
-                        <div class="col-sm-auto">
-                            <button class="btn-load" style="background:#8B6B4A;" onclick="saveChannelUrl()"><i class="bi bi-save me-1"></i> Save</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── DUAL CHAT ── -->
-                <div class="chat-section">
-                    <div class="chat-tabs">
-                        <button class="chat-tab-btn active" id="tab-church" onclick="switchTab('church')">
-                            <i class="bi bi-chat-heart-fill"></i> Church Chat
-                            <span class="tab-badge" id="pendingBadge" style="display:none;">0</span>
+                    <!-- Mode Switcher -->
+                    <div class="mode-switcher">
+                        <span class="mode-label">Watch via</span>
+                        <button class="mode-btn active" id="modeYt" onclick="switchMode('youtube')">
+                            <div class="mode-dot"></div>
+                            <i class="bi bi-youtube" style="color:#FF0000;"></i> YouTube Stream
                         </button>
-                        <button class="chat-tab-btn" id="tab-youtube" onclick="switchTab('youtube')">
-                            <i class="bi bi-youtube"></i> YouTube Live Chat
+                        <button class="mode-btn" id="modeMeet" onclick="switchMode('meet')">
+                            <div class="mode-dot"></div>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#1a73e8" xmlns="http://www.w3.org/2000/svg"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                            Google Meet Audio
+                        </button>
+                        <button class="mode-btn" id="modeBoth" onclick="switchMode('both')">
+                            <div class="mode-dot"></div>
+                            <i class="bi bi-grid-1x2-fill"></i> Both
                         </button>
                     </div>
 
-                    <!-- Church Chat Pane -->
-                    <div class="chat-pane active" id="pane-church">
-                        <div class="church-chat-wrap">
+                    <!-- YouTube Video -->
+                    <div class="video-card" id="ytCard">
+                        <div class="video-wrapper" id="videoWrapper">
+                            <div class="video-offline" id="videoOffline">
+                                <i class="bi bi-youtube" style="color:#FF0000;"></i>
+                                <h3>Service Not Yet Live</h3>
+                                <p>Our next service begins Sunday at 9:00 AM. Enter your YouTube Channel ID or Video ID below to connect the stream.</p>
+                                <a href="https://www.youtube.com" target="_blank" id="ytDirectLink" class="btn-yt">
+                                    <i class="bi bi-youtube"></i> Visit Our YouTube Channel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                            <!-- Name Gate -->
+                    <!-- Google Meet Panel -->
+                    <div class="meet-panel" id="meetCard" style="display:none;">
+                        <div class="meet-header">
+                            <div class="meet-header-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Google Meet — Audio Prayer Room</h4>
+                                <p>Join the live audio room to pray, worship, and connect verbally with the congregation</p>
+                            </div>
+                        </div>
+                        <div class="meet-body">
+                            <div class="meet-join-card">
+                                <i class="bi bi-mic-fill" style="color:#1a73e8;"></i>
+                                <h5>Live Audio Room</h5>
+                                <p>Join via Google Meet for a real-time voice connection with fellow worshippers. Pray together, hear testimonies, and participate in altar calls — all from your device.</p>
+                                <div class="meet-link-row">
+                                    <input type="text" class="meet-link-input" id="meetLinkInput" placeholder="Paste Google Meet link (e.g. meet.google.com/abc-defg-hij)">
+                                    <button class="btn-meet-join" onclick="joinMeet()"><i class="bi bi-box-arrow-up-right"></i> Join</button>
+                                </div>
+                                <button class="btn-meet-launch" onclick="launchMeetEmbed()">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                                    Open Meet in This Window
+                                </button>
+                                <div class="meet-alt-row">
+                                    <button class="btn-meet-alt" onclick="copyMeetLink()"><i class="bi bi-link-45deg"></i> Copy Link</button>
+                                    <button class="btn-meet-alt" onclick="shareMeetWhatsApp()"><i class="bi bi-whatsapp" style="color:#25D366;"></i> Share on WhatsApp</button>
+                                    <button class="btn-meet-alt" onclick="window.open('https://meet.google.com/new','_blank')"><i class="bi bi-plus-circle" style="color:#1a73e8;"></i> Create New Room</button>
+                                </div>
+                            </div>
+                            <div id="meetIframeWrap" style="display:none; margin-bottom:1.25rem;">
+                                <iframe id="meetIframe" src="" allow="camera; microphone; display-capture" style="width:100%;height:420px;border:none;border-radius:10px;"></iframe>
+                            </div>
+                            <div class="meet-schedule">
+                                <span class="meet-schedule-label">Audio Room Schedule</span>
+                                <div class="meet-sched-item"><div class="meet-sched-dot live"></div><span class="meet-sched-time">Now</span><span class="meet-sched-name">Sunday Morning Worship — Open Room</span></div>
+                                <div class="meet-sched-item"><div class="meet-sched-dot upcoming"></div><span class="meet-sched-time">11:00 AM</span><span class="meet-sched-name">Second Service Audio Room</span></div>
+                                <div class="meet-sched-item"><div class="meet-sched-dot upcoming"></div><span class="meet-sched-time">Wed 7PM</span><span class="meet-sched-name">Bible Study Discussion Room</span></div>
+                                <div class="meet-sched-item"><div class="meet-sched-dot upcoming"></div><span class="meet-sched-time">Fri 6:30PM</span><span class="meet-sched-name">Prayer Night Intercession Room</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Config -->
+                    <div class="config-panel" id="ytConfig">
+                        <div class="row g-2 align-items-end">
+                            <div class="col-sm">
+                                <label class="config-label">YouTube Channel ID or Video ID</label>
+                                <input type="text" class="config-input" id="ytInput" placeholder="e.g. UCxxxxxxxxxxxxxxxx or a video ID">
+                                <p class="config-hint">YouTube Studio → Settings → Channel → Advanced Settings → Channel ID</p>
+                            </div>
+                            <div class="col-sm-auto"><button class="btn-load" onclick="loadStream()"><i class="bi bi-play-fill me-1"></i> Load Stream</button></div>
+                        </div>
+                        <div class="row g-2 align-items-end mt-2">
+                            <div class="col-sm">
+                                <label class="config-label">Google Meet Link for Audio Room</label>
+                                <input type="text" class="config-input" id="meetConfigInput" placeholder="https://meet.google.com/abc-defg-hij" oninput="saveMeetLink(this.value)">
+                                <p class="config-hint">Create a recurring meeting for Sunday services and paste the link above.</p>
+                            </div>
+                            <div class="col-sm-auto"><button class="btn-load" style="background:#1a73e8;" onclick="saveMeetLinkBtn()"><i class="bi bi-save me-1"></i> Save</button></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT: Engagement Hub + Sidebar -->
+            <div class="col-lg-4">
+                <div class="stream-col">
+
+                    <!-- ═══ ENGAGEMENT HUB ═══ -->
+                    <div class="engagement-hub">
+                        <div class="hub-tabs">
+                            <button class="hub-tab active" id="tab-chat" onclick="switchHub('chat',this)">
+                                <i class="bi bi-chat-heart-fill"></i>
+                                <span>Chat</span>
+                            </button>
+                            <button class="hub-tab" id="tab-poll" onclick="switchHub('poll',this)">
+                                <i class="bi bi-bar-chart-fill"></i>
+                                <span>Poll</span>
+                                <span class="hub-badge">1</span>
+                            </button>
+                            <button class="hub-tab" id="tab-notes" onclick="switchHub('notes',this)">
+                                <i class="bi bi-journal-text"></i>
+                                <span>Notes</span>
+                            </button>
+                            <button class="hub-tab" id="tab-react" onclick="switchHub('react',this)">
+                                <i class="bi bi-emoji-smile-fill"></i>
+                                <span>React</span>
+                            </button>
+                            <button class="hub-tab" id="tab-attend" onclick="switchHub('attend',this)">
+                                <i class="bi bi-check2-circle"></i>
+                                <span>Attend</span>
+                            </button>
+                        </div>
+
+                        <!-- CHAT PANEL -->
+                        <div class="hub-panel active" id="panel-chat">
                             <div class="chat-gate" id="chatGate">
                                 <i class="bi bi-person-heart"></i>
                                 <h4>Join the Conversation</h4>
-                                <p>Enter your name to join the live church chat and connect with the congregation.</p>
+                                <p>Enter your name to join the live church chat.</p>
                                 <div class="chat-gate-form">
-                                    <input type="text" class="gate-input" id="gateNameInput" placeholder="Your name..." maxlength="30" onkeydown="if(event.key==='Enter') joinChat()">
-                                    <button class="btn-join-chat" onclick="joinChat()">Join Chat</button>
+                                    <input type="text" class="gate-input" id="gateNameInput" placeholder="Your name..." maxlength="30" onkeydown="if(event.key==='Enter')joinChat()">
+                                    <button class="btn-join-chat" onclick="joinChat()">Join</button>
                                 </div>
                             </div>
-
-                            <!-- Chat Room (hidden until name entered) -->
                             <div class="chat-room" id="chatRoom">
                                 <div class="chat-topbar">
-                                    <div class="viewer-count">
-                                        <span class="viewer-dot"></span>
-                                        <span id="viewerCount">24 watching</span>
-                                    </div>
-                                    <button class="mod-badge" onclick="openModPanel()">
-                                        <i class="bi bi-shield-check me-1"></i> Moderate <span id="modCount">0</span>
-                                    </button>
+                                    <div class="viewer-count"><span class="viewer-dot"></span><span id="viewerCount">24 watching</span></div>
+                                    <div style="font-size:0.72rem;color:var(--text-light);">Press Enter to send</div>
                                 </div>
-
                                 <div class="chat-messages" id="chatMessages"></div>
-
                                 <div class="chat-input-area">
-                                    <!-- Tag row -->
                                     <div class="chat-tag-row">
-                                        <button class="tag-btn" id="tagPrayer" onclick="toggleTag('prayer')">🙏 Prayer Request</button>
-                                        <button class="tag-btn praise-tag" id="tagPraise" onclick="toggleTag('praise')">✨ Praise Report</button>
+                                        <button class="tag-btn" id="tagPrayer" onclick="toggleTag('prayer')">🙏 Prayer</button>
+                                        <button class="tag-btn praise-tag" id="tagPraise" onclick="toggleTag('praise')">✨ Praise</button>
                                     </div>
-                                    <!-- Emoji row -->
                                     <div class="emoji-row">
-                                        <button class="emoji-btn" onclick="insertEmoji('🙏')" title="Praying Hands">🙏</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('❤️')" title="Heart">❤️</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('🔥')" title="Fire">🔥</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('🙌')" title="Raised Hands">🙌</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('✝️')" title="Cross">✝️</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('🕊️')" title="Dove">🕊️</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('💛')" title="Gold Heart">💛</button>
-                                        <button class="emoji-btn" onclick="insertEmoji('🌿')" title="Growth">🌿</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('🙏')">🙏</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('❤️')">❤️</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('🔥')">🔥</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('🙌')">🙌</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('✝️')">✝️</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('🕊️')">🕊️</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('💛')">💛</button>
+                                        <button class="emoji-btn" onclick="insertEmoji('🌿')">🌿</button>
                                     </div>
-                                    <!-- Input + Send -->
                                     <div class="chat-input-row">
-                                        <textarea class="chat-textarea" id="chatInput" placeholder="Share a message, prayer, or praise..." rows="1"
-                                            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"
-                                            oninput="autoResize(this)"></textarea>
+                                        <textarea class="chat-textarea" id="chatInput" placeholder="Share a message, prayer, or praise..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}" oninput="autoResize(this)"></textarea>
                                         <button class="btn-send" onclick="sendMessage()"><i class="bi bi-send-fill"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- YouTube Chat Pane -->
-                    <div class="chat-pane" id="pane-youtube">
-                        <div class="yt-chat-frame" id="ytChatFrame">
-                            <div class="yt-chat-placeholder" id="ytChatPlaceholder">
-                                <i class="bi bi-youtube"></i>
-                                <h4>YouTube Live Chat</h4>
-                                <p>Load your YouTube stream above using your Channel ID, then the live chat will appear here automatically.</p>
+                        <!-- POLL PANEL -->
+                        <div class="hub-panel" id="panel-poll">
+                            <div class="poll-panel-body">
+                                <!-- Active poll -->
+                                <div class="poll-card" id="activePollCard">
+                                    <span class="poll-status live"><span style="width:6px;height:6px;background:var(--accent-color);border-radius:50%;display:inline-block;animation:livePulse 1.5s infinite;"></span> Live Poll</span>
+                                    <p class="poll-question" id="pollQuestion">What topic would you like the next sermon series to cover?</p>
+                                    <div id="pollOptions"></div>
+                                    <div id="pollVoteButtons"></div>
+                                    <div class="poll-total" id="pollTotal"></div>
+                                </div>
+
+                                <!-- Previous poll (ended) -->
+                                <div class="poll-card">
+                                    <span class="poll-status ended">Ended</span>
+                                    <p class="poll-question">How are you joining us today?</p>
+                                    <div>
+                                        <div class="poll-option">
+                                            <div class="poll-option-label"><span>In person at church</span><span class="poll-option-pct">62%</span></div>
+                                            <div class="poll-bar-wrap"><div class="poll-bar" style="width:62%"></div></div>
+                                        </div>
+                                        <div class="poll-option">
+                                            <div class="poll-option-label"><span>YouTube live stream</span><span class="poll-option-pct">31%</span></div>
+                                            <div class="poll-bar-wrap"><div class="poll-bar" style="width:31%"></div></div>
+                                        </div>
+                                        <div class="poll-option">
+                                            <div class="poll-option-label"><span>Google Meet audio room</span><span class="poll-option-pct">7%</span></div>
+                                            <div class="poll-bar-wrap"><div class="poll-bar" style="width:7%"></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="poll-total">143 total votes</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- END DUAL CHAT -->
 
-            </div>
+                        <!-- NOTES PANEL -->
+                        <div class="hub-panel" id="panel-notes">
+                            <div class="notes-panel-body">
+                                <div class="notes-header-row">
+                                    <h5 class="notes-title">Today's Sermon Notes</h5>
+                                    <button class="btn-notes-action" onclick="downloadNotes()"><i class="bi bi-download"></i> Save</button>
+                                </div>
+                                <div class="notes-scripture">
+                                    <div class="notes-scripture-label">Today's Key Verse</div>
+                                    <blockquote id="notesVerse">"The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning."</blockquote>
+                                    <div style="font-size:0.75rem;color:var(--text-light);margin-top:4px;">— Lamentations 3:22–23</div>
+                                </div>
+                                <div class="notes-key-points">
+                                    <span class="notes-kp-label">Key Points from the Message</span>
+                                    <div class="notes-kp-item"><div class="notes-kp-num">1</div><div>God's mercies are not earned — they are given fresh every morning regardless of yesterday.</div></div>
+                                    <div class="notes-kp-item"><div class="notes-kp-num">2</div><div>The word "steadfast" (hesed) in Hebrew describes a covenant love that never breaks.</div></div>
+                                    <div class="notes-kp-item"><div class="notes-kp-num">3</div><div>Great is His faithfulness — not because our circumstances are great, but because He is.</div></div>
+                                </div>
+                                <div class="notes-personal">
+                                    <span class="notes-kp-label">My Personal Notes</span>
+                                    <textarea class="notes-textarea" id="personalNotes" placeholder="Type your notes here as you listen... they will be saved automatically."></textarea>
+                                    <div style="display:flex;align-items:center;gap:10px;">
+                                        <button class="btn-save-notes" onclick="saveNotes()"><i class="bi bi-bookmark-fill"></i> Save Notes</button>
+                                        <span class="notes-saved-msg" id="notesSavedMsg"><i class="bi bi-check-circle-fill"></i> Saved!</span>
+                                    </div>
+                                </div>
+                                <div class="notes-scripture" style="margin-top:0.5rem;">
+                                    <div class="notes-scripture-label">Reflection Question</div>
+                                    <blockquote style="font-style:normal;font-size:0.88rem;">What from yesterday are you carrying into today that God is asking you to leave behind?</blockquote>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- RIGHT: Sidebar -->
-            <div class="col-lg-4">
-                <div class="sidebar-card">
-                    <span class="sidebar-label">Service Info</span>
-                    <div class="info-row"><i class="bi bi-geo-alt-fill"></i><div><strong>Location</strong>Word Transformation Church, Ghana</div></div>
-                    <div class="info-row"><i class="bi bi-clock-fill"></i><div><strong>Sunday Service</strong>9:00 AM & 11:00 AM (GMT)</div></div>
-                    <div class="info-row"><i class="bi bi-camera-video-fill"></i><div><strong>Live Stream</strong>YouTube Live · HD Quality</div></div>
-                    <div class="info-row"><i class="bi bi-phone-fill"></i><div><strong>Mobile Friendly</strong>Stream on any device</div></div>
-                </div>
+                        <!-- REACTIONS PANEL -->
+                        <div class="hub-panel" id="panel-react">
+                            <div class="reactions-panel-body">
+                                <div class="reaction-summary">
+                                    <span class="reaction-summary-label">Live Reaction Count</span>
+                                    <div class="reaction-counts" id="reactionCounts">
+                                        <div class="reaction-count-item"><span class="reaction-count-emoji">🙏</span><span class="reaction-count-num" id="rc-pray">142</span></div>
+                                        <div class="reaction-count-item"><span class="reaction-count-emoji">🔥</span><span class="reaction-count-num" id="rc-fire">98</span></div>
+                                        <div class="reaction-count-item"><span class="reaction-count-emoji">🙌</span><span class="reaction-count-num" id="rc-hands">76</span></div>
+                                        <div class="reaction-count-item"><span class="reaction-count-emoji">❤️</span><span class="reaction-count-num" id="rc-heart">203</span></div>
+                                        <div class="reaction-count-item"><span class="reaction-count-emoji">✝️</span><span class="reaction-count-num" id="rc-cross">55</span></div>
+                                    </div>
+                                </div>
+                                <div class="reaction-log" id="reactionLog"></div>
+                                <div class="reaction-fire-btn-row">
+                                    <button class="reaction-fire-btn" onclick="fireReaction('🙏','pray')" title="Praying">🙏</button>
+                                    <button class="reaction-fire-btn" onclick="fireReaction('🔥','fire')" title="On fire!">🔥</button>
+                                    <button class="reaction-fire-btn" onclick="fireReaction('🙌','hands')" title="Hallelujah">🙌</button>
+                                    <button class="reaction-fire-btn" onclick="fireReaction('❤️','heart')" title="Love this">❤️</button>
+                                    <button class="reaction-fire-btn" onclick="fireReaction('✝️','cross')" title="Amen">✝️</button>
+                                    <button class="reaction-fire-btn" onclick="fireReaction('😭','cry')" title="Touched">😭</button>
+                                    <button class="reaction-fire-btn" onclick="fireReaction('💛','gold')" title="Blessed">💛</button>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="sidebar-card">
-                    <span class="sidebar-label">Weekly Schedule</span>
-                    <div class="schedule-item">
-                        <div class="schedule-dot active" id="sundayDot"></div>
-                        <span class="schedule-day">Sunday</span>
-                        <span class="schedule-time">9:00 AM & 11:00 AM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <div class="schedule-dot"></div>
-                        <span class="schedule-day">Wednesday</span>
-                        <span class="schedule-time">7:00 PM · Bible Study</span>
-                    </div>
-                    <div class="schedule-item">
-                        <div class="schedule-dot"></div>
-                        <span class="schedule-day">Friday</span>
-                        <span class="schedule-time">6:30 PM · Prayer Night</span>
-                    </div>
-                </div>
+                        <!-- ATTENDANCE PANEL -->
+                        <div class="hub-panel" id="panel-attend">
+                            <div class="attendance-panel-body">
+                                <div class="attendance-check-card">
+                                    <h4>Mark Your Attendance</h4>
+                                    <p>Let us know you're here — in person or online. Your presence matters to this community.</p>
+                                    <button class="btn-check-in" id="checkInBtn" onclick="checkIn()">
+                                        <i class="bi bi-check-circle"></i> Check In to Service
+                                    </button>
+                                </div>
+                                <div class="attendance-stats">
+                                    <div class="att-stat"><div class="att-stat-num" id="attendStreak">4</div><div class="att-stat-label">Week streak 🔥</div></div>
+                                    <div class="att-stat"><div class="att-stat-num" id="attendTotal">18</div><div class="att-stat-label">Services this year</div></div>
+                                </div>
+                                <div class="attendance-streak">
+                                    <span class="streak-label">Last 8 Sundays</span>
+                                    <div class="streak-dots" id="streakDots"></div>
+                                </div>
+                                <div>
+                                    <span class="notes-kp-label" style="font-size:0.68rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--secondary-color);display:block;margin-bottom:0.75rem;">Recent Services</span>
+                                    <div class="recent-services" id="recentServices"></div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="sidebar-card">
-                    <span class="sidebar-label">Share This Service</span>
-                    <button class="share-btn" onclick="shareLink('facebook')"><i class="bi bi-facebook i-fb"></i> Share on Facebook</button>
-                    <button class="share-btn" onclick="shareLink('whatsapp')"><i class="bi bi-whatsapp i-wa"></i> Share on WhatsApp</button>
-                    <button class="share-btn" onclick="shareLink('twitter')"><i class="bi bi-twitter i-tw"></i> Share on Twitter / X</button>
-                    <button class="share-btn" onclick="copyLink()"><i class="bi bi-link-45deg i-link"></i><span id="copyText">Copy Stream Link</span></button>
+                    </div>
+
+                    <!-- Service Info -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-header"><h5>Service Info</h5></div>
+                        <div class="sidebar-card-body">
+                            <div class="info-row"><i class="bi bi-geo-alt-fill"></i><div><strong>Location</strong>Word Transformation Church, East Legon, Accra</div></div>
+                            <div class="info-row"><i class="bi bi-clock-fill"></i><div><strong>Sunday Service</strong>9:00 AM & 11:00 AM (GMT)</div></div>
+                            <div class="info-row"><i class="bi bi-camera-video-fill"></i><div><strong>Video Stream</strong>YouTube Live · HD Quality</div></div>
+                            <div class="info-row"><i class="bi bi-mic-fill" style="color:#1a73e8;"></i><div><strong>Audio Room</strong>Google Meet · Live voice connection</div></div>
+                        </div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="sidebar-card">
+                        <div class="sidebar-card-header"><h5>Share This Service</h5></div>
+                        <div class="sidebar-card-body">
+                            <button class="share-btn" onclick="shareLink('facebook')"><i class="bi bi-facebook i-fb"></i> Share on Facebook</button>
+                            <button class="share-btn" onclick="shareLink('whatsapp')"><i class="bi bi-whatsapp i-wa"></i> Share on WhatsApp</button>
+                            <button class="share-btn" onclick="shareLink('twitter')"><i class="bi bi-twitter i-tw"></i> Share on Twitter / X</button>
+                            <button class="share-btn" onclick="shareMeetLink()"><i class="bi bi-camera-video-fill i-meet"></i> Invite to Audio Room</button>
+                            <button class="share-btn" onclick="copyLink()"><i class="bi bi-link-45deg i-link"></i><span id="copyText">Copy Stream Link</span></button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Moderation Panel -->
-<div class="mod-panel" id="modPanel" onclick="closeModOnBg(event)">
-    <div class="mod-modal">
-        <div class="mod-header">
-            <h4><i class="bi bi-shield-check me-2"></i>Message Moderation</h4>
-            <button class="mod-close" onclick="closeModPanel()"><i class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="mod-queue" id="modQueue">
-            <div class="mod-empty"><i class="bi bi-check-circle"></i>No messages waiting for approval.</div>
-        </div>
-    </div>
-</div>
 
 <!-- Scripture Bar -->
 <div class="scripture-bar">
@@ -485,35 +744,20 @@
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
                 <div class="past-card">
-                    <div class="past-thumb t1"><i class="bi bi-book-half" style="color:rgba(212,175,55,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill"></i></div><span class="past-duration">48:22</span></div>
-                    <div class="past-body">
-                        <p class="past-date">March 9, 2025</p>
-                        <h4 class="past-title">When God's Silence Is His Answer</h4>
-                        <div class="past-scripture"><i class="bi bi-book"></i> John 11:1–44</div>
-                        <a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a>
-                    </div>
+                    <div class="past-thumb t1"><i class="bi bi-book-half" style="color:rgba(212,175,55,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill" style="color:#fff;font-size:2.5rem;"></i></div><span class="past-duration">48:22</span></div>
+                    <div class="past-body"><p class="past-date">March 9, 2025</p><h4 class="past-title">When God's Silence Is His Answer</h4><div class="past-scripture"><i class="bi bi-book"></i> John 11:1–44</div><a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="past-card">
-                    <div class="past-thumb t2"><i class="bi bi-lightning-fill" style="color:rgba(100,160,255,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill"></i></div><span class="past-duration">52:10</span></div>
-                    <div class="past-body">
-                        <p class="past-date">March 2, 2025</p>
-                        <h4 class="past-title">All Things Work Together: Finding Purpose in Pain</h4>
-                        <div class="past-scripture"><i class="bi bi-book"></i> Romans 8:28</div>
-                        <a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a>
-                    </div>
+                    <div class="past-thumb t2"><i class="bi bi-lightning-fill" style="color:rgba(100,160,255,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill" style="color:#fff;font-size:2.5rem;"></i></div><span class="past-duration">52:10</span></div>
+                    <div class="past-body"><p class="past-date">March 2, 2025</p><h4 class="past-title">All Things Work Together</h4><div class="past-scripture"><i class="bi bi-book"></i> Romans 8:28</div><a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="past-card">
-                    <div class="past-thumb t3"><i class="bi bi-water" style="color:rgba(130,220,140,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill"></i></div><span class="past-duration">44:55</span></div>
-                    <div class="past-body">
-                        <p class="past-date">Feb 16, 2025</p>
-                        <h4 class="past-title">Step Out of the Boat: Faith That Moves in the Storm</h4>
-                        <div class="past-scripture"><i class="bi bi-book"></i> Matthew 14:22–33</div>
-                        <a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a>
-                    </div>
+                    <div class="past-thumb t3"><i class="bi bi-water" style="color:rgba(130,220,140,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill" style="color:#fff;font-size:2.5rem;"></i></div><span class="past-duration">44:55</span></div>
+                    <div class="past-body"><p class="past-date">Feb 16, 2025</p><h4 class="past-title">Step Out of the Boat</h4><div class="past-scripture"><i class="bi bi-book"></i> Matthew 14:22–33</div><a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a></div>
                 </div>
             </div>
         </div>
@@ -523,7 +767,7 @@
     </div>
 </section>
 
-<!-- Prayer Request -->
+<!-- Prayer Section -->
 <section class="prayer-section">
     <div class="container">
         <div class="prayer-card">
@@ -540,137 +784,174 @@
     </div>
 </section>
 
+<!-- Toast -->
+<div id="toast"><i class="bi bi-check-circle-fill"></i><span id="toastText">Done!</span></div>
+
 <!-- Footer -->
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5>Word Transformation Church</h5>
-                <p class="text-white-50">Transforming lives through the power of God's Word.</p>
-            </div>
-            <div class="col-md-2 mb-4">
-                <h5>Links</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="index.html">Home</a></li>
-                    <li class="mb-2"><a href="index.html#about">About</a></li>
-                    <li class="mb-2"><a href="blog.html">Blog</a></li>
-                    <li class="mb-2"><a href="livestream.html">Live Stream</a></li>
-                    <li class="mb-2"><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h5>Service Times</h5>
-                <ul class="list-unstyled text-white-50">
-                    <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
-                    <li class="mb-2">Wednesday: 7:00 PM</li>
-                    <li class="mb-2">Friday: 6:30 PM</li>
-                </ul>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h5>Follow Us</h5>
-                <div class="d-flex gap-2">
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
-                </div>
-            </div>
+            <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+            <div class="col-md-2 mb-4"><h5>Links</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="about.html">About</a></li><li class="mb-2"><a href="blog.html">Blog</a></li><li class="mb-2"><a href="livestream.html">Live Stream</a></li><li class="mb-2"><a href="contact.html">Contact</a></li></ul></div>
+            <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+            <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
         </div>
-        <hr>
-        <div class="text-center">
-            <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
-        </div>
+        <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-/* ════════════════════════════════════════
+/* ══════════════════════════════════════
    STATE
-   ════════════════════════════════════════ */
-let currentUser   = '';
-let selectedTag   = '';          // 'prayer' | 'praise' | ''
-let pendingQueue  = [];          // messages waiting moderation
-let approvedMsgs  = [];          // messages shown in chat
-let currentYtId   = '';
+══════════════════════════════════════ */
+let currentUser = '';
+let selectedTag = '';
+let pendingQueue = [];
+let approvedMsgs = [];
+let currentYtId = '';
+let savedMeetLink = '';
+let pollVoted = false;
+let checkedIn = false;
+let notesSaveTimer = null;
 const AVATAR_COLORS = ['#8B5E3C','#2C5F2D','#1A3A5C','#7A5A00','#5C1A3A','#3A1A5C'];
+const reactionCounts = { pray:142, fire:98, hands:76, heart:203, cross:55 };
+const reactionEmojis = { pray:'🙏', fire:'🔥', hands:'🙌', heart:'❤️', cross:'✝️' };
 
-/* seed chat with some welcome messages */
 const seedMessages = [
-    { id: 1, name: 'Pastor Emmanuel', text: 'Welcome everyone joining us online! 🙏 God bless you for being here.', tag: '', time: '8:58 AM', reactions: { '🙏': 12, '❤️': 8, '🔥': 5 }, reacted: {} },
-    { id: 2, name: 'Abena M.', text: 'Joining from Kumasi! So glad the stream is up ❤️', tag: '', time: '9:01 AM', reactions: { '❤️': 6 }, reacted: {} },
-    { id: 3, name: 'Kofi A.', text: 'Please pray for my family going through a tough season. We trust God. ✝️', tag: 'prayer', time: '9:03 AM', reactions: { '🙏': 18, '❤️': 11 }, reacted: {} },
-    { id: 4, name: 'Grace O.', text: 'God healed my mother last week after we prayed! Sharing this as a praise 🙌🔥', tag: 'praise', time: '9:05 AM', reactions: { '🙌': 22, '🔥': 15, '❤️': 9 }, reacted: {} },
+    { id:1, name:'Pastor Emmanuel', text:'Welcome everyone joining us online! 🙏 God bless you for being here.', tag:'', time:'8:58 AM', reactions:{'🙏':12,'❤️':8,'🔥':5}, reacted:{} },
+    { id:2, name:'Abena M.', text:'Joining from Kumasi! So glad the stream is up ❤️', tag:'', time:'9:01 AM', reactions:{'❤️':6}, reacted:{} },
+    { id:3, name:'Kofi A.', text:'Please pray for my family going through a tough season. We trust God. ✝️', tag:'prayer', time:'9:03 AM', reactions:{'🙏':18,'❤️':11}, reacted:{} },
+    { id:4, name:'Grace O.', text:'God healed my mother last week! Sharing this as a praise 🙌🔥', tag:'praise', time:'9:05 AM', reactions:{'🙌':22,'🔥':15,'❤️':9}, reacted:{} },
 ];
 
-/* ════════════════════════════════════════
-   CHAT TAB SWITCH
-   ════════════════════════════════════════ */
-function switchTab(tab) {
-    document.querySelectorAll('.chat-tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.chat-pane').forEach(p => p.classList.remove('active'));
-    document.getElementById('tab-' + tab).classList.add('active');
-    document.getElementById('pane-' + tab).classList.add('active');
+const pollData = {
+    question: 'What topic would you like the next sermon series to cover?',
+    options: ['Marriage & Family', 'Financial Stewardship', 'Spiritual Warfare', 'Evangelism & Missions'],
+    votes: [38, 55, 27, 20],
+    userVote: null
+};
+
+const attendanceHistory = [
+    { date:'Mar 9', name:'Sunday Worship', mode:'in-person', attended:true },
+    { date:'Mar 2', name:'Sunday Worship', mode:'in-person', attended:true },
+    { date:'Feb 23', name:'Sunday Worship', mode:'online', attended:true },
+    { date:'Feb 16', name:'Sunday Worship', mode:'in-person', attended:true },
+    { date:'Feb 9', name:'Sunday Worship', mode:'online', attended:false },
+    { date:'Feb 2', name:'Sunday Worship', mode:'in-person', attended:true },
+];
+
+/* ══════════════════════════════════════
+   MODE SWITCHER
+══════════════════════════════════════ */
+function switchMode(mode) {
+    document.getElementById('modeYt').classList.remove('active');
+    document.getElementById('modeMeet').classList.remove('active');
+    document.getElementById('modeBoth').classList.remove('active');
+    document.getElementById('ytCard').style.display = 'none';
+    document.getElementById('meetCard').style.display = 'none';
+    document.getElementById('ytConfig').style.display = 'none';
+
+    if (mode === 'youtube') {
+        document.getElementById('modeYt').classList.add('active');
+        document.getElementById('ytCard').style.display = 'block';
+        document.getElementById('ytConfig').style.display = 'block';
+    } else if (mode === 'meet') {
+        document.getElementById('modeMeet').classList.add('active');
+        document.getElementById('meetCard').style.display = 'block';
+        document.getElementById('ytConfig').style.display = 'block';
+    } else {
+        document.getElementById('modeBoth').classList.add('active');
+        document.getElementById('ytCard').style.display = 'block';
+        document.getElementById('meetCard').style.display = 'block';
+        document.getElementById('ytConfig').style.display = 'block';
+    }
 }
 
-/* ════════════════════════════════════════
-   YOUTUBE STREAM + CHAT
-   ════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   YOUTUBE STREAM
+══════════════════════════════════════ */
 function loadStream() {
     const raw = document.getElementById('ytInput').value.trim();
     if (!raw) { alert('Please enter a YouTube Channel ID or Video ID.'); return; }
     currentYtId = raw;
-
-    // Load video
     const wrapper = document.getElementById('videoWrapper');
-    const videoSrc = raw.startsWith('UC') && raw.length > 10
+    const src = raw.startsWith('UC') && raw.length > 10
         ? `https://www.youtube.com/embed/live_stream?channel=${raw}&autoplay=1&rel=0`
         : `https://www.youtube.com/embed/${raw}?autoplay=1&rel=0`;
-    wrapper.innerHTML = `<iframe src="${videoSrc}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-
-    // Load YouTube chat
-    const chatVideoId = raw.startsWith('UC') ? null : raw;
-    const ytChatFrame = document.getElementById('ytChatFrame');
-    if (chatVideoId) {
-        ytChatFrame.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${chatVideoId}&embed_domain=${location.hostname || 'localhost'}" style="width:100%;height:100%;border:none;"></iframe>`;
-    } else {
-        ytChatFrame.innerHTML = `<div class="yt-chat-placeholder"><i class="bi bi-youtube"></i><h4>YouTube Chat</h4><p>For live chat, please enter a specific Video ID (not a Channel ID). You can find the video ID in your YouTube live stream URL after "watch?v=".</p></div>`;
-    }
-
+    wrapper.innerHTML = `<iframe src="${src}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     localStorage.setItem('wtc_yt_id', raw);
+    showToast('Stream loaded successfully!');
 }
 
-function saveChannelUrl() {
-    const url = document.getElementById('ytChannelUrl').value.trim();
-    if (url) {
-        document.querySelectorAll('#ytDirectLink, #ytAllLink').forEach(a => a.href = url);
-        localStorage.setItem('wtc_yt_url', url);
-        alert('Channel URL saved!');
-    }
+/* ══════════════════════════════════════
+   GOOGLE MEET
+══════════════════════════════════════ */
+function saveMeetLink(val) { savedMeetLink = val.trim(); }
+function saveMeetLinkBtn() {
+    const val = document.getElementById('meetConfigInput').value.trim();
+    if (!val) { alert('Please enter a Google Meet link.'); return; }
+    savedMeetLink = val;
+    document.getElementById('meetLinkInput').value = val;
+    localStorage.setItem('wtc_meet_link', val);
+    showToast('Meet link saved!');
+}
+function joinMeet() {
+    const link = document.getElementById('meetLinkInput').value.trim() || savedMeetLink;
+    if (!link) { alert('Please enter your Google Meet link first.'); return; }
+    const url = link.startsWith('http') ? link : 'https://' + link;
+    window.open(url, '_blank');
+}
+function launchMeetEmbed() {
+    const link = document.getElementById('meetLinkInput').value.trim() || savedMeetLink;
+    if (!link) { alert('Please enter your Google Meet link in the config section below, then try again.'); return; }
+    const url = link.startsWith('http') ? link : 'https://' + link;
+    document.getElementById('meetIframe').src = url;
+    document.getElementById('meetIframeWrap').style.display = 'block';
+    showToast('Opening Meet in embedded view…');
+}
+function copyMeetLink() {
+    const link = savedMeetLink || document.getElementById('meetLinkInput').value.trim();
+    if (!link) { showToast('No Meet link saved yet.'); return; }
+    navigator.clipboard.writeText(link);
+    showToast('Meet link copied!');
+}
+function shareMeetWhatsApp() {
+    const link = savedMeetLink || document.getElementById('meetLinkInput').value.trim() || 'https://meet.google.com';
+    const msg = encodeURIComponent(`Join Word Transformation Church Live Audio Room: ${link}`);
+    window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+}
+function shareMeetLink() {
+    const link = savedMeetLink || 'https://meet.google.com';
+    const msg = encodeURIComponent(`Join Word Transformation Church Live Audio Room: ${link}`);
+    window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
 }
 
-/* ════════════════════════════════════════
-   CHURCH CHAT — JOIN
-   ════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   HUB TAB SWITCHER
+══════════════════════════════════════ */
+function switchHub(id, btn) {
+    document.querySelectorAll('.hub-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.hub-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+}
+
+/* ══════════════════════════════════════
+   CHAT
+══════════════════════════════════════ */
 function joinChat() {
     const name = document.getElementById('gateNameInput').value.trim();
-    if (!name) { alert('Please enter your name to join the chat.'); return; }
+    if (!name) { alert('Please enter your name.'); return; }
     currentUser = name;
     document.getElementById('chatGate').style.display = 'none';
     document.getElementById('chatRoom').classList.add('visible');
-
-    // Render seed messages
     approvedMsgs = JSON.parse(JSON.stringify(seedMessages));
     approvedMsgs.forEach(m => renderMessage(m));
     scrollToBottom();
-
-    // Simulate live viewer fluctuation
     simulateViewers();
 }
 
-/* ════════════════════════════════════════
-   RENDER MESSAGE
-   ════════════════════════════════════════ */
 let msgIdCounter = 100;
 
 function renderMessage(msg) {
@@ -686,263 +967,224 @@ function buildMsgHTML(msg) {
     const isOwn = msg.name === currentUser;
     const initial = msg.name.charAt(0).toUpperCase();
     const color = AVATAR_COLORS[msg.name.charCodeAt(0) % AVATAR_COLORS.length];
-    const tagHTML = msg.tag === 'prayer'
-        ? `<span class="chat-tag tag-prayer">🙏 Prayer</span>`
-        : msg.tag === 'praise' ? `<span class="chat-tag tag-praise">✨ Praise</span>` : '';
-
+    const tagHTML = msg.tag === 'prayer' ? `<span class="chat-tag tag-prayer">🙏 Prayer</span>` : msg.tag === 'praise' ? `<span class="chat-tag tag-praise">✨ Praise</span>` : '';
     const reactionsHTML = Object.entries(msg.reactions || {}).map(([emoji, count]) => {
-        const reacted = msg.reacted[emoji] ? 'reacted' : '';
+        const reacted = (msg.reacted || {})[emoji] ? 'reacted' : '';
         return `<button class="reaction-pill ${reacted}" onclick="react(${msg.id},'${emoji}')"><span>${emoji}</span><span class="reaction-count">${count}</span></button>`;
     }).join('');
-
-    return `
-        <div class="chat-msg-header">
-            <div class="chat-avatar" style="background:${color}">${initial}</div>
-            <span class="chat-name">${escHtml(msg.name)}</span>
-            ${tagHTML}
-            <span class="chat-time">${msg.time}</span>
-        </div>
-        <div class="chat-bubble ${isOwn ? 'own' : ''}">${escHtml(msg.text)}</div>
-        <div class="reaction-bar" id="reactions-${msg.id}">${reactionsHTML}</div>`;
+    return `<div class="chat-msg-header"><div class="chat-avatar" style="background:${color}">${initial}</div><span class="chat-name">${escHtml(msg.name)}</span>${tagHTML}<span class="chat-time">${msg.time}</span></div><div class="chat-bubble ${isOwn ? 'own' : ''}">${escHtml(msg.text)}</div><div class="reaction-bar" id="reactions-${msg.id}">${reactionsHTML}</div>`;
 }
 
-function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* ════════════════════════════════════════
-   SEND MESSAGE
-   ════════════════════════════════════════ */
 function sendMessage() {
     const input = document.getElementById('chatInput');
-    const text  = input.value.trim();
+    const text = input.value.trim();
     if (!text || !currentUser) return;
-
     const now = new Date();
-    const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    const msg = {
-        id: ++msgIdCounter,
-        name: currentUser,
-        text,
-        tag: selectedTag,
-        time,
-        reactions: { '🙏': 0, '❤️': 0, '🔥': 0 },
-        reacted: {},
-        pending: true
-    };
-
-    // Add to moderation queue
-    pendingQueue.push(msg);
-    updatePendingBadge();
-
-    // Show as pending in chat
-    const container = document.getElementById('chatMessages');
-    const el = document.createElement('div');
-    el.className = 'chat-msg';
-    el.id = 'msg-pending-' + msg.id;
-
-    const initial = currentUser.charAt(0).toUpperCase();
-    const color = AVATAR_COLORS[currentUser.charCodeAt(0) % AVATAR_COLORS.length];
-    const tagHTML = selectedTag === 'prayer'
-        ? `<span class="chat-tag tag-prayer">🙏 Prayer</span>`
-        : selectedTag === 'praise' ? `<span class="chat-tag tag-praise">✨ Praise</span>` : '';
-
-    el.innerHTML = `
-        <div class="chat-msg-header">
-            <div class="chat-avatar" style="background:${color}">${initial}</div>
-            <span class="chat-name">${escHtml(currentUser)}</span>
-            ${tagHTML}
-            <span class="chat-time">${time}</span>
-        </div>
-        <div class="chat-bubble own pending">${escHtml(text)}</div>
-        <div class="pending-notice">Waiting for approval…</div>`;
-    container.appendChild(el);
-
-    // Reset
+    const time = now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+    const msg = { id: ++msgIdCounter, name: currentUser, text, tag: selectedTag, time, reactions:{'🙏':0,'❤️':0,'🔥':0}, reacted:{} };
+    approvedMsgs.push(msg);
+    renderMessage(msg);
     input.value = '';
     input.style.height = 'auto';
     selectedTag = '';
     document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('selected'));
     scrollToBottom();
-
-    // Auto-approve demo after 3s (remove this in production — use real moderation)
-    setTimeout(() => autoApproveDemo(msg.id), 3000);
 }
 
-/* Demo: auto-approve (in production remove this and use real moderation panel) */
-function autoApproveDemo(id) {
-    const idx = pendingQueue.findIndex(m => m.id === id);
-    if (idx === -1) return;
-    approveMessage(id);
-}
-
-/* ════════════════════════════════════════
-   MODERATION
-   ════════════════════════════════════════ */
-function updatePendingBadge() {
-    const badge = document.getElementById('pendingBadge');
-    const count = document.getElementById('modCount');
-    const n = pendingQueue.length;
-    badge.textContent = n;
-    badge.style.display = n > 0 ? 'inline' : 'none';
-    count.textContent = n;
-}
-
-function openModPanel() {
-    renderModQueue();
-    document.getElementById('modPanel').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-function closeModPanel() {
-    document.getElementById('modPanel').classList.remove('open');
-    document.body.style.overflow = '';
-}
-function closeModOnBg(e) { if (e.target === document.getElementById('modPanel')) closeModPanel(); }
-
-function renderModQueue() {
-    const q = document.getElementById('modQueue');
-    if (pendingQueue.length === 0) {
-        q.innerHTML = `<div class="mod-empty"><i class="bi bi-check-circle"></i>No messages waiting for approval.</div>`;
-        return;
-    }
-    q.innerHTML = pendingQueue.map(msg => `
-        <div class="mod-item" id="mod-item-${msg.id}">
-            <div class="mod-item-header">
-                <span class="mod-item-name">${escHtml(msg.name)}</span>
-                ${msg.tag ? `<span class="chat-tag ${msg.tag==='prayer'?'tag-prayer':'tag-praise'}">${msg.tag==='prayer'?'🙏 Prayer':'✨ Praise'}</span>` : ''}
-                <span class="mod-item-time">${msg.time}</span>
-            </div>
-            <div class="mod-item-text">${escHtml(msg.text)}</div>
-            <div class="mod-item-actions">
-                <button class="btn-approve" onclick="approveMessage(${msg.id})"><i class="bi bi-check-lg"></i> Approve</button>
-                <button class="btn-reject"  onclick="rejectMessage(${msg.id})"><i class="bi bi-x-lg"></i> Reject</button>
-            </div>
-        </div>`).join('');
-}
-
-function approveMessage(id) {
-    const idx = pendingQueue.findIndex(m => m.id === id);
-    if (idx === -1) return;
-    const msg = pendingQueue.splice(idx, 1)[0];
-    msg.pending = false;
-    approvedMsgs.push(msg);
-
-    // Remove pending placeholder
-    const pending = document.getElementById('msg-pending-' + id);
-    if (pending) pending.remove();
-
-    // Render approved message
-    renderMessage(msg);
-    scrollToBottom();
-
-    updatePendingBadge();
-    renderModQueue();
-}
-
-function rejectMessage(id) {
-    const idx = pendingQueue.findIndex(m => m.id === id);
-    if (idx !== -1) pendingQueue.splice(idx, 1);
-    const pending = document.getElementById('msg-pending-' + id);
-    if (pending) pending.remove();
-    updatePendingBadge();
-    renderModQueue();
-}
-
-/* ════════════════════════════════════════
-   REACTIONS
-   ════════════════════════════════════════ */
 function react(msgId, emoji) {
     const msg = approvedMsgs.find(m => m.id === msgId);
     if (!msg) return;
-    if (msg.reacted[emoji]) {
-        msg.reactions[emoji] = Math.max(0, (msg.reactions[emoji] || 0) - 1);
-        delete msg.reacted[emoji];
-    } else {
-        msg.reactions[emoji] = (msg.reactions[emoji] || 0) + 1;
-        msg.reacted[emoji] = true;
-    }
-    // Re-render reaction bar
-    const reacted = msg.reacted;
+    if (msg.reacted[emoji]) { msg.reactions[emoji] = Math.max(0,(msg.reactions[emoji]||0)-1); delete msg.reacted[emoji]; }
+    else { msg.reactions[emoji] = (msg.reactions[emoji]||0)+1; msg.reacted[emoji] = true; }
     const bar = document.getElementById('reactions-' + msgId);
     if (bar) {
-        bar.innerHTML = Object.entries(msg.reactions)
-            .filter(([, c]) => c > 0)
-            .map(([e, c]) => `<button class="reaction-pill ${reacted[e]?'reacted':''}" onclick="react(${msgId},'${e}')"><span>${e}</span><span class="reaction-count">${c}</span></button>`)
-            .join('');
+        bar.innerHTML = Object.entries(msg.reactions).filter(([,c]) => c > 0).map(([e,c]) =>
+            `<button class="reaction-pill ${(msg.reacted||{})[e]?'reacted':''}" onclick="react(${msgId},'${e}')"><span>${e}</span><span class="reaction-count">${c}</span></button>`
+        ).join('');
     }
 }
 
-/* ════════════════════════════════════════
-   TAG & EMOJI
-   ════════════════════════════════════════ */
 function toggleTag(tag) {
-    if (selectedTag === tag) {
-        selectedTag = '';
-        document.getElementById('tag' + tag.charAt(0).toUpperCase() + tag.slice(1)).classList.remove('selected');
+    if (selectedTag === tag) { selectedTag=''; document.getElementById('tag' + tag.charAt(0).toUpperCase() + tag.slice(1)).classList.remove('selected'); }
+    else { selectedTag=tag; document.querySelectorAll('.tag-btn').forEach(b=>b.classList.remove('selected')); document.getElementById('tag' + tag.charAt(0).toUpperCase() + tag.slice(1)).classList.add('selected'); }
+}
+function insertEmoji(e) { const ta=document.getElementById('chatInput'); const pos=ta.selectionStart; ta.value=ta.value.slice(0,pos)+e+ta.value.slice(ta.selectionEnd); ta.selectionStart=ta.selectionEnd=pos+e.length; ta.focus(); autoResize(ta); }
+function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
+function scrollToBottom() { const c=document.getElementById('chatMessages'); if(c) c.scrollTop=c.scrollHeight; }
+function simulateViewers() { const el=document.getElementById('viewerCount'); let base=24; setInterval(()=>{ base+=Math.floor(Math.random()*5)-2; base=Math.max(10,Math.min(150,base)); if(el) el.textContent=base+' watching'; },8000); }
+function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ══════════════════════════════════════
+   LIVE POLL
+══════════════════════════════════════ */
+function renderPoll() {
+    const total = pollData.votes.reduce((a,b)=>a+b,0);
+    const voted = pollData.userVote !== null;
+    if (voted) {
+        document.getElementById('pollQuestion').textContent = pollData.question;
+        let html = '';
+        pollData.options.forEach((opt,i) => {
+            const pct = total > 0 ? Math.round(pollData.votes[i]/total*100) : 0;
+            const selected = i === pollData.userVote ? 'selected' : '';
+            html += `<div class="poll-option"><div class="poll-option-label"><span>${opt}</span><span class="poll-option-pct">${pct}%</span></div><div class="poll-bar-wrap"><div class="poll-bar ${selected}" style="width:${pct}%"></div></div></div>`;
+        });
+        document.getElementById('pollOptions').innerHTML = html;
+        document.getElementById('pollVoteButtons').innerHTML = `<div class="poll-voted-label"><i class="bi bi-check-circle-fill"></i> Your vote has been counted. Thank you!</div>`;
+        document.getElementById('pollTotal').textContent = total + ' votes so far';
     } else {
-        selectedTag = tag;
-        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('selected'));
-        document.getElementById('tag' + tag.charAt(0).toUpperCase() + tag.slice(1)).classList.add('selected');
+        document.getElementById('pollOptions').innerHTML = '';
+        let html = '';
+        pollData.options.forEach((opt,i) => { html += `<button class="poll-option-btn" onclick="castVote(${i})"><i class="bi bi-circle"></i>${opt}</button>`; });
+        document.getElementById('pollVoteButtons').innerHTML = html;
+        document.getElementById('pollTotal').textContent = total + ' votes so far';
     }
 }
 
-function insertEmoji(emoji) {
-    const ta = document.getElementById('chatInput');
-    const pos = ta.selectionStart;
-    ta.value = ta.value.slice(0, pos) + emoji + ta.value.slice(ta.selectionEnd);
-    ta.selectionStart = ta.selectionEnd = pos + emoji.length;
-    ta.focus();
-    autoResize(ta);
+function castVote(idx) {
+    pollData.votes[idx]++;
+    pollData.userVote = idx;
+    renderPoll();
+    showToast('Vote submitted! 🗳️');
 }
 
-function autoResize(el) {
-    el.style.height = 'auto';
-    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+/* ══════════════════════════════════════
+   SERMON NOTES
+══════════════════════════════════════ */
+function saveNotes() {
+    const notes = document.getElementById('personalNotes').value;
+    localStorage.setItem('wtc_sermon_notes_today', notes);
+    const msg = document.getElementById('notesSavedMsg');
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 2500);
 }
 
-/* ════════════════════════════════════════
-   HELPERS
-   ════════════════════════════════════════ */
-function scrollToBottom() {
-    const c = document.getElementById('chatMessages');
-    if (c) c.scrollTop = c.scrollHeight;
+function downloadNotes() {
+    const notes = document.getElementById('personalNotes').value;
+    const verse = document.getElementById('notesVerse').textContent;
+    const content = `Word Transformation Church — Sermon Notes\nDate: ${new Date().toLocaleDateString()}\n\nKey Verse:\n${verse}\n\nKey Points:\n1. God's mercies are not earned — they are given fresh every morning.\n2. "Steadfast" (hesed) in Hebrew = a covenant love that never breaks.\n3. Great is His faithfulness — not because circumstances are great, but because He is.\n\nMy Personal Notes:\n${notes || '(No notes written)'}`;
+    const blob = new Blob([content], {type:'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'sermon-notes-' + new Date().toISOString().slice(0,10) + '.txt';
+    a.click();
+    showToast('Notes downloaded!');
 }
 
-function simulateViewers() {
-    const el = document.getElementById('viewerCount');
-    let base = 24;
-    setInterval(() => {
-        base += Math.floor(Math.random() * 5) - 2;
-        base = Math.max(10, Math.min(150, base));
-        if (el) el.textContent = base + ' watching';
-    }, 8000);
+document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('wtc_sermon_notes_today');
+    if (saved) document.getElementById('personalNotes').value = saved;
+    document.getElementById('personalNotes').addEventListener('input', () => {
+        clearTimeout(notesSaveTimer);
+        notesSaveTimer = setTimeout(saveNotes, 2000);
+    });
+});
+
+/* ══════════════════════════════════════
+   REACTIONS FEED
+══════════════════════════════════════ */
+const reactionMessages = { '🙏':'is praying', '🔥':'is on fire!', '🙌':'said Hallelujah!', '❤️':'sent love', '✝️':'said Amen!', '😭':'is touched', '💛':'is blessed' };
+const reactionNames = ['Kwame','Abena','Grace','Emmanuel','Kofi','Esi','Samuel','Akosua','Daniel','Ruth'];
+let reactionLogItems = [];
+const reactionCountMap = { pray:'rc-pray', fire:'rc-fire', hands:'rc-hands', heart:'rc-heart', cross:'rc-cross' };
+
+function fireReaction(emoji, key) {
+    if (reactionCountMap[key]) {
+        reactionCounts[key]++;
+        const el = document.getElementById(reactionCountMap[key]);
+        if (el) el.textContent = reactionCounts[key];
+    }
+    addReactionLog(currentUser || 'You', emoji, reactionMessages[emoji] || 'reacted');
+    // float animation
+    const feed = document.querySelector('.reaction-feed-area');
+    if (feed) {
+        const span = document.createElement('span');
+        span.className = 'reaction-float';
+        span.textContent = emoji;
+        span.style.left = (20 + Math.random() * 60) + '%';
+        span.style.animationDelay = '0s';
+        feed.appendChild(span);
+        setTimeout(() => span.remove(), 3200);
+    }
 }
 
-/* ════════════════════════════════════════
+function addReactionLog(name, emoji, msg) {
+    const now = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const log = document.getElementById('reactionLog');
+    const el = document.createElement('div');
+    el.className = 'reaction-log-item';
+    el.innerHTML = `<span class="reaction-log-emoji">${emoji}</span><span class="reaction-log-name">${escHtml(name)}</span><span class="reaction-log-msg">${msg}</span><span class="reaction-log-time">${now}</span>`;
+    log.insertBefore(el, log.firstChild);
+    if (log.children.length > 20) log.removeChild(log.lastChild);
+}
+
+// Simulate others reacting
+setInterval(() => {
+    const r = Math.random();
+    if (r < 0.4) {
+        const emojis = ['🙏','🔥','🙌','❤️','✝️','💛','😭'];
+        const emoji = emojis[Math.floor(Math.random()*emojis.length)];
+        const name = reactionNames[Math.floor(Math.random()*reactionNames.length)];
+        addReactionLog(name, emoji, reactionMessages[emoji] || 'reacted');
+    }
+}, 4500);
+
+/* ══════════════════════════════════════
+   ATTENDANCE
+══════════════════════════════════════ */
+function renderAttendance() {
+    const dots = document.getElementById('streakDots');
+    const records = document.getElementById('recentServices');
+    // Streak dots: last 8 Sundays
+    const weekNames = ['Mar 13','Mar 9','Mar 2','Feb 23','Feb 16','Feb 9','Feb 2','Jan 26'];
+    const presences = [false, true, true, true, true, false, true, true]; // Mar 13 = today (not checked in yet)
+    dots.innerHTML = weekNames.map((w,i) => {
+        const cls = i === 0 ? 'today' : presences[i] ? 'present' : 'absent';
+        return `<div class="streak-dot ${cls}" title="${w}">${cls==='present'?'✓':cls==='absent'?'✗':w.slice(0,3)}</div>`;
+    }).join('');
+    // Recent records
+    records.innerHTML = attendanceHistory.slice(0,5).map(r => `
+        <div class="service-record">
+            <span class="service-record-date">${r.date}</span>
+            <span class="service-record-name">${r.name}</span>
+            <span class="service-record-badge ${r.mode==='online'?'badge-online':'badge-attended'}">${r.mode==='online'?'Online':'Present'}</span>
+        </div>`).join('');
+}
+
+function checkIn() {
+    if (checkedIn) return;
+    checkedIn = true;
+    const btn = document.getElementById('checkInBtn');
+    btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Checked In! 🎉';
+    btn.classList.add('checked');
+    const streak = document.getElementById('attendStreak');
+    const total = document.getElementById('attendTotal');
+    streak.textContent = parseInt(streak.textContent) + 1;
+    total.textContent = parseInt(total.textContent) + 1;
+    // Update today's dot
+    const dots = document.getElementById('streakDots');
+    if (dots.firstChild) { dots.firstChild.className = 'streak-dot present'; dots.firstChild.textContent = '✓'; }
+    showToast('✓ Checked in to Sunday Service!');
+    // Add to attendance history
+    attendanceHistory.unshift({ date:'Mar 13', name:'Sunday Worship', mode:'online', attended:true });
+    renderAttendance();
+}
+
+/* ══════════════════════════════════════
    SHARE & COPY
-   ════════════════════════════════════════ */
+══════════════════════════════════════ */
 function shareLink(platform) {
     const url = encodeURIComponent(window.location.href);
     const msg = encodeURIComponent('Join Word Transformation Church live service now!');
-    const links = {
-        facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-        whatsapp: `https://api.whatsapp.com/send?text=${msg}%20${url}`,
-        twitter:  `https://twitter.com/intent/tweet?text=${msg}&url=${url}`
-    };
+    const links = { facebook:`https://www.facebook.com/sharer/sharer.php?u=${url}`, whatsapp:`https://api.whatsapp.com/send?text=${msg}%20${url}`, twitter:`https://twitter.com/intent/tweet?text=${msg}&url=${url}` };
     window.open(links[platform], '_blank', 'width=600,height=400');
 }
 function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-        const el = document.getElementById('copyText');
-        el.textContent = '✓ Copied!';
-        setTimeout(() => el.textContent = 'Copy Stream Link', 2000);
-    });
+    navigator.clipboard.writeText(window.location.href).then(() => { const el=document.getElementById('copyText'); el.textContent='✓ Copied!'; setTimeout(()=>el.textContent='Copy Stream Link',2000); });
 }
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════════════
    PRAYER FORM
-   ════════════════════════════════════════ */
+══════════════════════════════════════ */
 function submitPrayer() {
     const text = document.getElementById('prayerText').value.trim();
     if (!text) { alert('Please write your prayer request before sending.'); return; }
@@ -950,36 +1192,49 @@ function submitPrayer() {
     document.getElementById('prayerName').value = '';
     const s = document.getElementById('prayerSuccess');
     s.style.display = 'block';
-    setTimeout(() => s.style.display = 'none', 5000);
+    setTimeout(() => s.style.display='none', 5000);
 }
 
-/* ════════════════════════════════════════
-   ON LOAD
-   ════════════════════════════════════════ */
-window.addEventListener('DOMContentLoaded', () => {
-    const saved    = localStorage.getItem('wtc_yt_id');
-    const savedUrl = localStorage.getItem('wtc_yt_url');
-    if (saved)    document.getElementById('ytInput').value = saved;
-    if (savedUrl) {
-        document.getElementById('ytChannelUrl').value = savedUrl;
-        document.querySelectorAll('#ytDirectLink, #ytAllLink').forEach(a => a.href = savedUrl);
-    }
-});
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastText').textContent = msg;
+    t.style.opacity = '1'; t.style.transform = 'translateY(0)';
+    setTimeout(() => { t.style.opacity='0'; t.style.transform='translateY(12px)'; }, 3200);
+}
 
-/* ════════════════════════════════════════
+/* ══════════════════════════════════════
    LIVE BANNER
-   ════════════════════════════════════════ */
+══════════════════════════════════════ */
 (function() {
-    const now  = new Date();
-    const day  = now.getUTCDay();
-    const mins = now.getUTCHours() * 60 + now.getUTCMinutes();
-    const isLive = day === 0 && mins >= 510 && mins <= 780;
+    const now = new Date();
+    const day = now.getUTCDay();
+    const mins = now.getUTCHours()*60+now.getUTCMinutes();
+    const isLive = day===0 && mins>=510 && mins<=780;
     if (!isLive) {
         const b = document.getElementById('liveBanner');
         b.style.background = '#4A3728';
-        b.innerHTML = `<div class="live-banner-inner"><i class="bi bi-calendar3 me-2"></i>Next Live Service: Sunday at 9:00 AM · All are welcome</div>`;
+        b.innerHTML = `<div class="live-banner-inner"><i class="bi bi-calendar3 me-2"></i>Next Live Service: Sunday at 9:00 AM · YouTube Stream & Google Meet Audio Room</div>`;
     }
 })();
+
+/* ══════════════════════════════════════
+   ON LOAD
+══════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+    const savedYt = localStorage.getItem('wtc_yt_id');
+    const savedUrl = localStorage.getItem('wtc_yt_url');
+    const savedMeet = localStorage.getItem('wtc_meet_link');
+    if (savedYt) document.getElementById('ytInput').value = savedYt;
+    if (savedUrl) document.querySelectorAll('#ytDirectLink, #ytAllLink').forEach(a => a.href = savedUrl);
+    if (savedMeet) { savedMeetLink = savedMeet; document.getElementById('meetConfigInput').value = savedMeet; document.getElementById('meetLinkInput').value = savedMeet; }
+    renderPoll();
+    renderAttendance();
+    // Seed reaction log
+    [['Abena K.','🙏','is praying'],['Samuel A.','🔥','is on fire!'],['Grace M.','🙌','said Hallelujah!'],['Emmanuel O.','❤️','sent love']].forEach(([n,e,m]) => addReactionLog(n,e,m));
+});
 </script>
 </body>
 </html>
