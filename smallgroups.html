@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Groups | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-color:#8B5E3C;--primary-dark:#6B4A2E;--secondary-color:#D4AF37;--accent-color:#2C5F2D;--light-bg:#F9F6F0;--dark-bg:#1A1A1A;--deep-brown:#4A3728;--text-dark:#333333;--text-light:#666666;--white:#FFFFFF;--heading-font:'Playfair Display',serif;--body-font:'Inter',sans-serif;--border-radius:8px;}
+        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;scroll-padding-top:70px;}
+        body{font-family:var(--body-font);color:var(--text-dark);background:var(--white);line-height:1.6;}
+        h1,h2,h3,h4,h5,h6{font-family:var(--heading-font);font-weight:600;line-height:1.3;}
+        a{text-decoration:none;transition:all 0.3s ease;}
+        .navbar{background-color:var(--deep-brown);padding:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+        .navbar-brand{font-family:var(--heading-font);font-size:1.4rem;font-weight:600;color:var(--white)!important;}
+        .navbar-brand i{color:var(--secondary-color);margin-right:0.5rem;}
+        .navbar-nav .nav-link{color:rgba(255,255,255,0.88)!important;font-weight:500;padding:0.5rem 1rem!important;border-radius:var(--border-radius);transition:all 0.3s ease;}
+        .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--white)!important;background:rgba(255,255,255,0.1);}
+        .btn-give{background:var(--secondary-color);color:var(--deep-brown);border:none;padding:0.45rem 1.25rem;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;}
+        .btn-give:hover{background:#b8972e;transform:translateY(-2px);}
+        .page-hero{background:linear-gradient(135deg,var(--deep-brown) 0%,#2E1F14 100%);padding:5rem 0 4rem;text-align:center;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.12) 0%,transparent 60%);}
+        .page-hero-content{position:relative;}
+        .eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1rem;display:block;}
+        .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:300;color:#F5F0E8;margin-bottom:1rem;}
+        .page-hero p{font-size:1.05rem;color:rgba(245,240,232,0.72);max-width:520px;margin:0 auto;}
+        .hero-div{display:flex;align-items:center;justify-content:center;gap:10px;margin:1.5rem auto 0;max-width:200px;}
+        .hero-div-line{flex:1;height:1px;background:rgba(212,175,55,0.4);}
+        .hero-div-dot{width:5px;height:5px;background:var(--secondary-color);border-radius:50%;flex-shrink:0;}
+
+        /* Why section */
+        .why-section{background:var(--light-bg);padding:60px 0;}
+        .why-card{background:var(--white);border:1px solid #EDE4D3;border-radius:10px;padding:1.75rem;text-align:center;height:100%;}
+        .why-icon{width:52px;height:52px;background:var(--light-bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--primary-color);margin:0 auto 1rem;}
+        .why-card h4{font-size:1rem;color:var(--deep-brown);margin-bottom:0.5rem;}
+        .why-card p{font-size:0.87rem;color:var(--text-light);margin:0;}
+
+        /* Filter */
+        .filter-section{background:var(--white);padding:2rem 0;border-bottom:1px solid #EDE4D3;position:sticky;top:66px;z-index:100;}
+        .filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+        .filter-select{padding:0.55rem 1rem;border:1px solid #DDD4C5;border-radius:50px;font-size:0.88rem;background:var(--white);color:var(--text-dark);outline:none;cursor:pointer;transition:border-color 0.2s;}
+        .filter-select:focus{border-color:var(--secondary-color);}
+        .filter-count{margin-left:auto;font-size:0.82rem;color:var(--text-light);}
+
+        /* Group cards */
+        .groups-section{padding:60px 0;}
+        .group-card{background:var(--white);border:1px solid #EDE4D3;border-radius:12px;overflow:hidden;height:100%;transition:all 0.3s ease;box-shadow:0 2px 8px rgba(139,94,60,0.05);}
+        .group-card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(139,94,60,0.12);border-color:var(--secondary-color);}
+        .group-card-top{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid #EDE4D3;}
+        .group-type-badge{display:inline-block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:50px;margin-bottom:0.75rem;}
+        .badge-bible{background:#E8F0FB;color:#1a5fa5;}
+        .badge-prayer{background:#FBF3DC;color:#7A5A00;}
+        .badge-youth{background:#E4F0E4;color:#2C5F2D;}
+        .badge-women{background:#FBE8F3;color:#8B1a5f;}
+        .badge-men{background:#E4F0E4;color:#1a5f2a;}
+        .badge-couples{background:#F3E8FB;color:#5f1a8b;}
+        .badge-online{background:#F0EAE0;color:#8B5E3C;}
+        .group-card-top h4{font-size:1.05rem;color:var(--text-dark);margin-bottom:0.35rem;}
+        .group-desc{font-size:0.85rem;color:var(--text-light);line-height:1.6;}
+        .group-card-meta{padding:1rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+        .group-meta-item{display:flex;align-items:flex-start;gap:7px;font-size:0.78rem;color:var(--text-light);}
+        .group-meta-item i{color:var(--primary-color);flex-shrink:0;margin-top:2px;}
+        .group-card-footer{padding:1rem 1.5rem;border-top:1px solid #EDE4D3;display:flex;align-items:center;justify-content:space-between;}
+        .group-spots{font-size:0.75rem;color:var(--text-light);}
+        .spots-fill{display:inline-block;width:80px;height:5px;background:#EDE4D3;border-radius:3px;margin-left:6px;vertical-align:middle;}
+        .spots-fill-inner{height:100%;background:var(--secondary-color);border-radius:3px;transition:width 0.3s;}
+        .btn-join{padding:0.45rem 1.1rem;background:var(--deep-brown);color:#F5F0E8;border:none;border-radius:50px;font-size:0.8rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;}
+        .btn-join:hover{background:var(--primary-dark);transform:translateY(-1px);}
+
+        /* Start group CTA */
+        .start-group-section{background:var(--light-bg);padding:60px 0;text-align:center;}
+        .start-card{background:linear-gradient(135deg,var(--deep-brown),#2E1F14);border-radius:14px;padding:3rem 2.5rem;max-width:700px;margin:0 auto;}
+        .start-card h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#F5F0E8;margin-bottom:1rem;}
+        .start-card p{color:rgba(245,240,232,0.7);margin-bottom:2rem;font-size:0.95rem;}
+        .btn-start{padding:0.75rem 2rem;background:var(--secondary-color);color:var(--deep-brown);border:none;border-radius:50px;font-weight:600;font-size:0.95rem;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;gap:8px;}
+        .btn-start:hover{background:#b8972e;transform:translateY(-2px);}
+
+        /* Modal */
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(13,10,7,0.7);z-index:9999;align-items:center;justify-content:center;padding:1rem;}
+        .modal-overlay.open{display:flex;}
+        .modal-box{background:var(--white);border-radius:14px;padding:2rem;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+        .modal-box h4{font-size:1.3rem;color:var(--deep-brown);margin-bottom:0.5rem;}
+        .modal-box p{font-size:0.88rem;color:var(--text-light);margin-bottom:1.5rem;}
+        .form-group{margin-bottom:1rem;}
+        .form-group label{display:block;font-size:0.75rem;font-weight:500;letter-spacing:0.04em;color:var(--text-light);margin-bottom:0.4rem;text-transform:uppercase;}
+        .form-group input,.form-group select{width:100%;padding:0.65rem 0.9rem;border:1.5px solid #DDD4C5;border-radius:8px;font-size:0.92rem;color:var(--text-dark);outline:none;transition:border-color 0.2s;font-family:var(--body-font);}
+        .form-group input:focus,.form-group select:focus{border-color:var(--secondary-color);}
+        .btn-submit{width:100%;padding:0.75rem;background:var(--deep-brown);color:#F5F0E8;border:none;border-radius:8px;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.3s;margin-top:0.5rem;}
+        .btn-submit:hover{background:var(--primary-dark);}
+        .btn-modal-close{width:100%;padding:0.6rem;background:transparent;color:var(--text-light);border:1px solid #DDD4C5;border-radius:8px;font-size:0.88rem;cursor:pointer;margin-top:8px;transition:all 0.2s;}
+        .btn-modal-close:hover{background:var(--light-bg);}
+
+        .footer{background-color:var(--dark-bg);color:var(--white);padding:60px 0 30px;}
+        .footer h5{color:var(--white);margin-bottom:1.5rem;}
+        .footer a{color:rgba(255,255,255,0.7);}
+        .footer a:hover{color:var(--secondary-color);}
+        .footer hr{opacity:0.2;margin:2rem 0;}
+        @media(max-width:768px){.filter-row{gap:8px;}.filter-count{width:100%;margin-left:0;}.navbar-collapse{background:var(--deep-brown);padding:1rem;border-radius:var(--border-radius);margin-top:0.5rem;}}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="devotional.html">Devotional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="smallgroups.html">Small Groups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <div class="container"><div class="page-hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>Small Groups</h1>
+            <p>Life is better in community. Find your people and grow together in faith.</p>
+            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+        </div></div>
+    </div>
+
+    <section class="why-section">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-3 col-sm-6"><div class="why-card"><div class="why-icon"><i class="bi bi-people-fill"></i></div><h4>Belong</h4><p>Find a place where you are truly known, accepted, and loved.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="why-card"><div class="why-icon"><i class="bi bi-book-fill"></i></div><h4>Grow</h4><p>Go deeper into God's Word in an intimate, interactive setting.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="why-card"><div class="why-icon"><i class="bi bi-chat-heart-fill"></i></div><h4>Share</h4><p>Be real. Share your struggles and celebrate your victories together.</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="why-card"><div class="why-icon"><i class="bi bi-hand-index-thumb-fill"></i></div><h4>Serve</h4><p>Groups that look outward — serving one another and the community.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="filter-section">
+        <div class="container">
+            <div class="filter-row">
+                <select class="filter-select" id="typeFilter" onchange="filterGroups()">
+                    <option value="">All types</option>
+                    <option value="bible">Bible Study</option>
+                    <option value="prayer">Prayer</option>
+                    <option value="youth">Youth</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="couples">Couples</option>
+                    <option value="online">Online</option>
+                </select>
+                <select class="filter-select" id="dayFilter" onchange="filterGroups()">
+                    <option value="">Any day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <select class="filter-select" id="areaFilter" onchange="filterGroups()">
+                    <option value="">Any area</option>
+                    <option value="East Legon">East Legon</option>
+                    <option value="Osu">Osu</option>
+                    <option value="Tema">Tema</option>
+                    <option value="Adenta">Adenta</option>
+                    <option value="Online">Online</option>
+                </select>
+                <span class="filter-count" id="groupCount">Showing 8 groups</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="groups-section">
+        <div class="container">
+            <div class="row g-4" id="groupGrid">
+                <div class="col-lg-4 col-md-6 group-item" data-type="bible" data-day="Tuesday" data-area="East Legon">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-bible">Bible Study</span>
+                            <h4>Rooted in the Word</h4>
+                            <p class="group-desc">An expository study through the book of Romans. Ideal for believers who want to go deep into Scripture with solid discussion and application.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Tuesdays, 7:00 PM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>East Legon</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Elder Kwesi</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>8–12 people</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">4 spots left <span class="spots-fill"><span class="spots-fill-inner" style="width:66%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Rooted in the Word')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="prayer" data-day="Wednesday" data-area="Osu">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-prayer">Prayer</span>
+                            <h4>Intercession Circle</h4>
+                            <p class="group-desc">A dedicated prayer group that intercedes for the church, the city, and the nations. Come hungry for prayer and expectant for breakthrough.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Wednesdays, 6:00 AM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>Osu</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Sis. Abena</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>Open group</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">Open <span class="spots-fill"><span class="spots-fill-inner" style="width:40%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Intercession Circle')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="women" data-day="Saturday" data-area="Adenta">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-women">Women</span>
+                            <h4>Women of Worth</h4>
+                            <p class="group-desc">A safe and empowering space for women to share, grow, pray, and support one another. Bible study, life conversations, and sisterhood every week.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Saturdays, 10:00 AM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>Adenta</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Sis. Grace</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>10–15 people</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">2 spots left <span class="spots-fill"><span class="spots-fill-inner" style="width:85%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Women of Worth')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="men" data-day="Friday" data-area="Tema">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-men">Men</span>
+                            <h4>Iron Brotherhood</h4>
+                            <p class="group-desc">Men sharpening men. A space for honest conversation, accountability, Bible study, and prayer focused on godly leadership in every sphere of life.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Fridays, 6:30 PM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>Tema</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Bro. Emmanuel</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>8–10 people</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">3 spots left <span class="spots-fill"><span class="spots-fill-inner" style="width:70%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Iron Brotherhood')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="youth" data-day="Thursday" data-area="East Legon">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-youth">Youth</span>
+                            <h4>Gen Z Disciples</h4>
+                            <p class="group-desc">A cell group for young adults aged 18–30 navigating faith, career, relationships, and identity. Real talk, real Word, real community.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Thursdays, 7:30 PM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>East Legon</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Rev. Kwame</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>10–15 people</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">5 spots left <span class="spots-fill"><span class="spots-fill-inner" style="width:55%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Gen Z Disciples')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="couples" data-day="Saturday" data-area="Osu">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-couples">Couples</span>
+                            <h4>Covenant Homes</h4>
+                            <p class="group-desc">Strengthening marriages through God's Word. Study, share, and pray together with other couples building Christ-centred homes.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Saturdays, 4:00 PM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>Osu</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Pastors James & Grace</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>6–8 couples</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">1 spot left <span class="spots-fill"><span class="spots-fill-inner" style="width:90%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Covenant Homes')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="online" data-day="Monday" data-area="Online">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-online">Online</span>
+                            <h4>Kingdom Online Cell</h4>
+                            <p class="group-desc">Join from anywhere in the world via Zoom. Bible study, prayer, and fellowship for those who cannot attend in person or are based abroad.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Mondays, 8:00 PM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>Online (Zoom)</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Sis. Ruth</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>Open group</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">Open <span class="spots-fill"><span class="spots-fill-inner" style="width:30%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('Kingdom Online Cell')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 group-item" data-type="bible" data-day="Tuesday" data-area="Adenta">
+                    <div class="group-card">
+                        <div class="group-card-top">
+                            <span class="group-type-badge badge-bible">Bible Study</span>
+                            <h4>New Believers' Foundation</h4>
+                            <p class="group-desc">A nurturing group designed for new Christians and those returning to faith. Learn the basics of the Christian life in a welcoming, judgment-free space.</p>
+                        </div>
+                        <div class="group-card-meta">
+                            <div class="group-meta-item"><i class="bi bi-calendar3"></i>Tuesdays, 6:00 PM</div>
+                            <div class="group-meta-item"><i class="bi bi-geo-alt"></i>Adenta</div>
+                            <div class="group-meta-item"><i class="bi bi-person"></i>Led by Elder Sarah</div>
+                            <div class="group-meta-item"><i class="bi bi-people"></i>Open group</div>
+                        </div>
+                        <div class="group-card-footer">
+                            <div class="group-spots">Open <span class="spots-fill"><span class="spots-fill-inner" style="width:25%"></span></span></div>
+                            <button class="btn-join" onclick="openJoinModal('New Believers\' Foundation')">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="noResults" style="display:none;text-align:center;padding:3rem;color:var(--text-light);">
+                <i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:1rem;"></i>
+                No groups match your filters. <a href="#" onclick="resetFilters()" style="color:var(--primary-color);">Clear filters</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="start-group-section">
+        <div class="container">
+            <div class="start-card">
+                <h2>Don't see your fit? Start a group.</h2>
+                <p>If you have a heart to gather people and lead a group, we will train and support you. Every group was started by someone who simply said yes.</p>
+                <button class="btn-start" onclick="openJoinModal('Start a Group — Interest')"><i class="bi bi-plus-circle"></i> I want to start a group</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Modal -->
+    <div class="modal-overlay" id="joinModal" onclick="if(event.target===this)closeModal()">
+        <div class="modal-box">
+            <h4>Join <span id="modalGroupName">this group</span></h4>
+            <p>Fill in your details and the group leader will reach out to you within 48 hours.</p>
+            <div class="form-group"><label>Full name</label><input type="text" placeholder="Your name"></div>
+            <div class="form-group"><label>Email address</label><input type="email" placeholder="you@example.com"></div>
+            <div class="form-group"><label>Phone number</label><input type="tel" placeholder="024 000 0000"></div>
+            <div class="form-group"><label>Tell us about yourself (optional)</label><input type="text" placeholder="New member, been attending for 2 years..."></div>
+            <button class="btn-submit" onclick="submitJoin()"><i class="bi bi-send me-2"></i>Send Request</button>
+            <button class="btn-modal-close" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+                <div class="col-md-2 mb-4"><h5>Pages</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="about.html">About</a></li><li class="mb-2"><a href="smallgroups.html">Small Groups</a></li><li class="mb-2"><a href="contact.html">Contact</a></li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
+            </div>
+            <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function filterGroups(){
+            var type=document.getElementById('typeFilter').value;
+            var day=document.getElementById('dayFilter').value;
+            var area=document.getElementById('areaFilter').value;
+            var items=document.querySelectorAll('.group-item');
+            var count=0;
+            items.forEach(function(item){
+                var show=(!type||item.dataset.type===type)&&(!day||item.dataset.day===day)&&(!area||item.dataset.area===area);
+                item.style.display=show?'':'none';
+                if(show)count++;
+            });
+            document.getElementById('groupCount').textContent='Showing '+count+' group'+(count!==1?'s':'');
+            document.getElementById('noResults').style.display=count===0?'block':'none';
+        }
+        function resetFilters(){document.getElementById('typeFilter').value='';document.getElementById('dayFilter').value='';document.getElementById('areaFilter').value='';filterGroups();}
+        function openJoinModal(name){document.getElementById('modalGroupName').textContent=name;document.getElementById('joinModal').classList.add('open');document.body.style.overflow='hidden';}
+        function closeModal(){document.getElementById('joinModal').classList.remove('open');document.body.style.overflow='';}
+        function submitJoin(){closeModal();setTimeout(function(){alert('Request sent! The group leader will contact you within 48 hours. God bless you.');},200);}
+    </script>
+</body>
+</html>

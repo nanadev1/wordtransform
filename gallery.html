@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-color:#8B5E3C;--primary-dark:#6B4A2E;--secondary-color:#D4AF37;--light-bg:#F9F6F0;--dark-bg:#1A1A1A;--deep-brown:#4A3728;--text-dark:#333333;--text-light:#666666;--white:#FFFFFF;--heading-font:'Playfair Display',serif;--body-font:'Inter',sans-serif;--border-radius:8px;}
+        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;scroll-padding-top:70px;}
+        body{font-family:var(--body-font);color:var(--text-dark);background:var(--white);line-height:1.6;}
+        h1,h2,h3,h4,h5,h6{font-family:var(--heading-font);font-weight:600;line-height:1.3;}
+        a{text-decoration:none;transition:all 0.3s ease;}
+        .navbar{background-color:var(--deep-brown);padding:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+        .navbar-brand{font-family:var(--heading-font);font-size:1.4rem;font-weight:600;color:var(--white)!important;}
+        .navbar-brand i{color:var(--secondary-color);margin-right:0.5rem;}
+        .navbar-nav .nav-link{color:rgba(255,255,255,0.88)!important;font-weight:500;padding:0.5rem 1rem!important;border-radius:var(--border-radius);transition:all 0.3s ease;}
+        .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--white)!important;background:rgba(255,255,255,0.1);}
+        .btn-give{background:var(--secondary-color);color:var(--deep-brown);border:none;padding:0.45rem 1.25rem;border-radius:50px;font-weight:600;font-size:0.9rem;transition:all 0.3s ease;cursor:pointer;}
+        .btn-give:hover{background:#b8972e;transform:translateY(-2px);}
+        .page-hero{background:linear-gradient(135deg,var(--deep-brown) 0%,#2E1F14 100%);padding:5rem 0 4rem;text-align:center;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 30% 50%,rgba(212,175,55,0.12) 0%,transparent 60%);}
+        .page-hero-content{position:relative;}
+        .eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--secondary-color);margin-bottom:1rem;display:block;}
+        .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:300;color:#F5F0E8;margin-bottom:1rem;}
+        .page-hero p{font-size:1.05rem;color:rgba(245,240,232,0.72);max-width:520px;margin:0 auto;}
+        .hero-div{display:flex;align-items:center;justify-content:center;gap:10px;margin:1.5rem auto 0;max-width:200px;}
+        .hero-div-line{flex:1;height:1px;background:rgba(212,175,55,0.4);}
+        .hero-div-dot{width:5px;height:5px;background:var(--secondary-color);border-radius:50%;flex-shrink:0;}
+
+        /* Filter */
+        .filter-bar{background:var(--light-bg);border-bottom:1px solid #EDE4D3;padding:1.25rem 0;position:sticky;top:66px;z-index:100;}
+        .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+        .filter-tab{padding:0.45rem 1.1rem;border-radius:50px;border:1px solid #DDD4C5;background:var(--white);font-size:0.82rem;font-weight:500;color:var(--text-light);cursor:pointer;transition:all 0.2s ease;}
+        .filter-tab:hover{border-color:var(--primary-color);color:var(--primary-color);}
+        .filter-tab.active{background:var(--deep-brown);border-color:var(--deep-brown);color:var(--white);}
+
+        /* Gallery Grid */
+        .gallery-section{padding:60px 0;}
+        .gallery-grid{columns:3;gap:16px;}
+        .gallery-item{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;border-radius:10px;cursor:pointer;}
+        .gallery-item:hover .gallery-overlay{opacity:1;}
+        .gallery-placeholder{width:100%;background:linear-gradient(135deg,#EDE4D3,#DDD4C5);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#C9A87A;transition:transform 0.3s ease;}
+        .gallery-item:hover .gallery-placeholder{transform:scale(1.03);}
+        .gallery-placeholder.h1{height:280px;}
+        .gallery-placeholder.h2{height:200px;}
+        .gallery-placeholder.h3{height:240px;}
+        .gallery-placeholder.h4{height:320px;}
+        .gallery-overlay{position:absolute;inset:0;background:rgba(74,55,40,0.75);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;padding:1rem;text-align:center;}
+        .gallery-overlay i{font-size:1.8rem;color:var(--secondary-color);margin-bottom:8px;}
+        .gallery-overlay span{font-size:0.82rem;color:rgba(245,240,232,0.9);font-weight:500;}
+        .gallery-overlay small{font-size:0.72rem;color:rgba(245,240,232,0.6);margin-top:3px;}
+
+        /* Lightbox */
+        .lightbox{display:none;position:fixed;inset:0;background:rgba(13,10,7,0.92);z-index:9999;align-items:center;justify-content:center;padding:1.5rem;}
+        .lightbox.open{display:flex;}
+        .lightbox-content{max-width:800px;width:100%;background:var(--deep-brown);border-radius:12px;overflow:hidden;position:relative;}
+        .lightbox-img{width:100%;height:440px;background:linear-gradient(135deg,#2A1F14,#1A0F08);display:flex;align-items:center;justify-content:center;font-size:5rem;color:#C9A87A;}
+        .lightbox-info{padding:1.25rem 1.5rem;}
+        .lightbox-title{font-size:1.1rem;color:#F5F0E8;margin-bottom:4px;}
+        .lightbox-meta{font-size:0.8rem;color:rgba(245,240,232,0.6);}
+        .lightbox-close{position:absolute;top:12px;right:14px;background:none;border:none;color:#F5F0E8;font-size:1.6rem;cursor:pointer;line-height:1;z-index:10;}
+        .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(212,175,55,0.2);border:none;color:var(--secondary-color);width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+        .lightbox-nav:hover{background:rgba(212,175,55,0.4);}
+        .lightbox-prev{left:12px;}
+        .lightbox-next{right:12px;}
+
+        .footer{background-color:var(--dark-bg);color:var(--white);padding:60px 0 30px;}
+        .footer h5{color:var(--white);margin-bottom:1.5rem;}
+        .footer a{color:rgba(255,255,255,0.7);}
+        .footer a:hover{color:var(--secondary-color);}
+        .footer hr{opacity:0.2;margin:2rem 0;}
+        @media(max-width:768px){.gallery-grid{columns:2;}.navbar-collapse{background:var(--deep-brown);padding:1rem;border-radius:var(--border-radius);margin-top:0.5rem;}}
+        @media(max-width:480px){.gallery-grid{columns:1;}}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="devotional.html">Devotional</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="smallgroups.html">Small Groups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <div class="container"><div class="page-hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>Gallery</h1>
+            <p>Moments of worship, fellowship, and community captured in time.</p>
+            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+        </div></div>
+    </div>
+
+    <div class="filter-bar">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterGallery('all',this)">All Photos</button>
+                <button class="filter-tab" onclick="filterGallery('worship',this)">Sunday Worship</button>
+                <button class="filter-tab" onclick="filterGallery('events',this)">Events</button>
+                <button class="filter-tab" onclick="filterGallery('outreach',this)">Outreach</button>
+                <button class="filter-tab" onclick="filterGallery('youth',this)">Youth</button>
+                <button class="filter-tab" onclick="filterGallery('baptism',this)">Baptism</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-cat="worship" data-title="Sunday Morning Worship" data-date="March 9, 2026" onclick="openLightbox(this)"><div class="gallery-placeholder h1"><i class="bi bi-music-note-beamed"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Sunday Morning Worship</span><small>March 9, 2026</small></div></div>
+                <div class="gallery-item" data-cat="events" data-title="Easter Celebration 2025" data-date="April 20, 2025" onclick="openLightbox(this)"><div class="gallery-placeholder h2"><i class="bi bi-stars"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Easter Celebration 2025</span><small>April 20, 2025</small></div></div>
+                <div class="gallery-item" data-cat="outreach" data-title="Community Outreach Day" data-date="February 15, 2026" onclick="openLightbox(this)"><div class="gallery-placeholder h3"><i class="bi bi-people-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Community Outreach Day</span><small>Feb 15, 2026</small></div></div>
+                <div class="gallery-item" data-cat="baptism" data-title="Water Baptism Service" data-date="January 12, 2026" onclick="openLightbox(this)"><div class="gallery-placeholder h4"><i class="bi bi-droplet-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Water Baptism Service</span><small>Jan 12, 2026</small></div></div>
+                <div class="gallery-item" data-cat="youth" data-title="Youth Rally Night" data-date="March 1, 2026" onclick="openLightbox(this)"><div class="gallery-placeholder h2"><i class="bi bi-lightning-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Youth Rally Night</span><small>March 1, 2026</small></div></div>
+                <div class="gallery-item" data-cat="worship" data-title="Choir Performance" data-date="February 23, 2026" onclick="openLightbox(this)"><div class="gallery-placeholder h1"><i class="bi bi-mic-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Choir Performance</span><small>Feb 23, 2026</small></div></div>
+                <div class="gallery-item" data-cat="events" data-title="Women's Prayer Breakfast" data-date="February 8, 2026" onclick="openLightbox(this)"><div class="gallery-placeholder h3"><i class="bi bi-cup-hot-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Women's Prayer Breakfast</span><small>Feb 8, 2026</small></div></div>
+                <div class="gallery-item" data-cat="outreach" data-title="Food Distribution Drive" data-date="December 20, 2025" onclick="openLightbox(this)"><div class="gallery-placeholder h2"><i class="bi bi-bag-heart-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Food Distribution Drive</span><small>Dec 20, 2025</small></div></div>
+                <div class="gallery-item" data-cat="youth" data-title="Youth Bible Camp" data-date="August 2025" onclick="openLightbox(this)"><div class="gallery-placeholder h4"><i class="bi bi-tree-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Youth Bible Camp</span><small>August 2025</small></div></div>
+                <div class="gallery-item" data-cat="worship" data-title="Christmas Carol Service" data-date="December 22, 2025" onclick="openLightbox(this)"><div class="gallery-placeholder h3"><i class="bi bi-snow"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Christmas Carol Service</span><small>Dec 22, 2025</small></div></div>
+                <div class="gallery-item" data-cat="baptism" data-title="Baptism Testimony Night" data-date="November 9, 2025" onclick="openLightbox(this)"><div class="gallery-placeholder h1"><i class="bi bi-hand-thumbs-up-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Baptism Testimony Night</span><small>Nov 9, 2025</small></div></div>
+                <div class="gallery-item" data-cat="events" data-title="Annual Men's Conference" data-date="October 18, 2025" onclick="openLightbox(this)"><div class="gallery-placeholder h2"><i class="bi bi-shield-fill"></i></div><div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Annual Men's Conference</span><small>Oct 18, 2025</small></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)"><i class="bi bi-chevron-left"></i></button>
+            <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)"><i class="bi bi-chevron-right"></i></button>
+            <div class="lightbox-img" id="lightboxImg"><i class="bi bi-image"></i></div>
+            <div class="lightbox-info">
+                <p class="lightbox-title" id="lightboxTitle">Photo Title</p>
+                <p class="lightbox-meta" id="lightboxMeta">Date</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4"><h5>Word Transformation Church</h5><p class="text-white-50">Transforming lives through the power of God's Word.</p></div>
+                <div class="col-md-2 mb-4"><h5>Pages</h5><ul class="list-unstyled"><li class="mb-2"><a href="index.html">Home</a></li><li class="mb-2"><a href="about.html">About</a></li><li class="mb-2"><a href="gallery.html">Gallery</a></li><li class="mb-2"><a href="contact.html">Contact</a></li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Service Times</h5><ul class="list-unstyled text-white-50"><li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li><li class="mb-2">Wednesday: 7:00 PM</li><li class="mb-2">Friday: 6:30 PM</li></ul></div>
+                <div class="col-md-3 mb-4"><h5>Follow Us</h5><div class="d-flex gap-2"><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a><a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a></div></div>
+            </div>
+            <hr><div class="text-center"><p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var allItems = Array.from(document.querySelectorAll('.gallery-item'));
+        var currentIdx = 0;
+        var visibleItems = allItems;
+
+        function filterGallery(cat, btn) {
+            document.querySelectorAll('.filter-tab').forEach(function(t){t.classList.remove('active');});
+            btn.classList.add('active');
+            allItems.forEach(function(item){
+                item.style.display = (cat==='all'||item.dataset.cat===cat) ? '' : 'none';
+            });
+            visibleItems = allItems.filter(function(i){return i.style.display!=='none';});
+        }
+
+        function openLightbox(el) {
+            currentIdx = visibleItems.indexOf(el);
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow='hidden';
+        }
+
+        function updateLightbox() {
+            var item = visibleItems[currentIdx];
+            document.getElementById('lightboxTitle').textContent = item.dataset.title;
+            document.getElementById('lightboxMeta').textContent = item.dataset.date;
+        }
+
+        function navLightbox(dir) {
+            currentIdx = (currentIdx + dir + visibleItems.length) % visibleItems.length;
+            updateLightbox();
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow='';
+        }
+
+        document.addEventListener('keydown', function(e){
+            if(e.key==='Escape') closeLightbox();
+            if(e.key==='ArrowRight') navLightbox(1);
+            if(e.key==='ArrowLeft') navLightbox(-1);
+        });
+    </script>
+</body>
+</html>
