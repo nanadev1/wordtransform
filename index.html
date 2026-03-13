@@ -3,1411 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Word Transformation Church - A place of worship, community, and spiritual growth">
-    <meta name="keywords" content="church, worship, word transformation, christian, community">
+    <meta name="description" content="Word Transformation Church — A place of worship, community, and spiritual growth in Accra, Ghana.">
+    <meta name="keywords" content="church, worship, word transformation, christian, community, Accra, Ghana">
     <meta name="author" content="Word Transformation Church">
-    
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Word Transformation Church">
-    <meta property="og:description" content="Join us for worship and fellowship">
+    <meta property="og:description" content="Join us for worship and fellowship — come as you are.">
     <meta property="og:type" content="website">
-    
     <title>Word Transformation Church | Home</title>
-    
-    <!-- Bootstrap 5 CSS -->
+
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-    
+    <!-- Google Fonts: DM Serif Display + DM Sans + Lora -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
     <style>
-        /* ========================================
-           Word Transformation Church - Custom Styles
-           ======================================== */
-        
-        :root {
-            /* Color Palette */
-            --primary-color: #000000;        /* Earthy brown */
-            --primary-dark: #6B4A2E;          /* Darker brown */
-            --secondary-color: #D4AF37;       /* Gold */
-            --accent-color: #2C5F2D;          /* Forest green */
-            --light-bg: #F9F6F0;              /* Cream/off-white */
-            --dark-bg: #1A1A1A;                /* Dark background */
-            --text-dark: #333333;
-            --text-light: #666666;
-            --white: #FFFFFF;
-            
-            /* Typography */
-            --heading-font: 'Playfair Display', serif;
-            --body-font: 'Inter', sans-serif;
-            
-            /* Spacing */
-            --section-padding: 80px 0;
-            --border-radius: 8px;
-        }
-
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--body-font);
-            color: var(--text-dark);
-            line-height: 1.6;
-            background-color: var(--white);
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--heading-font);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 600;
-            font-family: var(--heading-font);
-            color: var(--white) !important;
-        }
-
-        .navbar-brand i {
-            color: var(--secondary-color);
-            margin-right: 0.5rem;
-        }
-
-        .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            padding: 0.5rem 1rem !important;
-            margin: 0 0.2rem;
-            transition: all 0.3s ease;
-            border-radius: var(--border-radius);
-        }
-
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            color: var(--white) !important;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Hero Section */
-        .hero-section {
-            height: 100vh;
-            min-height: 600px;
-            background: #0d0500;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Decorative cross overlay */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(ellipse at 70% 50%, rgba(212,175,55,0.12) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, rgba(44,95,45,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* ── Hero video background ── */
-        /* ── Hero YouTube video background ── */
-        .hero-video-wrap {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-            background: #0d0800;
-        }
-        /* Video background — covers the full hero */
-        .hero-yt-frame {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            pointer-events: none;
-        }
-        /* Fallback animated background shown while YT loads or if blocked */
-        .hero-fallback-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                url('worship1.jpg') center/cover no-repeat,
-                linear-gradient(135deg,#1a0a00 0%,#3a2010 40%,#1a3a1a 100%);
-            animation: heroKenBurns 20s ease-in-out infinite alternate;
-        }
-        @keyframes heroKenBurns {
-            0%   { transform: scale(1.00) translate(0px,0px); }
-            50%  { transform: scale(1.08) translate(-10px,-6px); }
-            100% { transform: scale(1.14) translate(8px,5px); }
-        }
-        /* Animated people-like particle dots */
-        .hero-particles {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .hero-particles span {
-            position: absolute;
-            bottom: -20px;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: rgba(212,175,55,0.6);
-            animation: floatUp linear infinite;
-        }
-        @keyframes floatUp {
-            0%   { transform: translateY(0) scale(1);   opacity: 0.8; }
-            80%  { opacity: 0.4; }
-            100% { transform: translateY(-110vh) scale(0.4); opacity: 0; }
-        }
-        /* Dark gradient overlay */
-        .hero-video-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.40) 0%,
-                rgba(0,0,0,0.18) 45%,
-                rgba(0,0,0,0.68) 100%
-            );
-            z-index: 2;
-        }
-        /* Gold shimmer on top */
-        .hero-shimmer {
-            position: absolute;
-            inset: 0;
-            z-index: 3;
-            pointer-events: none;
-            background-image:
-                radial-gradient(ellipse at 70% 50%, rgba(212,175,55,0.10) 0%, transparent 55%),
-                radial-gradient(ellipse at 20% 80%, rgba(44,95,45,0.07) 0%, transparent 45%);
-        }
-
-        /* Hero eyebrow text */
-        .hero-eyebrow {
-            font-size: 0.78rem;
-            font-weight: 500;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            color: var(--secondary-color);
-            margin-bottom: 1.25rem;
-        }
-
-        /* Scroll hint */
-        .hero-scroll-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            animation: scrollBounce 2s infinite;
-            z-index: 2;
-        }
-        .hero-scroll-hint i { font-size: 1rem; }
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
-            50%       { transform: translateX(-50%) translateY(6px); opacity: 1; }
-        }
-
-        .hero-section h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-section .lead {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: var(--white);
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn-outline-light {
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-light:hover {
-            background-color: var(--white);
-            color: var(--primary-color) !important;
-        }
-
-        /* Section Styling */
-        .section-padding {
-            padding: var(--section-padding);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--secondary-color);
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* About Section */
-        #about {
-            background-color: var(--white);
-        }
-
-        .stat-box {
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            background: var(--light-bg);
-            text-align: center;
-        }
-
-        .stat-box h3 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-box p {
-            margin-bottom: 0;
-            font-weight: 500;
-        }
-
-        /* Services Section */
-        #services {
-            background-color: var(--light-bg);
-        }
-
-        .service-card {
-            padding: 2rem;
-            text-align: center;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            text-align: center;
-            margin: 0 auto 1.5rem;
-            background: var(--light-bg);
-            border-radius: 50%;
-            color: var(--primary-color);
-            font-size: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover .service-icon {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        /* Footer */
-        .footer {
-            background-color: var(--dark-bg);
-            color: var(--white);
-            padding: 60px 0 30px;
-        }
-
-        .footer h5 {
-            color: var(--white);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--secondary-color);
-        }
-
-        .footer hr {
-            opacity: 0.2;
-            margin: 2rem 0;
-        }
-
-        @keyframes livePulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
-
-        /* Navbar dropdown */
-        .dropdown-menu {
-            background-color: #1a1a1a;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--border-radius);
-            padding: 0.5rem 0;
-            min-width: 200px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        .dropdown-item {
-            color: rgba(255,255,255,0.85);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.55rem 1.25rem;
-            transition: all 0.2s ease;
-        }
-        .dropdown-item:hover {
-            background-color: rgba(255,255,255,0.08);
-            color: var(--white);
-        }
-        .dropdown-item i { color: var(--secondary-color); }
-        .dropdown-divider { border-color: rgba(255,255,255,0.1); margin: 0.35rem 0; }
-        .navbar-nav .nav-link.dropdown-toggle::after { margin-left: 5px; }
-
-        /* More dropdown menu */
-        .more-menu {
-            border: 1px solid rgba(212,175,55,0.25);
-            border-radius: 10px;
-            background: #0D0A07;
-            padding: 0.5rem 0;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            min-width: 200px;
-        }
-        .more-menu .dropdown-item {
-            color: rgba(245,240,232,0.82);
-            font-size: 0.88rem;
-            font-weight: 500;
-            padding: 0.6rem 1.25rem;
-            transition: all 0.15s ease;
-            display: flex;
-            align-items: center;
-        }
-        .more-menu .dropdown-item i { color: var(--secondary-color); }
-        .more-menu .dropdown-item:hover {
-            background: rgba(212,175,55,0.1);
-            color: #F5F0E8;
-        }
-        .more-menu .dropdown-divider { border-color: rgba(212,175,55,0.15); margin: 0.35rem 0; }
-
-        /* Join Live nav button */
-        .btn-live-nav {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #FF0000;
-            color: #fff !important;
-            padding: 0.45rem 1.25rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .btn-live-nav:hover { background: #cc0000; transform: translateY(-2px); }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .navbar-collapse {
-                background-color: var(--primary-color);
-                padding: 1rem;
-                border-radius: var(--border-radius);
-                margin-top: 0.5rem;
-            }
-        }
-
-        /* ========================================
-           Sunday Service Countdown Section
-           ======================================== */
-        #countdown-section {
-            background-color: var(--light-bg);
-            padding: var(--section-padding);
-        }
-
-        .countdown-card {
-            background: #F5F0E8;
-            border: 1px solid rgba(139,94,60,0.25);
-            border-radius: 6px;
-            padding: 3rem 3.5rem;
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .countdown-card::before,
-        .countdown-card::after {
-            content: '';
-            position: absolute;
-            left: 24px; right: 24px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
-        }
-        .countdown-card::before { top: 16px; }
-        .countdown-card::after  { bottom: 16px; }
-
-        .cd-corner {
-            position: absolute;
-            width: 16px; height: 16px;
-            border-color: var(--secondary-color);
-            border-style: solid;
-            opacity: 0.6;
-        }
-        .cd-corner.tl { top: 8px; left: 8px;    border-width: 1px 0 0 1px; }
-        .cd-corner.tr { top: 8px; right: 8px;   border-width: 1px 1px 0 0; }
-        .cd-corner.bl { bottom: 8px; left: 8px;   border-width: 0 0 1px 1px; }
-        .cd-corner.br { bottom: 8px; right: 8px;  border-width: 0 1px 1px 0; }
-
-        .cd-cross {
-            display: block;
-            margin: 0 auto 1rem;
-            opacity: 0.5;
-        }
-
-        .cd-eyebrow {
-            font-family: var(--body-font);
-            font-size: 0.68rem;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--secondary-color);
-            margin-bottom: 0.75rem;
-        }
-
-        .cd-heading {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 300;
-            color: #4A3728;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-        }
-
-        .cd-sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
-        .cd-divider {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 280px;
-            margin: 0 auto 2rem;
-        }
-        .cd-divider-line { flex: 1; height: 1px; background: rgba(139,94,60,0.25); }
-        .cd-divider-dot  { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; flex-shrink: 0; }
-
-        .cd-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin-bottom: 2rem;
-        }
-
-        .cd-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cd-box {
-            background: #FFFFFF;
-            border: 1px solid rgba(139,94,60,0.18);
-            border-radius: 4px;
-            width: 100%;
-            padding: 1rem 0.5rem 0.85rem;
-            position: relative;
-        }
-
-        .cd-box::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 14px; right: 14px;
-            height: 2px;
-            background: var(--secondary-color);
-            border-radius: 1px;
-            opacity: 0.55;
-        }
-
-        .cd-num {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4.5vw, 3rem);
-            font-weight: 600;
-            color: #4A3728;
-            line-height: 1;
-            display: block;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-
-        .cd-num.flip {
-            transform: scale(0.82);
-            opacity: 0.45;
-        }
-
-        .cd-label {
-            font-size: 0.62rem;
-            font-weight: 500;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--text-light);
-        }
-
-        .cd-info {
-            display: flex;
-            justify-content: center;
-            gap: 1.8rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.8rem;
-        }
-
-        .cd-info-item {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 0.82rem;
-            color: var(--text-light);
-        }
-
-        .cd-info-item svg {
-            width: 14px; height: 14px;
-            fill: var(--primary-color);
-            opacity: 0.7;
-            flex-shrink: 0;
-        }
-
-        .cd-verse {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.7;
-            max-width: 380px;
-            margin: 0 auto;
-        }
-
-        .cd-verse cite {
-            display: block;
-            font-size: 0.78rem;
-            font-style: normal;
-            letter-spacing: 0.08em;
-            color: var(--secondary-color);
-            margin-top: 0.4rem;
-        }
-
-        .cd-done {
-            display: none;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 300;
-            color: #4A3728;
-            padding: 0.5rem 0 1.5rem;
-        }
-
-        @media (max-width: 480px) {
-            .countdown-card { padding: 2.5rem 1.25rem; }
-            .cd-grid { gap: 8px; }
-            .cd-info { gap: 1rem; }
-        }
-
-        /* ========================================
-           Give Button & Giving Modal
-           ======================================== */
-        .btn-give {
-            background-color: var(--secondary-color);
-            color: #4A3728;
-            border: none;
-            padding: 0.45rem 1.25rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.03em;
-            transition: all 0.3s ease;
-        }
-        .btn-give:hover {
-            background-color: #b8972e;
-            color: #3a2a1a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(212,175,55,0.35);
-        }
-
-        .giving-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(26,20,14,0.65);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .giving-modal {
-            background: #FDFAF5;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 480px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: giveSlideIn 0.3s ease;
-        }
-
-        @keyframes giveSlideIn {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .giving-close {
-            position: absolute;
-            top: 14px; right: 16px;
-            background: none; border: none;
-            font-size: 1.6rem; line-height: 1;
-            color: #8B6B4A; cursor: pointer;
-            padding: 0; z-index: 10;
-        }
-        .giving-close:hover { color: #4A3728; }
-
-        .giving-header {
-            background: #4A3728;
-            padding: 2rem 2rem 1.5rem;
-            border-radius: 12px 12px 0 0;
-            text-align: center;
-        }
-
-        .giving-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.9rem;
-            font-weight: 400;
-            color: #F5F0E8;
-            margin-bottom: 0.4rem;
-        }
-
-        .giving-sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 0.88rem;
-            color: rgba(245,240,232,0.7);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .giving-body { padding: 1.75rem 2rem 2rem; }
-
-        .give-field { margin-bottom: 1.2rem; }
-
-        .give-label {
-            display: block;
-            font-size: 0.78rem;
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: #8B6B4A;
-            margin-bottom: 0.5rem;
-        }
-
-        .give-tabs {
-            display: flex;
-            gap: 8px;
-        }
-
-        .give-tab {
-            flex: 1;
-            padding: 0.5rem 0.75rem;
-            background: #F0EAE0;
-            border: 1.5px solid transparent;
-            border-radius: 6px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: #8B6B4A;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .give-tab:hover { background: #E8DDD0; }
-        .give-tab.active {
-            background: #fff;
-            border-color: var(--secondary-color);
-            color: #4A3728;
-        }
-
-        .give-amount-wrap {
-            position: relative;
-        }
-        .give-currency {
-            position: absolute;
-            left: 14px; top: 50%;
-            transform: translateY(-50%);
-            font-weight: 600;
-            color: #8B6B4A;
-            font-size: 1rem;
-            pointer-events: none;
-        }
-        .give-amount-input { padding-left: 52px !important; }
-
-        .give-input {
-            width: 100%;
-            padding: 0.65rem 0.9rem;
-            border: 1.5px solid #DDD4C5;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            color: #333;
-            background: #fff;
-            transition: border-color 0.2s ease;
-            outline: none;
-            font-family: var(--body-font);
-        }
-        .give-input:focus { border-color: var(--secondary-color); }
-
-        .give-next-btn {
-            width: 100%;
-            padding: 0.75rem;
-            background: #4A3728;
-            color: #F5F0E8;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-        .give-next-btn:hover { background: #6B4A2E; transform: translateY(-1px); }
-
-        .give-summary-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #F0EAE0;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1.2rem;
-        }
-        .give-summary-tag {
-            background: #4A3728;
-            color: #F5F0E8;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 50px;
-        }
-        .give-summary-amount {
-            font-size: 1.1rem;
-            color: #4A3728;
-        }
-
-        .give-method-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 1.2rem;
-        }
-        .give-method {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            padding: 1rem 0.5rem;
-            background: #F0EAE0;
-            border: 1.5px solid transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-        .give-method span { font-size: 0.88rem; font-weight: 500; color: #4A3728; }
-        .give-method small { font-size: 0.72rem; color: #8B6B4A; }
-        .give-method:hover { background: #E8DDD0; }
-        .give-method.active {
-            background: #fff;
-            border-color: var(--secondary-color);
-        }
-        .give-method-icon { font-size: 1.4rem; color: #8B6B4A; }
-
-        .give-bank-info {
-            background: #F0EAE0;
-            border-radius: 8px;
-            padding: 1rem 1.1rem;
-            margin-bottom: 1rem;
-        }
-        .give-bank-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #8B6B4A;
-            margin-bottom: 0.75rem;
-        }
-        .give-bank-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.88rem;
-            padding: 0.35rem 0;
-            border-bottom: 1px solid rgba(139,107,74,0.15);
-            color: #4A3728;
-        }
-        .give-bank-row:last-of-type { border-bottom: none; }
-        .give-bank-row span { color: #8B6B4A; }
-        .give-bank-note {
-            font-size: 0.78rem;
-            color: #8B6B4A;
-            margin-top: 0.75rem;
-            margin-bottom: 0;
-            font-style: italic;
-        }
-
-        .give-btn-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 0.5rem;
-        }
-        .give-back-btn {
-            padding: 0.75rem 1.25rem;
-            background: #F0EAE0;
-            color: #4A3728;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .give-back-btn:hover { background: #E8DDD0; }
-        .give-submit-btn {
-            flex: 1;
-            padding: 0.75rem;
-            background: var(--secondary-color);
-            color: #4A3728;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .give-submit-btn:hover { background: #b8972e; transform: translateY(-1px); }
-
-        .give-success {
-            text-align: center;
-            padding: 1rem 0;
-        }
-        .give-success-icon {
-            width: 64px; height: 64px;
-            background: #2C5F2D;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1.25rem;
-            font-size: 2rem;
-            color: #fff;
-        }
-        .give-success-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            color: #4A3728;
-            margin-bottom: 0.75rem;
-        }
-        .give-success-msg {
-            font-size: 0.92rem;
-            color: #6B4A2E;
-            line-height: 1.7;
-        }
-
-        @media (max-width: 480px) {
-            .giving-body { padding: 1.25rem 1.25rem 1.5rem; }
-            .giving-header { padding: 1.5rem 1.25rem 1.25rem; }
-            .give-method-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        /* ========================================
-           Events Section
-           ======================================== */
-        #events { background-color: var(--white); }
-
-        .event-card {
-            background: var(--white);
-            border: 1px solid #EDE4D3;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(139,94,60,0.06);
-        }
-        .event-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 28px rgba(139,94,60,0.13);
-            border-color: var(--secondary-color);
-        }
-
-        .event-card-date {
-            background: #4A3728;
-            color: #F5F0E8;
-            text-align: center;
-            padding: 0.85rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1;
-        }
-        .event-day {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
-            font-weight: 600;
-            line-height: 1;
-            color: var(--secondary-color);
-        }
-        .event-month {
-            font-size: 0.72rem;
-            font-weight: 500;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(245,240,232,0.75);
-            margin-top: 2px;
-        }
-
-        .event-card-body { padding: 1.25rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
-
-        .event-tag {
-            display: inline-block;
-            font-size: 0.68rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 50px;
-            background: #F0EAE0;
-            color: #8B5E3C;
-            margin-bottom: 0.7rem;
-        }
-        .event-tag-green { background: #E4F0E4; color: #2C5F2D; }
-        .event-tag-gold  { background: #FBF3DC; color: #7A5A00; }
-
-        .event-card-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.6rem;
-            line-height: 1.35;
-        }
-        .event-card-desc {
-            font-size: 0.88rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            flex: 1;
-            margin-bottom: 1rem;
-        }
-        .event-card-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            font-size: 0.78rem;
-            color: #8B5E3C;
-            border-top: 1px solid #EDE4D3;
-            padding-top: 0.85rem;
-            margin-top: auto;
-        }
-        .event-card-meta span { display: flex; align-items: center; }
-
-        /* ========================================
-           Blog Section
-           ======================================== */
-        .blog-card {
-            background: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #EDE4D3;
-            box-shadow: 0 2px 8px rgba(139,94,60,0.06);
-            transition: all 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 28px rgba(139,94,60,0.13);
-        }
-
-        .blog-card-img { position: relative; }
-
-        .blog-img-placeholder {
-            height: 160px;
-            background: #F0EAE0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            color: #8B5E3C;
-        }
-        .blog-img-green { background: #E4F0E4; color: #2C5F2D; }
-        .blog-img-gold  { background: #FBF3DC; color: #7A5A00; }
-
-        .blog-category {
-            position: absolute;
-            top: 12px; left: 14px;
-            font-size: 0.68rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 50px;
-            background: #4A3728;
-            color: #F5F0E8;
-        }
-        .blog-category-green { background: #2C5F2D; }
-        .blog-category-gold  { background: #7A5A00; }
-
-        .blog-card-body { padding: 1.25rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
-
-        .blog-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.75rem;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-        }
-
-        .blog-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.6rem;
-            line-height: 1.35;
-        }
-
-        .blog-excerpt {
-            font-size: 0.88rem;
-            color: var(--text-light);
-            line-height: 1.65;
-            flex: 1;
-            margin-bottom: 1rem;
-        }
-
-        .blog-read-more {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #8B5E3C;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: auto;
-            transition: all 0.2s ease;
-        }
-        .blog-read-more:hover {
-            color: #4A3728;
-            gap: 8px;
-        }
-
-        .btn-outline-primary {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        /* ── Search ── */
-        .nav-search-btn {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.8);
-            font-size: 1.05rem;
-            padding: 0.35rem 0.5rem;
-            cursor: pointer;
-            transition: color 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-        .nav-search-btn:hover { color: var(--secondary-color); }
-
-        .search-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 9998;
-            display: none;
-            flex-direction: column;
-            align-items: stretch;
-        }
-        .search-overlay.open { display: flex; }
-
-        /* Full-width bar that sits right inside the navbar height */
-        .search-bar-wrap {
-            background: #0D0A07;
-            border-bottom: 2px solid var(--secondary-color);
-            padding: 0 1.5rem;
-            height: 66px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            animation: searchSlideDown 0.22s ease;
-        }
-        @keyframes searchSlideDown {
-            from { opacity: 0; transform: translateY(-100%); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .search-bar-icon { font-size: 1.15rem; color: var(--secondary-color); flex-shrink: 0; }
-        .search-bar-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #F5F0E8;
-            font-size: 1.05rem;
-            font-family: var(--body-font);
-            caret-color: var(--secondary-color);
-        }
-        .search-bar-input::placeholder { color: rgba(245,240,232,0.35); }
-        .search-bar-close {
-            background: none;
-            border: none;
-            color: rgba(245,240,232,0.6);
-            font-size: 1.1rem;
-            cursor: pointer;
-            padding: 0.3rem;
-            transition: color 0.2s;
-            flex-shrink: 0;
-        }
-        .search-bar-close:hover { color: #F5F0E8; }
-        .search-bar-hint {
-            font-size: 0.72rem;
-            color: rgba(245,240,232,0.35);
-            flex-shrink: 0;
-            display: none;
-        }
-
-        /* Results dropdown below the bar */
-        .search-box {
-            background: var(--white);
-            width: 100%;
-            max-width: 680px;
-            margin: 0 auto;
-            border-radius: 0 0 14px 14px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            position: relative;
-            left: 0; right: 0;
-        }
-        /* Dark backdrop below the bar */
-        .search-backdrop {
-            position: fixed;
-            inset: 66px 0 0 0;
-            background: rgba(13,8,4,0.7);
-            backdrop-filter: blur(4px);
-            z-index: -1;
-        }
-        @keyframes searchDrop {
-            from { opacity: 0; transform: translateY(-16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .search-input-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid #EDE4D3;
-        }
-        .search-icon-inner { font-size: 1.05rem; color: var(--secondary-color); flex-shrink: 0; }
-        .search-input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-            font-family: var(--body-font);
-            color: var(--text-dark);
-            background: transparent;
-        }
-        .search-input::placeholder { color: #bbb; }
-        .search-close-btn {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1rem;
-            cursor: pointer;
-            padding: 0.2rem;
-            transition: color 0.2s;
-            flex-shrink: 0;
-        }
-        .search-close-btn:hover { color: var(--text-dark); }
-
-        .search-results { max-height: 360px; overflow-y: auto; }
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.85rem 1.25rem;
-            border-bottom: 1px solid #F4EEE6;
-            text-decoration: none;
-            transition: background 0.15s ease;
-            cursor: pointer;
-        }
-        .search-result-item:last-child { border-bottom: none; }
-        .search-result-item:hover { background: var(--light-bg); }
-        .search-result-icon {
-            width: 36px; height: 36px;
-            border-radius: 8px;
-            background: rgba(212,175,55,0.12);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--secondary-color);
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .search-result-icon.green { background: rgba(44,95,45,0.1); color: var(--accent-color); }
-        .search-result-icon.brown { background: rgba(74,55,40,0.1); color: var(--deep-brown); }
-        .search-result-icon.red   { background: rgba(220,38,38,0.08); color: #dc2626; }
-        .search-result-text { flex: 1; min-width: 0; }
-        .search-result-title { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .search-result-sub   { font-size: 0.76rem; color: var(--text-light); }
-        .search-result-arrow { color: #DDD4C5; font-size: 0.85rem; }
-        .search-empty { padding: 1.75rem 1.25rem; text-align: center; color: var(--text-light); font-size: 0.88rem; }
-        .search-empty i { font-size: 1.75rem; display: block; margin-bottom: 0.5rem; color: #DDD4C5; }
-        .search-hints { padding: 0.75rem 1.25rem; }
-        .search-hint-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.6rem; display: block; }
-        .search-quick-links { display: flex; flex-wrap: wrap; gap: 6px; }
-        .search-quick-link {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 4px 12px; border-radius: 50px;
-            border: 1px solid #DDD4C5;
-            font-size: 0.78rem; font-weight: 500;
-            color: var(--text-dark); text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .search-quick-link:hover { border-color: var(--secondary-color); color: var(--deep-brown); background: rgba(212,175,55,0.07); }
+    /* =========================================================
+       WORD TRANSFORMATION CHURCH — Redesign 2025
+       Aesthetic: Warm editorial · Human-centred · Modern sacred
+       ========================================================= */
+
+    :root {
+        --black:      #0A0A0A;
+        --gold:       #C9A84C;
+        --gold-light: #E8C97A;
+        --gold-pale:  #FAF3E0;
+        --cream:      #F8F4EE;
+        --stone:      #EDE7DC;
+        --brown:      #5C3D1E;
+        --brown-mid:  #8B6340;
+        --green:      #2A5E2B;
+        --text:       #1C1C1C;
+        --muted:      #7A7063;
+        --white:      #FFFFFF;
+        --display:    'DM Serif Display', Georgia, serif;
+        --body:       'DM Sans', system-ui, sans-serif;
+        --serif:      'Lora', Georgia, serif;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:72px; }
+    body { font-family:var(--body); color:var(--text); background:var(--white); line-height:1.65; -webkit-font-smoothing:antialiased; }
+
+    /* ── Scroll animations ── */
+    .reveal { opacity:0; transform:translateY(36px); transition:opacity .75s ease,transform .75s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left  { opacity:0; transform:translateX(-40px); transition:opacity .75s ease,transform .75s ease; }
+    .reveal-right { opacity:0; transform:translateX(40px);  transition:opacity .75s ease,transform .75s ease; }
+    .reveal-left.visible,.reveal-right.visible { opacity:1; transform:translateX(0); }
+    .delay-1{transition-delay:.1s!important} .delay-2{transition-delay:.2s!important}
+    .delay-3{transition-delay:.3s!important} .delay-4{transition-delay:.4s!important}
+
+    /* ── Navbar ── */
+    .navbar {
+        background:rgba(10,10,10,.92);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+        padding:.9rem 0;
+        border-bottom:1px solid rgba(201,168,76,.12);
+        transition:background .3s ease; z-index:1030;
+    }
+    .navbar.scrolled { background:rgba(10,10,10,.98); box-shadow:0 4px 30px rgba(0,0,0,.4); }
+    .navbar-brand {
+        font-family:var(--display); font-size:1.3rem;
+        color:var(--white)!important; letter-spacing:-.01em;
+        display:flex; align-items:center; gap:10px;
+    }
+    .brand-icon {
+        width:32px; height:32px; background:var(--gold); border-radius:6px;
+        display:flex; align-items:center; justify-content:center;
+        color:var(--black); font-size:1rem; flex-shrink:0;
+    }
+    .brand-sub { display:block; font-family:var(--body); font-size:.65rem; font-weight:300; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); line-height:1; }
+    .navbar-nav .nav-link { color:rgba(255,255,255,.82)!important; font-size:.875rem; font-weight:500; padding:.5rem .9rem!important; border-radius:6px; transition:all .2s ease; }
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color:var(--gold)!important; background:rgba(201,168,76,.1); }
+    .dropdown-menu { background:#141414; border:1px solid rgba(201,168,76,.18); border-radius:10px; box-shadow:0 16px 48px rgba(0,0,0,.5); padding:.5rem; }
+    .dropdown-item { color:rgba(255,255,255,.8); font-size:.87rem; padding:.55rem .9rem; border-radius:6px; transition:all .15s ease; display:flex; align-items:center; gap:8px; }
+    .dropdown-item i { color:var(--gold); font-size:.85rem; }
+    .dropdown-item:hover { background:rgba(201,168,76,.1); color:var(--white); }
+    .dropdown-divider { border-color:rgba(201,168,76,.12); margin:.35rem 0; }
+    .btn-live-nav { display:inline-flex; align-items:center; gap:6px; background:#E50000; color:#fff!important; padding:.42rem 1.1rem; border-radius:50px; font-weight:600; font-size:.85rem; text-decoration:none; transition:all .25s ease; }
+    .btn-live-nav:hover { background:#c20000; transform:translateY(-1px); }
+    .live-dot { width:7px; height:7px; background:#fff; border-radius:50%; display:inline-block; animation:livePulse 1.4s ease-in-out infinite; }
+    @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+    .btn-give { background:var(--gold); color:var(--brown)!important; border:none; padding:.42rem 1.1rem; border-radius:50px; font-weight:600; font-size:.85rem; transition:all .25s ease; cursor:pointer; }
+    .btn-give:hover { background:var(--gold-light); transform:translateY(-1px); }
+
+    /* ── Hero ── */
+    .hero-section { height:100dvh; min-height:620px; position:relative; display:flex; align-items:flex-end; overflow:hidden; color:var(--white); }
+    .hero-video-wrap { position:absolute; inset:0; z-index:0; overflow:hidden; }
+    .hero-fallback-bg { position:absolute; inset:0; background:url('worship1.jpg') center/cover no-repeat; animation:kenBurns 25s ease-in-out infinite alternate; }
+    @keyframes kenBurns { 0%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.07) translate(-8px,-5px)} 100%{transform:scale(1.13) translate(6px,4px)} }
+    .hero-yt-frame { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); min-width:100%; min-height:100%; width:auto; height:auto; object-fit:cover; pointer-events:none; }
+    .hero-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 40%,rgba(0,0,0,.18) 70%,rgba(0,0,0,.1) 100%),linear-gradient(105deg,rgba(0,0,0,.35) 0%,transparent 60%); }
+    .hero-shimmer { position:absolute; inset:0; z-index:2; pointer-events:none; background:radial-gradient(ellipse at 80% 60%,rgba(201,168,76,.09) 0%,transparent 55%),radial-gradient(ellipse at 15% 85%,rgba(42,94,43,.07) 0%,transparent 50%); }
+    .hero-particles { position:absolute; inset:0; z-index:2; overflow:hidden; pointer-events:none; }
+    .hero-particles span { position:absolute; bottom:-20px; border-radius:50%; background:rgba(201,168,76,.5); animation:floatUp linear infinite; }
+    @keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:.7} 80%{opacity:.3} 100%{transform:translateY(-110vh) scale(.3);opacity:0} }
+    .hero-content { position:relative; z-index:5; padding:0 0 5rem; width:100%; }
+    .hero-eyebrow { display:inline-flex; align-items:center; gap:10px; font-size:.72rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; opacity:0; animation:fadeSlideUp .9s .3s forwards; }
+    .hero-eyebrow-line { display:inline-block; width:36px; height:1px; background:var(--gold); opacity:.7; }
+    .hero-h1 { font-family:var(--display); font-size:clamp(2.8rem,7vw,5.5rem); font-weight:400; line-height:1.05; letter-spacing:-.02em; margin-bottom:1.5rem; opacity:0; animation:fadeSlideUp 1s .5s forwards; }
+    .hero-h1 em { font-style:italic; color:var(--gold); }
+    .hero-lead { font-family:var(--serif); font-size:clamp(1rem,2vw,1.2rem); font-style:italic; color:rgba(255,255,255,.78); max-width:520px; margin-bottom:2.5rem; line-height:1.7; opacity:0; animation:fadeSlideUp 1s .7s forwards; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:14px; opacity:0; animation:fadeSlideUp 1s .9s forwards; }
+    .hero-btn-primary { background:var(--gold); color:var(--black); padding:.85rem 2rem; border-radius:50px; font-weight:600; font-size:.95rem; text-decoration:none; border:none; transition:all .3s ease; cursor:pointer; }
+    .hero-btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,168,76,.35); }
+    .hero-btn-ghost { background:transparent; color:var(--white); padding:.85rem 2rem; border-radius:50px; font-weight:500; font-size:.95rem; text-decoration:none; border:1.5px solid rgba(255,255,255,.45); transition:all .3s ease; display:flex; align-items:center; gap:8px; }
+    .hero-btn-ghost:hover { border-color:var(--white); background:rgba(255,255,255,.1); color:var(--white); }
+    .hero-times-strip { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.12); opacity:0; animation:fadeSlideUp 1s 1.1s forwards; }
+    .hero-time-item { display:flex; align-items:center; gap:8px; font-size:.82rem; color:rgba(255,255,255,.65); }
+    .hero-time-dot { width:5px; height:5px; background:var(--gold); border-radius:50%; flex-shrink:0; }
+    .hero-time-item strong { color:rgba(255,255,255,.9); font-weight:500; }
+    .hero-scroll { position:absolute; bottom:2rem; right:2.5rem; z-index:5; display:flex; flex-direction:column; align-items:center; gap:6px; color:rgba(255,255,255,.4); font-size:.65rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; animation:scrollBounce 2.2s infinite; }
+    .hero-scroll i { font-size:.9rem; }
+    @keyframes scrollBounce { 0%,100%{transform:translateY(0);opacity:.4} 50%{transform:translateY(7px);opacity:.8} }
+    @keyframes fadeSlideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── Countdown ── */
+    #countdown-section { background:var(--cream); padding:70px 0; }
+    .countdown-wrap { background:var(--white); border-radius:20px; padding:3rem 3.5rem; max-width:680px; margin:0 auto; text-align:center; box-shadow:0 4px 40px rgba(92,61,30,.08); border:1px solid var(--stone); position:relative; overflow:hidden; }
+    .countdown-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .cd-eyebrow { font-size:.68rem; font-weight:500; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
+    .cd-heading { font-family:var(--display); font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:400; color:var(--brown); margin-bottom:.25rem; line-height:1.2; }
+    .cd-sub { font-family:var(--serif); font-style:italic; font-size:.95rem; color:var(--muted); margin-bottom:2rem; }
+    .cd-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:2rem; }
+    .cd-unit { display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .cd-box { background:var(--cream); border-radius:10px; width:100%; padding:1rem 0 .85rem; border:1px solid var(--stone); }
+    .cd-num { font-family:var(--display); font-size:clamp(2rem,4.5vw,2.8rem); color:var(--brown); line-height:1; display:block; transition:transform .15s ease,opacity .15s ease; }
+    .cd-num.flip { transform:scale(.8); opacity:.4; }
+    .cd-label { font-size:.6rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+    .cd-info { display:flex; justify-content:center; flex-wrap:wrap; gap:1.5rem; margin-bottom:1.75rem; }
+    .cd-info-item { display:flex; align-items:center; gap:6px; font-size:.82rem; color:var(--muted); }
+    .cd-info-item i { color:var(--brown-mid); }
+    .cd-verse { font-family:var(--serif); font-style:italic; font-size:.92rem; color:var(--muted); line-height:1.7; max-width:380px; margin:0 auto; }
+    .cd-verse cite { display:block; font-style:normal; font-size:.75rem; letter-spacing:.1em; color:var(--gold); margin-top:.35rem; }
+    .cd-done { display:none; font-family:var(--display); font-size:1.7rem; font-weight:400; color:var(--brown); padding:.5rem 0 1.5rem; }
+    @media(max-width:480px){ .countdown-wrap{padding:2rem 1.25rem} .cd-grid{gap:8px} }
+
+    /* ── Section basics ── */
+    .section-eyebrow { display:inline-flex; align-items:center; gap:10px; font-size:.7rem; font-weight:500; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
+    .section-eyebrow-line { display:inline-block; width:28px; height:1px; background:var(--gold); opacity:.6; }
+    .section-title { font-family:var(--display); font-size:clamp(2rem,4.5vw,3rem); font-weight:400; line-height:1.15; letter-spacing:-.02em; color:var(--text); }
+    .section-lead { font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--muted); line-height:1.75; max-width:560px; }
+    .gold-accent { color:var(--gold); }
+
+    /* ── About ── */
+    #about { background:var(--white); padding:100px 0; }
+    .about-image-stack { position:relative; padding-bottom:3rem; }
+    .about-img-main { border-radius:16px; overflow:hidden; aspect-ratio:4/5; background:var(--stone); }
+    .about-img-main img { width:100%; height:100%; object-fit:cover; display:block; }
+    .about-stat-float { position:absolute; bottom:0; right:-20px; background:var(--black); color:var(--white); border-radius:14px; padding:1.25rem 1.5rem; text-align:center; min-width:130px; box-shadow:0 8px 32px rgba(0,0,0,.25); }
+    .about-stat-float .stat-num { font-family:var(--display); font-size:2.4rem; color:var(--gold); line-height:1; display:block; }
+    .about-stat-float .stat-lbl { font-size:.72rem; color:rgba(255,255,255,.6); letter-spacing:.1em; text-transform:uppercase; }
+    .about-img-accent { position:absolute; top:-16px; left:-16px; width:100%; height:100%; border:2px solid var(--gold); border-radius:16px; opacity:.18; pointer-events:none; }
+    .about-body { padding-left:2rem; }
+    .about-body p { font-size:1rem; color:#3D3530; line-height:1.8; margin-bottom:1.25rem; }
+    .pastor-quote { background:var(--cream); border-left:3px solid var(--gold); border-radius:0 12px 12px 0; padding:1.25rem 1.5rem; margin:2rem 0; }
+    .pastor-quote p { font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--brown); margin-bottom:.5rem; line-height:1.65; }
+    .pastor-quote cite { font-size:.8rem; font-style:normal; font-weight:500; color:var(--muted); letter-spacing:.05em; }
+    .about-stats-row { display:flex; gap:2rem; margin-top:2rem; flex-wrap:wrap; }
+    .about-stat .num { font-family:var(--display); font-size:2.2rem; color:var(--brown); line-height:1; display:block; }
+    .about-stat .lbl { font-size:.8rem; color:var(--muted); }
+    @media(max-width:991px){ .about-body{padding-left:0;padding-top:1.5rem} .about-stat-float{right:0} }
+
+    /* ── Services ── */
+    #services { background:var(--black); padding:100px 0; position:relative; overflow:hidden; }
+    #services::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.07) 0%,transparent 55%),radial-gradient(ellipse at 10% 80%,rgba(42,94,43,.06) 0%,transparent 50%); pointer-events:none; }
+    .service-cards-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; margin-top:3.5rem; border-radius:16px; overflow:hidden; }
+    .svc-card { background:#111; padding:2.5rem 2rem; position:relative; transition:background .35s ease; border:1px solid rgba(255,255,255,.04); }
+    .svc-card:hover { background:#181818; }
+    .svc-card::after { content:''; position:absolute; bottom:0; left:2rem; right:2rem; height:2px; background:var(--gold); border-radius:2px; transform:scaleX(0); transform-origin:left; transition:transform .4s ease; }
+    .svc-card:hover::after { transform:scaleX(1); }
+    .svc-icon { width:48px; height:48px; background:rgba(201,168,76,.1); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.3rem; margin-bottom:1.5rem; }
+    .svc-day { font-size:.65rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; }
+    .svc-name { font-family:var(--display); font-size:1.5rem; font-weight:400; color:var(--white); margin-bottom:.35rem; }
+    .svc-time { font-size:.85rem; color:rgba(255,255,255,.45); margin-bottom:1.25rem; }
+    .svc-desc { font-size:.9rem; color:rgba(255,255,255,.5); line-height:1.7; margin-bottom:1.5rem; }
+    @media(max-width:767px){ .service-cards-row{grid-template-columns:1fr} }
+
+    /* ── Testimonials ── */
+    #voices { background:var(--cream); padding:100px 0; }
+    .voice-card { background:var(--white); border-radius:16px; padding:2rem; height:100%; border:1px solid var(--stone); transition:all .3s ease; }
+    .voice-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(92,61,30,.1); border-color:var(--gold); }
+    .voice-quote-icon { font-family:var(--display); font-style:italic; font-size:4rem; color:var(--gold); opacity:.25; line-height:1; margin-bottom:-.5rem; display:block; }
+    .voice-text { font-family:var(--serif); font-style:italic; font-size:.97rem; color:var(--brown); line-height:1.75; margin-bottom:1.5rem; }
+    .voice-person { display:flex; align-items:center; gap:12px; }
+    .voice-avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--gold) 0%,var(--brown-mid) 100%); display:flex; align-items:center; justify-content:center; color:var(--white); font-weight:600; font-size:.9rem; flex-shrink:0; }
+    .voice-name { font-weight:600; font-size:.88rem; color:var(--text); }
+    .voice-role { font-size:.76rem; color:var(--muted); }
+
+    /* ── Events ── */
+    #events { background:var(--white); padding:100px 0; }
+    .event-card { background:var(--white); border:1px solid var(--stone); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:all .3s ease; }
+    .event-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(92,61,30,.1); border-color:var(--gold); }
+    .event-card-top { background:var(--black); padding:1.1rem 1.25rem .9rem; display:flex; align-items:flex-start; justify-content:space-between; }
+    .event-day { font-family:var(--display); font-size:2.6rem; color:var(--gold); line-height:1; }
+    .event-month { font-size:.67rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+    .event-tag { display:inline-block; font-size:.65rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:50px; background:rgba(201,168,76,.15); color:var(--gold); }
+    .event-tag-green { background:rgba(42,94,43,.15); color:#5aac5c; }
+    .event-tag-gold  { background:rgba(201,168,76,.15); color:var(--gold); }
+    .event-card-body { padding:1.25rem 1.4rem 1.4rem; flex:1; display:flex; flex-direction:column; }
+    .event-card-title { font-family:var(--display); font-size:1.1rem; font-weight:400; color:var(--text); margin-bottom:.6rem; line-height:1.3; }
+    .event-card-desc { font-size:.88rem; color:var(--muted); line-height:1.65; flex:1; margin-bottom:1rem; }
+    .event-card-meta { display:flex; flex-wrap:wrap; gap:10px; font-size:.78rem; color:var(--brown-mid); border-top:1px solid var(--stone); padding-top:.85rem; margin-top:auto; }
+    .event-card-meta span { display:flex; align-items:center; }
+
+    /* ── Blog ── */
+    #blog { background:var(--cream); padding:100px 0; }
+    .blog-card { background:var(--white); border-radius:14px; overflow:hidden; height:100%; display:flex; flex-direction:column; border:1px solid var(--stone); transition:all .3s ease; }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(92,61,30,.1); }
+    .blog-img { height:170px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+    .blog-img-devotional { background:linear-gradient(135deg,#2a1a0e 0%,#5C3D1E 100%); }
+    .blog-img-community  { background:linear-gradient(135deg,#0e2a12 0%,#2A5E2B 100%); }
+    .blog-img-testimony  { background:linear-gradient(135deg,#2a2200 0%,#7a5a00 100%); }
+    .blog-img i { font-size:3rem; color:rgba(255,255,255,.2); }
+    .blog-img-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.3) 0%,transparent 60%); }
+    .blog-cat-tag { position:absolute; top:12px; left:14px; font-size:.65rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:3px 10px; border-radius:50px; background:rgba(255,255,255,.15); backdrop-filter:blur(8px); color:rgba(255,255,255,.9); }
+    .blog-card-body { padding:1.4rem; flex:1; display:flex; flex-direction:column; }
+    .blog-meta { display:flex; flex-wrap:wrap; gap:12px; font-size:.74rem; color:var(--muted); margin-bottom:.75rem; }
+    .blog-title { font-family:var(--display); font-size:1.08rem; font-weight:400; color:var(--text); margin-bottom:.6rem; line-height:1.3; }
+    .blog-excerpt { font-size:.87rem; color:var(--muted); line-height:1.65; flex:1; margin-bottom:1rem; }
+    .blog-read-more { font-size:.84rem; font-weight:600; color:var(--brown-mid); text-decoration:none; display:inline-flex; align-items:center; gap:4px; margin-top:auto; transition:all .2s ease; }
+    .blog-read-more:hover { color:var(--brown); gap:8px; }
+
+    /* ── Contact strip ── */
+    #contact-strip { background:var(--brown); padding:80px 0; }
+    .contact-strip-title { font-family:var(--display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; color:var(--white); line-height:1.2; margin-bottom:1rem; }
+    .contact-strip-title em { font-style:italic; color:var(--gold-light); }
+    .contact-strip-sub { font-family:var(--serif); font-style:italic; color:rgba(255,255,255,.65); font-size:1rem; line-height:1.7; margin-bottom:2rem; }
+    .contact-info-item { display:flex; align-items:flex-start; gap:14px; margin-bottom:1.25rem; }
+    .contact-info-icon { width:38px; height:38px; flex-shrink:0; background:rgba(255,255,255,.1); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:.95rem; }
+    .contact-info-text { font-size:.9rem; color:rgba(255,255,255,.75); line-height:1.5; }
+    .contact-info-text strong { color:var(--white); display:block; margin-bottom:2px; }
+    .contact-form-card { background:var(--white); border-radius:16px; padding:2.5rem; box-shadow:0 8px 40px rgba(0,0,0,.2); }
+    .contact-form-card h4 { font-family:var(--display); font-weight:400; font-size:1.4rem; color:var(--text); margin-bottom:1.5rem; }
+    .form-control { border:1.5px solid var(--stone); border-radius:10px; padding:.7rem 1rem; font-size:.92rem; background:var(--cream); transition:border-color .2s ease,box-shadow .2s ease; }
+    .form-control:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,168,76,.12); background:var(--white); outline:none; }
+    .form-label { font-size:.82rem; font-weight:500; color:var(--text); margin-bottom:.4rem; display:block; }
+    .btn-submit { background:var(--gold); color:var(--black); border:none; padding:.8rem 2rem; border-radius:50px; font-weight:600; font-size:.95rem; transition:all .3s ease; cursor:pointer; width:100%; }
+    .btn-submit:hover { background:var(--gold-light); transform:translateY(-1px); }
+
+    /* ── Footer ── */
+    footer { background:var(--black); padding:70px 0 30px; border-top:1px solid rgba(201,168,76,.1); }
+    .footer-brand { font-family:var(--display); font-size:1.4rem; color:var(--white); margin-bottom:.75rem; display:block; }
+    .footer-brand span { color:var(--gold); }
+    .footer-tagline { font-family:var(--serif); font-style:italic; color:rgba(255,255,255,.4); font-size:.88rem; line-height:1.6; margin-bottom:1.5rem; max-width:260px; }
+    .footer-social { display:flex; gap:8px; }
+    .footer-social a { width:36px; height:36px; background:rgba(255,255,255,.06); border-radius:8px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.5); font-size:.95rem; text-decoration:none; transition:all .2s ease; border:1px solid rgba(255,255,255,.06); }
+    .footer-social a:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
+    .footer-heading { font-size:.68rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:1.2rem; }
+    footer ul { list-style:none; padding:0; }
+    footer ul li { margin-bottom:.7rem; }
+    footer ul li a { color:rgba(255,255,255,.5); text-decoration:none; font-size:.88rem; transition:color .2s ease; }
+    footer ul li a:hover { color:var(--gold); }
+    footer hr { border-color:rgba(255,255,255,.06); margin:2.5rem 0 1.5rem; }
+    .footer-bottom { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; }
+    .footer-copy { font-size:.8rem; color:rgba(255,255,255,.3); }
+    .footer-legal { display:flex; gap:1.25rem; }
+    .footer-legal a { font-size:.8rem; color:rgba(255,255,255,.3); text-decoration:none; transition:color .2s ease; }
+    .footer-legal a:hover { color:var(--gold); }
+
+    /* ── Giving Modal ── */
+    .giving-overlay { display:none; position:fixed; inset:0; background:rgba(10,10,10,.75); z-index:9999; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(6px); }
+    .giving-modal { background:#FDFAF5; border-radius:16px; width:100%; max-width:480px; max-height:90vh; overflow-y:auto; position:relative; animation:giveSlideIn .3s ease; }
+    @keyframes giveSlideIn { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    .giving-close { position:absolute; top:14px; right:16px; background:none; border:none; font-size:1.6rem; line-height:1; color:#8B6B4A; cursor:pointer; padding:0; z-index:10; }
+    .giving-close:hover { color:#4A3728; }
+    .giving-header { background:var(--brown); padding:2rem 2rem 1.5rem; border-radius:16px 16px 0 0; text-align:center; }
+    .giving-title { font-family:var(--display); font-size:2rem; font-weight:400; color:#F5F0E8; margin-bottom:.4rem; }
+    .giving-sub { font-family:var(--serif); font-style:italic; font-size:.88rem; color:rgba(245,240,232,.65); }
+    .giving-body { padding:1.75rem 2rem 2rem; }
+    .give-field { margin-bottom:1.2rem; }
+    .give-label { display:block; font-size:.8rem; font-weight:600; color:#4A3728; margin-bottom:.4rem; letter-spacing:.03em; }
+    .give-input { width:100%; padding:.65rem .9rem; border:1.5px solid #E0D5C5; border-radius:8px; font-size:.95rem; color:#2A1A0E; background:#FDFAF5; transition:border-color .2s ease; outline:none; }
+    .give-input:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,168,76,.12); }
+    .give-tabs { display:flex; gap:6px; margin-bottom:.5rem; }
+    .give-tab { padding:.45rem 1rem; border-radius:50px; border:1.5px solid #E0D5C5; font-size:.82rem; font-weight:500; cursor:pointer; background:#FDFAF5; color:#6B4A2E; transition:all .2s ease; }
+    .give-tab.active { background:var(--brown); color:#F5F0E8; border-color:var(--brown); }
+    .give-amount-wrap { position:relative; }
+    .give-currency { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#8B6B4A; font-weight:500; }
+    .give-amount-input { padding-left:2.2rem; }
+    .give-next-btn { width:100%; padding:.8rem; background:var(--brown); color:#F5F0E8; border:none; border-radius:10px; font-size:1rem; font-weight:500; cursor:pointer; transition:all .3s ease; margin-top:.5rem; }
+    .give-next-btn:hover { background:#6B4A2E; transform:translateY(-1px); }
+    .give-summary-box { display:flex; align-items:center; justify-content:space-between; background:#F0EAE0; border-radius:8px; padding:.75rem 1rem; margin-bottom:1.2rem; }
+    .give-summary-tag { background:var(--brown); color:#F5F0E8; font-size:.75rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:50px; }
+    .give-summary-amount { font-size:1.1rem; color:#4A3728; }
+    .give-method-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.2rem; }
+    .give-method { display:flex; flex-direction:column; align-items:center; gap:5px; padding:1rem .5rem; background:#F0EAE0; border:1.5px solid transparent; border-radius:10px; cursor:pointer; transition:all .2s ease; text-align:center; }
+    .give-method span { font-size:.88rem; font-weight:500; color:#4A3728; }
+    .give-method small { font-size:.72rem; color:#8B6B4A; }
+    .give-method:hover { background:#E8DDD0; }
+    .give-method.active { background:#fff; border-color:var(--gold); }
+    .give-method-icon { font-size:1.4rem; color:#8B6B4A; }
+    .give-bank-info { background:#F0EAE0; border-radius:8px; padding:1rem 1.1rem; margin-bottom:1rem; }
+    .give-bank-label { font-size:.75rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:#8B6B4A; margin-bottom:.75rem; }
+    .give-bank-row { display:flex; justify-content:space-between; font-size:.88rem; padding:.35rem 0; border-bottom:1px solid rgba(139,107,74,.15); color:#4A3728; }
+    .give-bank-row:last-of-type { border-bottom:none; }
+    .give-bank-row span { color:#8B6B4A; }
+    .give-bank-note { font-size:.78rem; color:#8B6B4A; margin-top:.75rem; margin-bottom:0; font-style:italic; }
+    .give-btn-row { display:flex; gap:10px; margin-top:.5rem; }
+    .give-back-btn { padding:.75rem 1.25rem; background:#F0EAE0; color:#4A3728; border:none; border-radius:8px; font-size:.95rem; font-weight:500; cursor:pointer; transition:all .2s ease; white-space:nowrap; }
+    .give-back-btn:hover { background:#E8DDD0; }
+    .give-submit-btn { flex:1; padding:.75rem; background:var(--gold); color:#4A3728; border:none; border-radius:8px; font-size:1rem; font-weight:600; cursor:pointer; transition:all .3s ease; }
+    .give-submit-btn:hover { background:var(--gold-light); transform:translateY(-1px); }
+    .give-success { text-align:center; padding:1rem 0; }
+    .give-success-icon { width:64px; height:64px; background:var(--green); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem; font-size:2rem; color:#fff; }
+    .give-success-title { font-family:var(--display); font-size:2rem; font-weight:400; color:#4A3728; margin-bottom:.75rem; }
+    .give-success-msg { font-size:.92rem; color:#6B4A2E; line-height:1.7; }
+    @media(max-width:480px){ .giving-body{padding:1.25rem} .giving-header{padding:1.5rem 1.25rem} }
+
+    /* ── Search ── */
+    .search-overlay { display:none; position:fixed; top:0; left:0; right:0; z-index:9998; flex-direction:column; }
+    .search-overlay.open { display:flex; }
+    .search-bar-wrap { background:rgba(10,10,10,.97); backdrop-filter:blur(20px); display:flex; align-items:center; gap:12px; padding:1.1rem 1.5rem; border-bottom:1px solid rgba(201,168,76,.15); }
+    .search-bar-icon { color:var(--gold); font-size:1.1rem; flex-shrink:0; }
+    .search-bar-input { flex:1; background:transparent; border:none; outline:none; font-size:1.1rem; color:var(--white); caret-color:var(--gold); }
+    .search-bar-input::placeholder { color:rgba(255,255,255,.3); }
+    .search-bar-hint { font-size:.75rem; color:rgba(255,255,255,.3); white-space:nowrap; }
+    .search-bar-close { background:none; border:none; color:rgba(255,255,255,.5); font-size:1.1rem; cursor:pointer; padding:4px; transition:color .2s ease; }
+    .search-bar-close:hover { color:var(--white); }
+    .search-box { background:rgba(10,10,10,.96); backdrop-filter:blur(20px); width:100%; max-width:660px; border-radius:0 0 14px 14px; border:1px solid rgba(201,168,76,.12); border-top:none; overflow:hidden; }
+    .search-results { max-height:70vh; overflow-y:auto; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:.85rem 1.25rem; text-decoration:none; transition:background .15s ease; color:var(--white); border-bottom:1px solid rgba(255,255,255,.05); }
+    .search-result-item:hover { background:rgba(201,168,76,.08); }
+    .search-result-icon { width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,.07); display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; color:rgba(255,255,255,.6); }
+    .search-result-icon.brown { color:var(--gold); }
+    .search-result-icon.green { color:#5aac5c; }
+    .search-result-icon.red   { color:#ff5555; }
+    .search-result-text { flex:1; }
+    .search-result-title { font-size:.92rem; font-weight:500; color:var(--white); }
+    .search-result-sub   { font-size:.76rem; color:rgba(255,255,255,.4); }
+    .search-result-arrow { color:rgba(255,255,255,.2); font-size:.75rem; }
+    .search-empty { padding:2rem; text-align:center; color:rgba(255,255,255,.4); font-size:.9rem; }
+    .search-hints { padding:1rem 1.25rem; }
+    .search-hint-label { font-size:.68rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.3); display:block; margin-bottom:.6rem; }
+    .search-quick-links { display:flex; flex-wrap:wrap; gap:6px; }
+    .search-quick-link { display:inline-flex; align-items:center; gap:5px; padding:4px 12px; border-radius:50px; border:1px solid rgba(201,168,76,.2); font-size:.78rem; font-weight:500; color:rgba(255,255,255,.6); text-decoration:none; transition:all .2s ease; }
+    .search-quick-link:hover { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,.06); }
+    .search-backdrop { position:fixed; inset:0; z-index:-1; }
+
+    /* ── Utility buttons ── */
+    .btn-outline-primary { border:1.5px solid var(--brown); color:var(--brown); border-radius:50px; font-weight:500; font-size:.9rem; padding:.65rem 1.75rem; transition:all .3s ease; background:transparent; text-decoration:none; display:inline-block; }
+    .btn-outline-primary:hover { background:var(--brown); color:var(--white); }
+    .btn-outline-white { border:1.5px solid rgba(255,255,255,.3); color:var(--white); border-radius:50px; font-weight:500; font-size:.9rem; padding:.65rem 1.75rem; background:transparent; text-decoration:none; transition:all .3s ease; display:inline-block; }
+    .btn-outline-white:hover { border-color:var(--white); background:rgba(255,255,255,.08); color:var(--white); }
+
+    /* ── Responsive ── */
+    @media(max-width:768px){
+        #about,#services,#voices,#events,#blog,#contact-strip { padding:70px 0; }
+        .navbar-collapse { background:#0a0a0a; padding:1rem; border-radius:10px; margin-top:.5rem; }
+        .hero-content { padding-bottom:4rem; }
+    }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="bi bi-church"></i> Word Transformation
+                <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+                <div>
+                    Word Transformation
+                    <span class="brand-sub">Church · Accra</span>
+                </div>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <!-- 5 Primary Links -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sermons.html">Sermons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#events">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="membership.html">Membership</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-
-                    <!-- More dropdown -->
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            More
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end more-menu" aria-labelledby="moreDropdown">
-                            <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill me-2"></i>About Us</a></li>
-                            <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill me-2"></i>Ministries</a></li>
-                            <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill me-2"></i>Small Groups</a></li>
-                            <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill me-2"></i>Devotional</a></li>
-                            <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill me-2"></i>Prayer</a></li>
-                            <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text me-2"></i>Blog</a></li>
-                            <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill me-2"></i>Volunteer</a></li>
-                            <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images me-2"></i>Gallery</a></li>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                            <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                            <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                            <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                            <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                            <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                            <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle me-2"></i>My Account</a></li>
-                            <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube me-2"></i>Live Stream</a></li>
+                            <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                            <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
                         </ul>
                     </li>
-
-                    <!-- Search + Action Buttons -->
                     <li class="nav-item ms-lg-1">
-                        <button class="nav-search-btn" onclick="toggleSearch()" title="Search site">
+                        <button class="nav-link bg-transparent border-0" onclick="toggleSearch()" style="color:rgba(255,255,255,.7);">
                             <i class="bi bi-search"></i>
                         </button>
                     </li>
                     <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                        <a href="livestream.html" class="btn-live-nav">
-                            <span class="live-dot"></span> Join Live
-                        </a>
+                        <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
                     </li>
                     <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
                         <button class="btn-give" onclick="document.getElementById('givingModal').style.display='flex'">
@@ -1419,393 +413,281 @@
         </div>
     </nav>
 
-    <!-- Search Overlay -->
+    <!-- ===================== SEARCH OVERLAY ===================== -->
     <div class="search-overlay" id="searchOverlay">
-        <!-- Full-width bar sitting over the navbar -->
         <div class="search-bar-wrap">
             <i class="bi bi-search search-bar-icon"></i>
-            <input type="text" id="searchInput" class="search-bar-input" placeholder="Search sermons, events, blog posts, ministries…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
-            <span class="search-bar-hint">Press Esc to close</span>
-            <button class="search-bar-close" onclick="toggleSearch()" title="Close"><i class="bi bi-x-lg"></i></button>
+            <input type="text" id="searchInput" class="search-bar-input" placeholder="Search sermons, events, ministries…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
+            <span class="search-bar-hint d-none d-md-inline">Press Esc to close</span>
+            <button class="search-bar-close" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
         </div>
-        <!-- Results dropdown -->
         <div style="position:relative;display:flex;justify-content:center;padding:0 1rem;">
-            <div class="search-box">
-                <div class="search-results" id="searchResults"></div>
-            </div>
+            <div class="search-box"><div class="search-results" id="searchResults"></div></div>
         </div>
-        <!-- Dark backdrop -->
         <div class="search-backdrop" onclick="toggleSearch()"></div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- ===================== HERO ===================== -->
     <section id="home" class="hero-section">
-        <!-- Hero background: YouTube iframe + animated CSS fallback -->
         <div class="hero-video-wrap" id="heroWrap">
-            <!-- Animated fallback always visible first -->
             <div class="hero-fallback-bg" id="heroFallback"></div>
-            <!-- Floating particles -->
             <div class="hero-particles" id="heroParticles"></div>
-            <!-- Free stock video — church worship, hands raised, choir -->
-            <video
-                id="heroVideo"
-                class="hero-yt-frame"
-                autoplay muted loop playsinline
-                preload="auto"
-                poster="worship1.jpg">
-                <!-- Mixkit free-license worship/church videos — no CORS issues -->
+            <video id="heroVideo" class="hero-yt-frame" autoplay muted loop playsinline preload="auto" poster="worship1.jpg">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-gospel-choir-singing-in-a-church-42894-large.mp4" type="video/mp4">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-people-raising-hands-in-a-concert-42610-large.mp4" type="video/mp4">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-at-a-music-concert-with-their-hands-4608-large.mp4" type="video/mp4">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-group-of-people-with-hands-raised-at-a-concert-4607-large.mp4" type="video/mp4">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-cheering-and-celebrating-4639-large.mp4" type="video/mp4">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-people-waving-their-hands-at-a-live-music-event-11-large.mp4" type="video/mp4">
             </video>
-            <div class="hero-video-overlay"></div>
+            <div class="hero-overlay"></div>
         </div>
         <div class="hero-shimmer"></div>
-        <div class="container" style="position:relative; z-index:2;">
-            <div class="row">
-                <div class="col-lg-8">
-                    <p class="hero-eyebrow">Welcome to Word Transformation Church</p>
-                    <h1 class="display-3 fw-bold">Where Lives Are<br><em style="font-style:italic; color:var(--secondary-color);">Transformed</em></h1>
-                    <p class="lead mb-4">Through the power of God's Word — come as you are.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="#services" class="btn btn-primary btn-lg">Our Services</a>
-                        <a href="livestream.html" class="btn btn-outline-light btn-lg"><i class="bi bi-youtube me-1"></i> Watch Live</a>
-                        <a href="contact.html" class="btn btn-outline-light btn-lg">Contact Us</a>
+        <div class="hero-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-xl-7">
+                        <p class="hero-eyebrow"><span class="hero-eyebrow-line"></span>Welcome to Word Transformation Church</p>
+                        <h1 class="hero-h1">Where Every Life<br>Can Be <em>Transformed</em></h1>
+                        <p class="hero-lead">"Come as you are" is not just something we say — it is who we are. A community of real people, real stories, and a very real God.</p>
+                        <div class="hero-actions">
+                            <a href="#about" class="hero-btn-primary">Discover Our Story</a>
+                            <a href="livestream.html" class="hero-btn-ghost"><i class="bi bi-play-circle-fill"></i> Watch Live</a>
+                            <a href="contact.html" class="hero-btn-ghost">Plan a Visit</a>
+                        </div>
+                        <div class="hero-times-strip">
+                            <div class="hero-time-item"><span class="hero-time-dot"></span><span><strong>Sunday</strong> 9:00 AM &amp; 11:00 AM</span></div>
+                            <div class="hero-time-item"><span class="hero-time-dot"></span><span><strong>Wednesday</strong> 7:00 PM Bible Study</span></div>
+                            <div class="hero-time-item"><span class="hero-time-dot"></span><span><strong>Friday</strong> 6:30 PM Prayer Night</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Scroll indicator -->
-        <div class="hero-scroll-hint">
-            <span>Scroll</span>
-            <i class="bi bi-chevron-down"></i>
-        </div>
+        <div class="hero-scroll"><span>Scroll</span><i class="bi bi-chevron-down"></i></div>
     </section>
 
-    <!-- Sunday Service Countdown Section -->
+    <!-- ===================== COUNTDOWN ===================== -->
     <section id="countdown-section">
         <div class="container">
-            <div class="countdown-card">
-                <div class="cd-corner tl"></div>
-                <div class="cd-corner tr"></div>
-                <div class="cd-corner bl"></div>
-                <div class="cd-corner br"></div>
-
-                <svg class="cd-cross" width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="8" y="0" width="4" height="26" rx="1" fill="#8B5E3C"/>
-                    <rect x="0" y="7" width="20" height="4" rx="1" fill="#8B5E3C"/>
-                </svg>
-
-                <p class="cd-eyebrow">Join us in worship</p>
-                <h2 class="cd-heading">Sunday Service</h2>
-                <p class="cd-sub">begins in</p>
-
-                <div class="cd-divider">
-                    <div class="cd-divider-line"></div>
-                    <div class="cd-divider-dot"></div>
-                    <div class="cd-divider-line"></div>
+            <div class="countdown-wrap reveal">
+                <p class="cd-eyebrow">Next Gathering</p>
+                <h2 class="cd-heading">Sunday Service Starts In</h2>
+                <p class="cd-sub">We'd love to see you there — all are welcome</p>
+                <div class="cd-grid">
+                    <div class="cd-unit"><div class="cd-box"><span class="cd-num" id="cd-days">00</span></div><span class="cd-label">Days</span></div>
+                    <div class="cd-unit"><div class="cd-box"><span class="cd-num" id="cd-hours">00</span></div><span class="cd-label">Hours</span></div>
+                    <div class="cd-unit"><div class="cd-box"><span class="cd-num" id="cd-mins">00</span></div><span class="cd-label">Minutes</span></div>
+                    <div class="cd-unit"><div class="cd-box"><span class="cd-num" id="cd-secs">00</span></div><span class="cd-label">Seconds</span></div>
                 </div>
-
-                <div class="cd-grid" id="cd-countdown">
-                    <div class="cd-unit">
-                        <div class="cd-box"><span class="cd-num" id="cd-days">00</span></div>
-                        <span class="cd-label">Days</span>
+                <div id="cd-countdown">
+                    <div class="cd-info">
+                        <div class="cd-info-item"><i class="bi bi-clock"></i> 9:00 AM &amp; 11:00 AM</div>
+                        <div class="cd-info-item"><i class="bi bi-geo-alt"></i> Main Sanctuary, Accra</div>
+                        <div class="cd-info-item"><i class="bi bi-broadcast"></i> <a href="livestream.html" style="color:inherit">Also online</a></div>
                     </div>
-                    <div class="cd-unit">
-                        <div class="cd-box"><span class="cd-num" id="cd-hours">00</span></div>
-                        <span class="cd-label">Hours</span>
-                    </div>
-                    <div class="cd-unit">
-                        <div class="cd-box"><span class="cd-num" id="cd-mins">00</span></div>
-                        <span class="cd-label">Minutes</span>
-                    </div>
-                    <div class="cd-unit">
-                        <div class="cd-box"><span class="cd-num" id="cd-secs">00</span></div>
-                        <span class="cd-label">Seconds</span>
-                    </div>
+                    <p class="cd-verse">"Not giving up meeting together, as some are in the habit of doing, but encouraging one another."<cite>— Hebrews 10:25</cite></p>
                 </div>
-
-                <p class="cd-done" id="cd-done">Service is beginning — welcome!</p>
-
-                <div class="cd-info">
-                    <div class="cd-info-item">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
-                        Word Transformation Church
-                    </div>
-                    <div class="cd-info-item">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm.01 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
-                        Every Sunday · 9:00 AM
-                    </div>
-                </div>
-
-                <div class="cd-divider" style="margin-bottom: 1.4rem;">
-                    <div class="cd-divider-line"></div>
-                    <div class="cd-divider-dot"></div>
-                    <div class="cd-divider-line"></div>
-                </div>
-
-                <p class="cd-verse">
-                    "For where two or three gather in my name, there am I with them."
-                    <cite>— Matthew 18:20</cite>
-                </p>
+                <p class="cd-done" id="cd-done">It's Sunday — see you there! 🙌</p>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section-padding">
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about">
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="section-title">About Us</h2>
-                    <p class="section-subtitle">About our church family</p>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src=img/worship1.jpg
-                         alt="Church interior" 
-                         class="img-fluid rounded-3 shadow">
-                </div>
-                <div class="col-lg-6">
-                    <h3 class="mb-4">Our Mission</h3>
-                    <p class="lead mb-4">To transform lives through the power of God's Word and create a community of believers who impact their world for Christ.</p>
-                    <p class="mb-4">We believe in the transformative power of Scripture and its ability to change hearts, heal wounds, and restore hope. At Word Transformation Church, we're committed to creating an environment where everyone can encounter God and experience genuine life change.</p>
-                    <div class="row g-4">
-                        <div class="col-6">
-                            <div class="stat-box">
-                                <h3 class="text-primary mb-2">15+</h3>
-                                <p class="text-muted mb-0">Years of Ministry</p>
-                            </div>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal-left">
+                    <div class="about-image-stack">
+                        <div class="about-img-accent"></div>
+                        <div class="about-img-main">
+                            <img src="worship1.jpg" alt="Our church community in worship" loading="lazy">
                         </div>
-                        <div class="col-6">
-                            <div class="stat-box">
-                                <h3 class="text-primary mb-2">500+</h3>
-                                <p class="text-muted mb-0">Church Family</p>
-                            </div>
+                        <div class="about-stat-float">
+                            <span class="stat-num">15+</span>
+                            <span class="stat-lbl">Years of<br>Ministry</span>
                         </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal-right">
+                    <div class="about-body">
+                        <p class="section-eyebrow"><span class="section-eyebrow-line"></span> Who We Are</p>
+                        <h2 class="section-title mb-4">A Family That <span class="gold-accent">Believes</span><br>in Every Person</h2>
+                        <p>We started as a small gathering of people who believed the Bible still has the power to change lives — and that conviction has never left us. Over 15 years, God has grown us into a multigenerational family of 500+ members from across Accra and beyond.</p>
+                        <p>We're not a perfect church. We're a church full of people in progress, walking together, growing together, and believing God for the impossible together.</p>
+                        <div class="pastor-quote">
+                            <p>"The Word of God is not a religious text — it is a living encounter. Every Sunday, every Wednesday, every prayer night, we come because we expect to meet God, and He has never let us down."</p>
+                            <cite>— Pastor Emmanuel, Senior Pastor</cite>
+                        </div>
+                        <div class="about-stats-row">
+                            <div class="about-stat"><span class="num">500+</span><span class="lbl">Church Family</span></div>
+                            <div class="about-stat"><span class="num">12</span><span class="lbl">Active Ministries</span></div>
+                            <div class="about-stat"><span class="num">40+</span><span class="lbl">Small Groups</span></div>
+                        </div>
+                        <div class="mt-4"><a href="about.html" class="btn-outline-primary">Read Our Full Story</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section-padding">
+    <!-- ===================== SERVICES ===================== -->
+    <section id="services">
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="section-title">Our Services</h2>
-                    <p class="section-subtitle">Join us for worship and fellowship</p>
+            <div class="row justify-content-between align-items-end">
+                <div class="col-lg-6 reveal">
+                    <p class="section-eyebrow"><span class="section-eyebrow-line"></span> Gatherings</p>
+                    <h2 class="section-title" style="color:var(--white);">Come, <span class="gold-accent">Worship</span><br>With Us</h2>
+                </div>
+                <div class="col-lg-5 reveal delay-2">
+                    <p class="section-lead">Every service is an opportunity to encounter God. Whether it's your first time or your hundredth, there is a seat for you.</p>
+                </div>
+            </div>
+            <div class="service-cards-row">
+                <div class="svc-card reveal delay-1">
+                    <div class="svc-icon"><i class="bi bi-sun-fill"></i></div>
+                    <p class="svc-day">Every Sunday</p>
+                    <h3 class="svc-name">Sunday Worship</h3>
+                    <p class="svc-time">9:00 AM &amp; 11:00 AM</p>
+                    <p class="svc-desc">Powerful praise, Spirit-filled worship, and life-changing messages from God's Word. We have children's church running simultaneously.</p>
+                    <a href="sermons.html" style="color:var(--gold);font-size:.85rem;font-weight:600;text-decoration:none;">Watch past sermons <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+                <div class="svc-card reveal delay-2">
+                    <div class="svc-icon"><i class="bi bi-book-fill"></i></div>
+                    <p class="svc-day">Every Wednesday</p>
+                    <h3 class="svc-name">Bible Study</h3>
+                    <p class="svc-time">7:00 PM</p>
+                    <p class="svc-desc">An intimate, interactive mid-week gathering where we dig deep into Scripture together. Ask questions. Bring your doubts. You are safe here.</p>
+                    <a href="devotional.html" style="color:var(--gold);font-size:.85rem;font-weight:600;text-decoration:none;">Daily devotional <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+                <div class="svc-card reveal delay-3">
+                    <div class="svc-icon"><i class="bi bi-chat-heart-fill"></i></div>
+                    <p class="svc-day">Every Friday</p>
+                    <h3 class="svc-name">Prayer Night</h3>
+                    <p class="svc-time">6:30 PM</p>
+                    <p class="svc-desc">We believe prayer changes things. Our Friday nights are alive with intercession, testimony, and the tangible presence of God. Come with your burdens.</p>
+                    <a href="prayer.html" style="color:var(--gold);font-size:.85rem;font-weight:600;text-decoration:none;">Submit a prayer request <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section id="voices">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <p class="section-eyebrow"><span class="section-eyebrow-line"></span> Real Stories</p>
+                <h2 class="section-title">Lives <span class="gold-accent">Changed</span> Here</h2>
+                <p class="section-lead mx-auto mt-3">We don't just preach transformation — we live it. Here are a few voices from our family.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 reveal delay-1">
+                    <div class="voice-card">
+                        <span class="voice-quote-icon">"</span>
+                        <p class="voice-text">I walked into Word Transformation three years ago with absolutely nothing to hold onto. Today my marriage is restored, my business is thriving, and I know exactly who I am. This church didn't just give me religion — it gave me my life back.</p>
+                        <div class="voice-person">
+                            <div class="voice-avatar">KA</div>
+                            <div><div class="voice-name">Kwame Asante</div><div class="voice-role">Member since 2022 · Businessman</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal delay-2">
+                    <div class="voice-card">
+                        <span class="voice-quote-icon">"</span>
+                        <p class="voice-text">As a young professional, I struggled to find a church that spoke to where I actually was in life. Here, Pastor's messages hit different every week. I don't leave the same way I came in — and that's exactly what I needed.</p>
+                        <div class="voice-person">
+                            <div class="voice-avatar">AB</div>
+                            <div><div class="voice-name">Abena Boateng</div><div class="voice-role">Member since 2023 · Nurse</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal delay-3">
+                    <div class="voice-card">
+                        <span class="voice-quote-icon">"</span>
+                        <p class="voice-text">My family moved to Accra not knowing anyone. The small group we joined became our people. They showed up when we had our baby, prayed us through a tough season, and made Ghana feel like home. We belong here.</p>
+                        <div class="voice-person">
+                            <div class="voice-avatar">JM</div>
+                            <div><div class="voice-name">James &amp; Mary Owusu</div><div class="voice-role">Members since 2021 · Parents</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5 reveal delay-2">
+                <a href="blog.html" class="btn-outline-primary">Read More Testimonies</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== EVENTS ===================== -->
+    <section id="events">
+        <div class="container">
+            <div class="row align-items-end mb-5">
+                <div class="col-md-8 reveal">
+                    <p class="section-eyebrow"><span class="section-eyebrow-line"></span> What's Happening</p>
+                    <h2 class="section-title">Upcoming <span class="gold-accent">Events</span></h2>
+                    <p class="section-lead mt-2">Life happens in community. Here's what God has on the calendar for us.</p>
+                </div>
+                <div class="col-md-4 text-md-end reveal delay-2 mt-3 mt-md-0">
+                    <a href="#" class="btn-outline-primary">View all events</a>
                 </div>
             </div>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-sun"></i>
-                        </div>
-                        <h4>Sunday Worship</h4>
-                        <p class="text-muted mb-3">9:00 AM & 11:00 AM</p>
-                        <p>Experience powerful worship and life-transforming messages in our main service.</p>
-                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-book"></i>
-                        </div>
-                        <h4>Bible Study</h4>
-                        <p class="text-muted mb-3">Wednesdays at 7:00 PM</p>
-                        <p>Deep dive into Scripture with our interactive mid-week Bible studies.</p>
-                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <h4>Prayer Meeting</h4>
-                        <p class="text-muted mb-3">Fridays at 6:30 PM</p>
-                        <p>Join us for powerful prayer sessions and spiritual warfare.</p>
-                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section-padding bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="section-title">Contact Us</h2>
-                    <p class="section-subtitle">We'd love to hear from you</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <div class="bg-white p-4 rounded-3 shadow">
-                        <h5 class="mb-4">Get in Touch</h5>
-                        <div class="d-flex mb-3">
-                            <i class="bi bi-geo-alt-fill text-primary fs-4 me-3"></i>
-                            <div>
-                                <h6>Address</h6>
-                                <p class="text-muted">123 Faith Avenue<br>Spiritual City, SC 12345</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <i class="bi bi-telephone-fill text-primary fs-4 me-3"></i>
-                            <div>
-                                <h6>Phone</h6>
-                                <p class="text-muted">(555) 123-4567</p>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <i class="bi bi-envelope-fill text-primary fs-4 me-3"></i>
-                            <div>
-                                <h6>Email</h6>
-                                <p class="text-muted"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660f080009261109140212140708150009140b07120f090848091401">[email&#160;protected]</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <form class="bg-white p-4 rounded-3 shadow">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Your Name</label>
-                            <input type="text" class="form-control" id="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events Section -->
-    <section id="events" class="section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="section-title">Upcoming Events</h2>
-                    <p class="section-subtitle mt-3">Stay connected with what God is doing in our community</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-1">
                     <div class="event-card">
-                        <div class="event-card-date">
-                            <span class="event-day">22</span>
-                            <span class="event-month">Mar</span>
-                        </div>
+                        <div class="event-card-top"><div class="event-date-block"><span class="event-day">22</span><span class="event-month">Mar</span></div><span class="event-tag">Worship</span></div>
                         <div class="event-card-body">
-                            <span class="event-tag">Worship</span>
                             <h4 class="event-card-title">Good Friday Night of Prayer</h4>
                             <p class="event-card-desc">Join us for a special evening of prayer and worship as we remember the sacrifice of Christ.</p>
-                            <div class="event-card-meta">
-                                <span><i class="bi bi-clock me-1"></i>7:00 PM</span>
-                                <span><i class="bi bi-geo-alt me-1"></i>Main Sanctuary</span>
-                            </div>
+                            <div class="event-card-meta"><span><i class="bi bi-clock me-1"></i>7:00 PM</span><span><i class="bi bi-geo-alt me-1"></i>Main Sanctuary</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-2">
                     <div class="event-card">
-                        <div class="event-card-date">
-                            <span class="event-day">29</span>
-                            <span class="event-month">Mar</span>
-                        </div>
+                        <div class="event-card-top"><div class="event-date-block"><span class="event-day">29</span><span class="event-month">Mar</span></div><span class="event-tag event-tag-green">Community</span></div>
                         <div class="event-card-body">
-                            <span class="event-tag event-tag-green">Community</span>
                             <h4 class="event-card-title">Easter Sunday Celebration</h4>
                             <p class="event-card-desc">Celebrate the resurrection of our Lord with two powerful services filled with praise and the Word.</p>
-                            <div class="event-card-meta">
-                                <span><i class="bi bi-clock me-1"></i>9:00 AM & 11:00 AM</span>
-                                <span><i class="bi bi-geo-alt me-1"></i>Main Sanctuary</span>
-                            </div>
+                            <div class="event-card-meta"><span><i class="bi bi-clock me-1"></i>9:00 AM &amp; 11:00 AM</span><span><i class="bi bi-geo-alt me-1"></i>Main Sanctuary</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-3">
                     <div class="event-card">
-                        <div class="event-card-date">
-                            <span class="event-day">05</span>
-                            <span class="event-month">Apr</span>
-                        </div>
+                        <div class="event-card-top"><div class="event-date-block"><span class="event-day">05</span><span class="event-month">Apr</span></div><span class="event-tag event-tag-gold">Conference</span></div>
                         <div class="event-card-body">
-                            <span class="event-tag event-tag-gold">Conference</span>
                             <h4 class="event-card-title">Annual Men's Conference</h4>
                             <p class="event-card-desc">A powerful one-day conference for men, focused on purpose, leadership, and spiritual growth.</p>
-                            <div class="event-card-meta">
-                                <span><i class="bi bi-clock me-1"></i>8:00 AM – 5:00 PM</span>
-                                <span><i class="bi bi-geo-alt me-1"></i>Fellowship Hall</span>
-                            </div>
+                            <div class="event-card-meta"><span><i class="bi bi-clock me-1"></i>8:00 AM – 5:00 PM</span><span><i class="bi bi-geo-alt me-1"></i>Fellowship Hall</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-1">
                     <div class="event-card">
-                        <div class="event-card-date">
-                            <span class="event-day">12</span>
-                            <span class="event-month">Apr</span>
-                        </div>
+                        <div class="event-card-top"><div class="event-date-block"><span class="event-day">12</span><span class="event-month">Apr</span></div><span class="event-tag event-tag-green">Youth</span></div>
                         <div class="event-card-body">
-                            <span class="event-tag event-tag-green">Youth</span>
-                            <h4 class="event-card-title">Youth Rally & Game Night</h4>
+                            <h4 class="event-card-title">Youth Rally &amp; Game Night</h4>
                             <p class="event-card-desc">An exciting evening for young people to connect, have fun, and encounter God together.</p>
-                            <div class="event-card-meta">
-                                <span><i class="bi bi-clock me-1"></i>5:00 PM</span>
-                                <span><i class="bi bi-geo-alt me-1"></i>Youth Centre</span>
-                            </div>
+                            <div class="event-card-meta"><span><i class="bi bi-clock me-1"></i>5:00 PM</span><span><i class="bi bi-geo-alt me-1"></i>Youth Centre</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-2">
                     <div class="event-card">
-                        <div class="event-card-date">
-                            <span class="event-day">19</span>
-                            <span class="event-month">Apr</span>
-                        </div>
+                        <div class="event-card-top"><div class="event-date-block"><span class="event-day">19</span><span class="event-month">Apr</span></div><span class="event-tag">Worship</span></div>
                         <div class="event-card-body">
-                            <span class="event-tag">Worship</span>
                             <h4 class="event-card-title">Women's Prayer Breakfast</h4>
                             <p class="event-card-desc">Ladies, come and be refreshed! A morning of prayer, fellowship, and encouragement over breakfast.</p>
-                            <div class="event-card-meta">
-                                <span><i class="bi bi-clock me-1"></i>8:00 AM</span>
-                                <span><i class="bi bi-geo-alt me-1"></i>Fellowship Hall</span>
-                            </div>
+                            <div class="event-card-meta"><span><i class="bi bi-clock me-1"></i>8:00 AM</span><span><i class="bi bi-geo-alt me-1"></i>Fellowship Hall</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-3">
                     <div class="event-card">
-                        <div class="event-card-date">
-                            <span class="event-day">26</span>
-                            <span class="event-month">Apr</span>
-                        </div>
+                        <div class="event-card-top"><div class="event-date-block"><span class="event-day">26</span><span class="event-month">Apr</span></div><span class="event-tag event-tag-gold">Outreach</span></div>
                         <div class="event-card-body">
-                            <span class="event-tag event-tag-gold">Outreach</span>
                             <h4 class="event-card-title">Community Outreach Day</h4>
                             <p class="event-card-desc">We are going into the streets! Join us as we serve our community with food, prayer, and the Gospel.</p>
-                            <div class="event-card-meta">
-                                <span><i class="bi bi-clock me-1"></i>9:00 AM</span>
-                                <span><i class="bi bi-geo-alt me-1"></i>City Centre</span>
-                            </div>
+                            <div class="event-card-meta"><span><i class="bi bi-clock me-1"></i>9:00 AM</span><span><i class="bi bi-geo-alt me-1"></i>City Centre</span></div>
                         </div>
                     </div>
                 </div>
@@ -1813,97 +695,152 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog" class="section-padding" style="background-color: var(--light-bg);">
+    <!-- ===================== BLOG ===================== -->
+    <section id="blog">
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="section-title">From the Blog</h2>
-                    <p class="section-subtitle mt-3">Words of encouragement, teaching, and testimony</p>
+            <div class="row align-items-end mb-5">
+                <div class="col-md-8 reveal">
+                    <p class="section-eyebrow"><span class="section-eyebrow-line"></span> From the Blog</p>
+                    <h2 class="section-title">Words That <span class="gold-accent">Nourish</span></h2>
+                    <p class="section-lead mt-2">Teaching, testimony, and encouragement for the everyday believer.</p>
+                </div>
+                <div class="col-md-4 text-md-end reveal delay-2 mt-3 mt-md-0">
+                    <a href="blog.html" class="btn-outline-primary">View all posts</a>
                 </div>
             </div>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-1">
                     <div class="blog-card">
-                        <div class="blog-card-img">
-                            <div class="blog-img-placeholder">
-                                <i class="bi bi-book-half"></i>
-                            </div>
-                            <span class="blog-category">Devotional</span>
-                        </div>
+                        <div class="blog-img blog-img-devotional"><i class="bi bi-book-half"></i><div class="blog-img-overlay"></div><span class="blog-cat-tag">Devotional</span></div>
                         <div class="blog-card-body">
-                            <div class="blog-meta">
-                                <span><i class="bi bi-person me-1"></i>Pastor James</span>
-                                <span><i class="bi bi-calendar3 me-1"></i>March 10, 2026</span>
-                            </div>
+                            <div class="blog-meta"><span><i class="bi bi-person me-1"></i>Pastor James</span><span><i class="bi bi-calendar3 me-1"></i>March 10, 2026</span></div>
                             <h4 class="blog-title">Walking in Faith When the Road is Unclear</h4>
                             <p class="blog-excerpt">Faith is not the absence of uncertainty — it is the courage to keep walking even when you cannot see the next step...</p>
-                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right ms-1"></i></a>
+                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-2">
                     <div class="blog-card">
-                        <div class="blog-card-img">
-                            <div class="blog-img-placeholder blog-img-green">
-                                <i class="bi bi-people-fill"></i>
-                            </div>
-                            <span class="blog-category blog-category-green">Community</span>
-                        </div>
+                        <div class="blog-img blog-img-community"><i class="bi bi-people-fill"></i><div class="blog-img-overlay"></div><span class="blog-cat-tag">Community</span></div>
                         <div class="blog-card-body">
-                            <div class="blog-meta">
-                                <span><i class="bi bi-person me-1"></i>Elder Sarah</span>
-                                <span><i class="bi bi-calendar3 me-1"></i>March 4, 2026</span>
-                            </div>
+                            <div class="blog-meta"><span><i class="bi bi-person me-1"></i>Elder Sarah</span><span><i class="bi bi-calendar3 me-1"></i>March 4, 2026</span></div>
                             <h4 class="blog-title">Why Community is at the Heart of the Gospel</h4>
                             <p class="blog-excerpt">We were never meant to do life alone. From Genesis to Revelation, Scripture calls us into deep, life-giving fellowship...</p>
-                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right ms-1"></i></a>
+                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 reveal delay-3">
                     <div class="blog-card">
-                        <div class="blog-card-img">
-                            <div class="blog-img-placeholder blog-img-gold">
-                                <i class="bi bi-stars"></i>
-                            </div>
-                            <span class="blog-category blog-category-gold">Testimony</span>
-                        </div>
+                        <div class="blog-img blog-img-testimony"><i class="bi bi-stars"></i><div class="blog-img-overlay"></div><span class="blog-cat-tag">Testimony</span></div>
                         <div class="blog-card-body">
-                            <div class="blog-meta">
-                                <span><i class="bi bi-person me-1"></i>Sis. Abena</span>
-                                <span><i class="bi bi-calendar3 me-1"></i>Feb 24, 2026</span>
-                            </div>
+                            <div class="blog-meta"><span><i class="bi bi-person me-1"></i>Sis. Abena</span><span><i class="bi bi-calendar3 me-1"></i>Feb 24, 2026</span></div>
                             <h4 class="blog-title">How God Turned My Season of Waiting into a Miracle</h4>
                             <p class="blog-excerpt">For three years I prayed the same prayer. I almost gave up — until the morning everything changed and I understood why...</p>
-                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right ms-1"></i></a>
+                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="text-center mt-5">
-                <a href="#" class="btn btn-outline-primary px-4">View all posts</a>
             </div>
         </div>
     </section>
 
-    <!-- Giving Modal -->
+    <!-- ===================== CONTACT STRIP ===================== -->
+    <section id="contact-strip">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 reveal-left">
+                    <h2 class="contact-strip-title">We'd Love to <em>Meet You</em></h2>
+                    <p class="contact-strip-sub">Whether you have a question, need prayer, or just want to know more — we are here. Reach out and a real person will respond.</p>
+                    <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div><div class="contact-info-text"><strong>Find Us</strong>123 Faith Avenue, Accra, Ghana</div></div>
+                    <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div><div class="contact-info-text"><strong>Call Us</strong>+233 000 000 000</div></div>
+                    <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div><div class="contact-info-text"><strong>Email Us</strong>info@wordtransformation.church</div></div>
+                    <div class="mt-4"><a href="contact.html" class="btn-outline-white">Full Contact Page</a></div>
+                </div>
+                <div class="col-lg-7 reveal-right">
+                    <div class="contact-form-card">
+                        <h4>Send Us a Message</h4>
+                        <div class="mb-3"><label class="form-label">Your Name</label><input type="text" class="form-control" placeholder="e.g. Kwame Mensah"></div>
+                        <div class="mb-3"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="you@email.com"></div>
+                        <div class="mb-3"><label class="form-label">Message</label><textarea class="form-control" rows="4" placeholder="How can we help or pray for you?"></textarea></div>
+                        <button type="button" class="btn-submit">Send Message <i class="bi bi-send-fill ms-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <span class="footer-brand">Word <span>Transformation</span></span>
+                    <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="livestream.html" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <p class="footer-heading">Explore</p>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <p class="footer-heading">Ministry</p>
+                    <ul>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="smallgroups.html">Small Groups</a></li>
+                        <li><a href="volunteer.html">Volunteer</a></li>
+                        <li><a href="prayer.html">Prayer Wall</a></li>
+                        <li><a href="devotional.html">Devotional</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <p class="footer-heading">Service Times</p>
+                    <ul>
+                        <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
+                        <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-book me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Wednesday</strong> — 7:00 PM Bible Study</li>
+                        <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:1.5rem;"><i class="bi bi-chat-heart me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Friday</strong> — 6:30 PM Prayer Night</li>
+                    </ul>
+                    <a href="livestream.html" class="btn-live-nav" style="width:fit-content;"><span class="live-dot"></span> Watch Live Online</a>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <p class="footer-copy">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms &amp; Conditions</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================== GIVING MODAL ===================== -->
     <div id="givingModal" class="giving-overlay" onclick="if(event.target===this)closeGiving()">
         <div class="giving-modal">
             <button class="giving-close" onclick="closeGiving()" aria-label="Close">&times;</button>
-
             <div class="giving-header">
-                <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 0.75rem;">
-                    <rect x="11" y="0" width="6" height="34" rx="2" fill="#D4AF37"/>
-                    <rect x="0" y="10" width="28" height="6" rx="2" fill="#D4AF37"/>
+                <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto .75rem">
+                    <rect x="11" y="0" width="6" height="34" rx="2" fill="#C9A84C"/><rect x="0" y="10" width="28" height="6" rx="2" fill="#C9A84C"/>
                 </svg>
                 <h2 class="giving-title">Give Online</h2>
                 <p class="giving-sub">"Each of you should give what you have decided in your heart." — 2 Cor 9:7</p>
             </div>
-
             <div class="giving-body">
-
-                <!-- Step 1: Amount & Category -->
                 <div class="give-step" id="step-1">
                     <div class="give-field">
                         <label class="give-label">Giving category</label>
@@ -1914,455 +851,142 @@
                         </div>
                         <input type="hidden" id="give-category" value="Tithe">
                     </div>
-
                     <div class="give-field">
                         <label class="give-label">Amount (GH₵)</label>
-                        <div class="give-amount-wrap">
-                            <span class="give-currency">GH₵</span>
-                            <input type="number" id="give-amount" class="give-input give-amount-input" placeholder="0.00" min="1" step="0.01">
-                        </div>
+                        <div class="give-amount-wrap"><span class="give-currency">GH₵</span><input type="number" id="give-amount" class="give-input give-amount-input" placeholder="0.00" min="1" step="0.01"></div>
                     </div>
-
-                    <div class="give-field">
-                        <label class="give-label">Your name</label>
-                        <input type="text" id="give-name" class="give-input" placeholder="Full name">
-                    </div>
-
-                    <div class="give-field">
-                        <label class="give-label">Email address</label>
-                        <input type="email" id="give-email" class="give-input" placeholder="you@example.com">
-                    </div>
-
-                    <button class="give-next-btn" onclick="goToStep2()">
-                        Continue <i class="bi bi-arrow-right ms-1"></i>
-                    </button>
+                    <div class="give-field"><label class="give-label">Your name</label><input type="text" id="give-name" class="give-input" placeholder="Full name"></div>
+                    <div class="give-field"><label class="give-label">Email address</label><input type="email" id="give-email" class="give-input" placeholder="you@example.com"></div>
+                    <button class="give-next-btn" onclick="goToStep2()">Continue <i class="bi bi-arrow-right ms-1"></i></button>
                 </div>
-
-                <!-- Step 2: Payment Method -->
-                <div class="give-step" id="step-2" style="display:none;">
-                    <div class="give-summary-box">
-                        <span id="summary-category" class="give-summary-tag">Tithe</span>
-                        <span class="give-summary-amount">GH₵ <strong id="summary-amount">0.00</strong></span>
-                    </div>
-
+                <div class="give-step" id="step-2" style="display:none">
+                    <div class="give-summary-box"><span id="summary-category" class="give-summary-tag">Tithe</span><span class="give-summary-amount">GH₵ <strong id="summary-amount">0.00</strong></span></div>
                     <div class="give-field">
                         <label class="give-label">Select payment method</label>
                         <div class="give-method-grid">
-                            <button class="give-method active" onclick="selectMethod(this,'momo')" id="method-momo">
-                                <i class="bi bi-phone-fill give-method-icon"></i>
-                                <span>Mobile Money</span>
-                                <small>MTN · Vodafone · AirtelTigo</small>
-                            </button>
-                            <button class="give-method" onclick="selectMethod(this,'bank')" id="method-bank">
-                                <i class="bi bi-bank give-method-icon"></i>
-                                <span>Bank Transfer</span>
-                                <small>Direct bank deposit</small>
-                            </button>
+                            <button class="give-method active" onclick="selectMethod(this,'momo')"><i class="bi bi-phone-fill give-method-icon"></i><span>Mobile Money</span><small>MTN · Vodafone · AirtelTigo</small></button>
+                            <button class="give-method" onclick="selectMethod(this,'bank')"><i class="bi bi-bank give-method-icon"></i><span>Bank Transfer</span><small>Direct bank deposit</small></button>
                         </div>
                         <input type="hidden" id="give-method" value="momo">
                     </div>
-
-                    <!-- Mobile Money fields -->
                     <div id="momo-fields">
-                        <div class="give-field">
-                            <label class="give-label">Mobile network</label>
-                            <select id="give-network" class="give-input">
-                                <option value="">Select network</option>
-                                <option value="MTN">MTN Mobile Money</option>
-                                <option value="Vodafone">Vodafone Cash</option>
-                                <option value="AirtelTigo">AirtelTigo Money</option>
-                            </select>
-                        </div>
-                        <div class="give-field">
-                            <label class="give-label">Mobile Money number</label>
-                            <input type="tel" id="give-phone" class="give-input" placeholder="e.g. 024 000 0000">
-                        </div>
+                        <div class="give-field"><label class="give-label">Mobile network</label><select id="give-network" class="give-input"><option value="">Select network</option><option value="MTN">MTN Mobile Money</option><option value="Vodafone">Vodafone Cash</option><option value="AirtelTigo">AirtelTigo Money</option></select></div>
+                        <div class="give-field"><label class="give-label">Mobile Money number</label><input type="tel" id="give-phone" class="give-input" placeholder="e.g. 024 000 0000"></div>
                     </div>
-
-                    <!-- Bank Transfer fields -->
-                    <div id="bank-fields" style="display:none;">
+                    <div id="bank-fields" style="display:none">
                         <div class="give-bank-info">
                             <p class="give-bank-label">Transfer to this account</p>
                             <div class="give-bank-row"><span>Bank</span><strong>GCB Bank Ghana</strong></div>
                             <div class="give-bank-row"><span>Account name</span><strong>Word Transformation Church</strong></div>
                             <div class="give-bank-row"><span>Account number</span><strong>1234567890</strong></div>
                             <div class="give-bank-row"><span>Branch</span><strong>Accra Main Branch</strong></div>
-                            <p class="give-bank-note">Use your name as the payment reference, then fill in the reference number below after transfer.</p>
+                            <p class="give-bank-note">Use your name as the reference, then enter the transaction number below.</p>
                         </div>
-                        <div class="give-field">
-                            <label class="give-label">Transaction / reference number</label>
-                            <input type="text" id="give-reference" class="give-input" placeholder="e.g. TXN123456789">
-                        </div>
+                        <div class="give-field"><label class="give-label">Transaction / reference number</label><input type="text" id="give-reference" class="give-input" placeholder="e.g. TXN123456789"></div>
                     </div>
-
                     <div class="give-btn-row">
-                        <button class="give-back-btn" onclick="goToStep1()">
-                            <i class="bi bi-arrow-left me-1"></i> Back
-                        </button>
-                        <button class="give-submit-btn" onclick="submitGiving()">
-                            <i class="bi bi-heart-fill me-1"></i> Complete Gift
-                        </button>
+                        <button class="give-back-btn" onclick="goToStep1()"><i class="bi bi-arrow-left me-1"></i> Back</button>
+                        <button class="give-submit-btn" onclick="submitGiving()"><i class="bi bi-heart-fill me-1"></i> Complete Gift</button>
                     </div>
                 </div>
-
-                <!-- Step 3: Confirmation -->
-                <div class="give-step" id="step-3" style="display:none;">
+                <div class="give-step" id="step-3" style="display:none">
                     <div class="give-success">
-                        <div class="give-success-icon">
-                            <i class="bi bi-check-lg"></i>
-                        </div>
+                        <div class="give-success-icon"><i class="bi bi-check-lg"></i></div>
                         <h3 class="give-success-title">God bless you!</h3>
                         <p class="give-success-msg">Your giving of <strong>GH₵ <span id="confirm-amount"></span></strong> for <strong><span id="confirm-category"></span></strong> has been received. A confirmation will be sent to <span id="confirm-email"></span>.</p>
-                        <button class="give-next-btn" onclick="closeGiving()" style="margin-top:1.5rem;">Close</button>
+                        <button class="give-next-btn" onclick="closeGiving()" style="margin-top:1.5rem">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h5>Word Transformation Church</h5>
-                    <p class="text-white-50">Transforming lives through the power of God's Word.</p>
-                </div>
-                <div class="col-md-2 mb-4">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="index.html">Home</a></li>
-                        <li class="mb-2"><a href="#about">About</a></li>
-                        <li class="mb-2"><a href="#services">Services</a></li>
-                        <li class="mb-2"><a href="#events">Events</a></li>
-                        <li class="mb-2"><a href="blog.html">Blog</a></li>
-                        <li class="mb-2"><a href="livestream.html">Live Stream</a></li>
-                        <li class="mb-2"><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h5>Service Times</h5>
-                    <ul class="list-unstyled text-white-50">
-                        <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
-                        <li class="mb-2">Wednesday: 7:00 PM</li>
-                        <li class="mb-2">Friday: 6:30 PM</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h5>Follow Us</h5>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="text-center">
-                <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
-                <p class="mt-2" style="font-size:0.85rem;">
-                    <a href="privacy.html" class="text-white-50 me-3">Privacy Policy</a>
-                    <a href="terms.html" class="text-white-50 me-3">Terms &amp; Conditions</a>
-                    <a href="sitemap.html" class="text-white-50">Sitemap</a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Search JS -->
-    <script>
-    const SITE_PAGES = [
-        { title: 'Home',            url: 'index.html',       icon: 'bi-house-fill',           cat: 'Page',     iconClass: 'brown' },
-        { title: 'About Us',        url: 'about.html',       icon: 'bi-info-circle-fill',      cat: 'Page',     iconClass: 'brown' },
-        { title: 'Ministries',      url: 'ministries.html',  icon: 'bi-people-fill',           cat: 'Page',     iconClass: 'green' },
-        { title: 'Small Groups',    url: 'smallgroups.html', icon: 'bi-diagram-3-fill',        cat: 'Page',     iconClass: 'green' },
-        { title: 'Sermons',         url: 'sermons.html',     icon: 'bi-mic-fill',              cat: 'Page',     iconClass: 'brown' },
-        { title: 'Blog',            url: 'blog.html',        icon: 'bi-journal-text',          cat: 'Page',     iconClass: '' },
-        { title: 'Devotional',      url: 'devotional.html',  icon: 'bi-journal-bookmark-fill', cat: 'Page',     iconClass: 'green' },
-        { title: 'Events',          url: 'index.html#events',icon: 'bi-calendar-event-fill',   cat: 'Section',  iconClass: '' },
-        { title: 'Gallery',         url: 'gallery.html',     icon: 'bi-images',                cat: 'Page',     iconClass: '' },
-        { title: 'Volunteer',       url: 'volunteer.html',   icon: 'bi-hand-thumbs-up-fill',   cat: 'Page',     iconClass: 'green' },
-        { title: 'Contact Us',      url: 'contact.html',     icon: 'bi-envelope-fill',         cat: 'Page',     iconClass: 'brown' },
-        { title: 'Prayer Wall',     url: 'prayer.html',      icon: 'bi-hand-index-thumb-fill', cat: 'Page',     iconClass: 'green' },
-        { title: 'Join Live Stream',url: 'livestream.html',  icon: 'bi-youtube',               cat: 'Page',     iconClass: 'red'   },
-        { title: 'Give Online',     url: '#give',            icon: 'bi-heart-fill',            cat: 'Action',   iconClass: 'red'   },
-        { title: 'My Account',      url: 'portal.html',      icon: 'bi-person-circle',         cat: 'Page',     iconClass: 'brown' },
-        // Sermons
-        { title: 'When God\'s Silence Is His Answer', url: 'blog.html', icon: 'bi-book-fill', cat: 'Sermon', iconClass: 'brown', sub: 'John 11:1–44' },
-        { title: 'All Things Work Together',          url: 'blog.html', icon: 'bi-book-fill', cat: 'Sermon', iconClass: 'brown', sub: 'Romans 8:28' },
-        { title: 'Step Out of the Boat',              url: 'blog.html', icon: 'bi-book-fill', cat: 'Sermon', iconClass: 'brown', sub: 'Matthew 14:22–33' },
-        { title: 'The Power of Persistent Prayer',    url: 'prayer.html',icon: 'bi-book-fill',cat: 'Sermon', iconClass: 'brown', sub: 'Luke 18:1–8' },
-        // Services
-        { title: 'Sunday Service — 9:00 AM',  url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
-        { title: 'Sunday Service — 11:00 AM', url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
-        { title: 'Wednesday Bible Study — 7:00 PM', url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
-        { title: 'Friday Prayer Night — 6:30 PM',   url: 'index.html#services', icon: 'bi-clock-fill', cat: 'Service', iconClass: 'green' },
-    ];
-
-    function toggleSearch() {
-        const overlay = document.getElementById('searchOverlay');
-        const input   = document.getElementById('searchInput');
-        const isOpen  = overlay.classList.toggle('open');
-        if (isOpen) {
-            input.value = '';
-            document.getElementById('searchResults').innerHTML = renderHints();
-            setTimeout(() => input.focus(), 80);
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    }
-
-    function closeSearchOnBg(e) {
-        if (e.target === document.getElementById('searchOverlay')) toggleSearch();
-    }
-
-    function handleSearchKey(e) {
-        if (e.key === 'Escape') toggleSearch();
-    }
-
-    function runSearch(q) {
-        const results = document.getElementById('searchResults');
-        q = q.trim().toLowerCase();
-        if (!q) { results.innerHTML = renderHints(); return; }
-
-        const matches = SITE_PAGES.filter(p =>
-            p.title.toLowerCase().includes(q) ||
-            (p.cat  && p.cat.toLowerCase().includes(q)) ||
-            (p.sub  && p.sub.toLowerCase().includes(q))
-        ).slice(0, 7);
-
-        if (!matches.length) {
-            results.innerHTML = `<div class="search-empty"><i class="bi bi-search"></i>No results for "<strong>${escQ(q)}</strong>"<br><span style="font-size:0.8rem;">Try: sermons, prayer, events, give…</span></div>`;
-            return;
-        }
-
-        results.innerHTML = matches.map(p => `
-            <a class="search-result-item" href="${p.url}">
-                <div class="search-result-icon ${p.iconClass||''}"><i class="bi ${p.icon}"></i></div>
-                <div class="search-result-text">
-                    <div class="search-result-title">${highlight(p.title, q)}</div>
-                    <div class="search-result-sub">${p.sub || p.cat}</div>
-                </div>
-                <i class="bi bi-arrow-right search-result-arrow"></i>
-            </a>`).join('');
-    }
-
-    function renderHints() {
-        return `<div class="search-hints">
-            <span class="search-hint-label">Quick Links</span>
-            <div class="search-quick-links">
-                <a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a>
-                <a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a>
-                <a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live Stream</a>
-                <a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a>
-                <a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a>
-                <a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a>
-                <a class="search-quick-link" href="contact.html"><i class="bi bi-envelope-fill"></i> Contact</a>
-            </div>
-        </div>`;
-    }
-
-    function highlight(text, q) {
-        const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
-        return text.replace(re, '<mark style="background:rgba(212,175,55,0.3);border-radius:3px;padding:0 2px;">$1</mark>');
-    }
-    function escQ(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-    // Close on Escape key globally
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && document.getElementById('searchOverlay').classList.contains('open')) toggleSearch();
-    });
-    </script>
-
-    <!-- Hero particle system + YT fallback handler -->
-    <script>
-    (function(){
-        // ── Spawn floating gold particles ──
-        var container = document.getElementById('heroParticles');
-        if (container) {
-            for (var i = 0; i < 28; i++) {
-                (function(i){
-                    var s = document.createElement('span');
-                    var size = 2 + Math.random() * 5;
-                    s.style.cssText = [
-                        'left:' + (Math.random()*100) + '%',
-                        'width:' + size + 'px',
-                        'height:' + size + 'px',
-                        'animation-duration:' + (6 + Math.random()*14) + 's',
-                        'animation-delay:' + (Math.random()*10) + 's',
-                        'opacity:' + (0.3 + Math.random()*0.5),
-                        'background:rgba(' + (Math.random()>0.5?'212,175,55':'255,255,255') + ',' + (0.2+Math.random()*0.5) + ')'
-                    ].join(';');
-                    container.appendChild(s);
-                })(i);
-            }
-        }
-
-        // ── Video background: fade out the static fallback once video plays ──
-        var vid = document.getElementById('heroVideo');
-        var fallback = document.getElementById('heroFallback');
-        if (vid) {
-            // Collect all <source> srcs for manual cycling
-            var sources = Array.from(vid.querySelectorAll('source')).map(function(s){ return s.src; });
-            var srcIdx = 0;
-
-            function tryNextSource() {
-                srcIdx++;
-                if (srcIdx < sources.length) {
-                    vid.src = sources[srcIdx];
-                    vid.load();
-                    vid.play().catch(function(){});
-                } else {
-                    console.log('All hero video sources exhausted — showing animated fallback');
-                }
-            }
-
-            vid.addEventListener('playing', function(){
-                if (fallback) {
-                    fallback.style.transition = 'opacity 1.8s ease';
-                    fallback.style.opacity = '0';
-                }
-            });
-
-            vid.addEventListener('error', tryNextSource);
-
-            // Also set a timeout — if nothing plays in 5s try next
-            var playTimeout = setTimeout(function(){
-                if (vid.readyState < 2) tryNextSource();
-            }, 5000);
-
-            vid.addEventListener('playing', function(){ clearTimeout(playTimeout); });
-        }
-    })();
-    </script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Smooth Scroll & Countdown -->
     <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+    // ── Navbar scroll ──
+    window.addEventListener('scroll',function(){ document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60); });
 
-        // Countdown timer
-        function getNextSunday() {
-            var now = new Date();
-            var day = now.getDay();
-            var daysUntil = day === 0 ? 7 : 7 - day;
-            var next = new Date(now);
-            next.setDate(now.getDate() + daysUntil);
-            next.setHours(9, 0, 0, 0);
-            return next;
-        }
+    // ── Intersection Observer scroll reveals ──
+    var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); }); },{ threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){ obs.observe(el); });
 
-        function animateFlip(el, newVal) {
-            if (el.textContent !== newVal) {
-                el.classList.add('flip');
-                setTimeout(function() {
-                    el.textContent = newVal;
-                    el.classList.remove('flip');
-                }, 150);
-            }
-        }
+    // ── Hero particles ──
+    (function(){
+        var c=document.getElementById('heroParticles'); if(!c) return;
+        for(var i=0;i<28;i++){ (function(i){ var s=document.createElement('span'); var sz=2+Math.random()*5;
+            s.style.cssText=['left:'+(Math.random()*100)+'%','width:'+sz+'px','height:'+sz+'px','animation-duration:'+(7+Math.random()*14)+'s','animation-delay:'+(Math.random()*12)+'s','opacity:'+(0.2+Math.random()*0.5),'background:rgba('+(Math.random()>.5?'201,168,76':'255,255,255')+','+(0.2+Math.random()*0.4)+')'].join(';');
+            c.appendChild(s); })(i); }
+    })();
 
-        function cdTick() {
-            var now = new Date();
-            var diff = getNextSunday() - now;
-            if (diff <= 0) {
-                document.getElementById('cd-countdown').style.display = 'none';
-                document.getElementById('cd-done').style.display = 'block';
-                return;
-            }
-            var d = String(Math.floor(diff / 86400000)).padStart(2, '0');
-            var h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-            var m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            var s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            animateFlip(document.getElementById('cd-days'),  d);
-            animateFlip(document.getElementById('cd-hours'), h);
-            animateFlip(document.getElementById('cd-mins'),  m);
-            animateFlip(document.getElementById('cd-secs'),  s);
-        }
+    // ── Hero video fallback ──
+    (function(){
+        var vid=document.getElementById('heroVideo'); var fb=document.getElementById('heroFallback'); if(!vid) return;
+        var srcs=Array.from(vid.querySelectorAll('source')).map(function(s){ return s.src; }); var idx=0;
+        function tryNext(){ idx++; if(idx<srcs.length){ vid.src=srcs[idx]; vid.load(); vid.play().catch(function(){}); } }
+        vid.addEventListener('playing',function(){ if(fb){ fb.style.transition='opacity 2s ease'; fb.style.opacity='0'; } });
+        vid.addEventListener('error',tryNext);
+        setTimeout(function(){ if(vid.readyState<2) tryNext(); },5000);
+    })();
 
-        cdTick();
-        setInterval(cdTick, 1000);
+    // ── Countdown ──
+    function getNextSunday(){ var n=new Date(),d=n.getDay(),nx=new Date(n); nx.setDate(n.getDate()+(d===0?7:7-d)); nx.setHours(9,0,0,0); return nx; }
+    function animFlip(el,v){ if(el.textContent!==v){ el.classList.add('flip'); setTimeout(function(){ el.textContent=v; el.classList.remove('flip'); },150); } }
+    function cdTick(){ var diff=getNextSunday()-new Date(); if(diff<=0){ document.getElementById('cd-countdown').style.display='none'; document.getElementById('cd-done').style.display='block'; return; }
+        animFlip(document.getElementById('cd-days'),String(Math.floor(diff/86400000)).padStart(2,'0'));
+        animFlip(document.getElementById('cd-hours'),String(Math.floor((diff%86400000)/3600000)).padStart(2,'0'));
+        animFlip(document.getElementById('cd-mins'),String(Math.floor((diff%3600000)/60000)).padStart(2,'0'));
+        animFlip(document.getElementById('cd-secs'),String(Math.floor((diff%60000)/1000)).padStart(2,'0')); }
+    cdTick(); setInterval(cdTick,1000);
 
-        // Giving modal
-        function closeGiving() {
-            document.getElementById('givingModal').style.display = 'none';
-            resetGiving();
-        }
-        function resetGiving() {
-            document.getElementById('step-1').style.display = 'block';
-            document.getElementById('step-2').style.display = 'none';
-            document.getElementById('step-3').style.display = 'none';
-            document.getElementById('give-amount').value = '';
-            document.getElementById('give-name').value = '';
-            document.getElementById('give-email').value = '';
-            document.getElementById('give-phone').value = '';
-            document.getElementById('give-network').value = '';
-            document.getElementById('give-category').value = 'Tithe';
-            document.getElementById('give-method').value = 'momo';
-            document.querySelectorAll('.give-tab').forEach(function(t,i){ t.classList.toggle('active', i===0); });
-            document.querySelectorAll('.give-method').forEach(function(m,i){ m.classList.toggle('active', i===0); });
-            document.getElementById('momo-fields').style.display = 'block';
-            document.getElementById('bank-fields').style.display = 'none';
-        }
-        function selectTab(el, val) {
-            document.querySelectorAll('.give-tab').forEach(function(t){ t.classList.remove('active'); });
-            el.classList.add('active');
-            document.getElementById('give-category').value = val;
-        }
-        function selectMethod(el, val) {
-            document.querySelectorAll('.give-method').forEach(function(m){ m.classList.remove('active'); });
-            el.classList.add('active');
-            document.getElementById('give-method').value = val;
-            document.getElementById('momo-fields').style.display = val === 'momo' ? 'block' : 'none';
-            document.getElementById('bank-fields').style.display  = val === 'bank' ? 'block' : 'none';
-        }
-        function goToStep2() {
-            var amount = document.getElementById('give-amount').value;
-            var name   = document.getElementById('give-name').value.trim();
-            var email  = document.getElementById('give-email').value.trim();
-            if (!amount || parseFloat(amount) <= 0) { alert('Please enter a valid amount.'); return; }
-            if (!name)  { alert('Please enter your name.'); return; }
-            if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
-            document.getElementById('summary-amount').textContent = parseFloat(amount).toFixed(2);
-            document.getElementById('summary-category').textContent = document.getElementById('give-category').value;
-            document.getElementById('step-1').style.display = 'none';
-            document.getElementById('step-2').style.display = 'block';
-        }
-        function goToStep1() {
-            document.getElementById('step-2').style.display = 'none';
-            document.getElementById('step-1').style.display = 'block';
-        }
-        function submitGiving() {
-            var method = document.getElementById('give-method').value;
-            if (method === 'momo') {
-                if (!document.getElementById('give-network').value) { alert('Please select your mobile network.'); return; }
-                if (!document.getElementById('give-phone').value.trim()) { alert('Please enter your Mobile Money number.'); return; }
-            } else {
-                if (!document.getElementById('give-reference').value.trim()) { alert('Please enter your transaction reference number.'); return; }
-            }
-            document.getElementById('confirm-amount').textContent   = parseFloat(document.getElementById('give-amount').value).toFixed(2);
-            document.getElementById('confirm-category').textContent = document.getElementById('give-category').value;
-            document.getElementById('confirm-email').textContent    = document.getElementById('give-email').value.trim();
-            document.getElementById('step-2').style.display = 'none';
-            document.getElementById('step-3').style.display = 'block';
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeGiving();
-        });
+    // ── Giving Modal ──
+    function closeGiving(){ document.getElementById('givingModal').style.display='none'; resetGiving(); }
+    function resetGiving(){
+        document.getElementById('step-1').style.display='block'; document.getElementById('step-2').style.display='none'; document.getElementById('step-3').style.display='none';
+        ['give-amount','give-name','give-email','give-phone','give-reference'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+        document.getElementById('give-network').value=''; document.getElementById('give-category').value='Tithe'; document.getElementById('give-method').value='momo';
+        document.querySelectorAll('.give-tab').forEach(function(t,i){ t.classList.toggle('active',i===0); });
+        document.querySelectorAll('.give-method').forEach(function(m,i){ m.classList.toggle('active',i===0); });
+        document.getElementById('momo-fields').style.display='block'; document.getElementById('bank-fields').style.display='none';
+    }
+    function selectTab(el,v){ document.querySelectorAll('.give-tab').forEach(function(t){ t.classList.remove('active'); }); el.classList.add('active'); document.getElementById('give-category').value=v; }
+    function selectMethod(el,v){ document.querySelectorAll('.give-method').forEach(function(m){ m.classList.remove('active'); }); el.classList.add('active'); document.getElementById('give-method').value=v; document.getElementById('momo-fields').style.display=v==='momo'?'block':'none'; document.getElementById('bank-fields').style.display=v==='bank'?'block':'none'; }
+    function goToStep2(){ if(!document.getElementById('give-amount').value||parseFloat(document.getElementById('give-amount').value)<=0){ alert('Please enter a valid amount.'); return; } if(!document.getElementById('give-name').value.trim()){ alert('Please enter your name.'); return; } var e=document.getElementById('give-email').value.trim(); if(!e||!e.includes('@')){ alert('Please enter a valid email.'); return; } document.getElementById('summary-amount').textContent=parseFloat(document.getElementById('give-amount').value).toFixed(2); document.getElementById('summary-category').textContent=document.getElementById('give-category').value; document.getElementById('step-1').style.display='none'; document.getElementById('step-2').style.display='block'; }
+    function goToStep1(){ document.getElementById('step-2').style.display='none'; document.getElementById('step-1').style.display='block'; }
+    function submitGiving(){ if(document.getElementById('give-method').value==='momo'){ if(!document.getElementById('give-network').value){ alert('Please select your mobile network.'); return; } if(!document.getElementById('give-phone').value.trim()){ alert('Please enter your Mobile Money number.'); return; } } else { if(!document.getElementById('give-reference').value.trim()){ alert('Please enter your transaction reference number.'); return; } } document.getElementById('confirm-amount').textContent=parseFloat(document.getElementById('give-amount').value).toFixed(2); document.getElementById('confirm-category').textContent=document.getElementById('give-category').value; document.getElementById('confirm-email').textContent=document.getElementById('give-email').value.trim(); document.getElementById('step-2').style.display='none'; document.getElementById('step-3').style.display='block'; }
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeGiving(); });
+
+    // ── Site Search ──
+    var SITE_PAGES=[
+        {title:'Home',url:'index.html',icon:'bi-house-fill',cat:'Page',iconClass:'brown'},
+        {title:'About Us',url:'about.html',icon:'bi-info-circle-fill',cat:'Page',iconClass:'brown'},
+        {title:'Ministries',url:'ministries.html',icon:'bi-people-fill',cat:'Page',iconClass:'green'},
+        {title:'Small Groups',url:'smallgroups.html',icon:'bi-diagram-3-fill',cat:'Page',iconClass:'green'},
+        {title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},
+        {title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},
+        {title:'Devotional',url:'devotional.html',icon:'bi-journal-bookmark-fill',cat:'Page',iconClass:'green'},
+        {title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},
+        {title:'Gallery',url:'gallery.html',icon:'bi-images',cat:'Page',iconClass:''},
+        {title:'Volunteer',url:'volunteer.html',icon:'bi-hand-thumbs-up-fill',cat:'Page',iconClass:'green'},
+        {title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},
+        {title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},
+        {title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},
+        {title:'Give Online',url:'#give',icon:'bi-heart-fill',cat:'Action',iconClass:'red'},
+        {title:'My Account',url:'portal.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},
+        {title:"When God's Silence Is His Answer",url:'blog.html',icon:'bi-book-fill',cat:'Sermon',iconClass:'brown',sub:'John 11:1–44'},
+        {title:'All Things Work Together',url:'blog.html',icon:'bi-book-fill',cat:'Sermon',iconClass:'brown',sub:'Romans 8:28'},
+        {title:'Sunday Service — 9:00 AM',url:'index.html#services',icon:'bi-clock-fill',cat:'Service',iconClass:'green'},
+        {title:'Wednesday Bible Study — 7:00 PM',url:'index.html#services',icon:'bi-clock-fill',cat:'Service',iconClass:'green'},
+        {title:'Friday Prayer Night — 6:30 PM',url:'index.html#services',icon:'bi-clock-fill',cat:'Service',iconClass:'green'},
+    ];
+    function toggleSearch(){ var o=document.getElementById('searchOverlay'); var ip=document.getElementById('searchInput'); var open=o.classList.toggle('open'); if(open){ ip.value=''; document.getElementById('searchResults').innerHTML=renderHints(); setTimeout(function(){ ip.focus(); },80); document.body.style.overflow='hidden'; } else { document.body.style.overflow=''; } }
+    function handleSearchKey(e){ if(e.key==='Escape') toggleSearch(); }
+    function runSearch(q){ var r=document.getElementById('searchResults'); q=q.trim().toLowerCase(); if(!q){ r.innerHTML=renderHints(); return; } var m=SITE_PAGES.filter(function(p){ return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub.toLowerCase().includes(q)); }).slice(0,7); if(!m.length){ r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+escQ(q)+'"</div>'; return; } r.innerHTML=m.map(function(p){ return '<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+highlight(p.title,q)+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>'; }).join(''); }
+    function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a><a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a></div></div>'; }
+    function highlight(t,q){ return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark style="background:rgba(201,168,76,.3);border-radius:3px;padding:0 2px;">$1</mark>'); }
+    function escQ(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.getElementById('searchOverlay').classList.contains('open')) toggleSearch(); });
     </script>
 </body>
 </html>
