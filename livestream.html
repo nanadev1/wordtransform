@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Live | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="claudestyle.css">
+    <style>
+        body { background-color: var(--white); }
+
+        .live-banner { background: var(--accent-color); padding: 0.55rem 0; text-align: center; }
+        .live-banner-inner { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.82rem; font-weight: 600; color: #fff; letter-spacing: 0.06em; text-transform: uppercase; }
+        .live-banner-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: livePulse 1.2s infinite; }
+
+        .page-hero { background: linear-gradient(135deg, var(--deep-brown) 0%, #2E1F14 100%); padding: 5rem 0 4rem; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%); }
+        .page-hero-content { position: relative; }
+        .eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem,5vw,3.6rem); font-weight: 300; color: #F5F0E8; margin-bottom: 1rem; }
+        .page-hero p { font-size: 1.05rem; color: rgba(245,240,232,0.72); max-width: 520px; margin: 0 auto; }
+        .hero-div { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 1.5rem auto 0; max-width: 200px; }
+        .hero-div-line { flex: 1; height: 1px; background: rgba(212,175,55,0.4); }
+        .hero-div-dot { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; flex-shrink: 0; }
+
+        .stream-section { background: var(--white); padding: 3rem 0 4rem; }
+        .stream-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); display: block; margin-bottom: 0.5rem; }
+        .stream-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 300; color: var(--deep-brown); margin-bottom: 0.4rem; }
+        .stream-subtitle { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; }
+
+        .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background: #1A1008; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(74,55,40,0.18); border: 1px solid #EDE4D3; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .video-offline { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--deep-brown), #1A1008); color: rgba(245,240,232,0.7); text-align: center; padding: 2rem; }
+        .video-offline i { font-size: 4rem; color: #FF0000; margin-bottom: 1.25rem; opacity: 0.85; }
+        .video-offline h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 300; color: #F5F0E8; margin-bottom: 0.75rem; }
+        .video-offline p { font-size: 0.88rem; color: rgba(245,240,232,0.55); max-width: 380px; line-height: 1.7; margin-bottom: 1.5rem; }
+
+        .btn-yt { display: inline-flex; align-items: center; gap: 8px; background: #FF0000; color: #fff; padding: 0.65rem 1.5rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; text-decoration: none; }
+        .btn-yt:hover { background: #cc0000; color: #fff; transform: translateY(-2px); }
+
+        .config-panel { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 10px; padding: 1.25rem 1.5rem; margin-top: 1.25rem; }
+        .config-panel label { font-size: 0.78rem; font-weight: 500; color: #8B6B4A; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+        .config-input { background: var(--white); border: 1.5px solid #DDD4C5; border-radius: 8px; padding: 0.55rem 1rem; font-size: 0.88rem; color: var(--text-dark); width: 100%; outline: none; transition: border-color 0.25s; font-family: var(--body-font); }
+        .config-input:focus { border-color: var(--secondary-color); }
+        .config-input::placeholder { color: #bbb; }
+        .btn-load { background: var(--deep-brown); color: #F5F0E8; border: none; padding: 0.55rem 1.25rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .btn-load:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .config-hint { font-size: 0.74rem; color: var(--text-light); margin-top: 0.4rem; }
+
+        .sidebar-card { background: var(--light-bg); border: 1px solid #EDE4D3; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; }
+        .sidebar-card:last-child { margin-bottom: 0; }
+        .sidebar-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
+
+        .info-row { display: flex; align-items: flex-start; gap: 10px; padding: 0.6rem 0; border-bottom: 1px solid #EDE4D3; font-size: 0.88rem; color: var(--text-light); }
+        .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .info-row i { color: var(--secondary-color); font-size: 0.95rem; flex-shrink: 0; margin-top: 2px; }
+        .info-row strong { color: var(--text-dark); display: block; font-size: 0.82rem; }
+
+        .schedule-item { display: flex; align-items: center; gap: 12px; padding: 0.65rem 0; border-bottom: 1px solid #EDE4D3; }
+        .schedule-item:last-child { border-bottom: none; }
+        .schedule-dot { width: 8px; height: 8px; border-radius: 50%; background: #DDD4C5; flex-shrink: 0; }
+        .schedule-dot.active { background: var(--accent-color); box-shadow: 0 0 8px rgba(44,95,45,0.4); animation: livePulse 1.5s infinite; }
+        .schedule-day { font-size: 0.82rem; font-weight: 600; color: var(--text-dark); width: 100px; flex-shrink: 0; }
+        .schedule-time { font-size: 0.82rem; color: var(--text-light); }
+
+        .share-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 0.65rem 1rem; border-radius: 8px; border: 1px solid #DDD4C5; background: var(--white); color: var(--text-dark); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.25s ease; margin-bottom: 0.5rem; text-align: left; }
+        .share-btn:last-child { margin-bottom: 0; }
+        .share-btn:hover { background: var(--light-bg); border-color: #C8B89A; color: var(--deep-brown); }
+        .share-btn i { font-size: 1.1rem; }
+        .i-fb { color: #1877F2; } .i-wa { color: #25D366; } .i-tw { color: #1DA1F2; } .i-link { color: var(--secondary-color); }
+
+        .scripture-bar { background: var(--light-bg); border-top: 1px solid #EDE4D3; border-bottom: 1px solid #EDE4D3; padding: 2.5rem 0; text-align: center; }
+        .scripture-bar p { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; font-weight: 300; color: var(--deep-brown); max-width: 680px; margin: 0 auto 0.5rem; line-height: 1.6; }
+        .scripture-bar cite { font-size: 0.8rem; color: var(--secondary-color); font-style: normal; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+
+        .recent-section { background: var(--white); padding: 4rem 0; }
+        .section-label-sm { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--secondary-color); display: block; margin-bottom: 0.5rem; }
+        .section-heading { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--deep-brown); margin-bottom: 2rem; }
+
+        .past-card { background: var(--white); border: 1px solid #EDE4D3; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(139,94,60,0.06); }
+        .past-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(139,94,60,0.13); border-color: rgba(212,175,55,0.4); }
+        .past-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; }
+        .t1 { background: linear-gradient(135deg, var(--deep-brown), #1A1008); }
+        .t2 { background: linear-gradient(135deg, #1A3A5C, #0D2240); }
+        .t3 { background: linear-gradient(135deg, var(--accent-color), #1A3D1B); }
+        .play-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .past-card:hover .play-overlay { opacity: 1; }
+        .play-overlay i { font-size: 2.5rem; color: #fff; }
+        .past-duration { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+        .past-body { padding: 1.1rem 1.25rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+        .past-date { font-size: 0.74rem; color: var(--text-light); margin-bottom: 0.4rem; }
+        .past-title { font-size: 0.96rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; line-height: 1.35; }
+        .past-scripture { font-size: 0.78rem; color: var(--secondary-color); display: flex; align-items: center; gap: 5px; margin-top: auto; }
+        .btn-watch { display: inline-flex; align-items: center; gap: 6px; padding: 0.45rem 1rem; background: #FF0000; color: #fff; border-radius: 50px; font-size: 0.8rem; font-weight: 500; margin-top: 0.85rem; transition: all 0.25s ease; text-decoration: none; }
+        .btn-watch:hover { background: #cc0000; color: #fff; }
+
+        .prayer-section { background: var(--light-bg); padding: 4rem 0; }
+        .prayer-card { background: var(--white); border: 1px solid #EDE4D3; border-radius: 14px; padding: 2.5rem; text-align: center; max-width: 640px; margin: 0 auto; box-shadow: 0 4px 20px rgba(139,94,60,0.08); }
+        .prayer-icon { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.25rem; display: block; }
+        .prayer-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.75rem; }
+        .prayer-card > p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; }
+        .prayer-form { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+        .prayer-input { background: var(--light-bg); border: 1.5px solid #DDD4C5; border-radius: 8px; padding: 0.65rem 1rem; font-size: 0.88rem; color: var(--text-dark); font-family: var(--body-font); outline: none; resize: vertical; min-height: 100px; transition: border-color 0.25s; }
+        .prayer-input:focus { border-color: var(--accent-color); }
+        .prayer-input::placeholder { color: #bbb; }
+        .prayer-input.name-field { min-height: auto; resize: none; }
+        .btn-pray { background: var(--accent-color); color: #fff; border: none; padding: 0.7rem 1.75rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; align-self: center; display: flex; align-items: center; gap: 8px; }
+        .btn-pray:hover { background: #234d24; transform: translateY(-1px); }
+        .prayer-success { display: none; color: var(--accent-color); font-size: 0.9rem; text-align: center; padding: 0.5rem 0; font-weight: 500; }
+
+        @media(max-width:768px){
+            .navbar-collapse { background-color: var(--primary-color); padding: 1rem; border-radius: var(--border-radius); margin-top: 0.5rem; }
+            .prayer-card { padding: 1.75rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Live Banner -->
+<div class="live-banner" id="liveBanner">
+    <div class="live-banner-inner">
+        <span class="live-banner-dot"></span>
+        We're Live Now — Join Sunday Service in Progress
+        <span class="live-banner-dot"></span>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn-live-nav" href="livestream.html">
+                        <span class="live-dot"></span> Live Now
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="container">
+        <div class="page-hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>Join Us Live</h1>
+            <p>Stream our Sunday service live on YouTube from wherever you are in the world.</p>
+            <div class="hero-div">
+                <div class="hero-div-line"></div>
+                <div class="hero-div-dot"></div>
+                <div class="hero-div-line"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stream Section -->
+<section class="stream-section">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- Main Video -->
+            <div class="col-lg-8">
+                <span class="stream-eyebrow">Live Stream · Every Sunday</span>
+                <h2 class="stream-title">Sunday Morning Worship Service</h2>
+                <p class="stream-subtitle">Joining us from home? You're still part of the family. Welcome.</p>
+
+                <div class="video-wrapper" id="videoWrapper">
+                    <div class="video-offline" id="videoOffline">
+                        <i class="bi bi-youtube"></i>
+                        <h3>Service Not Yet Live</h3>
+                        <p>Our next live service begins Sunday at 9:00 AM. Enter your YouTube Channel ID below to connect the stream, or visit us directly on YouTube.</p>
+                        <a href="https://www.youtube.com" target="_blank" id="ytDirectLink" class="btn-yt">
+                            <i class="bi bi-youtube"></i> Visit Our YouTube Channel
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Config Panel -->
+                <div class="config-panel">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-sm">
+                            <label>YouTube Channel ID or Video ID</label>
+                            <input type="text" class="config-input" id="ytInput" placeholder="e.g. UCxxxxxxxxxxxxxxxx or a video ID">
+                            <p class="config-hint">YouTube Studio → Settings → Channel → Advanced Settings → Channel ID</p>
+                        </div>
+                        <div class="col-sm-auto">
+                            <button class="btn-load" onclick="loadStream()"><i class="bi bi-play-fill me-1"></i> Load Stream</button>
+                        </div>
+                    </div>
+                    <div class="row g-2 align-items-end mt-2">
+                        <div class="col-sm">
+                            <label>YouTube Channel URL (for direct link)</label>
+                            <input type="text" class="config-input" id="ytChannelUrl" placeholder="https://www.youtube.com/@YourChannel">
+                        </div>
+                        <div class="col-sm-auto">
+                            <button class="btn-load" style="background:#8B6B4A;" onclick="saveChannelUrl()"><i class="bi bi-save me-1"></i> Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+
+                <div class="sidebar-card">
+                    <span class="sidebar-label">Service Info</span>
+                    <div class="info-row"><i class="bi bi-geo-alt-fill"></i><div><strong>Location</strong>Word Transformation Church, Ghana</div></div>
+                    <div class="info-row"><i class="bi bi-clock-fill"></i><div><strong>Sunday Service</strong>9:00 AM & 11:00 AM (GMT)</div></div>
+                    <div class="info-row"><i class="bi bi-camera-video-fill"></i><div><strong>Live Stream</strong>YouTube Live · HD Quality</div></div>
+                    <div class="info-row"><i class="bi bi-phone-fill"></i><div><strong>Mobile Friendly</strong>Stream on any device</div></div>
+                </div>
+
+                <div class="sidebar-card">
+                    <span class="sidebar-label">Weekly Schedule</span>
+                    <div class="schedule-item">
+                        <div class="schedule-dot active" id="sundayDot"></div>
+                        <span class="schedule-day">Sunday</span>
+                        <span class="schedule-time">9:00 AM & 11:00 AM</span>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-dot"></div>
+                        <span class="schedule-day">Wednesday</span>
+                        <span class="schedule-time">7:00 PM · Bible Study</span>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-dot"></div>
+                        <span class="schedule-day">Friday</span>
+                        <span class="schedule-time">6:30 PM · Prayer Night</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <span class="sidebar-label">Share This Service</span>
+                    <button class="share-btn" onclick="shareLink('facebook')"><i class="bi bi-facebook i-fb"></i> Share on Facebook</button>
+                    <button class="share-btn" onclick="shareLink('whatsapp')"><i class="bi bi-whatsapp i-wa"></i> Share on WhatsApp</button>
+                    <button class="share-btn" onclick="shareLink('twitter')"><i class="bi bi-twitter i-tw"></i> Share on Twitter / X</button>
+                    <button class="share-btn" onclick="copyLink()"><i class="bi bi-link-45deg i-link"></i><span id="copyText">Copy Stream Link</span></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scripture Bar -->
+<div class="scripture-bar">
+    <div class="container">
+        <p>"Where two or three are gathered in my name, there am I among them."</p>
+        <cite>Matthew 18:20</cite>
+    </div>
+</div>
+
+<!-- Recent Sermons -->
+<section class="recent-section">
+    <div class="container">
+        <span class="section-label-sm">Watch Again</span>
+        <h2 class="section-heading">Recent Services</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="past-card">
+                    <div class="past-thumb t1"><i class="bi bi-book-half" style="color:rgba(212,175,55,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill"></i></div><span class="past-duration">48:22</span></div>
+                    <div class="past-body">
+                        <p class="past-date">March 9, 2025</p>
+                        <h4 class="past-title">When God's Silence Is His Answer</h4>
+                        <div class="past-scripture"><i class="bi bi-book"></i> John 11:1–44</div>
+                        <a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="past-card">
+                    <div class="past-thumb t2"><i class="bi bi-lightning-fill" style="color:rgba(100,160,255,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill"></i></div><span class="past-duration">52:10</span></div>
+                    <div class="past-body">
+                        <p class="past-date">March 2, 2025</p>
+                        <h4 class="past-title">All Things Work Together: Finding Purpose in Pain</h4>
+                        <div class="past-scripture"><i class="bi bi-book"></i> Romans 8:28</div>
+                        <a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="past-card">
+                    <div class="past-thumb t3"><i class="bi bi-water" style="color:rgba(130,220,140,0.8);"></i><div class="play-overlay"><i class="bi bi-play-circle-fill"></i></div><span class="past-duration">44:55</span></div>
+                    <div class="past-body">
+                        <p class="past-date">Feb 16, 2025</p>
+                        <h4 class="past-title">Step Out of the Boat: Faith That Moves in the Storm</h4>
+                        <div class="past-scripture"><i class="bi bi-book"></i> Matthew 14:22–33</div>
+                        <a href="blog.html" class="btn-watch"><i class="bi bi-play-fill"></i> Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="https://www.youtube.com" target="_blank" id="ytAllLink" class="btn-yt"><i class="bi bi-youtube"></i> View All Sermons on YouTube</a>
+        </div>
+    </div>
+</section>
+
+<!-- Prayer Request -->
+<section class="prayer-section">
+    <div class="container">
+        <div class="prayer-card">
+            <i class="bi bi-hand-index-thumb-fill prayer-icon"></i>
+            <h3>Send a Prayer Request</h3>
+            <p>Watching from home? Our prayer team is here. Submit your request and we will lift you up in prayer.</p>
+            <div class="prayer-form">
+                <input type="text" class="prayer-input name-field" placeholder="Your name (optional)" id="prayerName">
+                <textarea class="prayer-input" placeholder="Share your prayer request here..." id="prayerText"></textarea>
+                <button class="btn-pray" onclick="submitPrayer()"><i class="bi bi-send-fill"></i> Send Prayer Request</button>
+                <div class="prayer-success" id="prayerSuccess"><i class="bi bi-check-circle-fill me-2"></i>Received! Our team will pray for you. God bless you.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5>Word Transformation Church</h5>
+                <p class="text-white-50">Transforming lives through the power of God's Word.</p>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="index.html">Home</a></li>
+                    <li class="mb-2"><a href="index.html#about">About</a></li>
+                    <li class="mb-2"><a href="blog.html">Blog</a></li>
+                    <li class="mb-2"><a href="livestream.html">Live Stream</a></li>
+                    <li class="mb-2"><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Service Times</h5>
+                <ul class="list-unstyled text-white-50">
+                    <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
+                    <li class="mb-2">Wednesday: 7:00 PM</li>
+                    <li class="mb-2">Friday: 6:30 PM</li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Follow Us</h5>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function loadStream() {
+        const raw = document.getElementById('ytInput').value.trim();
+        if (!raw) { alert('Please enter a YouTube Channel ID or Video ID.'); return; }
+        const wrapper = document.getElementById('videoWrapper');
+        const src = raw.startsWith('UC') && raw.length > 10
+            ? `https://www.youtube.com/embed/live_stream?channel=${raw}&autoplay=1&rel=0`
+            : `https://www.youtube.com/embed/${raw}?autoplay=1&rel=0`;
+        wrapper.innerHTML = `<iframe src="${src}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        localStorage.setItem('wtc_yt_id', raw);
+    }
+
+    function saveChannelUrl() {
+        const url = document.getElementById('ytChannelUrl').value.trim();
+        if (url) {
+            document.querySelectorAll('#ytDirectLink, #ytAllLink').forEach(a => a.href = url);
+            localStorage.setItem('wtc_yt_url', url);
+            alert('Channel URL saved!');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const saved = localStorage.getItem('wtc_yt_id');
+        const savedUrl = localStorage.getItem('wtc_yt_url');
+        if (saved) document.getElementById('ytInput').value = saved;
+        if (savedUrl) {
+            document.getElementById('ytChannelUrl').value = savedUrl;
+            document.querySelectorAll('#ytDirectLink, #ytAllLink').forEach(a => a.href = savedUrl);
+        }
+    });
+
+    function shareLink(platform) {
+        const url = encodeURIComponent(window.location.href);
+        const msg = encodeURIComponent('Join Word Transformation Church live service now!');
+        const links = {
+            facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+            whatsapp: `https://api.whatsapp.com/send?text=${msg}%20${url}`,
+            twitter:  `https://twitter.com/intent/tweet?text=${msg}&url=${url}`
+        };
+        window.open(links[platform], '_blank', 'width=600,height=400');
+    }
+
+    function copyLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            const el = document.getElementById('copyText');
+            el.textContent = '✓ Copied!';
+            setTimeout(() => el.textContent = 'Copy Stream Link', 2000);
+        });
+    }
+
+    function submitPrayer() {
+        const text = document.getElementById('prayerText').value.trim();
+        if (!text) { alert('Please write your prayer request before sending.'); return; }
+        document.getElementById('prayerText').value = '';
+        document.getElementById('prayerName').value = '';
+        const s = document.getElementById('prayerSuccess');
+        s.style.display = 'block';
+        setTimeout(() => s.style.display = 'none', 5000);
+    }
+
+    // Live banner — green on Sunday service hours, brown otherwise
+    (function() {
+        const now  = new Date();
+        const day  = now.getUTCDay();
+        const mins = now.getUTCHours() * 60 + now.getUTCMinutes();
+        const isLive = day === 0 && mins >= 510 && mins <= 780;
+        if (!isLive) {
+            const b = document.getElementById('liveBanner');
+            b.style.background = '#4A3728';
+            b.innerHTML = `<div class="live-banner-inner"><i class="bi bi-calendar3 me-2"></i>Next Live Service: Sunday at 9:00 AM · All are welcome</div>`;
+        }
+    })();
+</script>
+</body>
+</html>

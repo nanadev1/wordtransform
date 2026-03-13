@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Sermon Notes | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --primary-dark: #6B4A2E;
+            --secondary-color: #D4AF37;
+            --accent-color: #2C5F2D;
+            --light-bg: #F9F6F0;
+            --dark-bg: #1A1A1A;
+            --deep-brown: #4A3728;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 8px;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        body { font-family: var(--body-font); color: var(--text-dark); background: var(--white); line-height: 1.6; }
+        h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); font-weight: 600; line-height: 1.3; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+
+        /* Navbar */
+        .navbar { background-color: var(--deep-brown); padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .navbar-brand { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 600; color: var(--white) !important; }
+        .navbar-brand i { color: var(--secondary-color); margin-right: 0.5rem; }
+        .navbar-nav .nav-link { color: rgba(255,255,255,0.88) !important; font-weight: 500; padding: 0.5rem 1rem !important; border-radius: var(--border-radius); transition: all 0.3s ease; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--white) !important; background: rgba(255,255,255,0.1); }
+        .btn-give { background: var(--secondary-color); color: var(--deep-brown); border: none; padding: 0.45rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; }
+        .btn-give:hover { background: #b8972e; transform: translateY(-2px); }
+        .btn-live { background: #FF0000; color: #fff; border: none; padding: 0.45rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-live:hover { background: #cc0000; transform: translateY(-2px); color: #fff; }
+        .live-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; flex-shrink: 0; }
+        @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+
+        /* Page Hero */
+        .page-hero { background: linear-gradient(135deg, var(--deep-brown) 0%, #2E1F14 100%); padding: 5rem 0 4rem; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%); }
+        .page-hero-content { position: relative; }
+        .eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
+        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 300; color: #F5F0E8; margin-bottom: 1rem; }
+        .page-hero p { font-size: 1.05rem; color: rgba(245,240,232,0.72); max-width: 520px; margin: 0 auto; }
+        .hero-div { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 1.5rem auto 0; max-width: 200px; }
+        .hero-div-line { flex: 1; height: 1px; background: rgba(212,175,55,0.4); }
+        .hero-div-dot { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; flex-shrink: 0; }
+
+        /* Filter Bar */
+        .filter-bar { background: var(--white); border-bottom: 1px solid #EDE4D3; padding: 1rem 0; position: sticky; top: 62px; z-index: 100; }
+        .filter-btn { padding: 0.4rem 1.1rem; border-radius: 50px; font-size: 0.82rem; font-weight: 500; border: 1.5px solid #D6C9B8; color: var(--text-light); background: transparent; cursor: pointer; transition: all 0.25s ease; }
+        .filter-btn:hover { border-color: var(--deep-brown); color: var(--deep-brown); }
+        .filter-btn.active { background: var(--deep-brown); border-color: var(--deep-brown); color: #F5F0E8; }
+        .search-input { border: 1.5px solid #D6C9B8; border-radius: 50px; padding: 0.4rem 1rem 0.4rem 2.5rem; font-size: 0.88rem; color: var(--text-dark); background: var(--light-bg); outline: none; transition: border-color 0.25s; width: 220px; }
+        .search-input:focus { border-color: var(--secondary-color); }
+        .search-wrap { position: relative; display: inline-block; }
+        .search-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 0.85rem; pointer-events: none; }
+
+        /* Featured Article */
+        .featured-section { padding: 3.5rem 0 2rem; background: var(--light-bg); }
+        .featured-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(74,55,40,0.1); display: flex; flex-direction: column; }
+        @media(min-width:768px){ .featured-card { flex-direction: row; } }
+        .featured-img { min-height: 280px; background: linear-gradient(135deg, #4A3728, #1A1008); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; overflow: hidden; }
+        @media(min-width:768px){ .featured-img { width: 45%; } }
+        .featured-img-inner { text-align: center; color: rgba(245,240,232,0.6); }
+        .featured-img-inner i { font-size: 5rem; display: block; margin-bottom: 0.5rem; }
+        .featured-badge { position: absolute; top: 16px; left: 16px; background: var(--secondary-color); color: var(--deep-brown); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; }
+        .featured-body { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
+        .featured-tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.75rem; display: block; }
+        .featured-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--deep-brown); line-height: 1.25; margin-bottom: 1rem; }
+        .featured-excerpt { font-size: 0.95rem; color: var(--text-light); line-height: 1.75; margin-bottom: 1.5rem; }
+        .featured-meta { font-size: 0.78rem; color: var(--text-light); display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+        .featured-meta i { color: var(--secondary-color); }
+        .btn-read { display: inline-flex; align-items: center; gap: 6px; background: var(--deep-brown); color: #F5F0E8; padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.88rem; font-weight: 500; transition: all 0.3s ease; }
+        .btn-read:hover { background: var(--primary-dark); color: #fff; transform: translateX(3px); }
+
+        /* Scripture Banner */
+        .scripture-banner { background: var(--deep-brown); padding: 2.5rem 0; text-align: center; }
+        .scripture-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; color: #F5F0E8; max-width: 700px; margin: 0 auto 0.5rem; line-height: 1.6; }
+        .scripture-ref { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); }
+
+        /* Blog Grid */
+        .blog-section { padding: 3.5rem 0 5rem; }
+        .section-header { margin-bottom: 2.5rem; }
+        .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.5rem; display: block; }
+        .section-heading { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--deep-brown); }
+
+        .blog-card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid #EDE4D3; box-shadow: 0 2px 8px rgba(139,94,60,0.06); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
+        .blog-card:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(139,94,60,0.13); }
+        .blog-card-img { position: relative; height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .blog-card-img.brown { background: linear-gradient(135deg, #F0EAE0, #E8D8C4); color: #8B5E3C; }
+        .blog-card-img.green { background: linear-gradient(135deg, #E4F0E4, #C8E0C8); color: #2C5F2D; }
+        .blog-card-img.gold  { background: linear-gradient(135deg, #FBF3DC, #F0E4A8); color: #7A5A00; }
+        .blog-card-img.navy  { background: linear-gradient(135deg, #E0E8F0, #C4D0E4); color: #1A3A5C; }
+        .blog-category-badge { position: absolute; top: 12px; left: 14px; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; }
+        .badge-sermon { background: #4A3728; color: #F5F0E8; }
+        .badge-devotion { background: #2C5F2D; color: #fff; }
+        .badge-teaching { background: #7A5A00; color: #fff; }
+        .badge-announcement { background: #1A3A5C; color: #fff; }
+        .blog-card-body { padding: 1.25rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+        .blog-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.74rem; color: var(--text-light); margin-bottom: 0.75rem; }
+        .blog-meta i { color: var(--secondary-color); }
+        .blog-title { font-size: 1.05rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; line-height: 1.35; }
+        .blog-excerpt { font-size: 0.87rem; color: var(--text-light); line-height: 1.65; flex: 1; margin-bottom: 1rem; }
+        .scripture-tag { font-size: 0.75rem; font-weight: 500; color: var(--secondary-color); display: inline-flex; align-items: center; gap: 5px; margin-bottom: 0.75rem; }
+        .blog-read-more { font-size: 0.84rem; font-weight: 500; color: #8B5E3C; display: inline-flex; align-items: center; gap: 4px; margin-top: auto; transition: all 0.2s ease; }
+        .blog-read-more:hover { color: var(--deep-brown); gap: 8px; }
+
+        /* Sermon Notes CTA */
+        .notes-cta { background: linear-gradient(135deg, #2C5F2D, #1A3D1B); padding: 4rem 0; text-align: center; }
+        .notes-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: #F5F0E8; margin-bottom: 1rem; }
+        .notes-cta p { color: rgba(245,240,232,0.75); max-width: 520px; margin: 0 auto 1.75rem; }
+        .btn-outline-light-custom { display: inline-flex; align-items: center; gap: 8px; padding: 0.65rem 1.75rem; border: 1.5px solid rgba(245,240,232,0.5); border-radius: 50px; color: #F5F0E8; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; }
+        .btn-outline-light-custom:hover { background: rgba(245,240,232,0.1); border-color: #F5F0E8; color: #F5F0E8; }
+
+        /* Newsletter */
+        .newsletter-section { background: var(--light-bg); padding: 4rem 0; }
+        .newsletter-card { background: var(--white); border-radius: 14px; padding: 2.5rem 3rem; box-shadow: 0 4px 20px rgba(74,55,40,0.08); max-width: 680px; margin: 0 auto; text-align: center; }
+        .newsletter-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.75rem; }
+        .newsletter-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; }
+        .newsletter-form { display: flex; gap: 10px; flex-wrap: wrap; }
+        .newsletter-input { flex: 1; min-width: 200px; border: 1.5px solid #D6C9B8; border-radius: 50px; padding: 0.6rem 1.2rem; font-size: 0.88rem; color: var(--text-dark); outline: none; transition: border-color 0.25s; }
+        .newsletter-input:focus { border-color: var(--secondary-color); }
+        .btn-subscribe { background: var(--secondary-color); color: var(--deep-brown); border: none; padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .btn-subscribe:hover { background: #b8972e; transform: translateY(-1px); }
+
+        /* Pagination */
+        .pagination-wrap { padding: 2rem 0 0; display: flex; justify-content: center; gap: 6px; }
+        .page-btn { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #D6C9B8; background: transparent; color: var(--text-light); font-size: 0.88rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; }
+        .page-btn.active, .page-btn:hover { background: var(--deep-brown); border-color: var(--deep-brown); color: #F5F0E8; }
+
+        /* Footer */
+        .footer { background-color: var(--dark-bg); color: var(--white); padding: 60px 0 30px; }
+        .footer h5 { color: var(--white); margin-bottom: 1.5rem; }
+        .footer a { color: rgba(255,255,255,0.7); }
+        .footer a:hover { color: var(--secondary-color); }
+        .footer hr { opacity: 0.2; margin: 2rem 0; }
+
+        @media(max-width:768px){
+            .navbar-collapse { background: var(--deep-brown); padding: 1rem; border-radius: var(--border-radius); margin-top: 0.5rem; }
+            .featured-body { padding: 1.5rem; }
+            .newsletter-card { padding: 1.75rem 1.5rem; }
+        }
+
+        /* Article Modal */
+        .article-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
+        .article-overlay.open { display: flex; }
+        .article-modal { background: var(--white); border-radius: 16px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; }
+        .article-modal-hero { background: linear-gradient(135deg, #4A3728, #1A1008); padding: 3rem 2.5rem 2rem; position: relative; }
+        .article-modal-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.75rem; display: block; }
+        .article-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: #F5F0E8; line-height: 1.3; margin-bottom: 1rem; }
+        .article-modal-meta { font-size: 0.78rem; color: rgba(245,240,232,0.6); display: flex; gap: 1rem; flex-wrap: wrap; }
+        .article-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); border: none; color: #F5F0E8; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; transition: background 0.2s; }
+        .article-close:hover { background: rgba(255,255,255,0.2); }
+        .article-body { padding: 2rem 2.5rem; }
+        .article-scripture { background: var(--light-bg); border-left: 3px solid var(--secondary-color); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--deep-brown); line-height: 1.7; }
+        .article-scripture cite { display: block; font-size: 0.8rem; font-style: normal; font-weight: 500; color: var(--text-light); margin-top: 0.5rem; }
+        .article-text { font-size: 0.95rem; color: var(--text-dark); line-height: 1.8; margin-bottom: 1rem; }
+        .article-points { list-style: none; padding: 0; margin: 1.25rem 0; }
+        .article-points li { display: flex; gap: 10px; font-size: 0.92rem; color: var(--text-dark); padding: 0.5rem 0; border-bottom: 1px solid #EDE4D3; line-height: 1.6; }
+        .article-points li:last-child { border-bottom: none; }
+        .article-points i { color: var(--secondary-color); flex-shrink: 0; margin-top: 3px; }
+        .article-prayer { background: linear-gradient(135deg, #2C5F2D10, #2C5F2D05); border: 1px solid #2C5F2D30; border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+        .article-prayer-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #2C5F2D; margin-bottom: 0.5rem; display: block; }
+        .article-prayer p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.75; font-style: italic; margin: 0; }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
+                <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="devotional.html">Devotional</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn-live" href="livestream.html">
+                        <span class="live-dot"></span> Join Live
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="container">
+        <div class="page-hero-content">
+            <span class="eyebrow">Word Transformation Church</span>
+            <h1>Sermons & Blog</h1>
+            <p>Sermon recaps, key notes, and devotionals to deepen your walk with God.</p>
+            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+    <div class="container d-flex flex-wrap align-items-center gap-2 justify-content-between">
+        <div class="d-flex flex-wrap gap-2">
+            <button class="filter-btn active" onclick="filterPosts('all', this)">All</button>
+            <button class="filter-btn" onclick="filterPosts('sermon', this)">Sermon Recaps</button>
+            <button class="filter-btn" onclick="filterPosts('teaching', this)">Teachings</button>
+            <button class="filter-btn" onclick="filterPosts('devotion', this)">Devotionals</button>
+        </div>
+        <div class="search-wrap">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search sermons..." oninput="searchPosts(this.value)">
+        </div>
+    </div>
+</div>
+
+<!-- Featured Article -->
+<section class="featured-section">
+    <div class="container">
+        <div class="featured-card">
+            <div class="featured-img">
+                <div class="featured-img-inner">
+                    <i class="bi bi-book-half"></i>
+                    <small>Featured Sermon</small>
+                </div>
+                <span class="featured-badge">✦ Featured</span>
+            </div>
+            <div class="featured-body">
+                <span class="featured-tag">Sermon Recap · Series: Walking in Faith</span>
+                <h2 class="featured-title">When God's Silence Is His Answer</h2>
+                <p class="featured-excerpt">In this powerful Sunday message, Pastor unpacks the story of Lazarus and reveals how God's delays are never denials. When we can't hear God's voice, He may be working in ways we cannot yet see — preparing a miracle greater than we asked for.</p>
+                <div class="featured-meta">
+                    <span><i class="bi bi-person-fill me-1"></i>Pastor Emmanuel Osei</span>
+                    <span><i class="bi bi-calendar3 me-1"></i>March 9, 2025</span>
+                    <span><i class="bi bi-book me-1"></i>John 11:1–44</span>
+                    <span><i class="bi bi-clock me-1"></i>8 min read</span>
+                </div>
+                <a href="#" class="btn-read" onclick="openArticle('featured'); return false;">
+                    Read Full Notes <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scripture Banner -->
+<div class="scripture-banner">
+    <div class="container">
+        <p class="scripture-text">"Your word is a lamp to my feet and a light to my path."</p>
+        <span class="scripture-ref">Psalm 119:105</span>
+    </div>
+</div>
+
+<!-- Blog Grid -->
+<section class="blog-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Recent Posts</span>
+            <h2 class="section-heading">Sermon Recaps & Notes</h2>
+        </div>
+
+        <div class="row g-4" id="blog-grid">
+
+            <!-- Post 1 -->
+            <div class="col-md-6 col-lg-4 blog-post" data-category="sermon">
+                <div class="blog-card">
+                    <div class="blog-card-img brown">
+                        <i class="bi bi-lightning-fill"></i>
+                        <span class="blog-category-badge badge-sermon">Sermon</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span><i class="bi bi-calendar3 me-1"></i>March 2, 2025</span>
+                            <span><i class="bi bi-clock me-1"></i>6 min read</span>
+                        </div>
+                        <div class="scripture-tag"><i class="bi bi-book"></i> Romans 8:28</div>
+                        <h3 class="blog-title">All Things Work Together: Finding Purpose in Pain</h3>
+                        <p class="blog-excerpt">God's redemptive plan doesn't exclude our suffering — it includes it. Key takeaways from Sunday's message on trusting God in every season.</p>
+                        <a href="#" class="blog-read-more" onclick="openArticle('post1'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="col-md-6 col-lg-4 blog-post" data-category="teaching">
+                <div class="blog-card">
+                    <div class="blog-card-img green">
+                        <i class="bi bi-tree-fill"></i>
+                        <span class="blog-category-badge badge-teaching">Teaching</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span><i class="bi bi-calendar3 me-1"></i>Feb 23, 2025</span>
+                            <span><i class="bi bi-clock me-1"></i>5 min read</span>
+                        </div>
+                        <div class="scripture-tag"><i class="bi bi-book"></i> Psalm 1:1–3</div>
+                        <h3 class="blog-title">Rooted and Fruitful: The Power of Meditating on God's Word</h3>
+                        <p class="blog-excerpt">What does it mean to meditate day and night? This midweek teaching explores practical disciplines for staying planted in Scripture.</p>
+                        <a href="#" class="blog-read-more" onclick="openArticle('post2'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="col-md-6 col-lg-4 blog-post" data-category="devotion">
+                <div class="blog-card">
+                    <div class="blog-card-img gold">
+                        <i class="bi bi-sunrise-fill"></i>
+                        <span class="blog-category-badge badge-devotion">Devotional</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span><i class="bi bi-calendar3 me-1"></i>Feb 19, 2025</span>
+                            <span><i class="bi bi-clock me-1"></i>3 min read</span>
+                        </div>
+                        <div class="scripture-tag"><i class="bi bi-book"></i> Isaiah 40:31</div>
+                        <h3 class="blog-title">Renewed Strength: A Morning Devotional for the Weary Soul</h3>
+                        <p class="blog-excerpt">When weariness sets in, God's invitation remains open. A short but powerful devotion to start your week anchored in His promises.</p>
+                        <a href="#" class="blog-read-more" onclick="openArticle('post3'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 4 -->
+            <div class="col-md-6 col-lg-4 blog-post" data-category="sermon">
+                <div class="blog-card">
+                    <div class="blog-card-img navy">
+                        <i class="bi bi-water"></i>
+                        <span class="blog-category-badge badge-sermon">Sermon</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span><i class="bi bi-calendar3 me-1"></i>Feb 16, 2025</span>
+                            <span><i class="bi bi-clock me-1"></i>7 min read</span>
+                        </div>
+                        <div class="scripture-tag"><i class="bi bi-book"></i> Matthew 14:22–33</div>
+                        <h3 class="blog-title">Step Out of the Boat: Faith That Moves in the Storm</h3>
+                        <p class="blog-excerpt">Peter's walk on water teaches us that miracles happen at the intersection of faith and obedience. Full recap and three action points.</p>
+                        <a href="#" class="blog-read-more" onclick="openArticle('post4'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 5 -->
+            <div class="col-md-6 col-lg-4 blog-post" data-category="teaching">
+                <div class="blog-card">
+                    <div class="blog-card-img brown">
+                        <i class="bi bi-shield-fill"></i>
+                        <span class="blog-category-badge badge-teaching">Teaching</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span><i class="bi bi-calendar3 me-1"></i>Feb 9, 2025</span>
+                            <span><i class="bi bi-clock me-1"></i>6 min read</span>
+                        </div>
+                        <div class="scripture-tag"><i class="bi bi-book"></i> Ephesians 6:10–18</div>
+                        <h3 class="blog-title">The Full Armor of God: Understanding Your Spiritual Equipment</h3>
+                        <p class="blog-excerpt">A verse-by-verse breakdown of the armor of God — what each piece means and how to put it on daily for spiritual victory.</p>
+                        <a href="#" class="blog-read-more" onclick="openArticle('post5'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 6 -->
+            <div class="col-md-6 col-lg-4 blog-post" data-category="devotion">
+                <div class="blog-card">
+                    <div class="blog-card-img green">
+                        <i class="bi bi-heart-fill"></i>
+                        <span class="blog-category-badge badge-devotion">Devotional</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-meta">
+                            <span><i class="bi bi-calendar3 me-1"></i>Feb 5, 2025</span>
+                            <span><i class="bi bi-clock me-1"></i>4 min read</span>
+                        </div>
+                        <div class="scripture-tag"><i class="bi bi-book"></i> Jeremiah 29:11</div>
+                        <h3 class="blog-title">God Has a Plan for You: Holding Onto Hope in Uncertainty</h3>
+                        <p class="blog-excerpt">Written for those in a season of waiting — this devotional is a reminder that God's plans for you are good, even when the path is unclear.</p>
+                        <a href="#" class="blog-read-more" onclick="openArticle('post6'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" style="display:none; text-align:center; padding:3rem 0; color:var(--text-light);">
+            <i class="bi bi-search" style="font-size:2.5rem; display:block; margin-bottom:1rem; color:#D6C9B8;"></i>
+            <p>No posts found. Try a different search or filter.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrap">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- Sermon Notes CTA -->
+<div class="notes-cta">
+    <div class="container">
+        <h2>Never Miss a Message</h2>
+        <p>Join us live every Sunday at 9:00 AM or stream the service on YouTube from anywhere in the world.</p>
+        <div class="d-flex flex-wrap gap-3 justify-content-center">
+            <a href="livestream.html" class="btn-read" style="background:#FF0000;">
+                <i class="bi bi-youtube me-1"></i> Watch Live on YouTube
+            </a>
+            <a href="index.html#services" class="btn-outline-light-custom">
+                <i class="bi bi-calendar3"></i> View Service Times
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-card">
+            <i class="bi bi-envelope-heart-fill" style="font-size:2rem; color:var(--secondary-color); margin-bottom:0.75rem; display:block;"></i>
+            <h3>Get Sermon Notes in Your Inbox</h3>
+            <p>Subscribe and receive weekly sermon recaps, key scriptures, and devotionals straight to your email.</p>
+            <div class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address">
+                <button class="btn-subscribe"><i class="bi bi-send-fill me-1"></i> Subscribe</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5>Word Transformation Church</h5>
+                <p class="text-white-50">Transforming lives through the power of God's Word.</p>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="index.html">Home</a></li>
+                    <li class="mb-2"><a href="index.html#about">About</a></li>
+                    <li class="mb-2"><a href="ministries.html">Ministries</a></li>
+                    <li class="mb-2"><a href="blog.html">Blog</a></li>
+                    <li class="mb-2"><a href="livestream.html">Live Stream</a></li>
+                    <li class="mb-2"><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Service Times</h5>
+                <ul class="list-unstyled text-white-50">
+                    <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
+                    <li class="mb-2">Wednesday: 7:00 PM</li>
+                    <li class="mb-2">Friday: 6:30 PM</li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Follow Us</h5>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Article Modal -->
+<div class="article-overlay" id="articleOverlay" onclick="closeArticleOnBg(event)">
+    <div class="article-modal" id="articleModal">
+        <div class="article-modal-hero">
+            <button class="article-close" onclick="closeArticle()"><i class="bi bi-x-lg"></i></button>
+            <span class="article-modal-tag" id="modal-tag">Sermon Recap</span>
+            <h2 class="article-modal-title" id="modal-title"></h2>
+            <div class="article-modal-meta" id="modal-meta"></div>
+        </div>
+        <div class="article-body" id="modal-body"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const articles = {
+    featured: {
+        tag: 'Sermon Recap · Series: Walking in Faith',
+        title: 'When God\'s Silence Is His Answer',
+        meta: '<span><i class="bi bi-person-fill me-1"></i>Pastor Emmanuel Osei</span><span><i class="bi bi-calendar3 me-1"></i>March 9, 2025</span><span><i class="bi bi-book me-1"></i>John 11:1–44</span>',
+        body: `
+            <blockquote class="article-scripture">"When Jesus heard that, he said, This sickness is not unto death, but for the glory of God, that the Son of God might be glorified thereby." <cite>— John 11:4</cite></blockquote>
+            <p class="article-text">This Sunday's message challenged us to reconsider what we call God's "silence." When Lazarus fell ill, Jesus received the news and deliberately stayed two more days. To those waiting, it looked like absence. But Jesus called it purpose.</p>
+            <p class="article-text"><strong>3 Key Truths from the Message:</strong></p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span><strong>God's delays are not denials.</strong> The same God who could have prevented the death chose resurrection instead — because He had a greater miracle in mind.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Silence is not absence.</strong> Jesus said "I am the resurrection" — present tense. He is never far, even when you can't feel Him.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Your testimony is being prepared.</strong> Lazarus's story didn't end at death. Neither will yours. Trust the Author.</span></li>
+            </ul>
+            <p class="article-text">The sermon closed with an altar call for those in "a four-day situation" — seasons that seem too far gone. The church responded powerfully in prayer and worship.</p>
+            <div class="article-prayer">
+                <span class="article-prayer-label">This Week's Prayer</span>
+                <p>Lord, when I cannot hear You, help me trust that You are still working. Teach me to rest in Your silence, knowing that resurrection is on the way. Amen.</p>
+            </div>`
+    },
+    post1: {
+        tag: 'Sermon Recap',
+        title: 'All Things Work Together: Finding Purpose in Pain',
+        meta: '<span><i class="bi bi-calendar3 me-1"></i>March 2, 2025</span><span><i class="bi bi-book me-1"></i>Romans 8:28</span>',
+        body: `
+            <blockquote class="article-scripture">"And we know that all things work together for good to them that love God, to them who are the called according to his purpose." <cite>— Romans 8:28</cite></blockquote>
+            <p class="article-text">Sunday's message brought tremendous comfort to hearts in pain. The truth of Romans 8:28 is not that God causes suffering — but that He redeems it. Every broken piece of your story is in His hands.</p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span>God doesn't waste any experience in your life — even the ones that hurt the most.</span></li>
+                <li><i class="bi bi-gem"></i><span>Purpose and pain can coexist. The cross is proof of that.</span></li>
+                <li><i class="bi bi-gem"></i><span>The phrase "we know" is an anchor — not a feeling but a conviction built on God's track record.</span></li>
+            </ul>
+            <div class="article-prayer"><span class="article-prayer-label">Prayer</span><p>Father, I surrender my pain to You. I trust that You are weaving it into something beautiful. Help me to see Your hand even in what I don't understand. Amen.</p></div>`
+    },
+    post2: {
+        tag: 'Teaching',
+        title: 'Rooted and Fruitful: The Power of Meditating on God\'s Word',
+        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 23, 2025</span><span><i class="bi bi-book me-1"></i>Psalm 1:1–3</span>',
+        body: `
+            <blockquote class="article-scripture">"But his delight is in the law of the Lord; and in his law doth he meditate day and night. And he shall be like a tree planted by the rivers of water..." <cite>— Psalm 1:2–3</cite></blockquote>
+            <p class="article-text">Midweek teaching unpacked what true meditation on God's Word looks like — and it's not emptying your mind, but filling it with truth. The blessed person of Psalm 1 is defined by what they delight in and dwell on.</p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span><strong>Meditate = murmur.</strong> The Hebrew word for "meditate" is hagah — to murmur or whisper. Read Scripture aloud to yourself.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Day and night</strong> — not occasional, but rhythmic. Build morning and evening time with the Word.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Fruit comes in season.</strong> Don't rush. Stay planted and trust the process.</span></li>
+            </ul>
+            <div class="article-prayer"><span class="article-prayer-label">This Week's Challenge</span><p>Pick one verse this week. Read it morning and evening. Write it on a card. Let it sink deep. Watch what begins to grow.</p></div>`
+    },
+    post3: {
+        tag: 'Devotional',
+        title: 'Renewed Strength: A Morning Devotional for the Weary Soul',
+        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 19, 2025</span><span><i class="bi bi-book me-1"></i>Isaiah 40:31</span>',
+        body: `
+            <blockquote class="article-scripture">"But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles..." <cite>— Isaiah 40:31</cite></blockquote>
+            <p class="article-text">Some mornings you wake up tired — not just in body, but in spirit. God wrote this verse for you. Waiting on the Lord is not passive resignation; it's active expectation, like a soldier at attention.</p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span><strong>Wait</strong> — qavah in Hebrew means to bind together, like a rope twisted for strength. Your waiting braids you with God.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Renew</strong> — a fresh exchange. You bring your weariness; He gives His strength.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Mount up</strong> — eagles don't flap to rise. They spread their wings and let the wind carry them. Let the Spirit carry you today.</span></li>
+            </ul>
+            <div class="article-prayer"><span class="article-prayer-label">Morning Prayer</span><p>Lord, I am tired, but I am Yours. Today I choose to wait on You. Exchange my weakness for Your strength. Let me soar on wings I did not earn. Amen.</p></div>`
+    },
+    post4: {
+        tag: 'Sermon Recap',
+        title: 'Step Out of the Boat: Faith That Moves in the Storm',
+        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 16, 2025</span><span><i class="bi bi-book me-1"></i>Matthew 14:22–33</span>',
+        body: `
+            <blockquote class="article-scripture">"And Peter answered him and said, Lord, if it be thou, bid me come unto thee on the water. And he said, Come." <cite>— Matthew 14:28–29</cite></blockquote>
+            <p class="article-text">Peter's walk on water is often remembered for the sinking — but let's not forget the walking. Of twelve disciples, only Peter stepped out. He is the only human in history to walk on water, and it happened in a storm.</p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span>Faith requires a "Come." Are you waiting for God's invitation before you step? He gives it when you ask.</span></li>
+                <li><i class="bi bi-gem"></i><span>You can walk on what should swallow you — if your eyes are on Jesus.</span></li>
+                <li><i class="bi bi-gem"></i><span>Even when you sink, Jesus reaches. His hand is faster than the wave.</span></li>
+            </ul>
+            <div class="article-prayer"><span class="article-prayer-label">Action Points</span><p>1. Identify the boat you're afraid to leave. 2. Ask Jesus for a "Come." 3. Step — and keep your gaze on Him, not the storm around you.</p></div>`
+    },
+    post5: {
+        tag: 'Teaching',
+        title: 'The Full Armor of God: Understanding Your Spiritual Equipment',
+        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 9, 2025</span><span><i class="bi bi-book me-1"></i>Ephesians 6:10–18</span>',
+        body: `
+            <blockquote class="article-scripture">"Put on the whole armour of God, that ye may be able to stand against the wiles of the devil." <cite>— Ephesians 6:11</cite></blockquote>
+            <p class="article-text">Paul wrote this from prison, surrounded by Roman soldiers — and he used what he saw to teach the church. Every piece of Roman armor became a metaphor for spiritual readiness.</p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span><strong>Belt of Truth</strong> — Truth is foundational. Without it, everything else shifts.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Breastplate of Righteousness</strong> — Protects the heart. Your standing before God is your protection.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Shield of Faith</strong> — Quenches fiery darts. Every doubt, fear, and accusation — faith deflects them.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Helmet of Salvation</strong> — Guards your mind. Know who you are in Christ.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>Sword of the Spirit</strong> — The Word of God. The only offensive weapon. Use it daily.</span></li>
+            </ul>
+            <div class="article-prayer"><span class="article-prayer-label">Daily Declaration</span><p>I put on the full armor of God today. I stand in His truth, His righteousness, His peace, His faith, His salvation, and His Word. No weapon formed against me shall prosper. Amen.</p></div>`
+    },
+    post6: {
+        tag: 'Devotional',
+        title: 'God Has a Plan for You: Holding Onto Hope in Uncertainty',
+        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 5, 2025</span><span><i class="bi bi-book me-1"></i>Jeremiah 29:11</span>',
+        body: `
+            <blockquote class="article-scripture">"For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end." <cite>— Jeremiah 29:11</cite></blockquote>
+            <p class="article-text">This verse was written to people in exile — far from home, confused, and waiting. It was not written to people who had it all figured out. It was written for you, right where you are.</p>
+            <ul class="article-points">
+                <li><i class="bi bi-gem"></i><span><strong>"I know"</strong> — God doesn't guess. He is intimately aware of your situation, your fear, and your future.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>"Thoughts of peace"</strong> — His intentions toward you are good. Always have been. Always will be.</span></li>
+                <li><i class="bi bi-gem"></i><span><strong>"Expected end"</strong> — Hope and a future. Not just survival — a destination worth anticipating.</span></li>
+            </ul>
+            <div class="article-prayer"><span class="article-prayer-label">Prayer for the Waiting Season</span><p>Lord, I don't always understand the path, but I trust the One who holds it. Your plans for me are good. I choose hope today. Lead me forward in Your peace. Amen.</p></div>`
+    }
+};
+
+function openArticle(id) {
+    const a = articles[id];
+    if (!a) return;
+    document.getElementById('modal-tag').textContent = a.tag;
+    document.getElementById('modal-title').textContent = a.title;
+    document.getElementById('modal-meta').innerHTML = a.meta;
+    document.getElementById('modal-body').innerHTML = a.body;
+    document.getElementById('articleOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeArticle() {
+    document.getElementById('articleOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+function closeArticleOnBg(e) {
+    if (e.target === document.getElementById('articleOverlay')) closeArticle();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
+
+function filterPosts(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const posts = document.querySelectorAll('.blog-post');
+    let visible = 0;
+    posts.forEach(p => {
+        const show = cat === 'all' || p.dataset.category === cat;
+        p.style.display = show ? '' : 'none';
+        if (show) visible++;
+    });
+    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function searchPosts(q) {
+    const posts = document.querySelectorAll('.blog-post');
+    let visible = 0;
+    posts.forEach(p => {
+        const text = p.textContent.toLowerCase();
+        const show = text.includes(q.toLowerCase());
+        p.style.display = show ? '' : 'none';
+        if (show) visible++;
+    });
+    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
