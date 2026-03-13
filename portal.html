@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Portal | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B5E3C;
+            --primary-dark: #6B4A2E;
+            --secondary-color: #D4AF37;
+            --accent-color: #2C5F2D;
+            --light-bg: #F9F6F0;
+            --dark-bg: #1A1A1A;
+            --deep-brown: #4A3728;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-dark);
+            background: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); font-weight: 600; line-height: 1.3; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+
+        /* ── Navbar ── */
+        .navbar {
+            background-color: var(--deep-brown);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .navbar-brand { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 600; color: var(--white) !important; }
+        .navbar-brand i { color: var(--secondary-color); margin-right: 0.5rem; }
+        .navbar-nav .nav-link { color: rgba(255,255,255,0.88) !important; font-weight: 500; padding: 0.5rem 1rem !important; border-radius: var(--border-radius); transition: all 0.3s ease; }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--white) !important; background: rgba(255,255,255,0.1); }
+        .btn-give { background: var(--secondary-color); color: var(--deep-brown); border: none; padding: 0.45rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; }
+        .btn-give:hover { background: #b8972e; transform: translateY(-2px); }
+
+        /* ── Auth Pages (Login / Register) ── */
+        .auth-wrap {
+            min-height: calc(100vh - 66px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, #2E1F14 100%);
+        }
+        .auth-card {
+            background: var(--white);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 440px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .auth-header {
+            background: var(--deep-brown);
+            padding: 2rem;
+            text-align: center;
+        }
+        .auth-logo { width: 48px; height: 48px; margin: 0 auto 0.75rem; }
+        .auth-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 300;
+            color: #F5F0E8;
+            margin-bottom: 0.3rem;
+        }
+        .auth-header p { font-size: 0.82rem; color: rgba(245,240,232,0.65); margin: 0; }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid #EDE4D3;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 0.9rem;
+            text-align: center;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .auth-tab.active { color: var(--deep-brown); border-bottom-color: var(--secondary-color); }
+
+        .auth-body { padding: 1.75rem 2rem 2rem; }
+
+        .auth-form { display: none; }
+        .auth-form.active { display: block; }
+
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; color: var(--text-light); margin-bottom: 0.4rem; text-transform: uppercase; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 1.5px solid #DDD4C5;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            background: var(--white);
+            outline: none;
+            transition: border-color 0.2s ease;
+            font-family: var(--body-font);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--secondary-color); }
+        .input-icon-wrap { position: relative; }
+        .input-icon-wrap i { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 0.9rem; cursor: pointer; }
+
+        .btn-auth {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--deep-brown);
+            color: #F5F0E8;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+        .btn-auth:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+        .auth-divider { display: flex; align-items: center; gap: 10px; margin: 1.25rem 0; }
+        .auth-divider-line { flex: 1; height: 1px; background: #EDE4D3; }
+        .auth-divider span { font-size: 0.75rem; color: var(--text-light); }
+
+        .auth-footer-text { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 1.25rem; }
+        .auth-footer-text a { color: var(--primary-color); font-weight: 500; }
+
+        /* ── Dashboard Layout ── */
+        .portal-layout { display: none; min-height: calc(100vh - 66px); }
+        .portal-layout.active { display: flex; }
+
+        .portal-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            background: var(--deep-brown);
+            min-height: calc(100vh - 66px);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 66px;
+            height: calc(100vh - 66px);
+            overflow-y: auto;
+        }
+
+        .sidebar-user {
+            padding: 1rem 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1rem;
+        }
+        .sidebar-avatar {
+            width: 52px; height: 52px;
+            background: rgba(212,175,55,0.25);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.75rem;
+        }
+        .sidebar-user h6 { color: #F5F0E8; font-size: 0.95rem; margin-bottom: 2px; }
+        .sidebar-user small { color: rgba(245,240,232,0.55); font-size: 0.75rem; }
+        .member-badge {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            background: rgba(212,175,55,0.2);
+            color: var(--secondary-color);
+            border-radius: 50px;
+            margin-top: 5px;
+        }
+
+        .sidebar-nav { list-style: none; padding: 0 0.75rem; }
+        .sidebar-nav li { margin-bottom: 2px; }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            color: rgba(245,240,232,0.75);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .sidebar-nav a i { font-size: 1rem; width: 18px; }
+        .sidebar-nav a:hover { background: rgba(255,255,255,0.08); color: #F5F0E8; }
+        .sidebar-nav a.active { background: rgba(212,175,55,0.18); color: var(--secondary-color); }
+        .sidebar-nav .nav-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 0.75rem 0.85rem; }
+
+        .portal-main { flex: 1; padding: 2rem; overflow-x: hidden; }
+
+        /* ── Dashboard Panels ── */
+        .dash-panel { display: none; }
+        .dash-panel.active { display: block; }
+
+        .dash-welcome {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 300;
+            color: var(--deep-brown);
+            margin-bottom: 0.25rem;
+        }
+        .dash-sub { font-size: 0.88rem; color: var(--text-light); margin-bottom: 2rem; }
+
+        .stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 2rem; }
+        .stat-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 10px;
+            padding: 1.25rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .stat-card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 4px; }
+        .stat-card-icon.brown { background: #F0EAE0; color: #8B5E3C; }
+        .stat-card-icon.gold  { background: #FBF3DC; color: #7A5A00; }
+        .stat-card-icon.green { background: #E4F0E4; color: #2C5F2D; }
+        .stat-card-icon.blue  { background: #E8F0FB; color: #1a5fa5; }
+        .stat-card-value { font-size: 1.6rem; font-weight: 600; color: var(--deep-brown); font-family: var(--heading-font); line-height: 1; }
+        .stat-card-label { font-size: 0.75rem; color: var(--text-light); }
+
+        .panel-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .panel-card-header {
+            padding: 1rem 1.4rem;
+            border-bottom: 1px solid #EDE4D3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .panel-card-header h5 { font-size: 1rem; color: var(--deep-brown); margin: 0; }
+        .panel-card-header a { font-size: 0.8rem; color: var(--primary-color); }
+        .panel-card-body { padding: 1.25rem 1.4rem; }
+
+        /* Giving history table */
+        .giving-table { width: 100%; font-size: 0.85rem; }
+        .giving-table th { color: var(--text-light); font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0 0 0.75rem; border-bottom: 1px solid #EDE4D3; }
+        .giving-table td { padding: 0.75rem 0; border-bottom: 1px solid #F5F0E8; color: var(--text-dark); vertical-align: middle; }
+        .giving-table tr:last-child td { border-bottom: none; }
+        .giving-status { display: inline-block; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; font-weight: 500; }
+        .giving-status.confirmed { background: #E4F0E4; color: #2C5F2D; }
+        .giving-status.pending   { background: #FBF3DC; color: #7A5A00; }
+        .giving-category-badge { display: inline-block; padding: 2px 8px; border-radius: 50px; font-size: 0.7rem; background: #F0EAE0; color: #8B5E3C; }
+
+        /* Events list */
+        .event-list-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid #F5F0E8;
+        }
+        .event-list-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .event-list-date {
+            width: 44px; flex-shrink: 0;
+            background: var(--light-bg);
+            border-radius: 8px;
+            text-align: center;
+            padding: 0.4rem;
+        }
+        .event-list-date .d { font-family: var(--heading-font); font-size: 1.2rem; color: var(--deep-brown); line-height: 1; }
+        .event-list-date .m { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
+        .event-list-info h6 { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 3px; }
+        .event-list-info small { font-size: 0.75rem; color: var(--text-light); }
+
+        /* Prayer request form */
+        .prayer-tag-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0.75rem; }
+        .prayer-tag {
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            border: 1.5px solid #DDD4C5;
+            background: var(--white);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .prayer-tag:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .prayer-tag.active { background: var(--deep-brown); border-color: var(--deep-brown); color: var(--white); }
+
+        .prayer-list-item {
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--secondary-color);
+        }
+        .prayer-list-item:last-child { margin-bottom: 0; }
+        .prayer-list-item p { font-size: 0.88rem; color: var(--text-dark); margin-bottom: 0.4rem; }
+        .prayer-list-item small { font-size: 0.73rem; color: var(--text-light); }
+
+        /* Profile form */
+        .profile-avatar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.75rem;
+            border-bottom: 1px solid #EDE4D3;
+        }
+        .profile-avatar {
+            width: 72px; height: 72px;
+            background: #F0EAE0;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            color: #8B5E3C;
+            flex-shrink: 0;
+        }
+        .profile-avatar-info h5 { font-size: 1.1rem; color: var(--deep-brown); margin-bottom: 3px; }
+        .profile-avatar-info small { font-size: 0.78rem; color: var(--text-light); }
+        .btn-change-photo {
+            margin-top: 8px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border: 1px solid #DDD4C5;
+            border-radius: 6px;
+            background: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .btn-change-photo:hover { background: var(--light-bg); }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .btn-save {
+            padding: 0.65rem 1.75rem;
+            background: var(--deep-brown);
+            color: #F5F0E8;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-save:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-save-gold {
+            padding: 0.65rem 1.75rem;
+            background: var(--secondary-color);
+            color: var(--deep-brown);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-save-gold:hover { background: #b8972e; transform: translateY(-1px); }
+
+        /* Toast */
+        .toast-wrap {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            z-index: 9999;
+        }
+        .toast-msg {
+            background: var(--deep-brown);
+            color: #F5F0E8;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.3s ease;
+        }
+        .toast-msg.show { opacity: 1; transform: translateY(0); }
+
+        /* Footer */
+        .footer { background-color: var(--dark-bg); color: var(--white); padding: 60px 0 30px; }
+        .footer h5 { color: var(--white); margin-bottom: 1.5rem; }
+        .footer a { color: rgba(255,255,255,0.7); transition: all 0.3s ease; }
+        .footer a:hover { color: var(--secondary-color); }
+        .footer hr { opacity: 0.2; margin: 2rem 0; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .portal-layout { flex-direction: column; }
+            .portal-sidebar { width: 100%; min-height: auto; position: static; height: auto; padding: 1rem; }
+            .sidebar-nav { display: flex; overflow-x: auto; gap: 4px; padding: 0; }
+            .sidebar-nav li { margin-bottom: 0; }
+            .sidebar-nav a { white-space: nowrap; padding: 0.5rem 0.85rem; }
+            .sidebar-user { display: none; }
+            .stat-cards { grid-template-columns: 1fr 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .navbar-collapse { background: var(--deep-brown); padding: 1rem; border-radius: var(--border-radius); margin-top: 0.5rem; }
+        }
+    
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-church"></i> Word Transformation
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link active" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ══ AUTH SCREEN ══ -->
+    <div class="auth-wrap" id="authWrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <svg class="auth-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="2" width="8" height="44" rx="2" fill="#D4AF37"/>
+                    <rect x="4" y="14" width="40" height="8" rx="2" fill="#D4AF37"/>
+                </svg>
+                <h2>Member Portal</h2>
+                <p>Word Transformation Church</p>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuth('login', this)">Sign In</button>
+                <button class="auth-tab" onclick="switchAuth('register', this)">Create Account</button>
+            </div>
+            <div class="auth-body">
+
+                <!-- Login Form -->
+                <div class="auth-form active" id="loginForm">
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" id="login-email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon-wrap">
+                            <input type="password" id="login-password" placeholder="Your password">
+                            <i class="bi bi-eye" onclick="togglePass('login-password', this)"></i>
+                        </div>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; margin-bottom:1rem;">
+                        <a href="#" style="font-size:0.8rem; color:var(--primary-color);">Forgot password?</a>
+                    </div>
+                    <button class="btn-auth" onclick="doLogin()">
+                        <i class="bi bi-box-arrow-in-right me-2"></i> Sign In
+                    </button>
+                    <div class="auth-divider">
+                        <div class="auth-divider-line"></div>
+                        <span>or</span>
+                        <div class="auth-divider-line"></div>
+                    </div>
+                    <p class="auth-footer-text">New to the family? <a href="#" onclick="switchAuth('register', document.querySelectorAll('.auth-tab')[1])">Create an account</a></p>
+                </div>
+
+                <!-- Register Form -->
+                <div class="auth-form" id="registerForm">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input type="text" id="reg-firstname" placeholder="Kwame">
+                        </div>
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text" id="reg-lastname" placeholder="Mensah">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" id="reg-email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone number</label>
+                        <input type="tel" id="reg-phone" placeholder="024 000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon-wrap">
+                            <input type="password" id="reg-password" placeholder="Create a password">
+                            <i class="bi bi-eye" onclick="togglePass('reg-password', this)"></i>
+                        </div>
+                    </div>
+                    <button class="btn-auth" onclick="doRegister()">
+                        <i class="bi bi-person-plus me-2"></i> Create Account
+                    </button>
+                    <p class="auth-footer-text" style="margin-top:1rem;">Already a member? <a href="#" onclick="switchAuth('login', document.querySelectorAll('.auth-tab')[0])">Sign in</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ PORTAL DASHBOARD ══ -->
+    <div class="portal-layout" id="portalLayout">
+
+        <!-- Sidebar -->
+        <div class="portal-sidebar">
+            <div class="sidebar-user">
+                <div class="sidebar-avatar"><i class="bi bi-person-fill"></i></div>
+                <h6 id="sidebar-name">Kwame Mensah</h6>
+                <small id="sidebar-email">kwame@example.com</small><br>
+                <span class="member-badge">Member</span>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active" onclick="showPanel('dashboard', this)"><i class="bi bi-grid-1x2"></i> Dashboard</a></li>
+                <li><a href="#" onclick="showPanel('giving', this)"><i class="bi bi-heart"></i> Giving History</a></li>
+                <li><a href="#" onclick="showPanel('events', this)"><i class="bi bi-calendar3"></i> My Events</a></li>
+                <li><a href="#" onclick="showPanel('prayer', this)"><i class="bi bi-chat-heart"></i> Prayer Requests</a></li>
+                <li><a href="#" onclick="showPanel('profile', this)"><i class="bi bi-person"></i> My Profile</a></li>
+                <li><div class="nav-divider"></div></li>
+                <li><a href="sermons.html"><i class="bi bi-play-circle"></i> Sermons</a></li>
+                <li><a href="index.html"><i class="bi bi-house"></i> Church Home</a></li>
+                <li><div class="nav-divider"></div></li>
+                <li><a href="#" onclick="doLogout()"><i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="portal-main">
+
+            <!-- Dashboard Overview -->
+            <div class="dash-panel active" id="panel-dashboard">
+                <h2 class="dash-welcome" id="dash-greeting">Good morning, Kwame!</h2>
+                <p class="dash-sub">Welcome back to your member portal.</p>
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="stat-card-icon gold"><i class="bi bi-heart-fill"></i></div>
+                        <div class="stat-card-value">GH₵ 850</div>
+                        <div class="stat-card-label">Total giving this year</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon green"><i class="bi bi-calendar-check"></i></div>
+                        <div class="stat-card-value">3</div>
+                        <div class="stat-card-label">Upcoming events</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon brown"><i class="bi bi-chat-heart"></i></div>
+                        <div class="stat-card-value">2</div>
+                        <div class="stat-card-label">Prayer requests</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon blue"><i class="bi bi-play-circle"></i></div>
+                        <div class="stat-card-value">12</div>
+                        <div class="stat-card-label">Sermons watched</div>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div class="panel-card">
+                            <div class="panel-card-header">
+                                <h5>Recent Giving</h5>
+                                <a href="#" onclick="showPanel('giving', document.querySelectorAll('.sidebar-nav a')[1])">View all</a>
+                            </div>
+                            <div class="panel-card-body" style="padding: 0 1.4rem;">
+                                <table class="giving-table">
+                                    <thead><tr><th>Date</th><th>Category</th><th>Amount</th><th>Status</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Mar 9, 2026</td><td><span class="giving-category-badge">Tithe</span></td><td>GH₵ 200</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                        <tr><td>Mar 2, 2026</td><td><span class="giving-category-badge">Offering</span></td><td>GH₵ 50</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                        <tr><td>Feb 23, 2026</td><td><span class="giving-category-badge">Missions</span></td><td>GH₵ 100</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="panel-card">
+                            <div class="panel-card-header">
+                                <h5>Upcoming Events</h5>
+                                <a href="#" onclick="showPanel('events', document.querySelectorAll('.sidebar-nav a')[2])">View all</a>
+                            </div>
+                            <div class="panel-card-body" style="padding: 0.25rem 1.4rem;">
+                                <div class="event-list-item">
+                                    <div class="event-list-date"><div class="d">22</div><div class="m">Mar</div></div>
+                                    <div class="event-list-info"><h6>Good Friday Night of Prayer</h6><small><i class="bi bi-clock me-1"></i>7:00 PM · Main Sanctuary</small></div>
+                                </div>
+                                <div class="event-list-item">
+                                    <div class="event-list-date"><div class="d">29</div><div class="m">Mar</div></div>
+                                    <div class="event-list-info"><h6>Easter Sunday Celebration</h6><small><i class="bi bi-clock me-1"></i>9:00 AM · Main Sanctuary</small></div>
+                                </div>
+                                <div class="event-list-item">
+                                    <div class="event-list-date"><div class="d">05</div><div class="m">Apr</div></div>
+                                    <div class="event-list-info"><h6>Annual Men's Conference</h6><small><i class="bi bi-clock me-1"></i>8:00 AM · Fellowship Hall</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giving History Panel -->
+            <div class="dash-panel" id="panel-giving">
+                <h2 class="dash-welcome">Giving History</h2>
+                <p class="dash-sub">Your complete record of tithes and offerings.</p>
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <h5>2026 Giving Record</h5>
+                        <a href="#"><i class="bi bi-download me-1"></i>Download statement</a>
+                    </div>
+                    <div class="panel-card-body" style="padding: 0 1.4rem;">
+                        <table class="giving-table">
+                            <thead><tr><th>Date</th><th>Category</th><th>Method</th><th>Amount</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>Mar 9, 2026</td><td><span class="giving-category-badge">Tithe</span></td><td>Mobile Money</td><td>GH₵ 200</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                <tr><td>Mar 2, 2026</td><td><span class="giving-category-badge">Offering</span></td><td>Mobile Money</td><td>GH₵ 50</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                <tr><td>Feb 23, 2026</td><td><span class="giving-category-badge">Missions</span></td><td>Bank Transfer</td><td>GH₵ 100</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                <tr><td>Feb 16, 2026</td><td><span class="giving-category-badge">Tithe</span></td><td>Mobile Money</td><td>GH₵ 200</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                <tr><td>Feb 9, 2026</td><td><span class="giving-category-badge">Offering</span></td><td>Mobile Money</td><td>GH₵ 50</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                <tr><td>Feb 2, 2026</td><td><span class="giving-category-badge">Tithe</span></td><td>Bank Transfer</td><td>GH₵ 200</td><td><span class="giving-status confirmed">Confirmed</span></td></tr>
+                                <tr><td>Jan 26, 2026</td><td><span class="giving-category-badge">Missions</span></td><td>Mobile Money</td><td>GH₵ 50</td><td><span class="giving-status pending">Pending</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events Panel -->
+            <div class="dash-panel" id="panel-events">
+                <h2 class="dash-welcome">My Events</h2>
+                <p class="dash-sub">Events you are registered for or interested in.</p>
+                <div class="panel-card">
+                    <div class="panel-card-header"><h5>Upcoming</h5></div>
+                    <div class="panel-card-body" style="padding: 0.25rem 1.4rem 1rem;">
+                        <div class="event-list-item">
+                            <div class="event-list-date"><div class="d">22</div><div class="m">Mar</div></div>
+                            <div class="event-list-info" style="flex:1;"><h6>Good Friday Night of Prayer</h6><small><i class="bi bi-clock me-1"></i>7:00 PM &nbsp;·&nbsp; <i class="bi bi-geo-alt me-1"></i>Main Sanctuary</small></div>
+                            <span class="giving-status confirmed" style="align-self:center; white-space:nowrap;">Registered</span>
+                        </div>
+                        <div class="event-list-item">
+                            <div class="event-list-date"><div class="d">29</div><div class="m">Mar</div></div>
+                            <div class="event-list-info" style="flex:1;"><h6>Easter Sunday Celebration</h6><small><i class="bi bi-clock me-1"></i>9:00 AM &nbsp;·&nbsp; <i class="bi bi-geo-alt me-1"></i>Main Sanctuary</small></div>
+                            <span class="giving-status confirmed" style="align-self:center; white-space:nowrap;">Registered</span>
+                        </div>
+                        <div class="event-list-item">
+                            <div class="event-list-date"><div class="d">05</div><div class="m">Apr</div></div>
+                            <div class="event-list-info" style="flex:1;"><h6>Annual Men's Conference</h6><small><i class="bi bi-clock me-1"></i>8:00 AM &nbsp;·&nbsp; <i class="bi bi-geo-alt me-1"></i>Fellowship Hall</small></div>
+                            <span class="giving-status pending" style="align-self:center; white-space:nowrap;">Interested</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-card">
+                    <div class="panel-card-header"><h5>Browse all events</h5></div>
+                    <div class="panel-card-body">
+                        <p style="font-size:0.88rem; color:var(--text-light); margin-bottom:1rem;">Discover and register for upcoming church events.</p>
+                        <a href="index.html#events" class="btn-save" style="display:inline-flex; align-items:center; gap:6px;"><i class="bi bi-calendar3"></i> View Events Page</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prayer Requests Panel -->
+            <div class="dash-panel" id="panel-prayer">
+                <h2 class="dash-welcome">Prayer Requests</h2>
+                <p class="dash-sub">Submit a request and our prayer team will lift you up.</p>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="panel-card">
+                            <div class="panel-card-header"><h5>Submit a prayer request</h5></div>
+                            <div class="panel-card-body">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <div class="prayer-tag-wrap">
+                                        <button class="prayer-tag active" onclick="selectPrayerTag(this)">Healing</button>
+                                        <button class="prayer-tag" onclick="selectPrayerTag(this)">Family</button>
+                                        <button class="prayer-tag" onclick="selectPrayerTag(this)">Finance</button>
+                                        <button class="prayer-tag" onclick="selectPrayerTag(this)">Guidance</button>
+                                        <button class="prayer-tag" onclick="selectPrayerTag(this)">Salvation</button>
+                                        <button class="prayer-tag" onclick="selectPrayerTag(this)">Other</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Your request</label>
+                                    <textarea id="prayer-text" rows="5" placeholder="Share your prayer request here. Our team will pray for you..."></textarea>
+                                </div>
+                                <div class="form-group" style="display:flex; align-items:center; gap:8px;">
+                                    <input type="checkbox" id="prayer-anonymous" style="width:auto; padding:0;">
+                                    <label for="prayer-anonymous" style="margin:0; text-transform:none; font-size:0.85rem; color:var(--text-dark);">Submit anonymously</label>
+                                </div>
+                                <button class="btn-save-gold" onclick="submitPrayer()"><i class="bi bi-send me-2"></i>Submit Request</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel-card">
+                            <div class="panel-card-header"><h5>Your requests</h5></div>
+                            <div class="panel-card-body" id="prayer-list">
+                                <div class="prayer-list-item">
+                                    <p>Please pray for my mother's recovery from surgery. She has been in the hospital for two weeks now.</p>
+                                    <small><i class="bi bi-tag me-1"></i>Healing &nbsp;·&nbsp; <i class="bi bi-calendar3 me-1"></i>Mar 5, 2026</small>
+                                </div>
+                                <div class="prayer-list-item">
+                                    <p>I need wisdom and direction about a major career decision I am facing. Please intercede for me.</p>
+                                    <small><i class="bi bi-tag me-1"></i>Guidance &nbsp;·&nbsp; <i class="bi bi-calendar3 me-1"></i>Feb 18, 2026</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Panel -->
+            <div class="dash-panel" id="panel-profile">
+                <h2 class="dash-welcome">My Profile</h2>
+                <p class="dash-sub">Keep your details up to date.</p>
+                <div class="panel-card">
+                    <div class="panel-card-header"><h5>Personal information</h5></div>
+                    <div class="panel-card-body">
+                        <div class="profile-avatar-wrap">
+                            <div class="profile-avatar"><i class="bi bi-person-fill"></i></div>
+                            <div class="profile-avatar-info">
+                                <h5 id="profile-display-name">Kwame Mensah</h5>
+                                <small id="profile-display-email">kwame@example.com</small><br>
+                                <span class="btn-change-photo">Change photo</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First name</label>
+                                <input type="text" id="profile-firstname" value="Kwame">
+                            </div>
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input type="text" id="profile-lastname" value="Mensah">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" id="profile-email" value="kwame@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone number</label>
+                                <input type="tel" id="profile-phone" value="024 000 0000">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Date of birth</label>
+                                <input type="date" id="profile-dob">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="profile-gender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Home address</label>
+                            <input type="text" id="profile-address" placeholder="Your address">
+                        </div>
+                        <button class="btn-save" onclick="saveProfile()"><i class="bi bi-check2 me-2"></i>Save Changes</button>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header"><h5>Change password</h5></div>
+                    <div class="panel-card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Current password</label>
+                                <input type="password" placeholder="Current password">
+                            </div>
+                            <div class="form-group">
+                                <label>New password</label>
+                                <input type="password" placeholder="New password">
+                            </div>
+                        </div>
+                        <button class="btn-save" onclick="showToast('Password updated successfully.')"><i class="bi bi-shield-lock me-2"></i>Update Password</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-wrap">
+        <div class="toast-msg" id="toastMsg"><i class="bi bi-check-circle-fill"></i><span id="toastText"></span></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Word Transformation Church</h5>
+                    <p class="text-white-50">Transforming lives through the power of God's Word.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="sermons.html">Sermons</a></li>
+                        <li class="mb-2"><a href="index.html#events">Events</a></li>
+                        <li class="mb-2"><a href="index.html#blog">Blog</a></li>
+                        <li class="mb-2"><a href="portal.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Service Times</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
+                        <li class="mb-2">Wednesday: 7:00 PM</li>
+                        <li class="mb-2">Friday: 6:30 PM</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ── Auth ──
+        function switchAuth(tab, btn) {
+            document.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.remove('active'); });
+            btn.classList.add('active');
+            document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+            document.getElementById('registerForm').classList.toggle('active', tab === 'register');
+        }
+
+        function togglePass(id, icon) {
+            var input = document.getElementById(id);
+            if (input.type === 'password') { input.type = 'text'; icon.className = 'bi bi-eye-slash'; }
+            else { input.type = 'password'; icon.className = 'bi bi-eye'; }
+        }
+
+        function doLogin() {
+            var email = document.getElementById('login-email').value.trim();
+            var pass  = document.getElementById('login-password').value;
+            if (!email || !pass) { alert('Please enter your email and password.'); return; }
+            // TODO: replace with real API call POST /api/auth/login
+            showPortal(email.split('@')[0]);
+        }
+
+        function doRegister() {
+            var first = document.getElementById('reg-firstname').value.trim();
+            var last  = document.getElementById('reg-lastname').value.trim();
+            var email = document.getElementById('reg-email').value.trim();
+            var pass  = document.getElementById('reg-password').value;
+            if (!first || !last || !email || !pass) { alert('Please fill in all fields.'); return; }
+            // TODO: replace with real API call POST /api/auth/register
+            showPortal(first);
+        }
+
+        function showPortal(name) {
+            document.getElementById('authWrap').style.display = 'none';
+            document.getElementById('portalLayout').classList.add('active');
+            var display = name.charAt(0).toUpperCase() + name.slice(1);
+            document.getElementById('sidebar-name').textContent = display;
+            document.getElementById('dash-greeting').textContent = getGreeting() + ', ' + display + '!';
+            document.getElementById('profile-display-name').textContent = display;
+        }
+
+        function doLogout() {
+            document.getElementById('portalLayout').classList.remove('active');
+            document.getElementById('authWrap').style.display = 'flex';
+        }
+
+        function getGreeting() {
+            var h = new Date().getHours();
+            if (h < 12) return 'Good morning';
+            if (h < 17) return 'Good afternoon';
+            return 'Good evening';
+        }
+
+        // ── Navigation ──
+        function showPanel(id, link) {
+            event.preventDefault();
+            document.querySelectorAll('.dash-panel').forEach(function(p){ p.classList.remove('active'); });
+            document.getElementById('panel-' + id).classList.add('active');
+            document.querySelectorAll('.sidebar-nav a').forEach(function(a){ a.classList.remove('active'); });
+            if (link) link.classList.add('active');
+        }
+
+        // ── Prayer ──
+        var selectedPrayerTag = 'Healing';
+        function selectPrayerTag(el) {
+            document.querySelectorAll('.prayer-tag').forEach(function(t){ t.classList.remove('active'); });
+            el.classList.add('active');
+            selectedPrayerTag = el.textContent;
+        }
+
+        function submitPrayer() {
+            var text = document.getElementById('prayer-text').value.trim();
+            if (!text) { alert('Please enter your prayer request.'); return; }
+            var today = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+            var item = document.createElement('div');
+            item.className = 'prayer-list-item';
+            item.innerHTML = '<p>' + text + '</p><small><i class="bi bi-tag me-1"></i>' + selectedPrayerTag + ' &nbsp;·&nbsp; <i class="bi bi-calendar3 me-1"></i>' + today + '</small>';
+            document.getElementById('prayer-list').prepend(item);
+            document.getElementById('prayer-text').value = '';
+            // TODO: POST /api/prayer-requests
+            showToast('Prayer request submitted. We are praying for you!');
+        }
+
+        // ── Profile ──
+        function saveProfile() {
+            var first = document.getElementById('profile-firstname').value.trim();
+            var last  = document.getElementById('profile-lastname').value.trim();
+            if (!first || !last) { alert('Please enter your name.'); return; }
+            document.getElementById('profile-display-name').textContent = first + ' ' + last;
+            document.getElementById('sidebar-name').textContent = first;
+            // TODO: PUT /api/members/profile
+            showToast('Profile saved successfully.');
+        }
+
+        // ── Toast ──
+        function showToast(msg) {
+            var toast = document.getElementById('toastMsg');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(function(){ toast.classList.remove('show'); }, 3500);
+        }
+    </script>
+</body>
+</html>

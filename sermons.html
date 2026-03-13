@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sermons & Media | Word Transformation Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B5E3C;
+            --primary-dark: #6B4A2E;
+            --secondary-color: #D4AF37;
+            --accent-color: #2C5F2D;
+            --light-bg: #F9F6F0;
+            --dark-bg: #1A1A1A;
+            --deep-brown: #4A3728;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 8px;
+            --section-padding: 80px 0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-dark);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        h1,h2,h3,h4,h5,h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        a { text-decoration: none; transition: all 0.3s ease; }
+
+        /* ── Navbar ── */
+        .navbar {
+            background-color: var(--deep-brown);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .navbar-brand {
+            font-family: var(--heading-font);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--white) !important;
+        }
+        .navbar-brand i { color: var(--secondary-color); margin-right: 0.5rem; }
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.88) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active { color: var(--white) !important; background: rgba(255,255,255,0.1); }
+        .btn-give {
+            background: var(--secondary-color);
+            color: var(--deep-brown);
+            border: none;
+            padding: 0.45rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .btn-give:hover { background: #b8972e; transform: translateY(-2px); }
+
+        /* ── Page Hero ── */
+        .page-hero {
+            background: linear-gradient(135deg, var(--deep-brown) 0%, #2E1F14 100%);
+            padding: 5rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%),
+                              radial-gradient(ellipse at 70% 50%, rgba(212,175,55,0.08) 0%, transparent 60%);
+        }
+        .page-hero-content { position: relative; }
+        .page-hero-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 300;
+            color: #F5F0E8;
+            margin-bottom: 1rem;
+        }
+        .page-hero p {
+            font-size: 1.05rem;
+            color: rgba(245,240,232,0.72);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 1.5rem auto 0;
+            max-width: 200px;
+        }
+        .hero-divider-line { flex: 1; height: 1px; background: rgba(212,175,55,0.4); }
+        .hero-divider-dot  { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; flex-shrink: 0; }
+
+        /* ── Filter Bar ── */
+        .filter-bar {
+            background: var(--light-bg);
+            border-bottom: 1px solid #EDE4D3;
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 66px;
+            z-index: 100;
+        }
+        .filter-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-search {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+        .filter-search i {
+            position: absolute;
+            left: 12px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .filter-search input {
+            width: 100%;
+            padding: 0.55rem 0.9rem 0.55rem 2.2rem;
+            border: 1px solid #DDD4C5;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            background: var(--white);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .filter-search input:focus { border-color: var(--secondary-color); }
+        .filter-select {
+            padding: 0.55rem 1rem;
+            border: 1px solid #DDD4C5;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            background: var(--white);
+            color: var(--text-dark);
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .filter-select:focus { border-color: var(--secondary-color); }
+        .filter-tabs { display: flex; gap: 6px; }
+        .filter-tab {
+            padding: 0.45rem 1rem;
+            border-radius: 50px;
+            border: 1px solid #DDD4C5;
+            background: var(--white);
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-tab:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .filter-tab.active {
+            background: var(--deep-brown);
+            border-color: var(--deep-brown);
+            color: var(--white);
+        }
+
+        /* ── Featured Sermon ── */
+        .featured-section { padding: 60px 0 0; }
+        .featured-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .featured-label::after { content: ''; flex: 1; height: 1px; background: #EDE4D3; }
+
+        .featured-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 4px 20px rgba(139,94,60,0.08);
+        }
+        .featured-video { position: relative; background: #1A1A1A; min-height: 300px; }
+        .featured-video iframe {
+            width: 100%; height: 100%;
+            min-height: 300px;
+            border: none;
+            display: block;
+        }
+        .featured-info { padding: 2.5rem 2rem; display: flex; flex-direction: column; }
+        .featured-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: 50px;
+            background: #FBF3DC;
+            color: #7A5A00;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+        .featured-info h2 {
+            font-size: 1.65rem;
+            color: var(--deep-brown);
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+        }
+        .featured-info .sermon-verse {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .featured-info p {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        .sermon-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        .sermon-meta-row span { display: flex; align-items: center; gap: 5px; }
+        .sermon-meta-row i { color: var(--primary-color); }
+        .featured-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-sermon-primary {
+            padding: 0.6rem 1.4rem;
+            background: var(--deep-brown);
+            color: #F5F0E8;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-sermon-primary:hover { background: #6B4A2E; transform: translateY(-1px); color: #F5F0E8; }
+        .btn-sermon-outline {
+            padding: 0.6rem 1.4rem;
+            background: transparent;
+            color: var(--deep-brown);
+            border: 1.5px solid #DDD4C5;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-sermon-outline:hover { border-color: var(--deep-brown); background: #F5F0E8; }
+
+        /* ── Sermon Grid ── */
+        .sermons-section { padding: 60px 0; }
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: #EDE4D3; }
+
+        .sermon-card {
+            background: var(--white);
+            border: 1px solid #EDE4D3;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(139,94,60,0.05);
+        }
+        .sermon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(139,94,60,0.12);
+            border-color: var(--secondary-color);
+        }
+
+        /* Video card */
+        .sermon-thumb {
+            position: relative;
+            background: #1a1a1a;
+            padding-top: 56.25%;
+            overflow: hidden;
+        }
+        .sermon-thumb iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .sermon-thumb-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2E1F14;
+            cursor: pointer;
+        }
+        .sermon-thumb-placeholder i {
+            font-size: 2.8rem;
+            color: rgba(212,175,55,0.7);
+            transition: all 0.3s ease;
+        }
+        .sermon-thumb-placeholder:hover i { color: var(--secondary-color); transform: scale(1.1); }
+
+        /* Audio card */
+        .sermon-audio-header {
+            background: linear-gradient(135deg, var(--deep-brown), #2E1F14);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .audio-icon-wrap {
+            width: 52px; height: 52px;
+            background: rgba(212,175,55,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .audio-icon-wrap i { font-size: 1.5rem; color: var(--secondary-color); }
+        .audio-title-wrap h5 {
+            font-size: 0.95rem;
+            color: #F5F0E8;
+            margin-bottom: 2px;
+            line-height: 1.3;
+        }
+        .audio-title-wrap small { font-size: 0.75rem; color: rgba(245,240,232,0.6); }
+
+        .audio-player-wrap { padding: 1rem 1.25rem 0.5rem; }
+        .custom-audio {
+            width: 100%;
+            height: 36px;
+            accent-color: var(--secondary-color);
+        }
+        audio::-webkit-media-controls-panel { background: var(--light-bg); }
+
+        .sermon-card-body { padding: 1.2rem 1.3rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+        .sermon-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 9px;
+            border-radius: 50px;
+            background: #F0EAE0;
+            color: #8B5E3C;
+            margin-bottom: 0.6rem;
+        }
+        .sermon-card-body h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+        .sermon-card-verse {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+        .sermon-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: auto;
+            padding-top: 0.75rem;
+            border-top: 1px solid #EDE4D3;
+        }
+        .sermon-card-meta span { display: flex; align-items: center; gap: 4px; }
+        .sermon-card-actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 1.3rem 1.3rem;
+            flex-wrap: wrap;
+        }
+        .btn-card-action {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border-radius: 6px;
+            border: 1px solid #DDD4C5;
+            background: var(--white);
+            color: var(--deep-brown);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .btn-card-action:hover { background: var(--light-bg); border-color: var(--primary-color); }
+        .btn-card-action.primary { background: var(--deep-brown); color: #F5F0E8; border-color: var(--deep-brown); }
+        .btn-card-action.primary:hover { background: #6B4A2E; }
+
+        /* ── Pagination ── */
+        .pagination-wrap { display: flex; justify-content: center; gap: 6px; margin-top: 3rem; }
+        .page-btn {
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #DDD4C5;
+            border-radius: 6px;
+            background: var(--white);
+            color: var(--text-dark);
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .page-btn:hover { border-color: var(--deep-brown); color: var(--deep-brown); }
+        .page-btn.active { background: var(--deep-brown); border-color: var(--deep-brown); color: var(--white); }
+
+        /* ── Footer ── */
+        .footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 60px 0 30px;
+            margin-top: 0;
+        }
+        .footer h5 { color: var(--white); margin-bottom: 1.5rem; }
+        .footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.3s ease; }
+        .footer a:hover { color: var(--secondary-color); }
+        .footer hr { opacity: 0.2; margin: 2rem 0; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .featured-card { grid-template-columns: 1fr; }
+            .filter-wrap { gap: 8px; }
+            .filter-tabs { overflow-x: auto; }
+            .navbar-collapse {
+                background: var(--deep-brown);
+                padding: 1rem;
+                border-radius: var(--border-radius);
+                margin-top: 0.5rem;
+            }
+        }
+    
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-church"></i> Word Transformation
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <div class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="page-hero-eyebrow">Word Transformation Church</span>
+                <h1>Sermons & Media</h1>
+                <p>Be transformed by the renewing of your mind through the power of God's Word.</p>
+                <div class="hero-divider">
+                    <div class="hero-divider-line"></div>
+                    <div class="hero-divider-dot"></div>
+                    <div class="hero-divider-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="container">
+            <div class="filter-wrap">
+                <div class="filter-search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search sermons..." id="searchInput" oninput="filterSermons()">
+                </div>
+                <select class="filter-select" id="speakerFilter" onchange="filterSermons()">
+                    <option value="">All Speakers</option>
+                    <option value="Pastor James">Pastor James</option>
+                    <option value="Elder Sarah">Elder Sarah</option>
+                    <option value="Rev. Mensah">Rev. Mensah</option>
+                </select>
+                <select class="filter-select" id="seriesFilter" onchange="filterSermons()">
+                    <option value="">All Series</option>
+                    <option value="Faith">Faith Series</option>
+                    <option value="Identity">Identity in Christ</option>
+                    <option value="Prayer">Prayer & Fasting</option>
+                </select>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterType('all', this)">All</button>
+                    <button class="filter-tab" onclick="filterType('video', this)">Video</button>
+                    <button class="filter-tab" onclick="filterType('audio', this)">Audio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Sermon -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-label">Latest sermon</div>
+            <div class="featured-card">
+                <div class="featured-video">
+                    <iframe
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="Featured Sermon"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="featured-info">
+                    <span class="featured-badge">Faith Series · Week 6</span>
+                    <h2>You Are Not Too Far Gone</h2>
+                    <p class="sermon-verse">Romans 8:38–39</p>
+                    <p>No matter how far you feel from God, His love is relentless, His grace is sufficient, and His arms are always open. In this powerful message, Pastor James digs into the unbreakable nature of God's love.</p>
+                    <div class="sermon-meta-row">
+                        <span><i class="bi bi-person"></i> Pastor James</span>
+                        <span><i class="bi bi-calendar3"></i> March 9, 2026</span>
+                        <span><i class="bi bi-clock"></i> 48 min</span>
+                    </div>
+                    <div class="featured-actions">
+                        <a href="#" class="btn-sermon-primary"><i class="bi bi-play-fill"></i> Watch Now</a>
+                        <a href="#" class="btn-sermon-outline"><i class="bi bi-file-earmark-pdf"></i> Sermon Notes</a>
+                        <a href="#" class="btn-sermon-outline"><i class="bi bi-share"></i> Share</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sermon Grid -->
+    <section class="sermons-section">
+        <div class="container">
+
+            <!-- Video Sermons -->
+            <div class="section-label" id="video-label">Video sermons</div>
+            <div class="row g-4 mb-5" id="video-sermons">
+
+                <div class="col-lg-4 col-md-6 sermon-item" data-type="video" data-speaker="Pastor James" data-series="Faith" data-title="Walking Through the Valley">
+                    <div class="sermon-card">
+                        <div class="sermon-thumb">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Sermon" allowfullscreen></iframe>
+                        </div>
+                        <div class="sermon-card-body">
+                            <span class="sermon-tag">Faith Series</span>
+                            <h4>Walking Through the Valley</h4>
+                            <p class="sermon-card-verse">Psalm 23:4</p>
+                            <div class="sermon-card-meta">
+                                <span><i class="bi bi-person"></i> Pastor James</span>
+                                <span><i class="bi bi-calendar3"></i> Mar 2, 2026</span>
+                                <span><i class="bi bi-clock"></i> 42 min</span>
+                            </div>
+                        </div>
+                        <div class="sermon-card-actions">
+                            <a href="#" class="btn-card-action primary"><i class="bi bi-play-fill"></i> Watch</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-file-earmark-pdf"></i> Notes</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-share"></i> Share</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 sermon-item" data-type="video" data-speaker="Elder Sarah" data-series="Identity" data-title="Rooted in Christ">
+                    <div class="sermon-card">
+                        <div class="sermon-thumb">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Sermon" allowfullscreen></iframe>
+                        </div>
+                        <div class="sermon-card-body">
+                            <span class="sermon-tag">Identity in Christ</span>
+                            <h4>Rooted in Christ</h4>
+                            <p class="sermon-card-verse">Colossians 2:6–7</p>
+                            <div class="sermon-card-meta">
+                                <span><i class="bi bi-person"></i> Elder Sarah</span>
+                                <span><i class="bi bi-calendar3"></i> Feb 23, 2026</span>
+                                <span><i class="bi bi-clock"></i> 38 min</span>
+                            </div>
+                        </div>
+                        <div class="sermon-card-actions">
+                            <a href="#" class="btn-card-action primary"><i class="bi bi-play-fill"></i> Watch</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-file-earmark-pdf"></i> Notes</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-share"></i> Share</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 sermon-item" data-type="video" data-speaker="Rev. Mensah" data-series="Prayer" data-title="The Power of a Praying Church">
+                    <div class="sermon-card">
+                        <div class="sermon-thumb">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Sermon" allowfullscreen></iframe>
+                        </div>
+                        <div class="sermon-card-body">
+                            <span class="sermon-tag">Prayer & Fasting</span>
+                            <h4>The Power of a Praying Church</h4>
+                            <p class="sermon-card-verse">Acts 4:31</p>
+                            <div class="sermon-card-meta">
+                                <span><i class="bi bi-person"></i> Rev. Mensah</span>
+                                <span><i class="bi bi-calendar3"></i> Feb 16, 2026</span>
+                                <span><i class="bi bi-clock"></i> 55 min</span>
+                            </div>
+                        </div>
+                        <div class="sermon-card-actions">
+                            <a href="#" class="btn-card-action primary"><i class="bi bi-play-fill"></i> Watch</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-file-earmark-pdf"></i> Notes</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-share"></i> Share</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Audio Sermons -->
+            <div class="section-label" id="audio-label">Audio sermons</div>
+            <div class="row g-4" id="audio-sermons">
+
+                <div class="col-lg-4 col-md-6 sermon-item" data-type="audio" data-speaker="Pastor James" data-series="Faith" data-title="Trusting God in the Dark">
+                    <div class="sermon-card">
+                        <div class="sermon-audio-header">
+                            <div class="audio-icon-wrap"><i class="bi bi-headphones"></i></div>
+                            <div class="audio-title-wrap">
+                                <h5>Trusting God in the Dark</h5>
+                                <small>Pastor James · Faith Series</small>
+                            </div>
+                        </div>
+                        <div class="audio-player-wrap">
+                            <audio controls class="custom-audio">
+                                <source src="sermons/trusting-god.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        <div class="sermon-card-body">
+                            <p class="sermon-card-verse">Isaiah 50:10</p>
+                            <div class="sermon-card-meta">
+                                <span><i class="bi bi-person"></i> Pastor James</span>
+                                <span><i class="bi bi-calendar3"></i> Feb 9, 2026</span>
+                                <span><i class="bi bi-clock"></i> 45 min</span>
+                            </div>
+                        </div>
+                        <div class="sermon-card-actions">
+                            <a href="sermons/trusting-god.mp3" download class="btn-card-action primary"><i class="bi bi-download"></i> Download</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-file-earmark-pdf"></i> Notes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 sermon-item" data-type="audio" data-speaker="Elder Sarah" data-series="Identity" data-title="You Are God's Masterpiece">
+                    <div class="sermon-card">
+                        <div class="sermon-audio-header">
+                            <div class="audio-icon-wrap"><i class="bi bi-headphones"></i></div>
+                            <div class="audio-title-wrap">
+                                <h5>You Are God's Masterpiece</h5>
+                                <small>Elder Sarah · Identity in Christ</small>
+                            </div>
+                        </div>
+                        <div class="audio-player-wrap">
+                            <audio controls class="custom-audio">
+                                <source src="sermons/masterpiece.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        <div class="sermon-card-body">
+                            <p class="sermon-card-verse">Ephesians 2:10</p>
+                            <div class="sermon-card-meta">
+                                <span><i class="bi bi-person"></i> Elder Sarah</span>
+                                <span><i class="bi bi-calendar3"></i> Feb 2, 2026</span>
+                                <span><i class="bi bi-clock"></i> 40 min</span>
+                            </div>
+                        </div>
+                        <div class="sermon-card-actions">
+                            <a href="sermons/masterpiece.mp3" download class="btn-card-action primary"><i class="bi bi-download"></i> Download</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-file-earmark-pdf"></i> Notes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 sermon-item" data-type="audio" data-speaker="Rev. Mensah" data-series="Prayer" data-title="Fasting That Moves Heaven">
+                    <div class="sermon-card">
+                        <div class="sermon-audio-header">
+                            <div class="audio-icon-wrap"><i class="bi bi-headphones"></i></div>
+                            <div class="audio-title-wrap">
+                                <h5>Fasting That Moves Heaven</h5>
+                                <small>Rev. Mensah · Prayer & Fasting</small>
+                            </div>
+                        </div>
+                        <div class="audio-player-wrap">
+                            <audio controls class="custom-audio">
+                                <source src="sermons/fasting.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        <div class="sermon-card-body">
+                            <p class="sermon-card-verse">Isaiah 58:6</p>
+                            <div class="sermon-card-meta">
+                                <span><i class="bi bi-person"></i> Rev. Mensah</span>
+                                <span><i class="bi bi-calendar3"></i> Jan 26, 2026</span>
+                                <span><i class="bi bi-clock"></i> 50 min</span>
+                            </div>
+                        </div>
+                        <div class="sermon-card-actions">
+                            <a href="sermons/fasting.mp3" download class="btn-card-action primary"><i class="bi bi-download"></i> Download</a>
+                            <a href="#" class="btn-card-action"><i class="bi bi-file-earmark-pdf"></i> Notes</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-wrap">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Word Transformation Church</h5>
+                    <p class="text-white-50">Transforming lives through the power of God's Word.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="sermons.html">Sermons</a></li>
+                        <li class="mb-2"><a href="index.html#events">Events</a></li>
+                        <li class="mb-2"><a href="index.html#blog">Blog</a></li>
+                        <li class="mb-2"><a href="portal.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Service Times</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
+                        <li class="mb-2">Wednesday: 7:00 PM</li>
+                        <li class="mb-2">Friday: 6:30 PM</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="text-white-50 mb-0">&copy; 2026 Word Transformation Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var currentType = 'all';
+
+        function filterType(type, btn) {
+            currentType = type;
+            document.querySelectorAll('.filter-tab').forEach(function(t){ t.classList.remove('active'); });
+            btn.classList.add('active');
+            filterSermons();
+        }
+
+        function filterSermons() {
+            var search  = document.getElementById('searchInput').value.toLowerCase();
+            var speaker = document.getElementById('speakerFilter').value;
+            var series  = document.getElementById('seriesFilter').value;
+
+            var items = document.querySelectorAll('.sermon-item');
+            items.forEach(function(item) {
+                var title    = item.dataset.title.toLowerCase();
+                var spk      = item.dataset.speaker;
+                var ser      = item.dataset.series;
+                var type     = item.dataset.type;
+
+                var matchSearch  = !search  || title.includes(search);
+                var matchSpeaker = !speaker || spk === speaker;
+                var matchSeries  = !series  || ser === series;
+                var matchType    = currentType === 'all' || type === currentType;
+
+                item.style.display = (matchSearch && matchSpeaker && matchSeries && matchType) ? '' : 'none';
+            });
+
+            // Show/hide section labels
+            var visibleVideo = document.querySelectorAll('.sermon-item[data-type="video"]:not([style*="none"])').length;
+            var visibleAudio = document.querySelectorAll('.sermon-item[data-type="audio"]:not([style*="none"])').length;
+            document.getElementById('video-label').style.display = visibleVideo ? '' : 'none';
+            document.getElementById('audio-label').style.display = visibleAudio ? '' : 'none';
+        }
+    </script>
+</body>
+</html>
