@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Member Dashboard — Word Transformation Church personal portal.">
+<title>My Dashboard | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --black:#0A0A0A;--deep:#111111;--card:#1C1C1C;--card2:#222222;--border:rgba(255,255,255,0.08);
+    --gold:#C9A84C;--gold-light:#E8C97A;--gold-pale:rgba(201,168,76,0.1);
+    --light:#FFFFFF;--light-alt:#F7F4EF;--light-text:#1C1C1C;--light-muted:#6B6560;--light-stone:#E8E2D9;
+    --text:#E8E4DE;--text-dim:#A09A91;--muted:#6E6861;--white:#FFFFFF;
+    --brown:#5C3D1E;--brown-mid:#8B6340;--green:#2A5E2B;--green-light:#4CAF50;
+    --display:'DM Serif Display',Georgia,serif;--body:'DM Sans',system-ui,sans-serif;--serif:'Lora',Georgia,serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);color:var(--text);background:var(--deep);line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+/* Navbar */
+.navbar{background:rgba(10,10,10,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:.9rem 0;border-bottom:1px solid rgba(201,168,76,.12);z-index:1030;}
+.navbar.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.navbar-brand{font-family:var(--display);font-size:1.3rem;color:var(--white)!important;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;}
+.brand-icon{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:1rem;flex-shrink:0;}
+.brand-sub{display:block;font-family:var(--body);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);line-height:1;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.82)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;transition:all .2s ease;}
+.navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--gold)!important;background:rgba(201,168,76,.1);}
+.dropdown-menu{background:#141414;border:1px solid rgba(201,168,76,.18);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,.5);padding:.5rem;}
+.dropdown-item{color:rgba(255,255,255,.8);font-size:.87rem;padding:.55rem .9rem;border-radius:6px;transition:all .15s ease;display:flex;align-items:center;gap:8px;}
+.dropdown-item i{color:var(--gold);font-size:.85rem;}
+.dropdown-item:hover{background:rgba(201,168,76,.1);color:var(--white);}
+.dropdown-divider{border-color:rgba(201,168,76,.12);margin:.35rem 0;}
+.btn-live-nav{display:inline-flex;align-items:center;gap:6px;background:#E50000;color:#fff!important;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .25s ease;}
+.btn-live-nav:hover{background:#c20000;transform:translateY(-1px);}
+.live-dot{width:7px;height:7px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.4s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.btn-give{background:var(--gold);color:var(--brown)!important;border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;transition:all .25s ease;cursor:pointer;}
+.btn-give:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:991.98px){.navbar-collapse{background:#0a0a0a;padding:1rem;border-radius:10px;margin-top:.5rem;}}
+
+/* ── DASHBOARD LAYOUT ── */
+.dash-wrap{display:flex;min-height:calc(100vh - 70px);}
+
+/* Sidebar nav */
+.dash-sidebar{width:260px;background:var(--black);border-right:1px solid rgba(201,168,76,.08);padding:2rem 0;flex-shrink:0;position:sticky;top:70px;height:calc(100vh - 70px);overflow-y:auto;}
+.dash-user-block{padding:0 1.5rem 1.75rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.dash-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.3rem;color:var(--black);margin-bottom:.75rem;}
+.dash-user-name{font-family:var(--display);font-size:1.05rem;font-weight:400;color:var(--white);}
+.dash-user-role{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:2px;}
+.dash-user-since{font-size:.72rem;color:var(--muted);margin-top:3px;}
+.dash-nav{padding:1.25rem 0;}
+.dash-nav-section{padding:.5rem 1.5rem .3rem;font-size:.58rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.dash-nav-item{display:flex;align-items:center;gap:10px;padding:.65rem 1.5rem;font-size:.875rem;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s ease;cursor:pointer;border-left:3px solid transparent;margin-bottom:1px;}
+.dash-nav-item i{font-size:1rem;width:20px;text-align:center;flex-shrink:0;}
+.dash-nav-item:hover{background:rgba(255,255,255,.04);color:var(--white);}
+.dash-nav-item.active{background:rgba(201,168,76,.08);color:var(--gold);border-left-color:var(--gold);}
+.dash-nav-badge{margin-left:auto;background:var(--gold);color:var(--black);font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:50px;}
+.dash-nav-badge.green{background:var(--green-light);color:#fff;}
+@media(max-width:991.98px){.dash-sidebar{display:none;}.dash-mobile-menu{display:block!important;}}
+.dash-mobile-menu{display:none;background:var(--black);border-bottom:1px solid rgba(201,168,76,.08);padding:.5rem 1rem;overflow-x:auto;white-space:nowrap;}
+.dash-mobile-tab{display:inline-flex;align-items:center;gap:6px;padding:.5rem 1rem;font-size:.8rem;font-weight:500;color:rgba(255,255,255,.6);border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none;}
+.dash-mobile-tab.active{background:rgba(201,168,76,.1);color:var(--gold);}
+
+/* Main content */
+.dash-main{flex:1;padding:2.5rem;overflow-x:hidden;}
+@media(max-width:767px){.dash-main{padding:1.5rem 1rem;}}
+
+/* Section visibility */
+.dash-section{display:none;}
+.dash-section.active{display:block;}
+
+/* ── CARDS ── */
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all .3s ease;}
+.stat-card:hover{border-color:rgba(201,168,76,.2);}
+.stat-card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1rem;}
+.stat-card-num{font-family:var(--display);font-size:2rem;color:var(--white);line-height:1;display:block;margin-bottom:.25rem;}
+.stat-card-lbl{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;}
+.stat-card-trend{font-size:.72rem;margin-top:.5rem;display:flex;align-items:center;gap:4px;}
+.stat-card-trend.up{color:var(--green-light);}
+.stat-card-trend.neutral{color:var(--muted);}
+
+/* Section heading */
+.dash-section-title{font-family:var(--display);font-size:1.5rem;font-weight:400;color:var(--white);margin-bottom:.25rem;}
+.dash-section-sub{font-size:.85rem;color:var(--text-dim);margin-bottom:2rem;}
+
+/* Activity feed */
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.activity-item:last-child{border-bottom:none;}
+.activity-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.activity-content{flex:1;}
+.activity-title{font-size:.88rem;color:var(--white);font-weight:500;margin-bottom:2px;}
+.activity-meta{font-size:.74rem;color:var(--muted);}
+.activity-badge{font-size:.68rem;font-weight:600;padding:2px 9px;border-radius:50px;margin-left:auto;white-space:nowrap;}
+
+/* Giving chart placeholder */
+.giving-chart{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.5rem;}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:100px;margin-top:1rem;}
+.chart-bar{flex:1;border-radius:4px 4px 0 0;background:rgba(201,168,76,.2);transition:background .2s ease;position:relative;cursor:pointer;}
+.chart-bar:hover{background:rgba(201,168,76,.5);}
+.chart-bar .bar-tip{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.62rem;color:var(--gold);white-space:nowrap;opacity:0;transition:opacity .2s;}
+.chart-bar:hover .bar-tip{opacity:1;}
+.chart-month-labels{display:flex;gap:8px;margin-top:6px;}
+.chart-month-labels span{flex:1;font-size:.58rem;text-align:center;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+
+/* Giving history table */
+.give-table{width:100%;border-collapse:collapse;}
+.give-table th{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:.6rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);}
+.give-table td{font-size:.86rem;color:var(--text-dim);padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.give-table tbody tr:hover{background:rgba(255,255,255,.02);}
+.give-table td:first-child{color:var(--white);}
+.type-badge{font-size:.65rem;font-weight:600;padding:3px 9px;border-radius:50px;letter-spacing:.06em;text-transform:uppercase;}
+.type-tithe{background:rgba(92,61,30,.2);color:var(--gold);}
+.type-offering{background:rgba(42,94,43,.2);color:var(--green-light);}
+.type-missions{background:rgba(201,168,76,.12);color:#c9a84c;}
+.status-confirmed{color:var(--green-light);display:inline-flex;align-items:center;gap:4px;font-size:.75rem;}
+@media(max-width:767px){.give-table-wrap{overflow-x:auto;}}
+
+/* Events list */
+.event-list-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:flex-start;gap:1.25rem;transition:all .2s ease;margin-bottom:.75rem;}
+.event-list-item:hover{border-color:rgba(201,168,76,.2);}
+.event-list-date{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:.5rem .75rem;text-align:center;flex-shrink:0;min-width:52px;}
+.event-list-day{font-family:var(--display);font-size:1.5rem;color:var(--gold);line-height:1;}
+.event-list-month{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.event-list-title{font-family:var(--display);font-size:1rem;font-weight:400;color:var(--white);margin-bottom:.25rem;}
+.event-list-meta{font-size:.78rem;color:var(--text-dim);display:flex;flex-wrap:wrap;gap:.75rem;}
+.event-list-meta i{color:var(--gold);font-size:.75rem;}
+.event-list-badge{margin-left:auto;flex-shrink:0;}
+.btn-rsvp{background:transparent;border:1.5px solid rgba(201,168,76,.3);color:var(--gold);padding:.35rem .9rem;border-radius:50px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s ease;}
+.btn-rsvp:hover{background:rgba(201,168,76,.1);}
+.btn-rsvp.rsvped{background:rgba(42,94,43,.2);border-color:var(--green-light);color:var(--green-light);}
+
+/* Profile form */
+.profile-section-head{font-family:var(--display);font-size:1rem;font-weight:400;color:var(--white);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.pf-label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.4rem;}
+.pf-input{width:100%;padding:.7rem 1rem;border:1.5px solid rgba(255,255,255,.08);border-radius:10px;font-size:.92rem;color:var(--white);background:rgba(255,255,255,.04);outline:none;transition:border-color .2s;font-family:var(--body);}
+.pf-input:focus{border-color:rgba(201,168,76,.4);background:rgba(255,255,255,.06);}
+.pf-input::placeholder{color:rgba(255,255,255,.2);}
+.pf-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A09A91' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+.btn-save{background:var(--gold);color:var(--black);border:none;padding:.7rem 1.75rem;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .3s ease;}
+.btn-save:hover{background:var(--gold-light);transform:translateY(-1px);}
+.btn-save-outline{background:transparent;color:var(--text-dim);border:1.5px solid rgba(255,255,255,.12);padding:.7rem 1.75rem;border-radius:50px;font-weight:500;font-size:.9rem;cursor:pointer;transition:all .2s ease;}
+.btn-save-outline:hover{border-color:rgba(255,255,255,.3);color:var(--white);}
+
+/* Small group card */
+.group-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;height:100%;transition:all .3s ease;}
+.group-card:hover{transform:translateY(-3px);border-color:rgba(201,168,76,.2);}
+.group-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem;flex-shrink:0;}
+.group-name{font-family:var(--display);font-size:1.05rem;font-weight:400;color:var(--white);margin-bottom:.3rem;}
+.group-desc{font-size:.82rem;color:var(--text-dim);line-height:1.6;flex:1;margin-bottom:.85rem;}
+.group-meta{font-size:.72rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.85rem;}
+.group-meta i{color:var(--gold);font-size:.7rem;}
+.btn-join-group{background:transparent;border:1.5px solid rgba(201,168,76,.3);color:var(--gold);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-join-group:hover{background:rgba(201,168,76,.1);}
+.btn-join-group.joined{background:rgba(42,94,43,.15);border-color:var(--green-light);color:var(--green-light);}
+
+/* Prayer request */
+.prayer-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:.75rem;}
+.prayer-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;flex-wrap:wrap;gap:.5rem;}
+.prayer-name{font-size:.85rem;font-weight:600;color:var(--white);}
+.prayer-date{font-size:.7rem;color:var(--muted);}
+.prayer-text{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--text-dim);line-height:1.65;}
+.prayer-actions{display:flex;gap:8px;margin-top:.75rem;}
+.btn-pray{display:inline-flex;align-items:center;gap:5px;background:rgba(42,94,43,.12);border:1px solid rgba(42,94,43,.25);color:var(--green-light);padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-pray:hover{background:rgba(42,94,43,.2);}
+.pray-count{font-size:.68rem;color:var(--muted);}
+.pf-textarea{resize:vertical;min-height:90px;line-height:1.55;}
+
+/* Sermon card */
+.sermon-item{display:flex;gap:14px;align-items:flex-start;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.sermon-item:last-child{border-bottom:none;}
+.sermon-thumb{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,#1a0e05,#3d2010);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gold);opacity:.7;flex-shrink:0;}
+.sermon-title{font-family:var(--display);font-size:.95rem;font-weight:400;color:var(--white);margin-bottom:.25rem;line-height:1.3;}
+.sermon-meta{font-size:.74rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.75rem;}
+.sermon-meta i{color:var(--gold);font-size:.7rem;}
+.btn-play{background:var(--gold);color:var(--black);border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:auto;}
+.btn-play:hover{background:var(--gold-light);transform:scale(1.1);}
+
+/* Toast */
+.dash-toast{position:fixed;bottom:2rem;right:2rem;background:var(--green);color:#fff;padding:.75rem 1.25rem;border-radius:10px;font-size:.86rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(12px);transition:all .35s ease;z-index:9999;pointer-events:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+            <div>Word Transformation<span class="brand-sub">Church</span></div>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                        <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                        <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                        <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                        <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                        <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                        <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                        <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item active" href="memberdashboard.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                        <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-give" onclick="window.location='give.html'"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile tab bar -->
+<div class="dash-mobile-menu" id="mobileTabs">
+    <a class="dash-mobile-tab active" onclick="showSection('overview',this)"><i class="bi bi-grid-fill me-1"></i>Overview</a>
+    <a class="dash-mobile-tab" onclick="showSection('giving',this)"><i class="bi bi-heart-fill me-1"></i>Giving</a>
+    <a class="dash-mobile-tab" onclick="showSection('events',this)"><i class="bi bi-calendar-event me-1"></i>Events</a>
+    <a class="dash-mobile-tab" onclick="showSection('sermons',this)"><i class="bi bi-play-circle me-1"></i>Sermons</a>
+    <a class="dash-mobile-tab" onclick="showSection('groups',this)"><i class="bi bi-people me-1"></i>Groups</a>
+    <a class="dash-mobile-tab" onclick="showSection('prayer',this)"><i class="bi bi-hand-index-thumb me-1"></i>Prayer</a>
+    <a class="dash-mobile-tab" onclick="showSection('profile',this)"><i class="bi bi-person me-1"></i>Profile</a>
+</div>
+
+<!-- ===================== DASHBOARD LAYOUT ===================== -->
+<div class="dash-wrap">
+
+    <!-- ── Sidebar ── -->
+    <aside class="dash-sidebar">
+        <div class="dash-user-block">
+            <div class="dash-avatar">KA</div>
+            <div class="dash-user-name">Kwame Asante</div>
+            <div class="dash-user-role">Full Member</div>
+            <div class="dash-user-since">Member since Jan 2021</div>
+        </div>
+        <nav class="dash-nav">
+            <div class="dash-nav-section">Main</div>
+            <a class="dash-nav-item active" onclick="showSection('overview',this)"><i class="bi bi-grid-fill"></i>Overview</a>
+            <a class="dash-nav-item" onclick="showSection('giving',this)"><i class="bi bi-heart-fill"></i>My Giving <span class="dash-nav-badge">GH₵ 1,450</span></a>
+            <a class="dash-nav-item" onclick="showSection('events',this)"><i class="bi bi-calendar-event-fill"></i>Events <span class="dash-nav-badge green">3</span></a>
+            <a class="dash-nav-item" onclick="showSection('sermons',this)"><i class="bi bi-play-circle-fill"></i>Saved Sermons</a>
+            <div class="dash-nav-section">Community</div>
+            <a class="dash-nav-item" onclick="showSection('groups',this)"><i class="bi bi-people-fill"></i>Small Groups</a>
+            <a class="dash-nav-item" onclick="showSection('prayer',this)"><i class="bi bi-hand-index-thumb-fill"></i>Prayer Wall <span class="dash-nav-badge green">5</span></a>
+            <a class="dash-nav-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a>
+            <a class="dash-nav-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a>
+            <div class="dash-nav-section">Account</div>
+            <a class="dash-nav-item" onclick="showSection('profile',this)"><i class="bi bi-person-fill"></i>My Profile</a>
+            <a class="dash-nav-item" href="give.html"><i class="bi bi-credit-card-fill"></i>Give Online</a>
+            <a class="dash-nav-item" href="index.html" style="margin-top:1rem;color:rgba(255,255,255,.35);"><i class="bi bi-box-arrow-left"></i>Sign Out</a>
+        </nav>
+    </aside>
+
+    <!-- ── Main content ── -->
+    <main class="dash-main">
+
+        <!-- ===== OVERVIEW ===== -->
+        <section class="dash-section active" id="sec-overview">
+            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                <div>
+                    <h2 class="dash-section-title">Good morning, Kwame 👋</h2>
+                    <p class="dash-section-sub">Sunday service is in <strong style="color:var(--gold);" id="nextServiceCountdown">—</strong>. We'd love to see you there.</p>
+                </div>
+                <a href="give.html" style="background:var(--gold);color:var(--black);border:none;padding:.6rem 1.4rem;border-radius:50px;font-weight:600;font-size:.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><i class="bi bi-heart-fill"></i> Give Now</a>
+            </div>
+
+            <!-- Stats -->
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="background:rgba(201,168,76,.12);color:var(--gold);"><i class="bi bi-heart-fill"></i></div>
+                        <span class="stat-card-num">GH₵ 1,450</span>
+                        <span class="stat-card-lbl">Given this year</span>
+                        <div class="stat-card-trend up"><i class="bi bi-arrow-up-short"></i> 12% vs last year</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="background:rgba(42,94,43,.15);color:#5aac5c;"><i class="bi bi-calendar-check-fill"></i></div>
+                        <span class="stat-card-num">18</span>
+                        <span class="stat-card-lbl">Services attended</span>
+                        <div class="stat-card-trend up"><i class="bi bi-arrow-up-short"></i> 3 this month</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="background:rgba(201,168,76,.12);color:var(--gold);"><i class="bi bi-book-fill"></i></div>
+                        <span class="stat-card-num">42</span>
+                        <span class="stat-card-lbl">Quiz points earned</span>
+                        <div class="stat-card-trend up"><i class="bi bi-arrow-up-short"></i> Rank #7 this week</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="background:rgba(255,255,255,.06);color:var(--text-dim);"><i class="bi bi-people-fill"></i></div>
+                        <span class="stat-card-num">2</span>
+                        <span class="stat-card-lbl">Small groups</span>
+                        <div class="stat-card-trend neutral">Active member</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent activity + upcoming -->
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;">
+                        <h6 style="font-family:var(--display);font-size:.95rem;font-weight:400;color:var(--white);margin-bottom:1.1rem;">Recent Activity</h6>
+                        <div class="activity-item">
+                            <div class="activity-dot" style="background:var(--gold);"></div>
+                            <div class="activity-content"><div class="activity-title">Tithe recorded — GH₵ 200</div><div class="activity-meta">March 2, 2026 · Mobile Money</div></div>
+                            <span class="activity-badge" style="background:rgba(201,168,76,.12);color:var(--gold);">Giving</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot" style="background:#5aac5c;"></div>
+                            <div class="activity-content"><div class="activity-title">RSVP'd to Easter Sunday Service</div><div class="activity-meta">March 1, 2026</div></div>
+                            <span class="activity-badge" style="background:rgba(42,94,43,.12);color:#5aac5c;">Event</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot" style="background:var(--gold);"></div>
+                            <div class="activity-content"><div class="activity-title">Bible Quiz — scored 85% in Gospels</div><div class="activity-meta">Feb 28, 2026 · +12 XP</div></div>
+                            <span class="activity-badge" style="background:rgba(201,168,76,.12);color:var(--gold);">Quiz</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot" style="background:rgba(255,255,255,.2);"></div>
+                            <div class="activity-content"><div class="activity-title">Prayer submitted to the Prayer Wall</div><div class="activity-meta">Feb 25, 2026</div></div>
+                            <span class="activity-badge" style="background:rgba(255,255,255,.06);color:var(--muted);">Prayer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;">
+                        <h6 style="font-family:var(--display);font-size:.95rem;font-weight:400;color:var(--white);margin-bottom:1.1rem;">Upcoming Events</h6>
+                        <div class="event-list-item" style="padding:.85rem;margin-bottom:.5rem;">
+                            <div class="event-list-date"><div class="event-list-day">16</div><div class="event-list-month">Mar</div></div>
+                            <div><div class="event-list-title">Sunday Worship Service</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 9:00 AM &amp; 11:00 AM</span><span><i class="bi bi-geo-alt"></i> Main Sanctuary</span></div></div>
+                        </div>
+                        <div class="event-list-item" style="padding:.85rem;margin-bottom:.5rem;">
+                            <div class="event-list-date"><div class="event-list-day">20</div><div class="event-list-month">Mar</div></div>
+                            <div><div class="event-list-title">Wednesday Bible Study</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 7:00 PM</span><span><i class="bi bi-geo-alt"></i> Fellowship Hall</span></div></div>
+                        </div>
+                        <div class="event-list-item" style="padding:.85rem;">
+                            <div class="event-list-date"><div class="event-list-day">20</div><div class="event-list-month">Apr</div></div>
+                            <div><div class="event-list-title">Easter Sunday Celebration</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 8:00 AM</span><span><i class="bi bi-star-fill" style="color:var(--gold);"></i> Special Service</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GIVING ===== -->
+        <section class="dash-section" id="sec-giving">
+            <h2 class="dash-section-title">My Giving</h2>
+            <p class="dash-section-sub">Your generosity is making a difference. Track your contributions and download receipts.</p>
+            <div class="giving-chart">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6 style="font-size:.85rem;font-weight:600;color:var(--white);">Giving Overview — 2026</h6>
+                    <span style="font-family:var(--display);font-size:1.4rem;color:var(--gold);">GH₵ 1,450</span>
+                </div>
+                <div class="chart-bars">
+                    <div class="chart-bar" style="height:40%;"><span class="bar-tip">GH₵ 200 Jan</span></div>
+                    <div class="chart-bar" style="height:55%;"><span class="bar-tip">GH₵ 300 Feb</span></div>
+                    <div class="chart-bar" style="height:70%;background:rgba(201,168,76,.5);"><span class="bar-tip">GH₵ 350 Mar</span></div>
+                    <div class="chart-bar" style="height:30%;"><span class="bar-tip">GH₵ 150 Apr</span></div>
+                    <div class="chart-bar" style="height:45%;"><span class="bar-tip">GH₵ 250 May</span></div>
+                    <div class="chart-bar" style="height:20%;"><span class="bar-tip">GH₵ 100 Jun</span></div>
+                    <div class="chart-bar" style="height:10%;opacity:.3;"><span class="bar-tip">—</span></div>
+                    <div class="chart-bar" style="height:10%;opacity:.3;"></div>
+                    <div class="chart-bar" style="height:10%;opacity:.3;"></div>
+                    <div class="chart-bar" style="height:10%;opacity:.3;"></div>
+                    <div class="chart-bar" style="height:10%;opacity:.3;"></div>
+                    <div class="chart-bar" style="height:10%;opacity:.3;"></div>
+                </div>
+                <div class="chart-month-labels">
+                    <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                    <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                <h6 style="color:var(--white);font-family:var(--display);font-size:1rem;font-weight:400;margin:0;">Transaction History</h6>
+                <div style="display:flex;gap:8px;">
+                    <a href="give.html" style="background:var(--gold);color:var(--black);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:5px;"><i class="bi bi-heart-fill"></i> Give Now</a>
+                    <button onclick="showToast('Receipt downloaded!')" style="background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text-dim);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;cursor:pointer;"><i class="bi bi-download me-1"></i>Download PDF</button>
+                </div>
+            </div>
+            <div class="give-table-wrap">
+                <table class="give-table">
+                    <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>March 2, 2026</td><td>Sunday Service Tithe</td><td><span class="type-badge type-tithe">Tithe</span></td><td style="color:var(--gold);">GH₵ 200.00</td><td><span class="status-confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</span></td></tr>
+                        <tr><td>Feb 23, 2026</td><td>Missions Fund</td><td><span class="type-badge type-missions">Missions</span></td><td style="color:var(--gold);">GH₵ 100.00</td><td><span class="status-confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</span></td></tr>
+                        <tr><td>Feb 2, 2026</td><td>Sunday Service Tithe</td><td><span class="type-badge type-tithe">Tithe</span></td><td style="color:var(--gold);">GH₵ 200.00</td><td><span class="status-confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</span></td></tr>
+                        <tr><td>Jan 19, 2026</td><td>Freewill Offering</td><td><span class="type-badge type-offering">Offering</span></td><td style="color:var(--gold);">GH₵ 50.00</td><td><span class="status-confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</span></td></tr>
+                        <tr><td>Jan 5, 2026</td><td>Sunday Service Tithe</td><td><span class="type-badge type-tithe">Tithe</span></td><td style="color:var(--gold);">GH₵ 200.00</td><td><span class="status-confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== EVENTS ===== -->
+        <section class="dash-section" id="sec-events">
+            <h2 class="dash-section-title">Events</h2>
+            <p class="dash-section-sub">Upcoming gatherings, conferences, and special services. RSVP to secure your spot.</p>
+            <div class="event-list-item">
+                <div class="event-list-date"><div class="event-list-day">16</div><div class="event-list-month">Mar</div></div>
+                <div style="flex:1;"><div class="event-list-title">Sunday Worship Service</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 9:00 AM &amp; 11:00 AM</span><span><i class="bi bi-geo-alt"></i> Main Sanctuary</span><span><i class="bi bi-people"></i> All welcome</span></div></div>
+                <div class="event-list-badge"><button class="btn-rsvp rsvped" onclick="toggleRsvp(this)"><i class="bi bi-check-circle-fill me-1"></i>RSVP'd</button></div>
+            </div>
+            <div class="event-list-item">
+                <div class="event-list-date"><div class="event-list-day">19</div><div class="event-list-month">Mar</div></div>
+                <div style="flex:1;"><div class="event-list-title">Wednesday Bible Study</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 7:00 PM</span><span><i class="bi bi-geo-alt"></i> Fellowship Hall</span></div></div>
+                <div class="event-list-badge"><button class="btn-rsvp" onclick="toggleRsvp(this)">RSVP</button></div>
+            </div>
+            <div class="event-list-item">
+                <div class="event-list-date"><div class="event-list-day">29</div><div class="event-list-month">Mar</div></div>
+                <div style="flex:1;"><div class="event-list-title">Good Friday Service</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 6:00 PM</span><span><i class="bi bi-geo-alt"></i> Main Sanctuary</span><span><i class="bi bi-star-fill" style="color:var(--gold);"></i> Special Service</span></div></div>
+                <div class="event-list-badge"><button class="btn-rsvp" onclick="toggleRsvp(this)">RSVP</button></div>
+            </div>
+            <div class="event-list-item">
+                <div class="event-list-date"><div class="event-list-day">20</div><div class="event-list-month">Apr</div></div>
+                <div style="flex:1;"><div class="event-list-title">Easter Sunday Celebration</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 8:00 AM</span><span><i class="bi bi-geo-alt"></i> Main Sanctuary + Overflow</span><span><i class="bi bi-star-fill" style="color:var(--gold);"></i> Annual Celebration</span></div></div>
+                <div class="event-list-badge"><button class="btn-rsvp rsvped" onclick="toggleRsvp(this)"><i class="bi bi-check-circle-fill me-1"></i>RSVP'd</button></div>
+            </div>
+            <div class="event-list-item">
+                <div class="event-list-date"><div class="event-list-day">05</div><div class="event-list-month">Apr</div></div>
+                <div style="flex:1;"><div class="event-list-title">Launch Your Business Idea — Workshop</div><div class="event-list-meta"><span><i class="bi bi-clock"></i> 9:00 AM–11:00 AM</span><span><i class="bi bi-geo-alt"></i> Fellowship Hall</span></div></div>
+                <div class="event-list-badge"><a href="workshops.html" class="btn-rsvp">Register</a></div>
+            </div>
+        </section>
+
+        <!-- ===== SERMONS ===== -->
+        <section class="dash-section" id="sec-sermons">
+            <h2 class="dash-section-title">Saved Sermons</h2>
+            <p class="dash-section-sub">Messages you've bookmarked. Pick up where you left off.</p>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;">
+                <div class="sermon-item">
+                    <div class="sermon-thumb"><i class="bi bi-mic-fill"></i></div>
+                    <div style="flex:1;"><div class="sermon-title">When God's Silence Is His Answer</div><div class="sermon-meta"><span><i class="bi bi-person"></i> Pastor Emmanuel</span><span><i class="bi bi-calendar3"></i> March 9, 2026</span><span><i class="bi bi-clock"></i> 42 min</span></div></div>
+                    <button class="btn-play"><i class="bi bi-play-fill"></i></button>
+                </div>
+                <div class="sermon-item">
+                    <div class="sermon-thumb"><i class="bi bi-mic-fill"></i></div>
+                    <div style="flex:1;"><div class="sermon-title">All Things Work Together</div><div class="sermon-meta"><span><i class="bi bi-person"></i> Pastor Emmanuel</span><span><i class="bi bi-calendar3"></i> Feb 23, 2026</span><span><i class="bi bi-clock"></i> 38 min</span></div></div>
+                    <button class="btn-play"><i class="bi bi-play-fill"></i></button>
+                </div>
+                <div class="sermon-item">
+                    <div class="sermon-thumb"><i class="bi bi-mic-fill"></i></div>
+                    <div style="flex:1;"><div class="sermon-title">The Faith That Moved Mountains</div><div class="sermon-meta"><span><i class="bi bi-person"></i> Elder Grace</span><span><i class="bi bi-calendar3"></i> Feb 9, 2026</span><span><i class="bi bi-clock"></i> 35 min</span></div></div>
+                    <button class="btn-play"><i class="bi bi-play-fill"></i></button>
+                </div>
+            </div>
+            <div class="mt-3 text-center">
+                <a href="sermons.html" style="font-size:.84rem;font-weight:600;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">Browse all sermons <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- ===== SMALL GROUPS ===== -->
+        <section class="dash-section" id="sec-groups">
+            <h2 class="dash-section-title">Small Groups</h2>
+            <p class="dash-section-sub">Community is at the heart of who we are. Find your group or join a new one.</p>
+            <div class="row g-3">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="group-card">
+                        <div class="group-icon" style="background:rgba(201,168,76,.12);color:var(--gold);"><i class="bi bi-book-half"></i></div>
+                        <div class="group-name">Tuesday Bible Study</div>
+                        <div class="group-desc">Deep-dive weekly study into a single book of the Bible. Currently in the Gospel of John.</div>
+                        <div class="group-meta"><span><i class="bi bi-clock"></i> Tuesdays, 7:00 PM</span><span><i class="bi bi-people"></i> 14 members</span><span><i class="bi bi-geo-alt"></i> Room 2A</span></div>
+                        <button class="btn-join-group joined"><i class="bi bi-check-circle-fill me-1"></i>Joined</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="group-card">
+                        <div class="group-icon" style="background:rgba(42,94,43,.15);color:#5aac5c;"><i class="bi bi-people-fill"></i></div>
+                        <div class="group-name">Young Adults Fellowship</div>
+                        <div class="group-desc">A space for 18–35s to connect, pray, and grow together in faith and life. Monthly social events included.</div>
+                        <div class="group-meta"><span><i class="bi bi-clock"></i> Saturdays, 4:00 PM</span><span><i class="bi bi-people"></i> 28 members</span><span><i class="bi bi-geo-alt"></i> Fellowship Hall</span></div>
+                        <button class="btn-join-group joined"><i class="bi bi-check-circle-fill me-1"></i>Joined</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="group-card">
+                        <div class="group-icon" style="background:rgba(92,61,30,.2);color:var(--gold);"><i class="bi bi-house-heart-fill"></i></div>
+                        <div class="group-name">Married Couples Circle</div>
+                        <div class="group-desc">Monthly gatherings for married couples to grow together in faith, friendship, and practical wisdom for marriage.</div>
+                        <div class="group-meta"><span><i class="bi bi-clock"></i> 1st Saturday monthly</span><span><i class="bi bi-people"></i> 12 couples</span></div>
+                        <button class="btn-join-group" onclick="toggleGroup(this)">Join Group</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="group-card">
+                        <div class="group-icon" style="background:rgba(26,58,92,.15);color:#4A82B4;"><i class="bi bi-briefcase-fill"></i></div>
+                        <div class="group-name">Marketplace Ministry</div>
+                        <div class="group-desc">For professionals and entrepreneurs who want to integrate faith into their work life. Prayer, networking, and accountability.</div>
+                        <div class="group-meta"><span><i class="bi bi-clock"></i> Wednesdays, 6:30 AM</span><span><i class="bi bi-people"></i> 19 members</span></div>
+                        <button class="btn-join-group" onclick="toggleGroup(this)">Join Group</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PRAYER ===== -->
+        <section class="dash-section" id="sec-prayer">
+            <h2 class="dash-section-title">Prayer Wall</h2>
+            <p class="dash-section-sub">Share your requests and stand with others in prayer. Every prayer matters.</p>
+            <div class="mb-4" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;">
+                <h6 style="font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:1rem;">Submit a Prayer Request</h6>
+                <textarea class="pf-input pf-textarea" id="prayerInput" placeholder="Share your request — it will be prayed over by our prayer team and church family…"></textarea>
+                <div class="mt-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <label style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-dim);cursor:pointer;">
+                        <input type="checkbox" id="prayerAnon" style="accent-color:var(--gold);"> Post anonymously
+                    </label>
+                    <button onclick="submitPrayer()" class="btn-save" style="padding:.55rem 1.25rem;font-size:.85rem;"><i class="bi bi-send-fill me-1"></i>Submit Request</button>
+                </div>
+            </div>
+            <div class="prayer-item">
+                <div class="prayer-item-header"><span class="prayer-name">Abena K.</span><span class="prayer-date">March 10, 2026</span></div>
+                <p class="prayer-text">Please pray for my mother who is recovering from surgery. I believe God for complete healing and His peace to fill our home during this time.</p>
+                <div class="prayer-actions"><button class="btn-pray"><i class="bi bi-hand-index-thumb-fill"></i> Praying</button><span class="pray-count">23 people praying</span></div>
+            </div>
+            <div class="prayer-item">
+                <div class="prayer-item-header"><span class="prayer-name">Anonymous</span><span class="prayer-date">March 8, 2026</span></div>
+                <p class="prayer-text">Asking for God's direction for my career. I've been at a crossroads for months. I trust that His plan is perfect but I need wisdom to take the next step.</p>
+                <div class="prayer-actions"><button class="btn-pray"><i class="bi bi-hand-index-thumb-fill"></i> Praying</button><span class="pray-count">41 people praying</span></div>
+            </div>
+            <div class="prayer-item">
+                <div class="prayer-item-header"><span class="prayer-name">Kofi A.</span><span class="prayer-date">March 7, 2026</span></div>
+                <p class="prayer-text">Praise report! After two years of waiting, I got the job. God came through. Thank you to everyone who prayed with me. He is faithful.</p>
+                <div class="prayer-actions"><button class="btn-pray" style="background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3);color:var(--gold);"><i class="bi bi-stars"></i> Praise!</button><span class="pray-count">67 reactions</span></div>
+            </div>
+        </section>
+
+        <!-- ===== PROFILE ===== -->
+        <section class="dash-section" id="sec-profile">
+            <h2 class="dash-section-title">My Profile</h2>
+            <p class="dash-section-sub">Keep your details up to date so we can serve you better.</p>
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <!-- Personal info -->
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.5rem;">
+                        <h6 class="profile-section-head">Personal Information</h6>
+                        <div class="row g-3">
+                            <div class="col-sm-6"><label class="pf-label">First Name</label><input type="text" class="pf-input" value="Kwame"></div>
+                            <div class="col-sm-6"><label class="pf-label">Last Name</label><input type="text" class="pf-input" value="Asante"></div>
+                            <div class="col-sm-6"><label class="pf-label">Email</label><input type="email" class="pf-input" value="kwame@example.com"></div>
+                            <div class="col-sm-6"><label class="pf-label">Phone</label><input type="tel" class="pf-input" value="024 000 0000"></div>
+                            <div class="col-sm-6"><label class="pf-label">Date of Birth</label><input type="date" class="pf-input" value="1990-06-15"></div>
+                            <div class="col-sm-6"><label class="pf-label">Gender</label><select class="pf-input pf-select"><option>Male</option><option>Female</option><option>Prefer not to say</option></select></div>
+                            <div class="col-12"><label class="pf-label">Residential Address</label><input type="text" class="pf-input" value="East Legon, Accra"></div>
+                        </div>
+                    </div>
+                    <!-- Church info -->
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;margin-bottom:1.5rem;">
+                        <h6 class="profile-section-head">Church &amp; Faith</h6>
+                        <div class="row g-3">
+                            <div class="col-sm-6"><label class="pf-label">Membership Type</label><select class="pf-input pf-select"><option>Full Member</option><option>Associate Member</option><option>Regular Attendee</option></select></div>
+                            <div class="col-sm-6"><label class="pf-label">Baptism Status</label><select class="pf-input pf-select"><option>Baptised</option><option>Not yet baptised</option></select></div>
+                            <div class="col-sm-6"><label class="pf-label">Primary Ministry</label><select class="pf-input pf-select"><option>Worship Team</option><option>Ushering</option><option>Children's Ministry</option><option>Media Team</option><option>None</option></select></div>
+                            <div class="col-sm-6"><label class="pf-label">Attendance Preference</label><select class="pf-input pf-select"><option>In-person</option><option>Online</option><option>Both</option></select></div>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <button class="btn-save" onclick="showToast('Profile saved successfully!')"><i class="bi bi-check-lg me-1"></i>Save Changes</button>
+                        <button class="btn-save-outline">Cancel</button>
+                    </div>
+                </div>
+                <!-- Profile card -->
+                <div class="col-lg-4">
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-align:center;margin-bottom:1rem;">
+                        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2rem;color:var(--black);margin:0 auto 1rem;">KA</div>
+                        <h6 style="font-family:var(--display);font-size:1.1rem;color:var(--white);margin-bottom:.2rem;">Kwame Asante</h6>
+                        <p style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);">Full Member</p>
+                        <p style="font-size:.78rem;color:var(--muted);margin-top:.25rem;">Member since January 2021</p>
+                        <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06);">
+                            <div style="display:flex;justify-content:space-around;">
+                                <div><span style="font-family:var(--display);font-size:1.3rem;color:var(--gold);display:block;">18</span><span style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">Services</span></div>
+                                <div><span style="font-family:var(--display);font-size:1.3rem;color:var(--gold);display:block;">2</span><span style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">Groups</span></div>
+                                <div><span style="font-family:var(--display);font-size:1.3rem;color:var(--gold);display:block;">42</span><span style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">Quiz XP</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;">
+                        <h6 style="font-size:.8rem;font-weight:600;color:var(--white);margin-bottom:.75rem;">Change Password</h6>
+                        <input type="password" class="pf-input mb-2" placeholder="Current password">
+                        <input type="password" class="pf-input mb-2" placeholder="New password">
+                        <input type="password" class="pf-input mb-2" placeholder="Confirm new password">
+                        <button onclick="showToast('Password updated!')" class="btn-save" style="width:100%;font-size:.85rem;padding:.6rem;">Update Password</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div><!-- /dash-wrap -->
+
+<div class="dash-toast" id="dashToast"><i class="bi bi-check-circle-fill"></i><span id="dashToastMsg">Done!</span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);});
+
+// ── Section switching ──
+function showSection(id, triggerEl) {
+    document.querySelectorAll('.dash-section').forEach(function(s){s.classList.remove('active');});
+    document.getElementById('sec-'+id).classList.add('active');
+    // Sidebar
+    document.querySelectorAll('.dash-nav-item').forEach(function(n){n.classList.remove('active');});
+    // Mobile tabs
+    document.querySelectorAll('.dash-mobile-tab').forEach(function(t){t.classList.remove('active');});
+    if(triggerEl){triggerEl.classList.add('active');}
+}
+
+// ── Countdown to next Sunday service ──
+(function countdownService(){
+    function tick(){
+        var now=new Date();var d=now.getDay();var next=new Date(now);
+        next.setDate(now.getDate()+(d===0?7:7-d));next.setHours(9,0,0,0);
+        var diff=next-now;
+        if(diff<=0){document.getElementById('nextServiceCountdown').textContent='happening now!';return;}
+        var days=Math.floor(diff/86400000);var hrs=Math.floor((diff%86400000)/3600000);var mins=Math.floor((diff%3600000)/60000);
+        document.getElementById('nextServiceCountdown').textContent=(days>0?days+'d ':'')+hrs+'h '+mins+'m';
+    }
+    tick();setInterval(tick,60000);
+})();
+
+// ── Toast ──
+function showToast(msg){
+    var t=document.getElementById('dashToast');
+    document.getElementById('dashToastMsg').textContent=msg;
+    t.style.opacity='1';t.style.transform='translateY(0)';
+    setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';},3000);
+}
+
+// ── RSVP toggle ──
+function toggleRsvp(btn){
+    var isRsvped=btn.classList.contains('rsvped');
+    btn.classList.toggle('rsvped',!isRsvped);
+    btn.innerHTML=!isRsvped?'<i class="bi bi-check-circle-fill me-1"></i>RSVP\'d':'RSVP';
+    showToast(!isRsvped?'RSVP confirmed!':'RSVP removed.');
+}
+
+// ── Group join toggle ──
+function toggleGroup(btn){
+    btn.classList.add('joined');
+    btn.innerHTML='<i class="bi bi-check-circle-fill me-1"></i>Joined';
+    showToast('You\'ve joined the group!');
+}
+
+// ── Prayer submit ──
+function submitPrayer(){
+    var text=document.getElementById('prayerInput').value.trim();
+    if(!text){alert('Please write your prayer request.');return;}
+    document.getElementById('prayerInput').value='';
+    showToast('Prayer request submitted. We are praying with you 🙏');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Give Online — Support the ministry of Word Transformation Church through Mobile Money or bank transfer.">
+<title>Give Online | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --black:#0A0A0A;--deep:#111111;--card:#1C1C1C;--border:rgba(255,255,255,0.08);
+    --gold:#C9A84C;--gold-light:#E8C97A;--gold-pale:rgba(201,168,76,0.1);
+    --light:#FFFFFF;--light-alt:#F7F4EF;--light-text:#1C1C1C;--light-muted:#6B6560;--light-stone:#E8E2D9;
+    --text:#E8E4DE;--text-dim:#A09A91;--muted:#6E6861;--white:#FFFFFF;
+    --brown:#5C3D1E;--brown-mid:#8B6340;--green:#2A5E2B;
+    --display:'DM Serif Display',Georgia,serif;--body:'DM Sans',system-ui,sans-serif;--serif:'Lora',Georgia,serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:72px;}
+body{font-family:var(--body);color:var(--text);background:var(--deep);line-height:1.65;-webkit-font-smoothing:antialiased;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* Navbar */
+.navbar{background:rgba(10,10,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:.9rem 0;border-bottom:1px solid rgba(201,168,76,.12);transition:background .3s ease;z-index:1030;}
+.navbar.scrolled{background:rgba(10,10,10,.98);box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.navbar-brand{font-family:var(--display);font-size:1.3rem;color:var(--white)!important;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;}
+.brand-icon{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:1rem;flex-shrink:0;}
+.brand-sub{display:block;font-family:var(--body);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);line-height:1;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.82)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;transition:all .2s ease;}
+.navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--gold)!important;background:rgba(201,168,76,.1);}
+.dropdown-menu{background:#141414;border:1px solid rgba(201,168,76,.18);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,.5);padding:.5rem;}
+.dropdown-item{color:rgba(255,255,255,.8);font-size:.87rem;padding:.55rem .9rem;border-radius:6px;transition:all .15s ease;display:flex;align-items:center;gap:8px;}
+.dropdown-item i{color:var(--gold);font-size:.85rem;}
+.dropdown-item:hover{background:rgba(201,168,76,.1);color:var(--white);}
+.dropdown-divider{border-color:rgba(201,168,76,.12);margin:.35rem 0;}
+.btn-live-nav{display:inline-flex;align-items:center;gap:6px;background:#E50000;color:#fff!important;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .25s ease;}
+.btn-live-nav:hover{background:#c20000;transform:translateY(-1px);}
+.live-dot{width:7px;height:7px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.4s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.btn-give-nav{background:var(--gold);color:var(--brown)!important;border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;transition:all .25s ease;cursor:pointer;}
+.btn-give-nav:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:991.98px){.navbar-collapse{background:#0a0a0a;padding:1rem;border-radius:10px;margin-top:.5rem;}}
+
+/* Search */
+.search-overlay{display:none;position:fixed;top:0;left:0;right:0;z-index:9998;flex-direction:column;}
+.search-overlay.open{display:flex;}
+.search-bar-wrap{background:rgba(10,10,10,.97);backdrop-filter:blur(20px);display:flex;align-items:center;gap:12px;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(201,168,76,.15);}
+.search-bar-icon{color:var(--gold);font-size:1.1rem;}
+.search-bar-input{flex:1;background:transparent;border:none;outline:none;font-size:1.1rem;color:var(--white);caret-color:var(--gold);}
+.search-bar-input::placeholder{color:rgba(255,255,255,.3);}
+.search-bar-hint{font-size:.75rem;color:rgba(255,255,255,.3);white-space:nowrap;}
+.search-bar-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;padding:4px;}
+.search-bar-close:hover{color:var(--white);}
+.search-box{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);width:100%;max-width:660px;border-radius:0 0 14px 14px;border:1px solid rgba(201,168,76,.12);border-top:none;overflow:hidden;}
+.search-results{max-height:70vh;overflow-y:auto;}
+.search-result-item{display:flex;align-items:center;gap:12px;padding:.85rem 1.25rem;text-decoration:none;transition:background .15s ease;color:var(--white);border-bottom:1px solid rgba(255,255,255,.05);}
+.search-result-item:hover{background:rgba(201,168,76,.08);}
+.search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:rgba(255,255,255,.6);}
+.search-result-icon.brown{color:var(--gold);}
+.search-result-icon.green{color:#5aac5c;}
+.search-result-icon.red{color:#ff5555;}
+.search-result-text{flex:1;}
+.search-result-title{font-size:.92rem;font-weight:500;color:var(--white);}
+.search-result-sub{font-size:.76rem;color:rgba(255,255,255,.4);}
+.search-result-arrow{color:rgba(255,255,255,.2);font-size:.75rem;}
+.search-empty{padding:2rem;text-align:center;color:rgba(255,255,255,.4);font-size:.9rem;}
+.search-hints{padding:1rem 1.25rem;}
+.search-hint-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:.6rem;}
+.search-quick-links{display:flex;flex-wrap:wrap;gap:6px;}
+.search-quick-link{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;border:1px solid rgba(201,168,76,.2);font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s ease;}
+.search-quick-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);}
+.search-backdrop{position:fixed;inset:0;z-index:-1;}
+
+/* ── HERO ── */
+.give-hero{background:var(--black);padding:5.5rem 0 4.5rem;position:relative;overflow:hidden;text-align:center;}
+.give-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.14) 0%,transparent 65%);}
+.give-hero-inner{position:relative;}
+.give-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:50px;padding:.3rem 1.1rem;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.give-hero h1{font-family:var(--display);font-size:clamp(2.4rem,6vw,4rem);font-weight:400;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:1.1rem;}
+.give-hero h1 em{font-style:italic;color:var(--gold);}
+.give-hero-sub{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--text-dim);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;}
+.give-stats-row{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);max-width:560px;margin:0 auto;}
+.give-stat-num{font-family:var(--display);font-size:1.8rem;color:var(--gold);line-height:1;display:block;}
+.give-stat-lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:4px;}
+
+/* ── MAIN GIVE SECTION ── */
+.give-section{background:var(--light-alt);padding:5rem 0;}
+
+/* Category pills */
+.give-category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:2rem;}
+.give-cat-pill{background:var(--white);border:2px solid var(--light-stone);border-radius:12px;padding:1.25rem 1rem;text-align:center;cursor:pointer;transition:all .25s ease;}
+.give-cat-pill:hover{border-color:var(--gold);transform:translateY(-2px);}
+.give-cat-pill.active{border-color:var(--brown);background:rgba(92,61,30,.05);}
+.give-cat-pill i{font-size:1.5rem;display:block;margin-bottom:.5rem;color:var(--brown);}
+.give-cat-pill.active i{color:var(--brown);}
+.give-cat-pill span{font-size:.82rem;font-weight:600;color:var(--light-text);}
+.give-cat-pill small{display:block;font-size:.68rem;color:var(--light-muted);margin-top:2px;}
+
+/* Amount presets */
+.amount-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1rem;}
+.amount-preset{background:var(--white);border:2px solid var(--light-stone);border-radius:10px;padding:.75rem .5rem;text-align:center;cursor:pointer;transition:all .2s ease;font-weight:600;font-size:.9rem;color:var(--light-text);}
+.amount-preset:hover{border-color:var(--brown);color:var(--brown);}
+.amount-preset.active{background:var(--brown);border-color:var(--brown);color:#F5F0E8;}
+@media(max-width:480px){.amount-presets{grid-template-columns:repeat(2,1fr);}}
+
+/* Give form card */
+.give-form-card{background:var(--white);border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,.1);overflow:hidden;}
+.give-form-header{background:linear-gradient(135deg,var(--brown),#3d2010);padding:2rem 2.5rem;text-align:center;}
+.give-form-header h3{font-family:var(--display);font-size:1.6rem;font-weight:400;color:#F5F0E8;margin-bottom:.35rem;}
+.give-form-header p{font-family:var(--serif);font-style:italic;font-size:.88rem;color:rgba(245,240,232,.65);}
+.give-form-body{padding:2rem 2.5rem;}
+.gf-label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.5rem;}
+.gf-input{width:100%;padding:.7rem 1rem;border:1.5px solid var(--light-stone);border-radius:10px;font-size:.95rem;color:var(--light-text);background:#FDFAF5;outline:none;transition:border-color .2s ease,box-shadow .2s ease;font-family:var(--body);}
+.gf-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.12);}
+.gf-input::placeholder{color:var(--light-muted);}
+.gf-currency-wrap{position:relative;}
+.gf-currency{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--brown-mid);font-weight:600;}
+.gf-currency-input{padding-left:2.5rem;}
+.gf-divider{border:none;border-top:1px solid var(--light-stone);margin:1.5rem 0;}
+.btn-give-primary{width:100%;padding:1rem;background:linear-gradient(135deg,var(--brown),#3d2010);color:#F5F0E8;border:none;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.02em;}
+.btn-give-primary:hover{background:linear-gradient(135deg,#6B4A2E,var(--brown));transform:translateY(-2px);box-shadow:0 8px 24px rgba(92,61,30,.3);}
+.give-secure-note{display:flex;align-items:center;justify-content:center;gap:6px;font-size:.72rem;color:var(--light-muted);margin-top:1rem;}
+.give-secure-note i{color:var(--green);}
+
+/* Method toggle */
+.method-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem;}
+.method-btn{background:#F7F4EF;border:2px solid var(--light-stone);border-radius:10px;padding:1rem;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s ease;}
+.method-btn:hover{border-color:var(--brown-mid);}
+.method-btn.active{background:rgba(92,61,30,.06);border-color:var(--brown);}
+.method-btn i{font-size:1.4rem;color:var(--brown-mid);}
+.method-btn span{font-size:.82rem;font-weight:600;color:var(--light-text);}
+.method-btn small{font-size:.68rem;color:var(--light-muted);}
+
+/* Network grid */
+.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.network-btn{background:#F7F4EF;border:2px solid var(--light-stone);border-radius:8px;padding:.65rem .5rem;text-align:center;cursor:pointer;transition:all .2s ease;font-size:.75rem;font-weight:600;color:var(--light-text);}
+.network-btn:hover{border-color:var(--brown-mid);}
+.network-btn.active{border-color:var(--brown);background:rgba(92,61,30,.06);color:var(--brown);}
+.network-btn .net-icon{font-size:1.1rem;display:block;margin-bottom:3px;}
+
+/* Bank details */
+.bank-details{background:#F7F4EF;border-radius:12px;padding:1.25rem;margin-bottom:1rem;}
+.bank-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid var(--light-stone);font-size:.88rem;}
+.bank-row:last-of-type{border-bottom:none;}
+.bank-row span{color:var(--light-muted);}
+.bank-row strong{color:var(--light-text);}
+.copy-btn{background:none;border:none;color:var(--brown-mid);font-size:.75rem;cursor:pointer;padding:2px 6px;border-radius:4px;transition:all .2s;}
+.copy-btn:hover{background:rgba(92,61,30,.08);color:var(--brown);}
+
+/* ── INFO PANELS ── */
+.give-info-section{background:var(--deep);padding:5rem 0;}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;height:100%;transition:all .3s ease;}
+.info-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4);border-color:rgba(201,168,76,.2);}
+.info-card-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.25rem;}
+.info-card h4{font-family:var(--display);font-size:1.2rem;font-weight:400;color:var(--white);margin-bottom:.6rem;}
+.info-card p{font-family:var(--serif);font-size:.92rem;color:var(--text-dim);line-height:1.7;}
+
+/* ── IMPACT SECTION ── */
+.impact-section{background:var(--black);padding:5rem 0;border-top:1px solid rgba(201,168,76,.08);}
+.impact-num{font-family:var(--display);font-size:3rem;color:var(--gold);line-height:1;display:block;}
+.impact-lbl{font-size:.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.12em;margin-top:.4rem;}
+.impact-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:1rem;overflow:hidden;}
+.impact-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--brown),var(--gold));}
+
+/* ── SCRIPTURE STRIP ── */
+.scripture-strip{background:linear-gradient(135deg,var(--brown),#3d2010);padding:4rem 0;text-align:center;}
+.scripture-strip blockquote{font-family:var(--display);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:400;color:#F5F0E8;line-height:1.4;max-width:700px;margin:0 auto .75rem;}
+.scripture-strip cite{font-style:normal;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.55);}
+
+/* ── GIVING HISTORY (for logged-in users) ── */
+.history-section{background:var(--light-alt);padding:4rem 0;}
+.history-card{background:var(--white);border-radius:14px;border:1px solid var(--light-stone);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.history-header{background:var(--brown);padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;}
+.history-header h5{font-family:var(--display);font-size:1.1rem;font-weight:400;color:#F5F0E8;margin:0;}
+.history-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.75rem;border-bottom:1px solid var(--light-stone);gap:12px;flex-wrap:wrap;}
+.history-row:last-child{border-bottom:none;}
+.history-date{font-size:.78rem;color:var(--light-muted);}
+.history-type{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:50px;letter-spacing:.06em;text-transform:uppercase;}
+.history-type.tithe{background:rgba(92,61,30,.1);color:var(--brown);}
+.history-type.offering{background:rgba(42,94,43,.1);color:var(--green);}
+.history-type.missions{background:rgba(201,168,76,.12);color:#7a5a00;}
+.history-amount{font-weight:600;color:var(--light-text);font-size:.95rem;}
+.history-status{font-size:.72rem;display:flex;align-items:center;gap:4px;}
+.history-status.confirmed{color:var(--green);}
+
+/* ── FOOTER ── */
+footer{background:var(--black);padding:70px 0 30px;border-top:1px solid rgba(201,168,76,.1);}
+.footer-brand{font-family:var(--display);font-size:1.4rem;color:var(--white);margin-bottom:.75rem;display:block;}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.4);font-size:.88rem;line-height:1.6;margin-bottom:1.5rem;max-width:260px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.95rem;text-decoration:none;transition:all .2s ease;border:1px solid rgba(255,255,255,.06);}
+.footer-social a:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.footer-heading{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+footer ul{list-style:none;padding:0;}
+footer ul li{margin-bottom:.7rem;}
+footer ul li a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:color .2s ease;}
+footer ul li a:hover{color:var(--gold);}
+footer hr{border-color:rgba(255,255,255,.06);margin:2.5rem 0 1.5rem;}
+.footer-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;}
+.footer-copy{font-size:.8rem;color:rgba(255,255,255,.3);}
+.footer-legal{display:flex;gap:1.25rem;}
+.footer-legal a{font-size:.8rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s ease;}
+.footer-legal a:hover{color:var(--gold);}
+
+/* Toast */
+.toast-give{position:fixed;bottom:2rem;right:2rem;background:var(--green);color:#fff;padding:.75rem 1.25rem;border-radius:10px;font-size:.86rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(12px);transition:all .35s ease;z-index:9999;pointer-events:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+            <div>Word Transformation<span class="brand-sub">Church</span></div>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                        <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                        <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                        <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                        <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                        <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                        <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                        <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                        <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-1">
+                    <button class="nav-link bg-transparent border-0" onclick="toggleSearch()" style="color:rgba(255,255,255,.7);"><i class="bi bi-search"></i></button>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-give-nav active"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Search overlay -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-bar-wrap">
+        <i class="bi bi-search search-bar-icon"></i>
+        <input type="text" id="searchInput" class="search-bar-input" placeholder="Search sermons, events, ministries…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
+        <span class="search-bar-hint d-none d-md-inline">Press Esc to close</span>
+        <button class="search-bar-close" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div style="position:relative;display:flex;justify-content:center;padding:0 1rem;">
+        <div class="search-box"><div class="search-results" id="searchResults"></div></div>
+    </div>
+    <div class="search-backdrop" onclick="toggleSearch()"></div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="give-hero">
+    <div class="container give-hero-inner reveal">
+        <div class="give-eyebrow"><i class="bi bi-heart-fill"></i> Generous Giving</div>
+        <h1>Give to the <em>Work of God</em></h1>
+        <p class="give-hero-sub">"Honour the Lord with your wealth, with the firstfruits of all your crops." Every gift — no matter the size — advances the Kingdom and transforms lives in Accra and beyond.</p>
+        <div class="give-stats-row">
+            <div><span class="give-stat-num">500+</span><span class="give-stat-lbl">Members giving</span></div>
+            <div><span class="give-stat-num">12</span><span class="give-stat-lbl">Ministries funded</span></div>
+            <div><span class="give-stat-num">3</span><span class="give-stat-lbl">Outreach programs</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== MAIN GIVE ===================== -->
+<section class="give-section" id="give">
+    <div class="container">
+        <div class="row g-5 justify-content-center">
+
+            <!-- Left: Category + Form -->
+            <div class="col-lg-7 col-xl-6">
+
+                <!-- Giving categories -->
+                <h5 style="font-family:var(--display);font-size:1.1rem;font-weight:400;color:var(--light-text);margin-bottom:1rem;">What are you giving towards?</h5>
+                <div class="give-category-grid" id="categoryGrid">
+                    <div class="give-cat-pill active" onclick="selectCategory(this,'Tithe')">
+                        <i class="bi bi-award-fill"></i>
+                        <span>Tithe</span>
+                        <small>10% of income</small>
+                    </div>
+                    <div class="give-cat-pill" onclick="selectCategory(this,'Offering')">
+                        <i class="bi bi-gift-fill"></i>
+                        <span>Offering</span>
+                        <small>Freewill gift</small>
+                    </div>
+                    <div class="give-cat-pill" onclick="selectCategory(this,'Missions')">
+                        <i class="bi bi-globe2"></i>
+                        <span>Missions</span>
+                        <small>Outreach & evangelism</small>
+                    </div>
+                    <div class="give-cat-pill" onclick="selectCategory(this,'Building Fund')">
+                        <i class="bi bi-building-fill"></i>
+                        <span>Building Fund</span>
+                        <small>Sanctuary project</small>
+                    </div>
+                    <div class="give-cat-pill" onclick="selectCategory(this,'Welfare')">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Welfare</span>
+                        <small>Support families in need</small>
+                    </div>
+                    <div class="give-cat-pill" onclick="selectCategory(this,'Thanksgiving')">
+                        <i class="bi bi-stars"></i>
+                        <span>Thanksgiving</span>
+                        <small>Special gratitude</small>
+                    </div>
+                </div>
+
+                <!-- Give form card -->
+                <div class="give-form-card">
+                    <div class="give-form-header">
+                        <svg width="24" height="30" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto .75rem"><rect x="11" y="0" width="6" height="34" rx="2" fill="#C9A84C"/><rect x="0" y="10" width="28" height="6" rx="2" fill="#C9A84C"/></svg>
+                        <h3>Give — <span id="selectedCategoryLabel">Tithe</span></h3>
+                        <p>"Each of you should give what you have decided in your heart." — 2 Cor 9:7</p>
+                    </div>
+                    <div class="give-form-body">
+
+                        <!-- Amount presets -->
+                        <label class="gf-label">Choose an amount</label>
+                        <div class="amount-presets" id="amountPresets">
+                            <div class="amount-preset" onclick="setPreset(this,50)">GH₵ 50</div>
+                            <div class="amount-preset" onclick="setPreset(this,100)">GH₵ 100</div>
+                            <div class="amount-preset" onclick="setPreset(this,200)">GH₵ 200</div>
+                            <div class="amount-preset" onclick="setPreset(this,500)">GH₵ 500</div>
+                        </div>
+                        <div class="gf-currency-wrap mb-3">
+                            <span class="gf-currency">GH₵</span>
+                            <input type="number" class="gf-input gf-currency-input" id="giveAmount" placeholder="Or enter custom amount" min="1" step="0.01" oninput="clearPresets()">
+                        </div>
+
+                        <hr class="gf-divider">
+
+                        <!-- Personal details -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-6">
+                                <label class="gf-label">Your name</label>
+                                <input type="text" class="gf-input" id="giveName" placeholder="Full name">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="gf-label">Email address</label>
+                                <input type="email" class="gf-input" id="giveEmail" placeholder="you@example.com">
+                            </div>
+                        </div>
+
+                        <hr class="gf-divider">
+
+                        <!-- Payment method -->
+                        <label class="gf-label">Payment method</label>
+                        <div class="method-toggle" id="methodToggle">
+                            <button class="method-btn active" onclick="setMethod(this,'momo')">
+                                <i class="bi bi-phone-fill"></i>
+                                <span>Mobile Money</span>
+                                <small>MTN · Vodafone · AirtelTigo</small>
+                            </button>
+                            <button class="method-btn" onclick="setMethod(this,'bank')">
+                                <i class="bi bi-bank"></i>
+                                <span>Bank Transfer</span>
+                                <small>Direct deposit</small>
+                            </button>
+                        </div>
+
+                        <!-- MoMo fields -->
+                        <div id="momoFields">
+                            <label class="gf-label">Select your network</label>
+                            <div class="network-grid mb-3">
+                                <div class="network-btn active" onclick="selectNetwork(this,'MTN')"><span class="net-icon">🟡</span>MTN MoMo</div>
+                                <div class="network-btn" onclick="selectNetwork(this,'Vodafone')"><span class="net-icon">🔴</span>Vodafone Cash</div>
+                                <div class="network-btn" onclick="selectNetwork(this,'AirtelTigo')"><span class="net-icon">🔵</span>AirtelTigo</div>
+                            </div>
+                            <label class="gf-label">Mobile Money number</label>
+                            <input type="tel" class="gf-input mb-1" id="giveMomo" placeholder="e.g. 024 000 0000">
+                            <p style="font-size:.72rem;color:var(--light-muted);margin-bottom:1.25rem;">You will receive a prompt on this number to approve the payment.</p>
+                        </div>
+
+                        <!-- Bank fields -->
+                        <div id="bankFields" style="display:none;">
+                            <p class="gf-label">Transfer to this account</p>
+                            <div class="bank-details">
+                                <div class="bank-row"><span>Bank</span><strong>GCB Bank Ghana</strong></div>
+                                <div class="bank-row"><span>Account name</span><div style="display:flex;align-items:center;gap:8px;"><strong>Word Transformation Church</strong><button class="copy-btn" onclick="copyText('Word Transformation Church',this)"><i class="bi bi-copy"></i></button></div></div>
+                                <div class="bank-row"><span>Account number</span><div style="display:flex;align-items:center;gap:8px;"><strong>1234567890</strong><button class="copy-btn" onclick="copyText('1234567890',this)"><i class="bi bi-copy"></i></button></div></div>
+                                <div class="bank-row"><span>Branch</span><strong>Accra Main</strong></div>
+                            </div>
+                            <label class="gf-label">Transaction / reference number</label>
+                            <input type="text" class="gf-input mb-3" id="giveRef" placeholder="Enter reference after transfer (e.g. TXN123456789)">
+                        </div>
+
+                        <button class="btn-give-primary" onclick="submitGift()">
+                            <i class="bi bi-heart-fill"></i> Complete My Gift
+                        </button>
+                        <p class="give-secure-note"><i class="bi bi-shield-fill-check"></i> All transactions are encrypted and secure</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Info panels -->
+            <div class="col-lg-5 col-xl-4">
+
+                <!-- Why give -->
+                <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem;" class="reveal">
+                    <h5 style="font-family:var(--display);font-size:1.2rem;font-weight:400;color:var(--white);margin-bottom:1.25rem;">Why Give?</h5>
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div style="display:flex;gap:12px;">
+                            <div style="width:36px;height:36px;background:rgba(201,168,76,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;"><i class="bi bi-broadcast-pin"></i></div>
+                            <div><p style="font-size:.88rem;font-weight:600;color:var(--white);margin-bottom:.2rem;">Fund Our Sunday Services</p><p style="font-size:.8rem;color:var(--text-dim);line-height:1.5;">Every Sunday service — sound, media, children's church — is powered by your generosity.</p></div>
+                        </div>
+                        <div style="display:flex;gap:12px;">
+                            <div style="width:36px;height:36px;background:rgba(42,94,43,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#5aac5c;flex-shrink:0;"><i class="bi bi-people-fill"></i></div>
+                            <div><p style="font-size:.88rem;font-weight:600;color:var(--white);margin-bottom:.2rem;">Support Community Outreach</p><p style="font-size:.8rem;color:var(--text-dim);line-height:1.5;">We run food banks, school support, and welfare programs for families in need across Accra.</p></div>
+                        </div>
+                        <div style="display:flex;gap:12px;">
+                            <div style="width:36px;height:36px;background:rgba(201,168,76,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;"><i class="bi bi-mortarboard-fill"></i></div>
+                            <div><p style="font-size:.88rem;font-weight:600;color:var(--white);margin-bottom:.2rem;">Train the Next Generation</p><p style="font-size:.8rem;color:var(--text-dim);line-height:1.5;">Your giving funds youth programs, the Skills Workshops, and leadership training for young people.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recurring giving nudge -->
+                <div style="background:linear-gradient(135deg,rgba(92,61,30,.3),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.2);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem;" class="reveal">
+                    <i class="bi bi-arrow-repeat" style="font-size:1.4rem;color:var(--gold);display:block;margin-bottom:.75rem;"></i>
+                    <h6 style="font-family:var(--display);font-size:1.05rem;font-weight:400;color:var(--white);margin-bottom:.4rem;">Set Up Recurring Giving</h6>
+                    <p style="font-family:var(--serif);font-style:italic;font-size:.85rem;color:var(--text-dim);line-height:1.65;margin-bottom:1rem;">Regular givers are the backbone of our ministry. Commit to a monthly amount and never miss a giving date.</p>
+                    <a href="portal.html" style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--gold);text-decoration:none;transition:gap .2s;">Set up recurring <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+                <!-- Contact for queries -->
+                <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;" class="reveal">
+                    <p style="font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.75rem;">Need Help?</p>
+                    <p style="font-size:.85rem;color:var(--text-dim);line-height:1.6;margin-bottom:.75rem;">If you have questions about your giving or need a receipt, our finance team is here to help.</p>
+                    <a href="contact.html" style="font-size:.84rem;font-weight:600;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:5px;"><i class="bi bi-envelope-fill"></i> Contact Finance Team</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===================== GIVING HISTORY ===================== -->
+<section class="history-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <h4 style="font-family:var(--display);font-size:1.4rem;font-weight:400;color:var(--light-text);margin:0;">Your Giving History</h4>
+                    <a href="portal.html" style="font-size:.82rem;font-weight:600;color:var(--brown);text-decoration:none;display:inline-flex;align-items:center;gap:5px;">View full history <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="history-card reveal">
+                    <div class="history-header">
+                        <h5>Recent Transactions</h5>
+                        <span style="font-size:.72rem;color:rgba(245,240,232,.55);">Year to date: <strong style="color:#F5F0E8;">GH₵ 1,450.00</strong></span>
+                    </div>
+                    <div class="history-row"><div><div class="history-date">March 2, 2026</div><div style="font-size:.88rem;color:var(--light-text);font-weight:500;margin-top:2px;">Sunday Service Tithe</div></div><span class="history-type tithe">Tithe</span><div class="history-amount">GH₵ 200.00</div><div class="history-status confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</div></div>
+                    <div class="history-row"><div><div class="history-date">February 23, 2026</div><div style="font-size:.88rem;color:var(--light-text);font-weight:500;margin-top:2px;">Missions Fund</div></div><span class="history-type missions">Missions</span><div class="history-amount">GH₵ 100.00</div><div class="history-status confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</div></div>
+                    <div class="history-row"><div><div class="history-date">February 2, 2026</div><div style="font-size:.88rem;color:var(--light-text);font-weight:500;margin-top:2px;">Sunday Service Tithe</div></div><span class="history-type tithe">Tithe</span><div class="history-amount">GH₵ 200.00</div><div class="history-status confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</div></div>
+                    <div class="history-row"><div><div class="history-date">January 19, 2026</div><div style="font-size:.88rem;color:var(--light-text);font-weight:500;margin-top:2px;">Freewill Offering</div></div><span class="history-type offering">Offering</span><div class="history-amount">GH₵ 50.00</div><div class="history-status confirmed"><i class="bi bi-check-circle-fill"></i> Confirmed</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== IMPACT ===================== -->
+<section class="impact-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <p style="font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;">Your Giving at Work</p>
+            <h2 style="font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:var(--white);">Impact This Year</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-sm-6 col-lg-3 reveal">
+                <span class="impact-num">847</span>
+                <span class="impact-lbl">Lives reached through outreach</span>
+                <div class="impact-bar"><div class="impact-bar-fill" style="width:84%;"></div></div>
+            </div>
+            <div class="col-sm-6 col-lg-3 reveal">
+                <span class="impact-num">120</span>
+                <span class="impact-lbl">Students in skills workshops</span>
+                <div class="impact-bar"><div class="impact-bar-fill" style="width:60%;"></div></div>
+            </div>
+            <div class="col-sm-6 col-lg-3 reveal">
+                <span class="impact-num">34</span>
+                <span class="impact-lbl">Families supported through welfare</span>
+                <div class="impact-bar"><div class="impact-bar-fill" style="width:34%;"></div></div>
+            </div>
+            <div class="col-sm-6 col-lg-3 reveal">
+                <span class="impact-num">3</span>
+                <span class="impact-lbl">Mission trips funded this year</span>
+                <div class="impact-bar"><div class="impact-bar-fill" style="width:50%;"></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SCRIPTURE STRIP ===================== -->
+<section class="scripture-strip">
+    <div class="container">
+        <blockquote>"Remember this: Whoever sows sparingly will also reap sparingly, and whoever sows generously will also reap generously."</blockquote>
+        <cite>— 2 Corinthians 9:6</cite>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <span class="footer-brand">Word <span>Transformation</span></span>
+                <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
+                <div class="footer-social">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="livestream.html"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Explore</p>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="sermons.html">Sermons</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Ministry</p>
+                <ul>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="smallgroups.html">Small Groups</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="prayer.html">Prayer Wall</a></li>
+                    <li><a href="devotional.html">Devotional</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <p class="footer-heading">Service Times</p>
+                <ul>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-book me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Wednesday</strong> — 7:00 PM Bible Study</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:1.5rem;"><i class="bi bi-chat-heart me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Friday</strong> — 6:30 PM Prayer Night</li>
+                </ul>
+                <a href="livestream.html" class="btn-live-nav" style="width:fit-content;"><span class="live-dot"></span> Watch Live Online</a>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="sitemap.html">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="toast-give" id="giveToast"><i class="bi bi-check-circle-fill"></i><span id="giveToastMsg">Done!</span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);});
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+var selectedCategory='Tithe';
+var selectedMethod='momo';
+var selectedNetwork='MTN';
+
+function selectCategory(el,cat){
+    document.querySelectorAll('.give-cat-pill').forEach(function(p){p.classList.remove('active');});
+    el.classList.add('active');
+    selectedCategory=cat;
+    document.getElementById('selectedCategoryLabel').textContent=cat;
+}
+function setPreset(el,val){
+    document.querySelectorAll('.amount-preset').forEach(function(p){p.classList.remove('active');});
+    el.classList.add('active');
+    document.getElementById('giveAmount').value=val;
+}
+function clearPresets(){
+    document.querySelectorAll('.amount-preset').forEach(function(p){p.classList.remove('active');});
+}
+function setMethod(el,method){
+    document.querySelectorAll('.method-btn').forEach(function(b){b.classList.remove('active');});
+    el.classList.add('active');
+    selectedMethod=method;
+    document.getElementById('momoFields').style.display=method==='momo'?'block':'none';
+    document.getElementById('bankFields').style.display=method==='bank'?'block':'none';
+}
+function selectNetwork(el,net){
+    document.querySelectorAll('.network-btn').forEach(function(b){b.classList.remove('active');});
+    el.classList.add('active');
+    selectedNetwork=net;
+}
+function copyText(text,btn){
+    navigator.clipboard.writeText(text).then(function(){
+        btn.innerHTML='<i class="bi bi-check-lg"></i>';
+        showToast('Copied to clipboard!');
+        setTimeout(function(){btn.innerHTML='<i class="bi bi-copy"></i>';},2000);
+    });
+}
+function showToast(msg){
+    var t=document.getElementById('giveToast');
+    document.getElementById('giveToastMsg').textContent=msg;
+    t.style.opacity='1';t.style.transform='translateY(0)';
+    setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';},3000);
+}
+function submitGift(){
+    var amount=parseFloat(document.getElementById('giveAmount').value);
+    var name=document.getElementById('giveName').value.trim();
+    var email=document.getElementById('giveEmail').value.trim();
+    if(!amount||amount<=0){alert('Please enter a valid amount.');return;}
+    if(!name){alert('Please enter your name.');return;}
+    if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
+    if(selectedMethod==='momo'&&!document.getElementById('giveMomo').value.trim()){alert('Please enter your Mobile Money number.');return;}
+    if(selectedMethod==='bank'&&document.getElementById('giveRef')&&!document.getElementById('giveRef').value.trim()){alert('Please enter your transaction reference number.');return;}
+    showToast('🙏 Thank you! GH₵ '+amount.toFixed(2)+' '+selectedCategory+' received. God bless you!');
+}
+
+// Search
+var SITE_PAGES=[{title:'Home',url:'index.html',icon:'bi-house-fill',cat:'Page',iconClass:'brown'},{title:'About Us',url:'about.html',icon:'bi-info-circle-fill',cat:'Page',iconClass:'brown'},{title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},{title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},{title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},{title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},{title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},{title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},{title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},{title:'Give Online',url:'give.html',icon:'bi-heart-fill',cat:'Page',iconClass:'red'},{title:'My Account',url:'portal.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'}];
+function toggleSearch(){var o=document.getElementById('searchOverlay');var ip=document.getElementById('searchInput');var open=o.classList.toggle('open');if(open){ip.value='';document.getElementById('searchResults').innerHTML=renderHints();setTimeout(function(){ip.focus();},80);document.body.style.overflow='hidden';}else{document.body.style.overflow='';}}
+function handleSearchKey(e){if(e.key==='Escape')toggleSearch();}
+function runSearch(q){var r=document.getElementById('searchResults');q=q.trim().toLowerCase();if(!q){r.innerHTML=renderHints();return;}var m=SITE_PAGES.filter(function(p){return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q));}).slice(0,7);if(!m.length){r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results</div>';return;}r.innerHTML=m.map(function(p){return'<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+p.title+'</div><div class="search-result-sub">'+p.cat+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>';}).join('');}
+function renderHints(){return'<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a></div></div>';}
+</script>
+</body>
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When God's Silence Is His Answer — A devotional reflection from Word Transformation Church.">
+<title>When God's Silence Is His Answer | Blog | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   DESIGN TOKENS — matches index.html exactly
+   ========================================================= */
+:root {
+    --black:      #0A0A0A;
+    --deep:       #111111;
+    --card:       #1C1C1C;
+    --border:     rgba(255,255,255,0.08);
+    --gold:       #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale:  rgba(201,168,76,0.1);
+    --light:      #FFFFFF;
+    --light-alt:  #F7F4EF;
+    --light-text: #1C1C1C;
+    --light-muted:#6B6560;
+    --light-stone:#E8E2D9;
+    --text:       #E8E4DE;
+    --text-dim:   #A09A91;
+    --muted:      #6E6861;
+    --white:      #FFFFFF;
+    --brown:      #5C3D1E;
+    --brown-mid:  #8B6340;
+    --green:      #2A5E2B;
+    --display:    'DM Serif Display', Georgia, serif;
+    --body:       'DM Sans', system-ui, sans-serif;
+    --serif:      'Lora', Georgia, serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:72px;}
+body{font-family:var(--body);color:var(--text);background:var(--deep);line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+/* ── Scroll animations ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── Navbar ── */
+.navbar{background:rgba(10,10,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:.9rem 0;border-bottom:1px solid rgba(201,168,76,.12);transition:background .3s ease;z-index:1030;}
+.navbar.scrolled{background:rgba(10,10,10,.98);box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.navbar-brand{font-family:var(--display);font-size:1.3rem;color:var(--white)!important;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;}
+.brand-icon{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:1rem;flex-shrink:0;}
+.brand-sub{display:block;font-family:var(--body);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);line-height:1;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.82)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;transition:all .2s ease;}
+.navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--gold)!important;background:rgba(201,168,76,.1);}
+.dropdown-menu{background:#141414;border:1px solid rgba(201,168,76,.18);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,.5);padding:.5rem;}
+.dropdown-item{color:rgba(255,255,255,.8);font-size:.87rem;padding:.55rem .9rem;border-radius:6px;transition:all .15s ease;display:flex;align-items:center;gap:8px;}
+.dropdown-item i{color:var(--gold);font-size:.85rem;}
+.dropdown-item:hover{background:rgba(201,168,76,.1);color:var(--white);}
+.dropdown-divider{border-color:rgba(201,168,76,.12);margin:.35rem 0;}
+.btn-live-nav{display:inline-flex;align-items:center;gap:6px;background:#E50000;color:#fff!important;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .25s ease;}
+.btn-live-nav:hover{background:#c20000;transform:translateY(-1px);}
+.live-dot{width:7px;height:7px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.4s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.btn-give{background:var(--gold);color:var(--brown)!important;border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;transition:all .25s ease;cursor:pointer;}
+.btn-give:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:991.98px){.navbar-collapse{background:#0a0a0a;padding:1rem;border-radius:10px;margin-top:.5rem;}}
+
+/* ── Search overlay ── */
+.search-overlay{display:none;position:fixed;top:0;left:0;right:0;z-index:9998;flex-direction:column;}
+.search-overlay.open{display:flex;}
+.search-bar-wrap{background:rgba(10,10,10,.97);backdrop-filter:blur(20px);display:flex;align-items:center;gap:12px;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(201,168,76,.15);}
+.search-bar-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+.search-bar-input{flex:1;background:transparent;border:none;outline:none;font-size:1.1rem;color:var(--white);caret-color:var(--gold);}
+.search-bar-input::placeholder{color:rgba(255,255,255,.3);}
+.search-bar-hint{font-size:.75rem;color:rgba(255,255,255,.3);white-space:nowrap;}
+.search-bar-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;padding:4px;transition:color .2s ease;}
+.search-bar-close:hover{color:var(--white);}
+.search-box{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);width:100%;max-width:660px;border-radius:0 0 14px 14px;border:1px solid rgba(201,168,76,.12);border-top:none;overflow:hidden;}
+.search-results{max-height:70vh;overflow-y:auto;}
+.search-result-item{display:flex;align-items:center;gap:12px;padding:.85rem 1.25rem;text-decoration:none;transition:background .15s ease;color:var(--white);border-bottom:1px solid rgba(255,255,255,.05);}
+.search-result-item:hover{background:rgba(201,168,76,.08);}
+.search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:rgba(255,255,255,.6);}
+.search-result-icon.brown{color:var(--gold);}
+.search-result-icon.green{color:#5aac5c;}
+.search-result-icon.red{color:#ff5555;}
+.search-result-text{flex:1;}
+.search-result-title{font-size:.92rem;font-weight:500;color:var(--white);}
+.search-result-sub{font-size:.76rem;color:rgba(255,255,255,.4);}
+.search-result-arrow{color:rgba(255,255,255,.2);font-size:.75rem;}
+.search-empty{padding:2rem;text-align:center;color:rgba(255,255,255,.4);font-size:.9rem;}
+.search-hints{padding:1rem 1.25rem;}
+.search-hint-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:.6rem;}
+.search-quick-links{display:flex;flex-wrap:wrap;gap:6px;}
+.search-quick-link{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;border:1px solid rgba(201,168,76,.2);font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s ease;}
+.search-quick-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);}
+.search-backdrop{position:fixed;inset:0;z-index:-1;}
+
+/* ── Post hero ── */
+.post-hero{background:var(--black);padding:5rem 0 0;position:relative;overflow:hidden;}
+.post-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%,rgba(201,168,76,.1) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(42,94,43,.08) 0%,transparent 50%);}
+.post-hero-inner{position:relative;padding-bottom:3.5rem;}
+.post-breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1.75rem;flex-wrap:wrap;}
+.post-breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s ease;}
+.post-breadcrumb a:hover{color:var(--gold);}
+.post-breadcrumb i{font-size:.6rem;color:rgba(255,255,255,.2);}
+.post-category-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);border-radius:50px;padding:.3rem 1rem;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;}
+.post-title{font-family:var(--display);font-size:clamp(2rem,5vw,3.8rem);font-weight:400;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:1.5rem;}
+.post-title em{font-style:italic;color:var(--gold);}
+.post-subtitle{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--text-dim);line-height:1.7;max-width:640px;margin-bottom:2.5rem;}
+.post-meta-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.08);}
+.post-author{display:flex;align-items:center;gap:12px;}
+.post-author-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:400;font-size:1rem;color:var(--black);flex-shrink:0;}
+.post-author-name{font-size:.9rem;font-weight:600;color:var(--white);}
+.post-author-role{font-size:.72rem;color:var(--text-dim);}
+.post-meta-divider{width:1px;height:32px;background:rgba(255,255,255,.1);}
+.post-meta-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-dim);}
+.post-meta-item i{color:var(--gold);font-size:.8rem;}
+.post-share-row{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.share-btn{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.88rem;cursor:pointer;transition:all .2s ease;text-decoration:none;}
+.share-btn:hover{background:rgba(201,168,76,.15);color:var(--gold);border-color:rgba(201,168,76,.3);}
+@media(max-width:767px){.post-share-row{margin-left:0;width:100%;}}
+
+/* ── Featured image strip ── */
+.post-img-strip{width:100%;height:420px;background:linear-gradient(135deg,#1a0e05 0%,#2a1a08 40%,#0e1a0e 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.post-img-strip img{width:100%;height:100%;object-fit:cover;display:block;}
+.post-img-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;opacity:.35;}
+.post-img-fallback i{font-size:5rem;color:var(--gold);}
+.post-img-fallback span{font-family:var(--display);font-size:1.1rem;color:rgba(255,255,255,.6);}
+.post-img-caption{text-align:center;font-size:.76rem;color:var(--text-dim);padding:.75rem 1rem;font-style:italic;background:rgba(0,0,0,.3);}
+@media(max-width:767px){.post-img-strip{height:240px;}}
+
+/* ── Article layout ── */
+.post-layout{padding:5rem 0;background:var(--deep);}
+.post-body{max-width:740px;}
+.post-body p{font-family:var(--serif);font-size:1.08rem;color:var(--text-dim);line-height:1.9;margin-bottom:1.75rem;}
+.post-body h2{font-family:var(--display);font-size:1.8rem;font-weight:400;color:var(--white);margin:3rem 0 1.25rem;line-height:1.2;}
+.post-body h3{font-family:var(--display);font-size:1.35rem;font-weight:400;color:var(--white);margin:2.25rem 0 1rem;}
+.post-body ul,.post-body ol{padding-left:1.5rem;margin-bottom:1.75rem;}
+.post-body li{font-family:var(--serif);font-size:1.05rem;color:var(--text-dim);line-height:1.8;margin-bottom:.5rem;}
+.post-body a{color:var(--gold);text-decoration:underline;text-underline-offset:3px;}
+.post-body a:hover{color:var(--gold-light);}
+.post-body strong{color:rgba(255,255,255,.85);font-weight:600;}
+
+/* Scripture pull-quote */
+.scripture-block{background:rgba(201,168,76,.07);border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:1.75rem 2rem;margin:2.5rem 0;}
+.scripture-block p{font-family:var(--display);font-style:italic;font-size:1.3rem;color:rgba(255,255,255,.9);line-height:1.5;margin-bottom:.5rem;}
+.scripture-block cite{font-size:.78rem;font-style:normal;font-weight:500;letter-spacing:.1em;color:var(--gold);}
+
+/* Callout box */
+.callout-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem 2rem;margin:2.5rem 0;display:flex;gap:1.25rem;align-items:flex-start;}
+.callout-icon{width:44px;height:44px;border-radius:10px;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;flex-shrink:0;}
+.callout-text p{font-family:var(--serif);font-size:.97rem;color:var(--text-dim);line-height:1.75;margin-bottom:0;}
+.callout-text strong{color:var(--white);}
+
+/* Divider */
+.post-divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;}
+.post-divider::before,.post-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07);}
+.post-divider-icon{color:var(--gold);font-size:.9rem;opacity:.6;}
+
+/* Tags */
+.post-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);}
+.post-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:50px;padding:4px 14px;font-size:.75rem;color:var(--text-dim);text-decoration:none;transition:all .2s ease;}
+.post-tag:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.3);color:var(--gold);}
+
+/* Author card */
+.author-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;margin-top:3.5rem;}
+.author-card-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.6rem;color:var(--black);flex-shrink:0;}
+.author-card-name{font-family:var(--display);font-size:1.25rem;color:var(--white);margin-bottom:.2rem;}
+.author-card-role{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+.author-card-bio{font-family:var(--serif);font-size:.92rem;color:var(--text-dim);line-height:1.7;}
+.author-socials{display:flex;gap:8px;margin-top:1rem;}
+.author-social{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.85rem;text-decoration:none;transition:all .2s ease;}
+.author-social:hover{background:rgba(201,168,76,.15);color:var(--gold);border-color:rgba(201,168,76,.3);}
+@media(max-width:575px){.author-card{flex-direction:column;}.author-card-avatar{width:56px;height:56px;font-size:1.2rem;}}
+
+/* ── Sidebar ── */
+.sidebar{position:sticky;top:88px;}
+.sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;}
+.sidebar-heading{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.1rem;}
+.toc-list{list-style:none;padding:0;}
+.toc-list li{margin-bottom:.6rem;}
+.toc-list a{font-size:.84rem;color:var(--text-dim);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s ease;padding:.25rem 0;}
+.toc-list a::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--muted);flex-shrink:0;transition:background .2s ease;}
+.toc-list a:hover{color:var(--gold);}
+.toc-list a:hover::before{background:var(--gold);}
+.toc-list a.active{color:var(--gold);}
+.toc-list a.active::before{background:var(--gold);}
+.related-post{display:flex;gap:12px;align-items:flex-start;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.05);text-decoration:none;transition:all .2s ease;}
+.related-post:last-child{border-bottom:none;padding-bottom:0;}
+.related-post:hover .related-post-title{color:var(--gold);}
+.related-post-thumb{width:54px;height:54px;border-radius:8px;background:linear-gradient(135deg,#1a0e05,#3d2010);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;color:var(--gold);opacity:.6;}
+.related-post-title{font-family:var(--display);font-size:.88rem;font-weight:400;color:var(--white);line-height:1.35;margin-bottom:.25rem;transition:color .2s ease;}
+.related-post-date{font-size:.7rem;color:var(--muted);}
+.sidebar-verse{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);line-height:1.7;text-align:center;}
+.sidebar-verse cite{display:block;font-style:normal;font-size:.72rem;color:var(--gold);margin-top:.5rem;letter-spacing:.08em;}
+
+/* Progress reading bar */
+.reading-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--brown),var(--gold));z-index:9999;transition:width .1s linear;}
+
+/* ── Comments ── */
+.comments-section{background:var(--black);padding:5rem 0;border-top:1px solid rgba(255,255,255,.05);}
+.comment-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem;}
+.comment-header{display:flex;align-items:center;gap:12px;margin-bottom:.75rem;}
+.comment-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--brown-mid),var(--brown));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:.85rem;flex-shrink:0;}
+.comment-author{font-weight:600;font-size:.88rem;color:var(--white);}
+.comment-date{font-size:.72rem;color:var(--muted);}
+.comment-text{font-family:var(--serif);font-size:.92rem;color:var(--text-dim);line-height:1.7;}
+.comment-form-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;}
+.comment-form-card h4{font-family:var(--display);font-size:1.2rem;font-weight:400;color:var(--white);margin-bottom:1.25rem;}
+.cf-input{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;padding:.7rem 1rem;font-size:.92rem;color:var(--white);outline:none;font-family:var(--body);transition:border-color .2s ease;}
+.cf-input:focus{border-color:rgba(201,168,76,.4);background:rgba(255,255,255,.07);}
+.cf-input::placeholder{color:rgba(255,255,255,.25);}
+.btn-comment{background:var(--gold);color:var(--black);border:none;padding:.75rem 2rem;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .3s ease;}
+.btn-comment:hover{background:var(--gold-light);transform:translateY(-1px);}
+
+/* ── Footer ── */
+footer{background:var(--black);padding:70px 0 30px;border-top:1px solid rgba(201,168,76,.1);}
+.footer-brand{font-family:var(--display);font-size:1.4rem;color:var(--white);margin-bottom:.75rem;display:block;}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.4);font-size:.88rem;line-height:1.6;margin-bottom:1.5rem;max-width:260px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.95rem;text-decoration:none;transition:all .2s ease;border:1px solid rgba(255,255,255,.06);}
+.footer-social a:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.footer-heading{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+footer ul{list-style:none;padding:0;}
+footer ul li{margin-bottom:.7rem;}
+footer ul li a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:color .2s ease;}
+footer ul li a:hover{color:var(--gold);}
+footer hr{border-color:rgba(255,255,255,.06);margin:2.5rem 0 1.5rem;}
+.footer-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;}
+.footer-copy{font-size:.8rem;color:rgba(255,255,255,.3);}
+.footer-legal{display:flex;gap:1.25rem;}
+.footer-legal a{font-size:.8rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s ease;}
+.footer-legal a:hover{color:var(--gold);}
+
+/* ── Giving Modal ── */
+.giving-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,10,.75);z-index:9999;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px);}
+.giving-modal{background:#FDFAF5;border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;animation:giveSlideIn .3s ease;}
+@keyframes giveSlideIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.giving-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.6rem;line-height:1;color:#8B6B4A;cursor:pointer;padding:0;z-index:10;}
+.giving-close:hover{color:#4A3728;}
+.giving-header{background:var(--brown);padding:2rem 2rem 1.5rem;border-radius:16px 16px 0 0;text-align:center;}
+.giving-title{font-family:var(--display);font-size:2rem;font-weight:400;color:#F5F0E8;margin-bottom:.4rem;}
+.giving-sub{font-family:var(--serif);font-style:italic;font-size:.88rem;color:rgba(245,240,232,.65);}
+.giving-body{padding:1.75rem 2rem 2rem;}
+.give-field{margin-bottom:1.2rem;}
+.give-label{display:block;font-size:.8rem;font-weight:600;color:#4A3728;margin-bottom:.4rem;}
+.give-input{width:100%;padding:.65rem .9rem;border:1.5px solid #E0D5C5;border-radius:8px;font-size:.95rem;color:#2A1A0E;background:#FDFAF5;transition:border-color .2s;outline:none;}
+.give-input:focus{border-color:var(--gold);}
+.give-tabs{display:flex;gap:6px;margin-bottom:.5rem;}
+.give-tab{padding:.45rem 1rem;border-radius:50px;border:1.5px solid #E0D5C5;font-size:.82rem;font-weight:500;cursor:pointer;background:#FDFAF5;color:#6B4A2E;transition:all .2s;}
+.give-tab.active{background:var(--brown);color:#F5F0E8;border-color:var(--brown);}
+.give-amount-wrap{position:relative;}
+.give-currency{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#8B6B4A;font-weight:500;}
+.give-amount-input{padding-left:2.2rem;}
+.give-next-btn{width:100%;padding:.8rem;background:var(--brown);color:#F5F0E8;border:none;border-radius:10px;font-size:1rem;font-weight:500;cursor:pointer;transition:all .3s;margin-top:.5rem;}
+.give-next-btn:hover{background:#6B4A2E;}
+.give-summary-box{display:flex;align-items:center;justify-content:space-between;background:#F0EAE0;border-radius:8px;padding:.75rem 1rem;margin-bottom:1.2rem;}
+.give-summary-tag{background:var(--brown);color:#F5F0E8;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:50px;}
+.give-summary-amount{font-size:1.1rem;color:#4A3728;}
+.give-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.2rem;}
+.give-method{display:flex;flex-direction:column;align-items:center;gap:5px;padding:1rem .5rem;background:#F0EAE0;border:1.5px solid transparent;border-radius:10px;cursor:pointer;transition:all .2s;text-align:center;}
+.give-method span{font-size:.88rem;font-weight:500;color:#4A3728;}
+.give-method small{font-size:.72rem;color:#8B6B4A;}
+.give-method:hover{background:#E8DDD0;}
+.give-method.active{background:#fff;border-color:var(--gold);}
+.give-method-icon{font-size:1.4rem;color:#8B6B4A;}
+.give-bank-info{background:#F0EAE0;border-radius:8px;padding:1rem 1.1rem;margin-bottom:1rem;}
+.give-bank-label{font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#8B6B4A;margin-bottom:.75rem;}
+.give-bank-row{display:flex;justify-content:space-between;font-size:.88rem;padding:.35rem 0;border-bottom:1px solid rgba(139,107,74,.15);color:#4A3728;}
+.give-bank-row:last-of-type{border-bottom:none;}
+.give-bank-row span{color:#8B6B4A;}
+.give-bank-note{font-size:.78rem;color:#8B6B4A;margin-top:.75rem;margin-bottom:0;font-style:italic;}
+.give-btn-row{display:flex;gap:10px;margin-top:.5rem;}
+.give-back-btn{padding:.75rem 1.25rem;background:#F0EAE0;color:#4A3728;border:none;border-radius:8px;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.give-back-btn:hover{background:#E8DDD0;}
+.give-submit-btn{flex:1;padding:.75rem;background:var(--gold);color:#4A3728;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;}
+.give-submit-btn:hover{background:var(--gold-light);}
+.give-success{text-align:center;padding:1rem 0;}
+.give-success-icon{width:64px;height:64px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2rem;color:#fff;}
+.give-success-title{font-family:var(--display);font-size:2rem;font-weight:400;color:#4A3728;margin-bottom:.75rem;}
+.give-success-msg{font-size:.92rem;color:#6B4A2E;line-height:1.7;}
+@media(max-width:480px){.giving-body{padding:1.25rem}.giving-header{padding:1.5rem 1.25rem}}
+
+/* ── Utility ── */
+.btn-outline-primary{border:1.5px solid rgba(201,168,76,.4);color:var(--gold);border-radius:50px;font-weight:500;font-size:.9rem;padding:.65rem 1.75rem;transition:all .3s ease;background:transparent;text-decoration:none;display:inline-block;}
+.btn-outline-primary:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+@media(max-width:768px){.post-layout{padding:3rem 0;}.sidebar{position:static;margin-top:3rem;}}
+</style>
+</head>
+<body>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+            <div>Word Transformation<span class="brand-sub">Church</span></div>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                        <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                        <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                        <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                        <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                        <li><a class="dropdown-item active" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                        <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                        <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                        <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                        <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-1">
+                    <button class="nav-link bg-transparent border-0" onclick="toggleSearch()" style="color:rgba(255,255,255,.7);"><i class="bi bi-search"></i></button>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-give" onclick="document.getElementById('givingModal').style.display='flex'"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ===================== SEARCH OVERLAY ===================== -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-bar-wrap">
+        <i class="bi bi-search search-bar-icon"></i>
+        <input type="text" id="searchInput" class="search-bar-input" placeholder="Search sermons, events, ministries…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
+        <span class="search-bar-hint d-none d-md-inline">Press Esc to close</span>
+        <button class="search-bar-close" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div style="position:relative;display:flex;justify-content:center;padding:0 1rem;">
+        <div class="search-box"><div class="search-results" id="searchResults"></div></div>
+    </div>
+    <div class="search-backdrop" onclick="toggleSearch()"></div>
+</div>
+
+<!-- ===================== POST HERO ===================== -->
+<section class="post-hero">
+    <div class="container post-hero-inner">
+        <nav class="post-breadcrumb" aria-label="breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="blog.html">Blog</a>
+            <i class="bi bi-chevron-right"></i>
+            <span style="color:rgba(255,255,255,.6);">Devotional</span>
+        </nav>
+        <div class="post-category-tag"><i class="bi bi-journal-bookmark-fill"></i> Devotional</div>
+        <h1 class="post-title">When God's Silence<br>Is <em>His Answer</em></h1>
+        <p class="post-subtitle">Sometimes the most profound thing God does is say nothing — and in that silence, He is shaping something in us that words never could.</p>
+        <div class="post-meta-row">
+            <div class="post-author">
+                <div class="post-author-avatar">PE</div>
+                <div>
+                    <div class="post-author-name">Pastor Emmanuel</div>
+                    <div class="post-author-role">Senior Pastor, Word Transformation Church</div>
+                </div>
+            </div>
+            <div class="post-meta-divider d-none d-md-block"></div>
+            <div class="post-meta-item"><i class="bi bi-calendar3"></i> March 9, 2026</div>
+            <div class="post-meta-item"><i class="bi bi-clock"></i> 7 min read</div>
+            <div class="post-meta-item"><i class="bi bi-chat-dots"></i> 14 comments</div>
+            <div class="post-share-row">
+                <a href="#" class="share-btn" title="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="share-btn" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="share-btn" title="Share on X"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="share-btn" title="Copy link" onclick="navigator.clipboard.writeText(window.location.href);this.innerHTML='<i class=\'bi bi-check-lg\'></i>';setTimeout(()=>this.innerHTML='<i class=\'bi bi-link-45deg\'></i>',2000);return false;"><i class="bi bi-link-45deg"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured image -->
+<div class="post-img-strip">
+    <img src="img/blog-silence.jpg" alt="A solitary figure in a quiet church, morning light streaming through stained glass" onerror="this.style.display='none';document.getElementById('imgFallback').style.display='flex';">
+    <div class="post-img-fallback" id="imgFallback" style="display:none;">
+        <i class="bi bi-book-fill"></i>
+        <span>John 11:1–44</span>
+    </div>
+</div>
+<div class="post-img-caption">Morning light in the sanctuary — a place where silence speaks. Photo: WTC Media Team</div>
+
+<!-- ===================== POST LAYOUT ===================== -->
+<section class="post-layout">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- ── Article body ── -->
+            <div class="col-lg-8">
+                <article class="post-body reveal" id="postBody">
+
+                    <p>Martha sent word to Jesus: <em>"Lord, the one you love is sick."</em> And Jesus, who loved Lazarus, who loved Martha and Mary — did nothing. He stayed where he was for two more days. No rushing. No immediate miracle. Just silence.</p>
+
+                    <p>If you have ever prayed and felt like your prayer hit the ceiling, you know this feeling. If you have ever stood at the edge of a crisis — a diagnosis, a broken relationship, a financial collapse — and cried out to God and heard nothing back, this passage is for you.</p>
+
+                    <div class="scripture-block">
+                        <p>"When he heard that Lazarus was sick, he stayed where he was two more days."</p>
+                        <cite>— John 11:6 (NIV)</cite>
+                    </div>
+
+                    <h2 id="s1">Silence Is Not Absence</h2>
+
+                    <p>We tend to interpret God's silence as God's absence. If He is not speaking, we reason, He must not be listening. If He is not moving, He must not care. But the story of Lazarus dismantles this logic completely. Jesus knew exactly what was happening. He was not uninformed. He was not indifferent. He was <strong>intentional</strong>.</p>
+
+                    <p>The text tells us in verse 5: <em>"Now Jesus loved Martha and her sister and Lazarus."</em> The Gospel writer places that declaration of love right before describing Jesus' decision to stay put. The love and the delay are not in contradiction. The love is the reason for the delay.</p>
+
+                    <div class="callout-box">
+                        <div class="callout-icon"><i class="bi bi-lightbulb-fill"></i></div>
+                        <div class="callout-text"><p><strong>Reflection:</strong> Think of a time when God's silence felt like abandonment. Looking back now, can you see evidence of His hand working in that season — even if you could not see it at the time?</p></div>
+                    </div>
+
+                    <h2 id="s2">God Works on a Different Timeline</h2>
+
+                    <p>Jesus says something remarkable when he finally tells his disciples it is time to go: <em>"Lazarus has fallen asleep; but I am going there to wake him up."</em> From where Jesus stands — knowing the end from the beginning — what looks like death to everyone else is merely sleep. What looks like the worst possible outcome is actually the setup for the greatest possible testimony.</p>
+
+                    <p>This is perhaps the most disorienting truth in all of Christian faith: God's delays are not God's denials. He operates on a timeline that accounts for resurrection, not just recovery. He is not trying to prevent you from going through hard things. He is shaping you through them into someone who can carry a greater weight of glory.</p>
+
+                    <div class="post-divider"><span class="post-divider-icon">✦</span></div>
+
+                    <h2 id="s3">What to Do in the Silence</h2>
+
+                    <p>So how do we live faithfully when God is quiet? Three things stand out from this passage:</p>
+
+                    <ul>
+                        <li><strong>Keep sending word.</strong> Martha and Mary sent word to Jesus. They did not stop praying because He had not yet come. Keep talking to Him even when He feels far.</li>
+                        <li><strong>Hold your theology steady.</strong> When Martha finally confronted Jesus, she said: <em>"Lord, if you had been here, my brother would not have died. But I know that even now God will give you whatever you ask."</em> Even in grief, her faith held. She did not abandon what she knew to be true.</li>
+                        <li><strong>Expect something you have not seen before.</strong> Nobody in that story expected Lazarus to walk out of the tomb. When God finally moves in your silence, it often exceeds anything you had imagined or prayed for.</li>
+                    </ul>
+
+                    <div class="scripture-block">
+                        <p>"Did I not tell you that if you believe, you will see the glory of God?"</p>
+                        <cite>— John 11:40 (NIV)</cite>
+                    </div>
+
+                    <h2 id="s4">A Word for Today</h2>
+
+                    <p>Perhaps you are in a season of silence right now. Perhaps you have been praying for a marriage, for a child, for a job, for healing — and heaven seems closed. I want you to hear this: God's silence is not His verdict on your situation. It is often the space He creates to do something that goes far beyond what you were asking for.</p>
+
+                    <p>The story of Lazarus does not end with a recovered sick man. It ends with a dead man walking. God is not interested in merely improving your circumstances. He is interested in demonstrating His resurrection power in the very place where hope has died.</p>
+
+                    <p>Keep trusting. Keep praying. The stone is about to be rolled away.</p>
+
+                    <!-- Tags -->
+                    <div class="post-tags">
+                        <a href="blog.html" class="post-tag"><i class="bi bi-tag"></i> Devotional</a>
+                        <a href="blog.html" class="post-tag"><i class="bi bi-tag"></i> Faith</a>
+                        <a href="blog.html" class="post-tag"><i class="bi bi-tag"></i> Prayer</a>
+                        <a href="blog.html" class="post-tag"><i class="bi bi-tag"></i> John 11</a>
+                        <a href="blog.html" class="post-tag"><i class="bi bi-tag"></i> Waiting on God</a>
+                    </div>
+
+                    <!-- Author card -->
+                    <div class="author-card">
+                        <div class="author-card-avatar">PE</div>
+                        <div>
+                            <div class="author-card-name">Pastor Emmanuel</div>
+                            <div class="author-card-role">Senior Pastor</div>
+                            <p class="author-card-bio">Pastor Emmanuel has served Word Transformation Church for over 15 years. He holds a Masters in Theology from Accra Theological Seminary and is passionate about making the Word of God accessible to everyday people. He and his wife Abena have three children.</p>
+                            <div class="author-socials">
+                                <a href="#" class="author-social"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#" class="author-social"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="author-social"><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </article>
+            </div>
+
+            <!-- ── Sidebar ── -->
+            <div class="col-lg-4">
+                <aside class="sidebar">
+
+                    <!-- Table of contents -->
+                    <div class="sidebar-card">
+                        <p class="sidebar-heading">In this article</p>
+                        <ul class="toc-list" id="toc">
+                            <li><a href="#s1" class="active">Silence Is Not Absence</a></li>
+                            <li><a href="#s2">God Works on a Different Timeline</a></li>
+                            <li><a href="#s3">What to Do in the Silence</a></li>
+                            <li><a href="#s4">A Word for Today</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Daily verse -->
+                    <div class="sidebar-card" style="background:linear-gradient(135deg,rgba(92,61,30,.25),rgba(201,168,76,.08));border-color:rgba(201,168,76,.2);">
+                        <p class="sidebar-heading">Today's Verse</p>
+                        <p class="sidebar-verse">"Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth."<cite>— Psalm 46:10</cite></p>
+                    </div>
+
+                    <!-- Related posts -->
+                    <div class="sidebar-card">
+                        <p class="sidebar-heading">Related Posts</p>
+                        <a href="blogpost.html" class="related-post">
+                            <div class="related-post-thumb"><i class="bi bi-book-fill"></i></div>
+                            <div>
+                                <div class="related-post-title">All Things Work Together</div>
+                                <div class="related-post-date">Romans 8:28 · Feb 23, 2026</div>
+                            </div>
+                        </a>
+                        <a href="blogpost.html" class="related-post">
+                            <div class="related-post-thumb" style="background:linear-gradient(135deg,#071508,#1a3d1b);"><i class="bi bi-tree-fill" style="color:#4CAF50;opacity:.6;"></i></div>
+                            <div>
+                                <div class="related-post-title">The Weight of Unanswered Prayer</div>
+                                <div class="related-post-date">Faith · Jan 14, 2026</div>
+                            </div>
+                        </a>
+                        <a href="blogpost.html" class="related-post">
+                            <div class="related-post-thumb" style="background:linear-gradient(135deg,#151000,#4a3800);"><i class="bi bi-stars" style="color:#C9A84C;opacity:.6;"></i></div>
+                            <div>
+                                <div class="related-post-title">Trusting God in the Dark</div>
+                                <div class="related-post-date">Devotional · Dec 5, 2025</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Give CTA -->
+                    <div class="sidebar-card" style="background:var(--brown);border-color:rgba(201,168,76,.2);text-align:center;">
+                        <i class="bi bi-heart-fill" style="font-size:1.5rem;color:var(--gold-light);display:block;margin-bottom:.75rem;"></i>
+                        <h6 style="font-family:var(--display);font-size:1.1rem;font-weight:400;color:#F5F0E8;margin-bottom:.5rem;">Support Our Ministry</h6>
+                        <p style="font-family:var(--serif);font-style:italic;font-size:.82rem;color:rgba(245,240,232,.65);margin-bottom:1rem;line-height:1.6;">Your giving fuels messages like this one — reaching lives across Accra and beyond.</p>
+                        <button onclick="document.getElementById('givingModal').style.display='flex'" style="background:var(--gold);color:var(--brown);border:none;padding:.6rem 1.5rem;border-radius:50px;font-weight:600;font-size:.85rem;cursor:pointer;width:100%;">
+                            <i class="bi bi-heart-fill me-1"></i> Give Online
+                        </button>
+                    </div>
+
+                </aside>
+            </div>
+
+        </div><!-- /row -->
+    </div>
+</section>
+
+<!-- ===================== COMMENTS ===================== -->
+<section class="comments-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3 style="font-family:var(--display);font-size:1.8rem;font-weight:400;color:var(--white);margin-bottom:2rem;">14 Comments</h3>
+
+                <div class="comment-card reveal">
+                    <div class="comment-header">
+                        <div class="comment-avatar">AK</div>
+                        <div>
+                            <div class="comment-author">Abena Korantema</div>
+                            <div class="comment-date">March 10, 2026 · 8:14 AM</div>
+                        </div>
+                    </div>
+                    <p class="comment-text">This hit me deeply. I have been waiting on God for a job for six months and this reminded me that His silence doesn't mean He isn't working. Thank you Pastor.</p>
+                </div>
+
+                <div class="comment-card reveal">
+                    <div class="comment-header">
+                        <div class="comment-avatar" style="background:linear-gradient(135deg,#2A5E2B,#1B4332);">KA</div>
+                        <div>
+                            <div class="comment-author">Kwame Asante</div>
+                            <div class="comment-date">March 10, 2026 · 10:32 AM</div>
+                        </div>
+                    </div>
+                    <p class="comment-text">"God is not trying to prevent you from going through hard things. He is shaping you through them." — I'm keeping this quote. Powerful word.</p>
+                </div>
+
+                <div class="comment-card reveal">
+                    <div class="comment-header">
+                        <div class="comment-avatar" style="background:linear-gradient(135deg,#1A3A5C,#2E6EA6);">EA</div>
+                        <div>
+                            <div class="comment-author">Efua Amponsah</div>
+                            <div class="comment-date">March 11, 2026 · 6:45 PM</div>
+                        </div>
+                    </div>
+                    <p class="comment-text">I shared this with my small group and we spent an hour on it. God is good — this arrived at exactly the right time for three people in our group who needed it.</p>
+                </div>
+
+                <!-- Comment form -->
+                <div class="comment-form-card mt-4 reveal">
+                    <h4>Leave a Comment</h4>
+                    <div class="row g-3 mb-3">
+                        <div class="col-sm-6"><input type="text" class="cf-input" placeholder="Your name"></div>
+                        <div class="col-sm-6"><input type="email" class="cf-input" placeholder="Email address"></div>
+                    </div>
+                    <textarea class="cf-input mb-3" rows="4" placeholder="Share your thoughts, testimony, or question…" style="resize:vertical;"></textarea>
+                    <button class="btn-comment"><i class="bi bi-send-fill me-2"></i>Post Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <span class="footer-brand">Word <span>Transformation</span></span>
+                <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
+                <div class="footer-social">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="livestream.html"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Explore</p>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="sermons.html">Sermons</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="biblequiz.html">Bible Quiz</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Ministry</p>
+                <ul>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="smallgroups.html">Small Groups</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="prayer.html">Prayer Wall</a></li>
+                    <li><a href="devotional.html">Devotional</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <p class="footer-heading">Service Times</p>
+                <ul>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-book me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Wednesday</strong> — 7:00 PM Bible Study</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:1.5rem;"><i class="bi bi-chat-heart me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Friday</strong> — 6:30 PM Prayer Night</li>
+                </ul>
+                <a href="livestream.html" class="btn-live-nav" style="width:fit-content;"><span class="live-dot"></span> Watch Live Online</a>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="sitemap.html">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===================== GIVING MODAL ===================== -->
+<div id="givingModal" class="giving-overlay" onclick="if(event.target===this)closeGiving()">
+    <div class="giving-modal">
+        <button class="giving-close" onclick="closeGiving()">&times;</button>
+        <div class="giving-header">
+            <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto .75rem"><rect x="11" y="0" width="6" height="34" rx="2" fill="#C9A84C"/><rect x="0" y="10" width="28" height="6" rx="2" fill="#C9A84C"/></svg>
+            <h2 class="giving-title">Give Online</h2>
+            <p class="giving-sub">"Each of you should give what you have decided in your heart." — 2 Cor 9:7</p>
+        </div>
+        <div class="giving-body">
+            <div class="give-step" id="step-1">
+                <div class="give-field"><label class="give-label">Giving category</label><div class="give-tabs"><button class="give-tab active" onclick="selectTab(this,'Tithe')">Tithe</button><button class="give-tab" onclick="selectTab(this,'Offering')">Offering</button><button class="give-tab" onclick="selectTab(this,'Missions')">Missions</button></div><input type="hidden" id="give-category" value="Tithe"></div>
+                <div class="give-field"><label class="give-label">Amount (GH₵)</label><div class="give-amount-wrap"><span class="give-currency">GH₵</span><input type="number" id="give-amount" class="give-input give-amount-input" placeholder="0.00" min="1" step="0.01"></div></div>
+                <div class="give-field"><label class="give-label">Your name</label><input type="text" id="give-name" class="give-input" placeholder="Full name"></div>
+                <div class="give-field"><label class="give-label">Email address</label><input type="email" id="give-email" class="give-input" placeholder="you@example.com"></div>
+                <button class="give-next-btn" onclick="goToStep2()">Continue <i class="bi bi-arrow-right ms-1"></i></button>
+            </div>
+            <div class="give-step" id="step-2" style="display:none">
+                <div class="give-summary-box"><span id="summary-category" class="give-summary-tag">Tithe</span><span class="give-summary-amount">GH₵ <strong id="summary-amount">0.00</strong></span></div>
+                <div class="give-field"><label class="give-label">Payment method</label><div class="give-method-grid"><button class="give-method active" onclick="selectMethod(this,'momo')"><i class="bi bi-phone-fill give-method-icon"></i><span>Mobile Money</span><small>MTN · Vodafone · AirtelTigo</small></button><button class="give-method" onclick="selectMethod(this,'bank')"><i class="bi bi-bank give-method-icon"></i><span>Bank Transfer</span><small>Direct deposit</small></button></div><input type="hidden" id="give-method" value="momo"></div>
+                <div id="momo-fields"><div class="give-field"><label class="give-label">Network</label><select id="give-network" class="give-input"><option value="">Select network</option><option>MTN Mobile Money</option><option>Vodafone Cash</option><option>AirtelTigo Money</option></select></div><div class="give-field"><label class="give-label">MoMo number</label><input type="tel" id="give-phone" class="give-input" placeholder="024 000 0000"></div></div>
+                <div id="bank-fields" style="display:none"><div class="give-bank-info"><p class="give-bank-label">Transfer to</p><div class="give-bank-row"><span>Bank</span><strong>GCB Bank Ghana</strong></div><div class="give-bank-row"><span>Account</span><strong>Word Transformation Church</strong></div><div class="give-bank-row"><span>Number</span><strong>1234567890</strong></div><p class="give-bank-note">Use your name as reference, then enter the transaction number below.</p></div><div class="give-field"><label class="give-label">Transaction reference</label><input type="text" id="give-reference" class="give-input" placeholder="TXN123456789"></div></div>
+                <div class="give-btn-row"><button class="give-back-btn" onclick="goToStep1()"><i class="bi bi-arrow-left me-1"></i> Back</button><button class="give-submit-btn" onclick="submitGiving()"><i class="bi bi-heart-fill me-1"></i> Complete Gift</button></div>
+            </div>
+            <div class="give-step" id="step-3" style="display:none"><div class="give-success"><div class="give-success-icon"><i class="bi bi-check-lg"></i></div><h3 class="give-success-title">God bless you!</h3><p class="give-success-msg">Your gift of <strong>GH₵ <span id="confirm-amount"></span></strong> for <strong><span id="confirm-category"></span></strong> has been received. Confirmation sent to <span id="confirm-email"></span>.</p><button class="give-next-btn" onclick="closeGiving()" style="margin-top:1.5rem">Close</button></div></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Navbar scroll
+window.addEventListener('scroll',function(){
+    document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);
+    // Reading progress bar
+    var el=document.getElementById('postBody');
+    if(el){var r=el.getBoundingClientRect();var total=el.offsetHeight-window.innerHeight;var pct=Math.min(100,Math.max(0,(window.scrollY-el.offsetTop+300)/total*100));document.getElementById('readingProgress').style.width=pct+'%';}
+});
+
+// Scroll reveals
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// TOC active state
+var headings=document.querySelectorAll('#postBody h2[id]');
+var tocLinks=document.querySelectorAll('#toc a');
+window.addEventListener('scroll',function(){
+    var current='';
+    headings.forEach(function(h){if(window.scrollY>=h.offsetTop-120)current=h.id;});
+    tocLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+current);});
+});
+
+// Giving modal
+function closeGiving(){document.getElementById('givingModal').style.display='none';resetGiving();}
+function resetGiving(){document.getElementById('step-1').style.display='block';document.getElementById('step-2').style.display='none';document.getElementById('step-3').style.display='none';['give-amount','give-name','give-email','give-phone','give-reference'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});document.getElementById('give-network').value='';document.getElementById('give-category').value='Tithe';document.getElementById('give-method').value='momo';document.querySelectorAll('.give-tab').forEach(function(t,i){t.classList.toggle('active',i===0);});document.querySelectorAll('.give-method').forEach(function(m,i){m.classList.toggle('active',i===0);});document.getElementById('momo-fields').style.display='block';document.getElementById('bank-fields').style.display='none';}
+function selectTab(el,v){document.querySelectorAll('.give-tab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');document.getElementById('give-category').value=v;}
+function selectMethod(el,v){document.querySelectorAll('.give-method').forEach(function(m){m.classList.remove('active');});el.classList.add('active');document.getElementById('give-method').value=v;document.getElementById('momo-fields').style.display=v==='momo'?'block':'none';document.getElementById('bank-fields').style.display=v==='bank'?'block':'none';}
+function goToStep2(){if(!document.getElementById('give-amount').value||parseFloat(document.getElementById('give-amount').value)<=0){alert('Please enter a valid amount.');return;}if(!document.getElementById('give-name').value.trim()){alert('Please enter your name.');return;}var e=document.getElementById('give-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email.');return;}document.getElementById('summary-amount').textContent=parseFloat(document.getElementById('give-amount').value).toFixed(2);document.getElementById('summary-category').textContent=document.getElementById('give-category').value;document.getElementById('step-1').style.display='none';document.getElementById('step-2').style.display='block';}
+function goToStep1(){document.getElementById('step-2').style.display='none';document.getElementById('step-1').style.display='block';}
+function submitGiving(){if(document.getElementById('give-method').value==='momo'){if(!document.getElementById('give-network').value){alert('Please select your network.');return;}if(!document.getElementById('give-phone').value.trim()){alert('Please enter your MoMo number.');return;}}else{if(!document.getElementById('give-reference').value.trim()){alert('Please enter your transaction reference.');return;}}document.getElementById('confirm-amount').textContent=parseFloat(document.getElementById('give-amount').value).toFixed(2);document.getElementById('confirm-category').textContent=document.getElementById('give-category').value;document.getElementById('confirm-email').textContent=document.getElementById('give-email').value.trim();document.getElementById('step-2').style.display='none';document.getElementById('step-3').style.display='block';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGiving();});
+
+// Search
+var SITE_PAGES=[{title:'Home',url:'index.html',icon:'bi-house-fill',cat:'Page',iconClass:'brown'},{title:'About Us',url:'about.html',icon:'bi-info-circle-fill',cat:'Page',iconClass:'brown'},{title:'Ministries',url:'ministries.html',icon:'bi-people-fill',cat:'Page',iconClass:'green'},{title:'Small Groups',url:'smallgroups.html',icon:'bi-diagram-3-fill',cat:'Page',iconClass:'green'},{title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},{title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},{title:'Devotional',url:'devotional.html',icon:'bi-journal-bookmark-fill',cat:'Page',iconClass:'green'},{title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},{title:'Gallery',url:'gallery.html',icon:'bi-images',cat:'Page',iconClass:''},{title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},{title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},{title:'Volunteer',url:'volunteer.html',icon:'bi-hand-thumbs-up-fill',cat:'Page',iconClass:'green'},{title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},{title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},{title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},{title:'Give Online',url:'#give',icon:'bi-heart-fill',cat:'Action',iconClass:'red'},{title:'My Account',url:'portal.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'}];
+function toggleSearch(){var o=document.getElementById('searchOverlay');var ip=document.getElementById('searchInput');var open=o.classList.toggle('open');if(open){ip.value='';document.getElementById('searchResults').innerHTML=renderHints();setTimeout(function(){ip.focus();},80);document.body.style.overflow='hidden';}else{document.body.style.overflow='';}}
+function handleSearchKey(e){if(e.key==='Escape')toggleSearch();}
+function runSearch(q){var r=document.getElementById('searchResults');q=q.trim().toLowerCase();if(!q){r.innerHTML=renderHints();return;}var m=SITE_PAGES.filter(function(p){return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q));}).slice(0,7);if(!m.length){r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+q+'"</div>';return;}r.innerHTML=m.map(function(p){return'<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+p.title+'</div><div class="search-result-sub">'+p.cat+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>';}).join('');}
+function renderHints(){return'<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a></div></div>';}
+</script>
+</body>
+</html>
