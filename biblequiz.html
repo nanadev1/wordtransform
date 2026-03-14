@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Quiz | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-pale:rgba(201,168,76,0.12);
+  --deep:#0E0B08;--card:#1A1510;--surface:#221C14;--border:rgba(201,168,76,0.18);
+  --brown:#5C3D1E;--brown-mid:#8B6340;
+  --green:#2A5E2B;--green-light:#4CAF50;
+  --red:#C0392B;--red-light:#E74C3C;
+  --text:#E8E2D6;--text-dim:#A09278;--text-muted:#6B5E4E;
+  --white:#FFFFFF;
+  --display:'Cinzel',serif;--serif:'Lora',Georgia,serif;--body:'DM Sans',system-ui,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--deep);color:var(--text);line-height:1.6;overflow-x:hidden;}
+
+/* ── NAVBAR ── */
+.navbar{background:rgba(14,11,8,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.9rem 0;}
+.navbar-brand{font-family:var(--display);font-size:1.2rem;color:var(--white)!important;letter-spacing:.06em;}
+.navbar-brand i{color:var(--gold);margin-right:.5rem;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.75)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;}
+.navbar-nav .nav-link:hover{color:var(--gold)!important;background:var(--gold-pale);}
+.btn-give{background:var(--gold);color:var(--deep);border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;cursor:pointer;}
+
+/* ── HERO ── */
+.quiz-hero{
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.18) 0%,transparent 60%),
+             linear-gradient(180deg,#1A1208 0%,var(--deep) 100%);
+  padding:5rem 0 4rem;text-align:center;position:relative;overflow:hidden;
+}
+.quiz-hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(201,168,76,.03) 40px,rgba(201,168,76,.03) 41px),
+                   repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(201,168,76,.03) 40px,rgba(201,168,76,.03) 41px);
+}
+.hero-inner{position:relative;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-pale);border:1px solid var(--border);border-radius:50px;padding:.35rem 1rem;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.hero-title{font-family:var(--display);font-size:clamp(2.2rem,6vw,4rem);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:1rem;letter-spacing:.04em;}
+.hero-title span{color:var(--gold);}
+.hero-sub{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--text-dim);max-width:500px;margin:0 auto 2rem;line-height:1.7;}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);}
+.hero-stat-num{font-family:var(--display);font-size:1.8rem;color:var(--gold);line-height:1;display:block;}
+.hero-stat-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.14em;margin-top:4px;}
+
+/* ── XP BAR ── */
+.xp-bar-section{background:var(--card);border-bottom:1px solid var(--border);padding:.75rem 0;}
+.xp-user{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.xp-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.9rem;color:var(--deep);font-weight:700;flex-shrink:0;}
+.xp-name{font-size:.9rem;font-weight:600;color:var(--white);}
+.xp-level{font-size:.7rem;color:var(--gold);font-weight:500;letter-spacing:.1em;text-transform:uppercase;}
+.xp-bar-wrap{flex:1;min-width:120px;}
+.xp-bar-track{height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;}
+.xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--brown),var(--gold));border-radius:4px;transition:width .6s ease;}
+.xp-points{font-size:.72rem;color:var(--text-dim);margin-top:3px;}
+.xp-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.streak-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.12);border:1px solid var(--border);border-radius:50px;padding:4px 12px;font-size:.78rem;font-weight:600;color:var(--gold);}
+.rank-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(42,94,43,.15);border:1px solid rgba(42,94,43,.3);border-radius:50px;padding:4px 12px;font-size:.78rem;font-weight:600;color:var(--green-light);}
+
+/* ── MAIN LAYOUT ── */
+.quiz-main{padding:3rem 0 5rem;background:var(--deep);}
+
+/* ── CATEGORY CARDS ── */
+.section-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.6rem;}
+.section-title{font-family:var(--display);font-size:clamp(1.5rem,3vw,2rem);color:var(--white);margin-bottom:.5rem;letter-spacing:.04em;}
+.section-sub{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--text-dim);}
+
+.cat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;
+  cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden;height:100%;
+}
+.cat-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(201,168,76,.07) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
+.cat-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4);}
+.cat-card:hover::before{opacity:1;}
+.cat-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;flex-shrink:0;}
+.cat-name{font-family:var(--display);font-size:1rem;color:var(--white);margin-bottom:.35rem;letter-spacing:.04em;}
+.cat-desc{font-size:.82rem;color:var(--text-dim);line-height:1.6;margin-bottom:1rem;}
+.cat-meta{display:flex;gap:10px;flex-wrap:wrap;}
+.cat-tag{font-size:.65rem;font-weight:600;padding:2px 9px;border-radius:50px;letter-spacing:.06em;text-transform:uppercase;}
+.cat-progress{margin-top:1rem;}
+.cat-progress-label{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text-dim);margin-bottom:4px;}
+.cat-progress-bar{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+.cat-progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--brown),var(--gold));}
+.cat-locked{position:absolute;top:14px;right:14px;font-size:.7rem;color:var(--text-muted);display:flex;align-items:center;gap:4px;}
+
+/* Category colors */
+.ic-gospels{background:rgba(201,168,76,.15);color:var(--gold);}
+.ic-psalms{background:rgba(74,130,180,.15);color:#4A82B4;}
+.ic-prophets{background:rgba(168,85,247,.15);color:#a855f7;}
+.ic-nt{background:rgba(44,94,43,.15);color:var(--green-light);}
+.ic-history{background:rgba(200,80,40,.15);color:#C85028;}
+.ic-genesis{background:rgba(201,168,76,.15);color:var(--gold);}
+.tag-easy{background:rgba(44,94,43,.2);color:var(--green-light);}
+.tag-medium{background:rgba(201,168,76,.2);color:var(--gold);}
+.tag-hard{background:rgba(192,57,43,.2);color:var(--red-light);}
+.tag-questions{background:rgba(255,255,255,.06);color:var(--text-dim);}
+
+/* ── QUIZ MODES ── */
+.modes-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:1.5rem;}
+.mode-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;cursor:pointer;transition:all .3s ease;text-align:center;}
+.mode-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+.mode-card.active{border-color:var(--gold);background:var(--gold-pale);}
+.mode-icon{font-size:2rem;margin-bottom:.75rem;display:block;}
+.mode-name{font-family:var(--display);font-size:.9rem;color:var(--white);margin-bottom:.3rem;letter-spacing:.04em;}
+.mode-desc{font-size:.76rem;color:var(--text-dim);line-height:1.5;}
+
+/* ── QUIZ ARENA ── */
+.quiz-arena{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.4);}
+.arena-header{background:linear-gradient(135deg,#2A1A08,#1A1208);padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border);}
+.arena-category{font-family:var(--display);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+.arena-progress-wrap{flex:1;max-width:300px;}
+.arena-progress-track{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+.arena-progress-fill{height:100%;background:linear-gradient(90deg,var(--brown),var(--gold));border-radius:3px;transition:width .4s ease;}
+.arena-q-count{font-size:.78rem;color:var(--text-dim);}
+.arena-timer{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:1.1rem;color:var(--white);}
+.arena-timer.warning{color:var(--red-light);animation:timerPulse .8s infinite;}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.timer-ring{width:36px;height:36px;position:relative;flex-shrink:0;}
+.timer-ring svg{transform:rotate(-90deg);}
+.timer-ring circle{fill:none;stroke:rgba(255,255,255,.08);stroke-width:3;}
+.timer-ring .timer-arc{stroke:var(--gold);stroke-dasharray:88;stroke-dashoffset:0;transition:stroke-dashoffset .9s linear;stroke-linecap:round;}
+.timer-ring.warning .timer-arc{stroke:var(--red-light);}
+
+.arena-body{padding:2.5rem 2rem;}
+.question-num{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;}
+.question-num::after{content:'';flex:1;height:1px;background:var(--border);}
+.question-text{font-family:var(--serif);font-size:clamp(1.1rem,2.5vw,1.45rem);color:var(--white);line-height:1.55;margin-bottom:.5rem;}
+.question-verse{font-family:var(--serif);font-style:italic;font-size:.85rem;color:var(--text-dim);margin-bottom:2rem;display:flex;align-items:center;gap:6px;}
+.question-verse i{color:var(--gold);font-size:.7rem;}
+
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.75rem;}
+.option-btn{
+  background:var(--surface);border:1.5px solid var(--border);border-radius:10px;
+  padding:1rem 1.1rem;font-size:.88rem;color:var(--text);text-align:left;
+  cursor:pointer;transition:all .25s ease;display:flex;align-items:center;gap:10px;
+  font-family:var(--body);line-height:1.4;
+}
+.option-btn:hover:not(:disabled){border-color:var(--gold);background:var(--gold-pale);color:var(--white);}
+.option-btn .opt-letter{width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;font-family:var(--display);transition:all .25s;}
+.option-btn:hover:not(:disabled) .opt-letter{background:var(--gold);color:var(--deep);}
+.option-btn.correct{border-color:var(--green-light);background:rgba(44,94,43,.2);color:var(--white);}
+.option-btn.correct .opt-letter{background:var(--green-light);color:var(--deep);}
+.option-btn.wrong{border-color:var(--red-light);background:rgba(192,57,43,.15);color:rgba(232,226,214,.6);}
+.option-btn.wrong .opt-letter{background:var(--red-light);color:var(--white);}
+.option-btn:disabled{cursor:not-allowed;}
+
+.explanation-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:1.1rem 1.3rem;margin-bottom:1.5rem;animation:fadeUp .3s ease;display:none;}
+.explanation-box.show{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.explanation-label{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.explanation-text{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--text-dim);line-height:1.7;}
+
+.arena-footer{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-top:1px solid var(--border);background:var(--surface);flex-wrap:wrap;gap:10px;}
+.score-display{display:flex;align-items:center;gap:16px;}
+.score-item{text-align:center;}
+.score-num{font-family:var(--display);font-size:1.4rem;line-height:1;display:block;}
+.score-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);}
+.score-correct .score-num{color:var(--green-light);}
+.score-wrong .score-num{color:var(--red-light);}
+.score-xp .score-num{color:var(--gold);}
+.btn-next{background:var(--gold);color:var(--deep);border:none;padding:.65rem 1.75rem;border-radius:50px;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:7px;font-family:var(--display);letter-spacing:.04em;}
+.btn-next:hover{background:var(--gold-light);transform:translateY(-1px);}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
+/* ── RESULTS SCREEN ── */
+.results-screen{padding:2.5rem 2rem;text-align:center;display:none;}
+.results-screen.show{display:block;}
+.results-trophy{font-size:4rem;margin-bottom:1rem;display:block;animation:trophyBounce .6s ease;}
+@keyframes trophyBounce{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.results-grade{font-family:var(--display);font-size:3.5rem;font-weight:900;margin-bottom:.5rem;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.results-title{font-family:var(--serif);font-size:1.4rem;color:var(--white);margin-bottom:.5rem;}
+.results-sub{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--text-dim);max-width:380px;margin:0 auto 2rem;line-height:1.7;}
+.results-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:0 auto 2rem;}
+.res-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem .75rem;}
+.res-stat-num{font-family:var(--display);font-size:1.6rem;color:var(--gold);line-height:1;display:block;}
+.res-stat-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-top:4px;}
+.results-xp-gain{background:rgba(201,168,76,.1);border:1px solid var(--border);border-radius:50px;padding:.5rem 1.25rem;display:inline-flex;align-items:center;gap:8px;margin-bottom:2rem;font-size:.82rem;color:var(--gold);font-weight:600;}
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn-primary-gold{background:var(--gold);color:var(--deep);border:none;padding:.7rem 1.75rem;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .3s;font-family:var(--display);letter-spacing:.04em;}
+.btn-primary-gold:hover{background:var(--gold-light);transform:translateY(-1px);}
+.btn-outline-gold{background:transparent;color:var(--gold);border:1.5px solid rgba(201,168,76,.4);padding:.7rem 1.75rem;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .3s;}
+.btn-outline-gold:hover{background:var(--gold-pale);border-color:var(--gold);}
+
+/* ── LEADERBOARD ── */
+.leaderboard-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.lb-header{background:linear-gradient(135deg,#2A1A08,#1A1208);padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.lb-title{font-family:var(--display);font-size:.85rem;letter-spacing:.08em;color:var(--gold);}
+.lb-tabs{display:flex;gap:4px;}
+.lb-tab{padding:.3rem .75rem;border-radius:50px;font-size:.72rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;transition:all .2s;}
+.lb-tab.active{background:var(--gold);color:var(--deep);border-color:var(--gold);}
+.lb-row{display:flex;align-items:center;gap:12px;padding:.9rem 1.4rem;border-bottom:1px solid rgba(201,168,76,.06);transition:background .2s;}
+.lb-row:last-child{border-bottom:none;}
+.lb-row:hover{background:rgba(255,255,255,.02);}
+.lb-rank{font-family:var(--display);font-size:.9rem;color:var(--text-muted);min-width:24px;text-align:center;}
+.lb-rank.gold-rank{color:var(--gold);}
+.lb-rank.silver-rank{color:#A8A8A8;}
+.lb-rank.bronze-rank{color:#CD7F32;}
+.lb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.75rem;color:var(--deep);font-weight:700;flex-shrink:0;}
+.lb-name{flex:1;font-size:.84rem;font-weight:500;color:var(--text);}
+.lb-score{font-family:var(--display);font-size:.9rem;color:var(--gold);}
+.lb-badge{font-size:.68rem;padding:2px 8px;border-radius:50px;background:var(--gold-pale);color:var(--gold);font-weight:600;}
+.lb-you{border-left:3px solid var(--gold);background:rgba(201,168,76,.04);}
+
+/* ── ACHIEVEMENTS ── */
+.achievements-section{margin-top:2rem;}
+.achievement-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:1rem;}
+.achievement{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem .75rem;text-align:center;transition:all .3s;}
+.achievement:hover{border-color:var(--gold);transform:translateY(-2px);}
+.achievement.locked{opacity:.35;filter:grayscale(1);}
+.ach-icon{font-size:1.6rem;display:block;margin-bottom:.5rem;}
+.ach-name{font-size:.68rem;font-weight:600;color:var(--text);letter-spacing:.04em;}
+.ach-earned{font-size:.62rem;color:var(--gold);margin-top:2px;}
+
+/* ── SCRIPTURE OF THE DAY ── */
+.sotd{background:linear-gradient(135deg,#1A1208,#0E0B08);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center;position:relative;overflow:hidden;}
+.sotd::before{content:'\201C';position:absolute;top:-10px;left:20px;font-family:var(--display);font-size:8rem;color:rgba(201,168,76,.06);pointer-events:none;line-height:1;}
+.sotd-label{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.sotd-verse{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--white);line-height:1.65;margin-bottom:.75rem;}
+.sotd-ref{font-size:.78rem;color:var(--gold);font-weight:600;letter-spacing:.1em;}
+
+/* ── DAILY CHALLENGE ── */
+.daily-card{background:linear-gradient(135deg,var(--brown),#2A1A08);border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:1.5rem;position:relative;overflow:hidden;}
+.daily-card::after{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(201,168,76,.06);}
+.daily-label{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.daily-title{font-family:var(--display);font-size:1.1rem;color:var(--white);margin-bottom:.4rem;letter-spacing:.04em;}
+.daily-sub{font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:1.1rem;line-height:1.5;}
+.daily-meta{display:flex;gap:10px;font-size:.72rem;color:rgba(255,255,255,.55);margin-bottom:1.1rem;flex-wrap:wrap;}
+.daily-meta i{color:var(--gold);}
+.btn-daily{background:var(--gold);color:var(--deep);border:none;padding:.55rem 1.4rem;border-radius:50px;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .3s;font-family:var(--display);letter-spacing:.04em;}
+.btn-daily:hover{background:var(--gold-light);transform:translateY(-1px);}
+.daily-reward{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;color:var(--gold);font-weight:600;margin-left:.75rem;}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .options-grid{grid-template-columns:1fr;}
+  .results-stats{grid-template-columns:repeat(2,1fr);}
+  .arena-body{padding:1.5rem 1.1rem;}
+  .arena-footer{padding:1rem 1.1rem;}
+  .navbar-collapse{background:rgba(14,11,8,.98);padding:1rem;border-radius:8px;margin-top:.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i>Word Transformation</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+        <li class="nav-item"><a class="nav-link active" href="biblequiz.html">Bible Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" href="workshops.html">Workshops</a></li>
+        <li class="nav-item"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="quiz-hero">
+  <div class="container hero-inner">
+    <div class="hero-badge"><i class="bi bi-book-half"></i> Word Transformation · Bible Quiz</div>
+    <h1 class="hero-title">Know Your <span>Scripture</span></h1>
+    <p class="hero-sub">"Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." — 2 Timothy 2:15</p>
+    <div class="hero-stats">
+      <div><span class="hero-stat-num" id="heroPlayers">1,240</span><div class="hero-stat-label">Players this week</div></div>
+      <div><span class="hero-stat-num">48</span><div class="hero-stat-label">Quiz categories</div></div>
+      <div><span class="hero-stat-num">2,400+</span><div class="hero-stat-label">Questions</div></div>
+      <div><span class="hero-stat-num" id="heroStreak">🔥 12</span><div class="hero-stat-label">Day streak record</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- XP Bar -->
+<div class="xp-bar-section" id="xpBarSection" style="display:none;">
+  <div class="container">
+    <div class="xp-user">
+      <div class="xp-avatar" id="xpAvatar">K</div>
+      <div>
+        <div class="xp-name" id="xpName">Kwame</div>
+        <div class="xp-level" id="xpLevel">Level 4 · Scribe</div>
+      </div>
+      <div class="xp-bar-wrap">
+        <div class="xp-bar-track"><div class="xp-bar-fill" id="xpBarFill" style="width:62%"></div></div>
+        <div class="xp-points"><span id="xpCurrent">620</span> / 1000 XP to next level</div>
+      </div>
+      <div class="xp-right">
+        <div class="streak-chip"><i class="bi bi-fire"></i><span id="streakCount">7</span> day streak</div>
+        <div class="rank-chip"><i class="bi bi-trophy"></i> Rank #<span id="userRank">14</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<section class="quiz-main">
+  <div class="container">
+
+    <!-- Name Gate -->
+    <div id="nameGate" style="max-width:460px;margin:0 auto 3rem;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2.5rem;text-align:center;">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">📖</div>
+      <h3 style="font-family:var(--display);color:var(--white);font-size:1.4rem;margin-bottom:.5rem;letter-spacing:.04em;">Start Your Journey</h3>
+      <p style="font-family:var(--serif);font-style:italic;color:var(--text-dim);font-size:.88rem;margin-bottom:1.5rem;">Enter your name to track your XP, streaks, and leaderboard ranking.</p>
+      <div style="display:flex;gap:8px;">
+        <input type="text" id="playerNameInput" placeholder="Your name..." style="flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:.6rem 1rem;font-size:.9rem;color:var(--text);outline:none;font-family:var(--body);" onkeydown="if(event.key==='Enter')startPlayer()">
+        <button onclick="startPlayer()" style="background:var(--gold);color:var(--deep);border:none;padding:.6rem 1.25rem;border-radius:8px;font-weight:700;font-size:.88rem;cursor:pointer;font-family:var(--display);letter-spacing:.04em;">Begin</button>
+      </div>
+    </div>
+
+    <div id="mainContent" style="display:none;">
+      <div class="row g-4">
+
+        <!-- LEFT: Quizzes -->
+        <div class="col-lg-8">
+
+          <!-- Daily Challenge -->
+          <div class="daily-card mb-4">
+            <div class="daily-label">⚡ Today's Challenge</div>
+            <h3 class="daily-title">Daily Scripture Sprint</h3>
+            <p class="daily-sub">10 questions · Mixed Bible · Timed · Resets every midnight. Complete today's challenge to keep your streak alive!</p>
+            <div class="daily-meta">
+              <span><i class="bi bi-clock me-1"></i>15 seconds per question</span>
+              <span><i class="bi bi-star me-1"></i>Bonus 2× XP today</span>
+              <span><i class="bi bi-people me-1"></i>248 completed today</span>
+            </div>
+            <button class="btn-daily" onclick="startQuiz('Daily Challenge','mixed','medium',10)">Start Challenge</button>
+            <span class="daily-reward"><i class="bi bi-gem"></i>+100 XP Bonus</span>
+          </div>
+
+          <!-- Quiz Modes -->
+          <div class="mb-4">
+            <span class="section-eyebrow">Play Style</span>
+            <h2 class="section-title">Choose Your Mode</h2>
+            <div class="modes-row">
+              <div class="mode-card active" id="mode-timed" onclick="selectMode('timed',this)">
+                <span class="mode-icon">⏱️</span>
+                <div class="mode-name">Timed</div>
+                <div class="mode-desc">15 seconds per question. Speed and accuracy count.</div>
+              </div>
+              <div class="mode-card" id="mode-study" onclick="selectMode('study',this)">
+                <span class="mode-icon">📚</span>
+                <div class="mode-name">Study Mode</div>
+                <div class="mode-desc">No timer. See explanations after each answer.</div>
+              </div>
+              <div class="mode-card" id="mode-lightning" onclick="selectMode('lightning',this)">
+                <span class="mode-icon">⚡</span>
+                <div class="mode-name">Lightning</div>
+                <div class="mode-desc">5 seconds. 20 questions. Rapid-fire Scripture.</div>
+              </div>
+              <div class="mode-card" id="mode-survival" onclick="selectMode('survival',this)">
+                <span class="mode-icon">🛡️</span>
+                <div class="mode-name">Survival</div>
+                <div class="mode-desc">3 lives. Lose a life each wrong answer. How far can you go?</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="mb-4">
+            <span class="section-eyebrow">Categories</span>
+            <h2 class="section-title">Pick a Topic</h2>
+            <p class="section-sub">Journey through every book and theme of Scripture</p>
+            <div class="row g-3 mt-1">
+              <div class="col-md-6">
+                <div class="cat-card" onclick="startQuiz('The Gospels','gospels','medium',10)">
+                  <div class="cat-icon ic-gospels"><i class="bi bi-book-fill"></i></div>
+                  <div class="cat-name">The Gospels</div>
+                  <div class="cat-desc">Matthew, Mark, Luke & John — the life, miracles, and teachings of Jesus Christ.</div>
+                  <div class="cat-meta"><span class="cat-tag tag-medium">Medium</span><span class="cat-tag tag-questions">40 questions</span></div>
+                  <div class="cat-progress"><div class="cat-progress-label"><span>Progress</span><span>6/40</span></div><div class="cat-progress-bar"><div class="cat-progress-fill" style="width:15%"></div></div></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="cat-card" onclick="startQuiz('Psalms & Proverbs','psalms','easy',10)">
+                  <div class="cat-icon ic-psalms"><i class="bi bi-music-note-beamed"></i></div>
+                  <div class="cat-name">Psalms & Proverbs</div>
+                  <div class="cat-desc">Songs of praise, lament, and wisdom literature from the heart of David and Solomon.</div>
+                  <div class="cat-meta"><span class="cat-tag tag-easy">Easy</span><span class="cat-tag tag-questions">35 questions</span></div>
+                  <div class="cat-progress"><div class="cat-progress-label"><span>Progress</span><span>14/35</span></div><div class="cat-progress-bar"><div class="cat-progress-fill" style="width:40%"></div></div></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="cat-card" onclick="startQuiz('New Testament Letters','nt','medium',10)">
+                  <div class="cat-icon ic-nt"><i class="bi bi-envelope-fill"></i></div>
+                  <div class="cat-name">New Testament Letters</div>
+                  <div class="cat-desc">Paul's epistles, Hebrews, James, and the General Letters to the early church.</div>
+                  <div class="cat-meta"><span class="cat-tag tag-medium">Medium</span><span class="cat-tag tag-questions">45 questions</span></div>
+                  <div class="cat-progress"><div class="cat-progress-label"><span>Progress</span><span>0/45</span></div><div class="cat-progress-bar"><div class="cat-progress-fill" style="width:0%"></div></div></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="cat-card" onclick="startQuiz('Old Testament Prophets','prophets','hard',10)">
+                  <div class="cat-icon ic-prophets"><i class="bi bi-lightning-fill"></i></div>
+                  <div class="cat-name">The Prophets</div>
+                  <div class="cat-desc">Isaiah through Malachi — God's messages through the major and minor prophets.</div>
+                  <div class="cat-meta"><span class="cat-tag tag-hard">Hard</span><span class="cat-tag tag-questions">50 questions</span></div>
+                  <div class="cat-progress"><div class="cat-progress-label"><span>Progress</span><span>0/50</span></div><div class="cat-progress-bar"><div class="cat-progress-fill" style="width:0%"></div></div></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="cat-card" onclick="startQuiz('Bible History','history','medium',10)">
+                  <div class="cat-icon ic-history"><i class="bi bi-hourglass-split"></i></div>
+                  <div class="cat-name">Bible History & People</div>
+                  <div class="cat-desc">Kings, judges, heroes of faith, and the great events that shaped Israel's story.</div>
+                  <div class="cat-meta"><span class="cat-tag tag-medium">Medium</span><span class="cat-tag tag-questions">60 questions</span></div>
+                  <div class="cat-progress"><div class="cat-progress-label"><span>Progress</span><span>3/60</span></div><div class="cat-progress-bar"><div class="cat-progress-fill" style="width:5%"></div></div></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="cat-card" onclick="startQuiz('Genesis & Creation','genesis','easy',10)">
+                  <div class="cat-icon ic-genesis"><i class="bi bi-globe2"></i></div>
+                  <div class="cat-name">Genesis & Creation</div>
+                  <div class="cat-desc">In the beginning — creation, the fall, the flood, the patriarchs, and God's covenant.</div>
+                  <div class="cat-meta"><span class="cat-tag tag-easy">Easy</span><span class="cat-tag tag-questions">30 questions</span></div>
+                  <div class="cat-progress"><div class="cat-progress-label"><span>Progress</span><span>8/30</span></div><div class="cat-progress-bar"><div class="cat-progress-fill" style="width:27%"></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quiz Arena -->
+          <div class="quiz-arena" id="quizArena" style="display:none;">
+            <!-- Active Quiz -->
+            <div id="quizActive">
+              <div class="arena-header">
+                <div>
+                  <div class="arena-category" id="arenaCategory">The Gospels</div>
+                  <div class="arena-q-count" id="arenaQCount">Question 1 of 10</div>
+                </div>
+                <div class="arena-progress-wrap">
+                  <div class="arena-progress-track"><div class="arena-progress-fill" id="arenaProgressFill" style="width:10%"></div></div>
+                </div>
+                <div class="arena-timer" id="arenaTimer">
+                  <div class="timer-ring" id="timerRing">
+                    <svg width="36" height="36" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="14"/>
+                      <circle class="timer-arc" id="timerArc" cx="18" cy="18" r="14"/>
+                    </svg>
+                  </div>
+                  <span id="timerNum">15</span>
+                </div>
+              </div>
+              <div class="arena-body">
+                <div class="question-num" id="questionNum">Question 1</div>
+                <p class="question-text" id="questionText"></p>
+                <p class="question-verse" id="questionVerse"><i class="bi bi-book"></i> <span></span></p>
+                <div class="options-grid" id="optionsGrid"></div>
+                <div class="explanation-box" id="explanationBox">
+                  <div class="explanation-label">📖 Scripture Context</div>
+                  <div class="explanation-text" id="explanationText"></div>
+                </div>
+              </div>
+              <div class="arena-footer">
+                <div class="score-display">
+                  <div class="score-item score-correct"><span class="score-num" id="scoreCorrect">0</span><div class="score-label">Correct</div></div>
+                  <div class="score-item score-wrong"><span class="score-num" id="scoreWrong">0</span><div class="score-label">Wrong</div></div>
+                  <div class="score-item score-xp"><span class="score-num" id="scoreXP">0</span><div class="score-label">XP</div></div>
+                </div>
+                <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>Next <i class="bi bi-arrow-right"></i></button>
+              </div>
+            </div>
+            <!-- Results Screen -->
+            <div class="results-screen" id="resultsScreen">
+              <span class="results-trophy" id="resultsTrophy">🏆</span>
+              <div class="results-grade" id="resultsGrade">A+</div>
+              <div class="results-title" id="resultsTitle">Outstanding!</div>
+              <p class="results-sub" id="resultsSub"></p>
+              <div class="results-xp-gain" id="resultsXpGain"><i class="bi bi-gem"></i>+0 XP earned</div>
+              <div class="results-stats">
+                <div class="res-stat"><span class="res-stat-num" id="rCorrect">0</span><div class="res-stat-label">Correct</div></div>
+                <div class="res-stat"><span class="res-stat-num" id="rWrong">0</span><div class="res-stat-label">Wrong</div></div>
+                <div class="res-stat"><span class="res-stat-num" id="rPct">0%</span><div class="res-stat-label">Accuracy</div></div>
+                <div class="res-stat"><span class="res-stat-num" id="rTime">0s</span><div class="res-stat-label">Avg Time</div></div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-primary-gold" onclick="retryQuiz()"><i class="bi bi-arrow-clockwise me-1"></i>Try Again</button>
+                <button class="btn-outline-gold" onclick="closeQuiz()">Choose Another</button>
+                <button class="btn-outline-gold" onclick="shareScore()"><i class="bi bi-share me-1"></i>Share</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Sidebar -->
+        <div class="col-lg-4">
+
+          <!-- Scripture of the Day -->
+          <div class="sotd mb-4">
+            <div class="sotd-label">📜 Verse of the Day</div>
+            <p class="sotd-verse" id="sotdVerse">"Thy word is a lamp unto my feet, and a light unto my path."</p>
+            <div class="sotd-ref" id="sotdRef">Psalm 119:105</div>
+          </div>
+
+          <!-- Leaderboard -->
+          <div class="leaderboard-card mb-4">
+            <div class="lb-header">
+              <div class="lb-title">🏆 Leaderboard</div>
+              <div class="lb-tabs">
+                <button class="lb-tab active" onclick="switchLbTab('week',this)">Week</button>
+                <button class="lb-tab" onclick="switchLbTab('all',this)">All Time</button>
+              </div>
+            </div>
+            <div id="leaderboardList"></div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="achievements-section">
+            <span class="section-eyebrow">Your Badges</span>
+            <h3 class="section-title" style="font-size:1.2rem;">Achievements</h3>
+            <div class="achievement-grid" id="achievementGrid"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background:#0A0806;border-top:1px solid var(--border);padding:2.5rem 0;text-align:center;">
+  <p style="font-family:var(--serif);font-style:italic;font-size:.85rem;color:var(--text-muted);">"The entrance of thy words giveth light; it giveth understanding unto the simple." — Psalm 119:130</p>
+  <div style="margin-top:1rem;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <a href="index.html" style="font-size:.82rem;color:var(--text-muted);text-decoration:none;">Home</a>
+    <a href="sermons.html" style="font-size:.82rem;color:var(--text-muted);text-decoration:none;">Sermons</a>
+    <a href="workshops.html" style="font-size:.82rem;color:var(--text-muted);text-decoration:none;">Workshops</a>
+    <a href="devotional.html" style="font-size:.82rem;color:var(--text-muted);text-decoration:none;">Devotional</a>
+    <a href="contact.html" style="font-size:.82rem;color:var(--text-muted);text-decoration:none;">Contact</a>
+  </div>
+  <p style="margin-top:1rem;font-size:.75rem;color:var(--text-muted);">&copy; 2026 Word Transformation Church</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ══════════════════════════════════
+   DATA
+══════════════════════════════════ */
+const QUESTIONS = {
+  gospels:[
+    {q:"What was the first miracle Jesus performed?",options:["Healing a blind man","Turning water into wine","Feeding 5,000","Walking on water"],ans:1,verse:"John 2:1–11",explanation:"At the wedding in Cana, Jesus turned six stone jars of water into wine at His mother Mary's request — revealing His glory for the first time."},
+    {q:"Who baptised Jesus in the Jordan River?",options:["Peter","Paul","John the Baptist","Elijah"],ans:2,verse:"Matthew 3:13–17",explanation:"John the Baptist baptised Jesus in the Jordan. The Holy Spirit descended like a dove, and a voice from heaven said 'This is my beloved Son.'"},
+    {q:"How many loaves of bread were used to feed the 5,000?",options:["2","5","7","12"],ans:1,verse:"John 6:9",explanation:"A young boy had five barley loaves and two fish. Jesus gave thanks, and through a miracle, fed a crowd of over 5,000 people with baskets left over."},
+    {q:"In the Sermon on the Mount, Jesus said 'Blessed are the meek, for they shall...'",options:["see God","inherit the earth","be called sons of God","receive mercy"],ans:1,verse:"Matthew 5:5",explanation:"The Beatitudes open the Sermon on the Mount. 'Blessed are the meek: for they shall inherit the earth' — an unexpected reversal of worldly power."},
+    {q:"Which disciple denied Jesus three times?",options:["Judas","Thomas","John","Peter"],ans:3,verse:"Mark 14:66–72",explanation:"Peter warmed himself by a fire in the high priest's courtyard and three times denied knowing Jesus — just as Jesus had predicted that very evening."},
+    {q:"What did Jesus say was the greatest commandment?",options:["Keep the Sabbath","Love God with all your heart","Do not kill","Love your neighbour"],ans:1,verse:"Matthew 22:37–38",explanation:"When asked about the greatest commandment, Jesus quoted Deuteronomy 6:5: 'Love the Lord your God with all your heart, soul, and mind.'"},
+    {q:"How many days was Lazarus in the tomb before Jesus raised him?",options:["1","2","3","4"],ans:3,verse:"John 11:17",explanation:"Lazarus had been in the tomb four days when Jesus arrived. This detail underscored the miracle — there was no natural hope of revival."},
+    {q:"Who came to Jesus at night to ask about being 'born again'?",options:["Zacchaeus","Nicodemus","Joseph of Arimathea","Simon the Pharisee"],ans:1,verse:"John 3:1–2",explanation:"Nicodemus, a Pharisee and member of the Jewish ruling council, came to Jesus at night — perhaps fearing judgement from his peers."},
+    {q:"What did Jesus say to the storm on the Sea of Galilee?",options:["Stop and be still","Peace, be still","Calm, be silent","Rest, be calm"],ans:1,verse:"Mark 4:39",explanation:"Jesus rebuked the wind and said to the sea, 'Peace, be still!' The wind ceased and there was a great calm, astonishing the disciples."},
+    {q:"Which woman anointed Jesus's feet with expensive perfume?",options:["Martha","Mary Magdalene","Mary of Bethany","Salome"],ans:2,verse:"John 12:3",explanation:"Mary of Bethany poured costly spikenard on Jesus's feet and wiped them with her hair. Jesus said she was preparing Him for His burial."},
+  ],
+  psalms:[
+    {q:"The Lord is my shepherd — which psalm begins with these words?",options:["Psalm 1","Psalm 23","Psalm 100","Psalm 119"],ans:1,verse:"Psalm 23:1",explanation:"Psalm 23, attributed to David, is one of the most beloved passages in Scripture. 'The Lord is my shepherd; I shall not want.'"},
+    {q:"'Trust in the Lord with all your heart' comes from which book?",options:["Psalms","Proverbs","Ecclesiastes","Isaiah"],ans:1,verse:"Proverbs 3:5",explanation:"This passage from Proverbs 3:5 continues: '…and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.'"},
+    {q:"'Thy word is a lamp unto my feet' is from Psalm...",options:["91","100","119","150"],ans:2,verse:"Psalm 119:105",explanation:"Psalm 119 is the longest chapter in the Bible — 176 verses entirely devoted to the greatness and power of God's Word."},
+    {q:"Which Psalm begins 'God is our refuge and strength'?",options:["Psalm 27","Psalm 46","Psalm 91","Psalm 23"],ans:1,verse:"Psalm 46:1",explanation:"Psalm 46 inspired Martin Luther's famous hymn 'A Mighty Fortress Is Our God.' It declares God as our ever-present help in trouble."},
+    {q:"How many chapters does Psalm 119 have?",options:["1 chapter","3 chapters","It is 1 chapter","22 sections in 1 chapter"],ans:3,verse:"Psalm 119",explanation:"Psalm 119 is a single chapter with 176 verses, arranged as an acrostic poem with 22 stanzas — one for each letter of the Hebrew alphabet."},
+  ],
+  nt:[
+    {q:"Who wrote most of the New Testament letters?",options:["Peter","John","Paul","James"],ans:2,verse:"Romans 1:1",explanation:"The Apostle Paul wrote 13 epistles (letters) in the New Testament — from Romans to Philemon — more than any other author."},
+    {q:"'Faith without works is dead' comes from which epistle?",options:["Romans","Hebrews","James","1 John"],ans:2,verse:"James 2:26",explanation:"James argues that genuine faith naturally produces works. Living faith is active and visible — dead faith is theoretical and produces nothing."},
+    {q:"'I can do all things through Christ which strengtheneth me' is from...",options:["Romans 8","Philippians 4","Ephesians 6","Colossians 3"],ans:1,verse:"Philippians 4:13",explanation:"Paul wrote these words while imprisoned. They came in the context of learning contentment in all circumstances — not a blank promise of achievement."},
+    {q:"What is the shortest verse in the New Testament?",options:["God is love","Jesus wept","Pray without ceasing","Rejoice always"],ans:1,verse:"John 11:35",explanation:"'Jesus wept' (John 11:35) is the shortest verse in the entire Bible. Jesus shed tears at the tomb of Lazarus, showing His full humanity."},
+    {q:"In Romans 8:28, God works all things together for good to those who...",options:["pray daily","love Him","are baptised","attend church"],ans:1,verse:"Romans 8:28",explanation:"The promise is to those who love God and are called according to His purpose — not a blanket promise to all, but an anchor for those in Christ."},
+  ],
+  prophets:[
+    {q:"Which prophet was swallowed by a great fish?",options:["Elijah","Jonah","Isaiah","Amos"],ans:1,verse:"Jonah 1:17",explanation:"Jonah fled from God's call to preach to Nineveh. God appointed a great fish to swallow him, where he prayed for three days and nights."},
+    {q:"'For I know the plans I have for you' — which prophet wrote this?",options:["Isaiah","Ezekiel","Jeremiah","Daniel"],ans:2,verse:"Jeremiah 29:11",explanation:"Jeremiah wrote this to the Israelites in Babylonian exile — plans for welfare and not for evil, a future and a hope, from a God who does not abandon His people."},
+    {q:"Which prophet had a vision of a valley of dry bones?",options:["Isaiah","Jeremiah","Ezekiel","Daniel"],ans:2,verse:"Ezekiel 37:1–14",explanation:"God led Ezekiel through a valley of dry bones and commanded him to prophesy. The bones came together, flesh grew, and breath entered — a picture of national resurrection."},
+    {q:"Daniel was thrown into the lions' den under which king?",options:["Nebuchadnezzar","Belshazzar","Darius","Cyrus"],ans:2,verse:"Daniel 6:16",explanation:"King Darius the Mede, manipulated by jealous officials, had Daniel thrown into the lions' den. An angel shut the lions' mouths and Daniel was unharmed."},
+    {q:"Isaiah's famous 'Suffering Servant' passage is in chapter...",options:["40","45","53","60"],ans:2,verse:"Isaiah 53",explanation:"Isaiah 53 prophesied the suffering, rejection, and substitutionary death of the Messiah — written 700 years before Jesus. 'He was wounded for our transgressions.'"},
+  ],
+  history:[
+    {q:"Who was the first king of Israel?",options:["David","Solomon","Saul","Samuel"],ans:2,verse:"1 Samuel 10:24",explanation:"Saul, from the tribe of Benjamin, was anointed Israel's first king by Samuel. He started well but disobeyed God and was eventually rejected as king."},
+    {q:"How many days did it take to build the walls of Jerusalem under Nehemiah?",options:["7","28","52","100"],ans:2,verse:"Nehemiah 6:15",explanation:"The wall of Jerusalem was completed in 52 days — an extraordinary feat that Nehemiah attributed to God. Even their enemies recognised that this work was done by God."},
+    {q:"Who was Elijah's successor as prophet?",options:["Elisha","Amos","Micah","Hosea"],ans:0,verse:"1 Kings 19:19",explanation:"God told Elijah to anoint Elisha as prophet in his place. Elisha received a double portion of Elijah's spirit and performed twice as many recorded miracles."},
+    {q:"Which judge led Israel with 300 men against the Midianites?",options:["Samson","Deborah","Gideon","Jephthah"],ans:2,verse:"Judges 7:7",explanation:"God reduced Gideon's army from 32,000 to 300 to demonstrate that the victory was His alone. They defeated Midian with torches, trumpets, and clay pots."},
+    {q:"What was Solomon's most famous act of wisdom?",options:["Building the Temple","Two women claiming one baby","Judging between 1000 men","Writing 3000 proverbs"],ans:1,verse:"1 Kings 3:16–28",explanation:"Two women claimed the same baby. Solomon ordered it cut in half — the true mother revealed herself by surrendering her claim to save the child."},
+  ],
+  genesis:[
+    {q:"On which day of creation did God make man?",options:["Fourth","Fifth","Sixth","Seventh"],ans:2,verse:"Genesis 1:26–27",explanation:"God made mankind on the sixth day, in His own image and likeness. Man was the crowning work of creation, given dominion over all the earth."},
+    {q:"What did God see at the end of each day of creation?",options:["It was finished","It was good","It was beautiful","It was done"],ans:1,verse:"Genesis 1",explanation:"After each act of creation, God declared it 'good.' On the sixth day, after creating mankind, He declared everything 'very good.'"},
+    {q:"How old was Noah when the flood came?",options:["500","600","700","800"],ans:1,verse:"Genesis 7:6",explanation:"Noah was 600 years old when the floodwaters came upon the earth. He lived for another 350 years after the flood, dying at 950."},
+    {q:"Which city's tower did the people try to build to reach heaven?",options:["Ur","Babylon","Babel","Nineveh"],ans:2,verse:"Genesis 11:4",explanation:"At Babel, the people said 'let us build a tower that reaches to the heavens.' God confused their language, and they scattered across the earth."},
+    {q:"Who sold Joseph into slavery?",options:["His father Jacob","His brothers","Potiphar","The Ishmaelites"],ans:1,verse:"Genesis 37:28",explanation:"Joseph's brothers — jealous of his coat and his dreams — sold him to Ishmaelite traders for 20 pieces of silver, who brought him to Egypt."},
+  ],
+  mixed:[
+    {q:"What is the shortest book in the Old Testament?",options:["Obadiah","Philemon","Jude","Nahum"],ans:0,verse:"Obadiah 1",explanation:"Obadiah is the shortest book in the Old Testament with only 21 verses. It prophesies against Edom for their betrayal of Israel."},
+    {q:"How many books are in the Bible?",options:["60","63","66","72"],ans:2,verse:"",explanation:"The Protestant Bible contains 66 books — 39 in the Old Testament and 27 in the New Testament. These were formally recognised through the process of canonisation."},
+    {q:"What does 'Amen' mean?",options:["Praise the Lord","So be it / Truly","The end","Thank you"],ans:1,verse:"",explanation:"'Amen' (Hebrew: אָמֵן) means 'so be it' or 'truly.' It expresses agreement and affirmation, often concluding a prayer or blessing."},
+    {q:"What river did Naaman wash in to be healed of leprosy?",options:["Nile","Euphrates","Jordan","Kishon"],ans:2,verse:"2 Kings 5:14",explanation:"Elisha told Naaman to wash in the Jordan River seven times. Naaman was angry at first — the Jordan seemed too ordinary — but obeyed and was healed."},
+    {q:"'The beginning of wisdom is the fear of the Lord' — where is this found?",options:["Proverbs 1:7","Psalm 111:10","Both","Job 28:28"],ans:2,verse:"Proverbs 1:7 & Psalm 111:10",explanation:"This foundational truth appears in multiple places — Proverbs 1:7, Psalm 111:10, and Job 28:28. The fear of the Lord is not terror but deep reverence."},
+    {q:"Who wrote the book of Revelation?",options:["Paul","Peter","John","Luke"],ans:2,verse:"Revelation 1:1",explanation:"John the Apostle received visions on the island of Patmos around AD 95 and recorded them in Revelation — addressing seven churches in Asia Minor."},
+    {q:"What does the name 'Jesus' mean?",options:["Son of God","The Lord saves","Prince of Peace","Light of the world"],ans:1,verse:"Matthew 1:21",explanation:"The angel told Joseph to name the child 'Jesus' (Yeshua in Hebrew), 'for he will save his people from their sins.' The name itself is a declaration of His mission."},
+    {q:"How many disciples did Jesus have?",options:["7","10","12","72"],ans:2,verse:"Luke 6:13",explanation:"Jesus chose 12 disciples — mirroring the 12 tribes of Israel — to be His closest companions and to carry on His mission after His ascension."},
+    {q:"Which is the longest book in the Bible?",options:["Genesis","Psalms","Isaiah","Jeremiah"],ans:1,verse:"Psalm 119",explanation:"Psalms is the longest book with 150 chapters and 2,461 verses. Psalm 119 alone is 176 verses — the longest single chapter in the Bible."},
+    {q:"Who was the first person to see the risen Jesus?",options:["Peter","Mary Magdalene","Mary the mother of Jesus","John"],ans:1,verse:"John 20:14–16",explanation:"Mary Magdalene was at the empty tomb early in the morning and became the first person to see and speak with the risen Christ. Jesus called her by name."},
+  ],
+};
+
+const VERSE_OF_DAY = [
+  {v:'"Thy word is a lamp unto my feet, and a light unto my path."',r:'Psalm 119:105'},
+  {v:'"I can do all things through Christ which strengtheneth me."',r:'Philippians 4:13'},
+  {v:'"The Lord is my shepherd; I shall not want."',r:'Psalm 23:1'},
+  {v:'"Trust in the Lord with all thine heart; and lean not unto thine own understanding."',r:'Proverbs 3:5'},
+];
+
+const LEADERBOARD_WEEK = [
+  {name:'Grace O.',score:2840,streak:12},
+  {name:'Samuel K.',score:2610,streak:9},
+  {name:'Abena M.',score:2480,streak:7},
+  {name:'Emmanuel A.',score:2200,streak:5},
+  {name:'Ruth N.',score:1980,streak:4},
+];
+
+const ACHIEVEMENTS = [
+  {icon:'📖',name:'First Quiz',earned:true,when:'Today'},
+  {icon:'🔥',name:'7-Day Streak',earned:false,when:''},
+  {icon:'⭐',name:'Perfect Score',earned:false,when:''},
+  {icon:'⚡',name:'Lightning Fast',earned:false,when:''},
+  {icon:'🏆',name:'Top 10 Rank',earned:false,when:''},
+  {icon:'📚',name:'All Categories',earned:false,when:''},
+  {icon:'💎',name:'1000 XP',earned:false,when:''},
+  {icon:'🌟',name:'Week Streak',earned:false,when:''},
+];
+
+/* ══════════════════════════════════
+   STATE
+══════════════════════════════════ */
+let playerName='', playerXP=620, playerLevel=4, playerStreak=7, playerRank=14;
+let currentCategory='', currentMode='timed', currentQuestions=[], currentQIdx=0;
+let scoreCorrect=0, scoreWrong=0, scoreXP=0;
+let timerInterval=null, timerSeconds=15, timerMax=15;
+let quizStartTime=null, totalTime=0;
+let livesModeActive=false, lives=3;
+
+/* ══════════════════════════════════
+   INIT
+══════════════════════════════════ */
+function startPlayer() {
+  const n = document.getElementById('playerNameInput').value.trim();
+  if (!n) { alert('Please enter your name.'); return; }
+  playerName = n;
+  document.getElementById('nameGate').style.display='none';
+  document.getElementById('mainContent').style.display='block';
+  document.getElementById('xpBarSection').style.display='block';
+  document.getElementById('xpAvatar').textContent = n.charAt(0).toUpperCase();
+  document.getElementById('xpName').textContent = n;
+  updateXPBar();
+  renderLeaderboard('week');
+  renderAchievements();
+  renderVOTD();
+}
+
+function renderVOTD() {
+  const d = VERSE_OF_DAY[new Date().getDay() % VERSE_OF_DAY.length];
+  document.getElementById('sotdVerse').textContent = d.v;
+  document.getElementById('sotdRef').textContent = d.r;
+}
+
+function updateXPBar() {
+  const pct = (playerXP % 1000) / 10;
+  document.getElementById('xpBarFill').style.width = pct + '%';
+  document.getElementById('xpCurrent').textContent = playerXP % 1000;
+  document.getElementById('streakCount').textContent = playerStreak;
+  document.getElementById('userRank').textContent = playerRank;
+  const levels = ['Seeker','Learner','Disciple','Scribe','Prophet','Elder','Apostle'];
+  document.getElementById('xpLevel').textContent = `Level ${playerLevel} · ${levels[Math.min(playerLevel-1,levels.length-1)]}`;
+}
+
+function selectMode(mode, el) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ══════════════════════════════════
+   QUIZ FLOW
+══════════════════════════════════ */
+function startQuiz(catName, catKey, difficulty, count) {
+  const pool = QUESTIONS[catKey] || QUESTIONS.mixed;
+  currentCategory = catName;
+  currentQuestions = shuffleArr([...pool]).slice(0, Math.min(count, pool.length));
+  currentQIdx = 0; scoreCorrect=0; scoreWrong=0; scoreXP=0;
+  livesModeActive = currentMode === 'survival';
+  lives = 3;
+  quizStartTime = Date.now(); totalTime = 0;
+  timerMax = currentMode==='lightning' ? 5 : currentMode==='study' ? 99999 : 15;
+  document.getElementById('quizArena').style.display='block';
+  document.getElementById('quizActive').style.display='block';
+  document.getElementById('resultsScreen').style.display='none';
+  document.getElementById('resultsScreen').classList.remove('show');
+  document.getElementById('quizArena').scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('arenaCategory').textContent = catName;
+  document.getElementById('btnNext').disabled=true;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (currentQIdx >= currentQuestions.length) { showResults(); return; }
+  const q = currentQuestions[currentQIdx];
+  document.getElementById('arenaQCount').textContent = `Question ${currentQIdx+1} of ${currentQuestions.length}`;
+  document.getElementById('arenaProgressFill').style.width = ((currentQIdx)/currentQuestions.length*100)+'%';
+  document.getElementById('questionNum').textContent = `Question ${currentQIdx+1}`;
+  document.getElementById('questionText').textContent = q.q;
+  const verseEl = document.getElementById('questionVerse');
+  if (q.verse) { verseEl.style.display='flex'; verseEl.querySelector('span').textContent=q.verse; }
+  else verseEl.style.display='none';
+  document.getElementById('explanationBox').classList.remove('show');
+  document.getElementById('scoreCorrect').textContent=scoreCorrect;
+  document.getElementById('scoreWrong').textContent=scoreWrong;
+  document.getElementById('scoreXP').textContent=scoreXP;
+  document.getElementById('btnNext').disabled=true;
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML=`<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick=()=>selectAnswer(i,q,btn);
+    grid.appendChild(btn);
+  });
+  if (currentMode !== 'study') startTimer();
+  else { document.getElementById('timerNum').textContent='∞'; document.getElementById('timerArc').style.strokeDashoffset='0'; }
+}
+
+function selectAnswer(chosen, q, btn) {
+  clearInterval(timerInterval);
+  totalTime += (timerMax - timerSeconds);
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(b=>b.disabled=true);
+  if (chosen === q.ans) {
+    btn.classList.add('correct');
+    scoreCorrect++;
+    const pts = currentMode==='lightning'?20 : currentMode==='timed' ? Math.max(10, timerSeconds*3) : 15;
+    scoreXP += pts;
+    playerXP += pts;
+    showFloatingXP('+'+pts+' XP', true);
+  } else {
+    btn.classList.add('wrong');
+    allBtns[q.ans].classList.add('correct');
+    scoreWrong++;
+    if (livesModeActive) { lives--; if(lives<=0){setTimeout(()=>{showResults();},1200);return;} }
+    showFloatingXP('Wrong!', false);
+  }
+  if (currentMode==='study' && q.explanation) {
+    document.getElementById('explanationText').textContent=q.explanation;
+    document.getElementById('explanationBox').classList.add('show');
+  }
+  document.getElementById('btnNext').disabled=false;
+  document.getElementById('scoreCorrect').textContent=scoreCorrect;
+  document.getElementById('scoreWrong').textContent=scoreWrong;
+  document.getElementById('scoreXP').textContent=scoreXP;
+  updateXPBar();
+}
+
+function nextQuestion() {
+  currentQIdx++;
+  if (currentQIdx >= currentQuestions.length) { showResults(); return; }
+  renderQuestion();
+}
+
+function startTimer() {
+  timerSeconds = timerMax;
+  clearInterval(timerInterval);
+  const arc = document.getElementById('timerArc');
+  const ring = document.getElementById('timerRing');
+  const num = document.getElementById('timerNum');
+  const timer = document.getElementById('arenaTimer');
+  const circumference = 88;
+  timerInterval = setInterval(()=>{
+    timerSeconds--;
+    num.textContent = timerSeconds;
+    arc.style.strokeDashoffset = circumference - (timerSeconds/timerMax)*circumference;
+    if (timerSeconds <= 5) { ring.classList.add('warning'); timer.classList.add('warning'); }
+    else { ring.classList.remove('warning'); timer.classList.remove('warning'); }
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      const allBtns=document.querySelectorAll('.option-btn');
+      allBtns.forEach(b=>b.disabled=true);
+      allBtns[currentQuestions[currentQIdx].ans].classList.add('correct');
+      scoreWrong++;
+      document.getElementById('scoreWrong').textContent=scoreWrong;
+      document.getElementById('btnNext').disabled=false;
+    }
+  },1000);
+}
+
+function showResults() {
+  clearInterval(timerInterval);
+  document.getElementById('quizActive').style.display='none';
+  const r = document.getElementById('resultsScreen');
+  r.classList.add('show'); r.style.display='block';
+  const pct = Math.round(scoreCorrect/currentQuestions.length*100);
+  const grades = [[90,'A+','🏆','Extraordinary! You truly know God\'s Word.'],[75,'A','🌟','Excellent! Deep knowledge of Scripture.'],[60,'B','📖','Well done! Keep studying and growing.'],[40,'C','💪','Good effort! The Word rewards those who dig deeper.'],[0,'D','🙏','Keep pressing in! Every study session builds your faith.']];
+  const [,grade,trophy,msg] = grades.find(([min])=>pct>=min)||grades[grades.length-1];
+  document.getElementById('resultsTrophy').textContent=trophy;
+  document.getElementById('resultsGrade').textContent=grade;
+  const titleMap={90:'Outstanding!',75:'Excellent!',60:'Well Done!',40:'Good Effort!',0:'Keep Going!'};
+  document.getElementById('resultsTitle').textContent=Object.entries(titleMap).sort((a,b)=>b[0]-a[0]).find(([k])=>pct>=k)?.[1]||'Keep Going!';
+  document.getElementById('resultsSub').textContent=msg;
+  document.getElementById('resultsXpGain').innerHTML=`<i class="bi bi-gem"></i>+${scoreXP} XP earned`;
+  document.getElementById('rCorrect').textContent=scoreCorrect;
+  document.getElementById('rWrong').textContent=scoreWrong;
+  document.getElementById('rPct').textContent=pct+'%';
+  const avgTime=currentQuestions.length>0?Math.round(totalTime/currentQuestions.length):0;
+  document.getElementById('rTime').textContent=avgTime+'s';
+  if(pct===100){unlockAchievement(2);}
+  if(currentMode==='lightning'){unlockAchievement(3);}
+}
+
+function retryQuiz(){startQuiz(currentCategory,currentCategory.toLowerCase().replace(/[^a-z]/g,'').slice(0,10)||'mixed','medium',currentQuestions.length);}
+function closeQuiz(){document.getElementById('quizArena').style.display='none';}
+function shareScore(){const t=encodeURIComponent(`I scored ${scoreXP} XP on the Word Transformation Bible Quiz! Can you beat me? 📖🔥`);window.open(`https://api.whatsapp.com/send?text=${t}`,'_blank');}
+
+/* ══════════════════════════════════
+   LEADERBOARD
+══════════════════════════════════ */
+function renderLeaderboard(tab) {
+  const list = document.getElementById('leaderboardList');
+  const data = [...LEADERBOARD_WEEK];
+  const userIdx = data.findIndex(d=>d.score<playerXP);
+  const insertIdx = userIdx===-1?data.length:userIdx;
+  data.splice(insertIdx,0,{name:playerName,score:playerXP,streak:playerStreak,isYou:true});
+  list.innerHTML = data.slice(0,8).map((p,i)=>{
+    const rankCls=i===0?'gold-rank':i===1?'silver-rank':i===2?'bronze-rank':'';
+    const rankIcon=i===0?'🥇':i===1?'🥈':i===2?'🥉':`#${i+1}`;
+    return `<div class="lb-row${p.isYou?' lb-you':''}">
+      <div class="lb-rank ${rankCls}">${rankIcon}</div>
+      <div class="lb-avatar">${p.name.charAt(0)}</div>
+      <div class="lb-name">${p.name}${p.isYou?' <span style="font-size:.68rem;color:var(--gold);">(You)</span>':''}</div>
+      ${p.streak?`<span class="lb-badge">🔥${p.streak}</span>`:''}
+      <div class="lb-score">${p.score.toLocaleString()}</div>
+    </div>`;
+  }).join('');
+}
+
+function switchLbTab(tab,btn){document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderLeaderboard(tab);}
+
+/* ══════════════════════════════════
+   ACHIEVEMENTS
+══════════════════════════════════ */
+function renderAchievements(){
+  document.getElementById('achievementGrid').innerHTML=ACHIEVEMENTS.map((a,i)=>`
+    <div class="achievement${a.earned?'':' locked'}" id="ach-${i}" title="${a.name}${a.earned?' — Earned '+a.when:''}">
+      <span class="ach-icon">${a.icon}</span>
+      <div class="ach-name">${a.name}</div>
+      ${a.earned?`<div class="ach-earned">✓ Earned</div>`:''}
+    </div>`).join('');
+}
+function unlockAchievement(idx){if(ACHIEVEMENTS[idx]&&!ACHIEVEMENTS[idx].earned){ACHIEVEMENTS[idx].earned=true;ACHIEVEMENTS[idx].when='Today';renderAchievements();showFloatingXP('Achievement unlocked! '+ACHIEVEMENTS[idx].icon,true);}}
+
+/* ══════════════════════════════════
+   UTILS
+══════════════════════════════════ */
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function showFloatingXP(msg, success) {
+  const el=document.createElement('div');
+  el.textContent=msg;
+  el.style.cssText=`position:fixed;bottom:3rem;right:2rem;background:${success?'var(--gold)':'var(--red-light)'};color:${success?'var(--deep)':'#fff'};padding:.5rem 1.1rem;border-radius:50px;font-weight:700;font-size:.85rem;z-index:9999;animation:floatXP .9s ease forwards;pointer-events:none;font-family:var(--display);letter-spacing:.04em;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),950);
+}
+const floatStyle=document.createElement('style');
+floatStyle.textContent='@keyframes floatXP{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-40px)}}';
+document.head.appendChild(floatStyle);
+</script>
+</body>
+</html>

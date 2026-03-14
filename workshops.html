@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills Workshops | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0C0F0A;--paper:#F5F2ED;--cream:#EDE8DF;--stone:#D4CEC4;
+  --gold:#B8962E;--gold-bright:#D4AF37;--gold-pale:rgba(184,150,46,.1);
+  --forest:#1B4332;--sage:#52796F;--mint:#84A98C;
+  --rust:#8B3A2E;--terracotta:#C07040;
+  --blue:#1A3A5C;--sky:#2E6EA6;
+  --text:#1C1A17;--text-mid:#5A5248;--text-light:#8A8278;
+  --white:#FFFFFF;
+  --display:'Sora',sans-serif;--serif:'Crimson Pro',serif;--mono:'Space Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--display);background:var(--paper);color:var(--text);line-height:1.6;overflow-x:hidden;}
+
+/* ── NAVBAR ── */
+.navbar{background:var(--ink);padding:.9rem 0;border-bottom:1px solid rgba(184,150,46,.18);}
+.navbar-brand{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--white)!important;letter-spacing:-.01em;}
+.navbar-brand i{color:var(--gold-bright);margin-right:.5rem;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.75)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;transition:all .2s;}
+.navbar-nav .nav-link:hover{color:var(--gold-bright)!important;background:rgba(212,175,55,.08);}
+.btn-give{background:var(--gold-bright);color:var(--ink);border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;}
+
+/* ── HERO ── */
+.ws-hero{
+  background:var(--ink);
+  padding:5rem 0 0;overflow:hidden;position:relative;
+}
+.ws-hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 20%,rgba(184,150,46,.12) 0%,transparent 50%),
+    radial-gradient(ellipse at 10% 80%,rgba(27,67,50,.4) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 100%,rgba(26,58,92,.2) 0%,transparent 40%);
+}
+.ws-hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.ws-hero-content{position:relative;padding-bottom:4rem;}
+.ws-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(184,150,46,.12);border:1px solid rgba(184,150,46,.3);border-radius:4px;padding:.3rem 1rem;font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:1.5rem;}
+.ws-hero h1{font-family:var(--display);font-size:clamp(2.4rem,7vw,5rem);font-weight:800;color:var(--white);line-height:1.05;margin-bottom:1.25rem;letter-spacing:-.03em;}
+.ws-hero h1 .accent{color:var(--gold-bright);}
+.ws-hero h1 .accent-green{color:var(--mint);}
+.ws-hero-lead{font-family:var(--serif);font-size:1.1rem;color:rgba(255,255,255,.65);max-width:520px;line-height:1.75;margin-bottom:2.5rem;}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:3rem;}
+.btn-hero-primary{background:var(--gold-bright);color:var(--ink);border:none;padding:.8rem 2rem;border-radius:6px;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-hero-primary:hover{background:#c9a332;transform:translateY(-2px);}
+.btn-hero-ghost{background:transparent;color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.25);padding:.8rem 2rem;border-radius:6px;font-weight:500;font-size:.95rem;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px;}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,.6);color:var(--white);}
+.hero-stat-bar{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.08);}
+.hero-stat{flex:1;padding:1.5rem 1rem;border-right:1px solid rgba(255,255,255,.08);}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-num{font-family:var(--display);font-size:1.9rem;font-weight:800;color:var(--gold-bright);line-height:1;display:block;}
+.hero-stat-label{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px;}
+.hero-image-side{display:flex;flex-direction:column;gap:14px;justify-content:center;padding-bottom:4rem;}
+.feature-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:12px;transition:all .3s;}
+.feature-pill:hover{background:rgba(255,255,255,.07);border-color:rgba(184,150,46,.3);}
+.fp-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.fp-title{font-size:.88rem;font-weight:600;color:var(--white);}
+.fp-sub{font-size:.72rem;color:rgba(255,255,255,.5);}
+
+/* ── TRACKS SECTION ── */
+.tracks-section{background:var(--paper);padding:5rem 0;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.6rem;}
+.section-heading{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:var(--text);letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem;}
+.section-sub{font-family:var(--serif);font-size:1rem;color:var(--text-mid);line-height:1.7;}
+
+.track-tabs{display:flex;gap:0;border-bottom:2px solid var(--stone);margin-top:2rem;overflow-x:auto;}
+.track-tab{padding:.9rem 1.5rem;font-size:.84rem;font-weight:600;color:var(--text-light);background:transparent;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .25s;display:flex;align-items:center;gap:7px;}
+.track-tab.active{color:var(--text);border-bottom-color:var(--gold-bright);}
+.track-tab:hover:not(.active){color:var(--text-mid);}
+.track-tab i{font-size:1rem;}
+
+.track-panel{display:none;padding-top:2.5rem;}
+.track-panel.active{display:block;}
+
+/* ── WORKSHOP CARD ── */
+.ws-card{background:var(--white);border:1.5px solid var(--stone);border-radius:12px;overflow:hidden;transition:all .3s;height:100%;display:flex;flex-direction:column;}
+.ws-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.1);border-color:var(--gold);}
+.ws-card-top{padding:1.5rem 1.5rem 0;display:flex;align-items:flex-start;gap:14px;}
+.ws-card-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.ws-card-meta{flex:1;}
+.ws-card-tag{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 9px;border-radius:4px;display:inline-block;margin-bottom:.35rem;}
+.ws-card h4{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0;letter-spacing:-.01em;line-height:1.3;}
+.ws-card-body{padding:1rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column;}
+.ws-card-desc{font-family:var(--serif);font-size:.92rem;color:var(--text-mid);line-height:1.7;margin-bottom:1rem;flex:1;}
+.ws-card-info{display:flex;flex-wrap:wrap;gap:10px;font-size:.72rem;color:var(--text-light);margin-bottom:1.1rem;padding-top:.75rem;border-top:1px solid var(--cream);}
+.ws-card-info span{display:flex;align-items:center;gap:4px;}
+.ws-card-info i{color:var(--gold);}
+.ws-learn{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.1rem;}
+.learn-chip{font-size:.68rem;font-weight:600;padding:3px 8px;border-radius:4px;background:var(--cream);color:var(--text-mid);}
+.ws-card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.ws-spots{font-size:.72rem;color:var(--text-light);}
+.ws-spots-fill{display:inline-block;width:70px;height:4px;background:var(--stone);border-radius:2px;margin-left:6px;vertical-align:middle;}
+.ws-spots-fill-inner{height:100%;border-radius:2px;background:var(--gold);}
+.btn-register{background:var(--ink);color:var(--white);border:none;padding:.5rem 1.25rem;border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:5px;}
+.btn-register:hover{background:var(--forest);}
+.btn-register.full{background:var(--stone);color:var(--text-mid);cursor:not-allowed;}
+.btn-waitlist{background:transparent;color:var(--gold);border:1.5px solid rgba(184,150,46,.4);padding:.5rem 1.25rem;border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .25s;}
+.btn-waitlist:hover{background:var(--gold-pale);}
+
+/* Track colours */
+.ic-tech{background:rgba(26,58,92,.1);color:var(--blue);}
+.ic-biz{background:rgba(184,150,46,.12);color:var(--gold);}
+.ic-creative{background:rgba(27,67,50,.1);color:var(--forest);}
+.ic-finance{background:rgba(139,58,46,.1);color:var(--rust);}
+.ic-leadership{background:rgba(82,121,111,.1);color:var(--sage);}
+.tag-tech{background:rgba(26,58,92,.08);color:var(--blue);}
+.tag-biz{background:rgba(184,150,46,.1);color:var(--gold);}
+.tag-creative{background:rgba(27,67,50,.08);color:var(--forest);}
+.tag-finance{background:rgba(139,58,46,.08);color:var(--rust);}
+.tag-leadership{background:rgba(82,121,111,.08);color:var(--sage);}
+
+/* ── FEATURED INSTRUCTOR ── */
+.instructor-section{background:var(--cream);padding:4rem 0;}
+.instructor-card{background:var(--white);border-radius:14px;overflow:hidden;border:1.5px solid var(--stone);display:grid;grid-template-columns:300px 1fr;box-shadow:0 8px 30px rgba(0,0,0,.07);}
+.instructor-image{background:linear-gradient(135deg,#1B4332,#1A3A5C);min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;}
+.instructor-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--rust));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2.2rem;font-weight:800;color:var(--ink);margin-bottom:1.1rem;}
+.instructor-name{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:.25rem;}
+.instructor-role{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:center;}
+.instructor-socials{display:flex;gap:8px;margin-top:1rem;}
+.ins-social{width:32px;height:32px;background:rgba(255,255,255,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:.85rem;cursor:pointer;transition:all .2s;}
+.ins-social:hover{background:rgba(255,255,255,.2);color:var(--white);}
+.instructor-body{padding:2rem 2.5rem;}
+.instructor-body h3{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem;letter-spacing:-.02em;}
+.instructor-body p{font-family:var(--serif);font-size:.95rem;color:var(--text-mid);line-height:1.75;margin-bottom:1.25rem;}
+.credential-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:1.25rem;}
+.credential-list li{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text-mid);}
+.credential-list i{color:var(--gold);font-size:.8rem;}
+
+/* ── REGISTRATION MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(12,15,10,.75);z-index:9999;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--white);border-radius:14px;width:100%;max-width:540px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);animation:modalDrop .3s ease;margin:auto;}
+@keyframes modalDrop{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.modal-header{background:var(--ink);padding:1.75rem 2rem;position:relative;}
+.modal-header h3{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:.25rem;}
+.modal-header p{font-size:.82rem;color:rgba(255,255,255,.55);margin:0;}
+.modal-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:rgba(255,255,255,.6);font-size:1.2rem;cursor:pointer;padding:4px;transition:color .2s;}
+.modal-close:hover{color:var(--white);}
+.modal-body{padding:1.75rem 2rem;}
+.form-group{margin-bottom:1rem;}
+.form-label-ws{display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mid);margin-bottom:.4rem;}
+.form-input-ws{width:100%;padding:.65rem 1rem;border:1.5px solid var(--stone);border-radius:8px;font-size:.9rem;color:var(--text);background:var(--paper);outline:none;transition:border-color .2s;font-family:var(--display);}
+.form-input-ws:focus{border-color:var(--gold-bright);background:var(--white);}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.workshop-summary{background:var(--cream);border-radius:8px;padding:1rem 1.1rem;margin-bottom:1.25rem;font-size:.84rem;color:var(--text-mid);}
+.workshop-summary strong{color:var(--text);display:block;margin-bottom:.25rem;}
+.btn-confirm{width:100%;padding:.8rem;background:var(--forest);color:var(--white);border:none;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:.5rem;font-family:var(--display);}
+.btn-confirm:hover{background:#245c3a;}
+.btn-cancel{width:100%;padding:.65rem;background:transparent;color:var(--text-mid);border:1.5px solid var(--stone);border-radius:8px;font-size:.88rem;font-weight:500;cursor:pointer;margin-top:8px;transition:all .2s;font-family:var(--display);}
+.btn-cancel:hover{background:var(--cream);}
+.modal-success{text-align:center;padding:2.5rem 2rem;display:none;}
+.modal-success.show{display:block;}
+.success-icon-ws{width:72px;height:72px;background:rgba(27,67,50,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2rem;animation:popIn .4s ease;}
+@keyframes popIn{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.success-title-ws{font-family:var(--display);font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:.5rem;}
+.success-sub-ws{font-family:var(--serif);font-size:.92rem;color:var(--text-mid);line-height:1.7;margin-bottom:1.5rem;}
+
+/* ── UPCOMING SCHEDULE ── */
+.schedule-section{background:var(--white);padding:4rem 0;}
+.schedule-item{display:grid;grid-template-columns:80px 1fr auto;gap:1.25rem;align-items:center;padding:1.25rem 0;border-bottom:1px solid var(--cream);}
+.schedule-item:last-child{border-bottom:none;}
+.schedule-date-box{background:var(--cream);border-radius:10px;text-align:center;padding:.75rem .5rem;}
+.sched-day{font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--text);line-height:1;}
+.sched-month{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);}
+.schedule-info h5{font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
+.schedule-info p{font-size:.78rem;color:var(--text-mid);}
+.schedule-info .sched-tag{font-size:.64rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:6px;letter-spacing:.06em;text-transform:uppercase;}
+.sched-action{display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.sched-spots{font-size:.7rem;color:var(--text-light);white-space:nowrap;}
+.btn-sched-reg{background:var(--ink);color:var(--white);border:none;padding:.45rem 1rem;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .25s;}
+.btn-sched-reg:hover{background:var(--forest);}
+
+/* ── TESTIMONIALS ── */
+.testimonials-section{background:var(--ink);padding:4rem 0;}
+.test-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.75rem;height:100%;transition:all .3s;}
+.test-card:hover{border-color:rgba(184,150,46,.3);background:rgba(255,255,255,.06);}
+.test-quote{font-size:2.5rem;color:var(--gold-bright);opacity:.4;font-family:var(--serif);line-height:1;margin-bottom:-.5rem;}
+.test-text{font-family:var(--serif);font-style:italic;font-size:.95rem;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:1.25rem;}
+.test-person{display:flex;align-items:center;gap:10px;}
+.test-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--ink);flex-shrink:0;}
+.test-name{font-size:.84rem;font-weight:600;color:var(--white);}
+.test-role{font-size:.72rem;color:rgba(255,255,255,.45);}
+
+/* ── NEWSLETTER ── */
+.newsletter-section{background:linear-gradient(135deg,var(--forest),#1A3A5C);padding:4rem 0;}
+.nl-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:3rem;text-align:center;max-width:600px;margin:0 auto;}
+.nl-card h3{font-family:var(--display);font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:.6rem;letter-spacing:-.02em;}
+.nl-card p{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.65);margin-bottom:1.75rem;}
+.nl-form{display:flex;gap:10px;flex-wrap:wrap;}
+.nl-input{flex:1;min-width:200px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;padding:.65rem 1rem;font-size:.9rem;color:var(--white);outline:none;font-family:var(--display);}
+.nl-input::placeholder{color:rgba(255,255,255,.4);}
+.nl-input:focus{border-color:var(--gold-bright);}
+.btn-nl{background:var(--gold-bright);color:var(--ink);border:none;padding:.65rem 1.5rem;border-radius:8px;font-weight:700;font-size:.88rem;cursor:pointer;white-space:nowrap;transition:all .3s;font-family:var(--display);}
+.btn-nl:hover{background:#c9a332;}
+
+/* ── TOAST ── */
+#wsToast{position:fixed;bottom:2rem;right:2rem;background:var(--forest);color:var(--white);padding:.75rem 1.25rem;border-radius:8px;font-size:.86rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.2);opacity:0;transform:translateY(12px);transition:all .3s;z-index:9999;pointer-events:none;font-family:var(--display);font-weight:600;}
+
+@media(max-width:768px){
+  .instructor-card{grid-template-columns:1fr;}
+  .schedule-item{grid-template-columns:70px 1fr;}.sched-action{display:none;}
+  .form-row-2{grid-template-columns:1fr;}
+  .navbar-collapse{background:var(--ink);padding:1rem;border-radius:8px;margin-top:.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i>Word Transformation</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+        <li class="nav-item"><a class="nav-link" href="biblequiz.html">Bible Quiz</a></li>
+        <li class="nav-item"><a class="nav-link active" href="workshops.html">Workshops</a></li>
+        <li class="nav-item"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="ws-hero">
+  <div class="ws-hero-bg"></div>
+  <div class="ws-hero-grid"></div>
+  <div class="container">
+    <div class="row align-items-center g-5 ws-hero-content">
+      <div class="col-lg-6">
+        <div class="ws-tag"><i class="bi bi-lightning-fill"></i>Faith · Skills · Purpose</div>
+        <h1>Build Skills.<br>Build the <span class="accent">Kingdom</span>.<br>Build Your <span class="accent-green">Future</span>.</h1>
+        <p class="ws-hero-lead">Free and affordable workshops for church members — from coding to business, creative design to financial freedom. Where faith meets professional excellence.</p>
+        <div class="hero-cta-row">
+          <button class="btn-hero-primary" onclick="document.querySelector('.tracks-section').scrollIntoView({behavior:'smooth'})"><i class="bi bi-arrow-down"></i>Browse Workshops</button>
+          <button class="btn-hero-ghost" onclick="openModal('all')"><i class="bi bi-calendar-plus"></i>Register Interest</button>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-image-side">
+          <div class="feature-pill"><div class="fp-icon" style="background:rgba(26,58,92,.3);color:#6aadff;"><i class="bi bi-code-slash"></i></div><div><div class="fp-title">Tech & Software Development</div><div class="fp-sub">Web, Mobile, Data & AI fundamentals</div></div></div>
+          <div class="feature-pill"><div class="fp-icon" style="background:rgba(184,150,46,.2);color:var(--gold-bright);"><i class="bi bi-graph-up-arrow"></i></div><div><div class="fp-title">Entrepreneurship & Business</div><div class="fp-sub">Start, fund, and grow your business</div></div></div>
+          <div class="feature-pill"><div class="fp-icon" style="background:rgba(27,67,50,.3);color:var(--mint);"><i class="bi bi-palette-fill"></i></div><div><div class="fp-title">Creative & Digital Design</div><div class="fp-sub">Branding, content, social media mastery</div></div></div>
+          <div class="feature-pill"><div class="fp-icon" style="background:rgba(139,58,46,.2);color:#e07050;"><i class="bi bi-piggy-bank-fill"></i></div><div><div class="fp-title">Financial Literacy & Stewardship</div><div class="fp-sub">Budget, invest, and honour God with money</div></div></div>
+          <div class="feature-pill"><div class="fp-icon" style="background:rgba(82,121,111,.2);color:var(--mint);"><i class="bi bi-person-up"></i></div><div><div class="fp-title">Leadership & Personal Development</div><div class="fp-sub">Communication, vision, purpose</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stat-bar">
+      <div class="hero-stat"><span class="hero-stat-num">28</span><div class="hero-stat-label">Workshops this year</div></div>
+      <div class="hero-stat"><span class="hero-stat-num">340+</span><div class="hero-stat-label">Members trained</div></div>
+      <div class="hero-stat"><span class="hero-stat-num">15</span><div class="hero-stat-label">Expert instructors</div></div>
+      <div class="hero-stat"><span class="hero-stat-num">Free</span><div class="hero-stat-label">For all members</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Tracks Section -->
+<section class="tracks-section">
+  <div class="container">
+    <span class="eyebrow">Learning Tracks</span>
+    <h2 class="section-heading">Choose Your Track</h2>
+    <p class="section-sub">Every workshop is taught by industry professionals who are also people of faith. You will grow in competence and character.</p>
+
+    <div class="track-tabs">
+      <button class="track-tab active" id="tab-tech" onclick="switchTrack('tech',this)"><i class="bi bi-code-slash"></i>Tech & Digital</button>
+      <button class="track-tab" id="tab-biz" onclick="switchTrack('biz',this)"><i class="bi bi-briefcase-fill"></i>Entrepreneurship</button>
+      <button class="track-tab" id="tab-creative" onclick="switchTrack('creative',this)"><i class="bi bi-palette-fill"></i>Creative & Design</button>
+      <button class="track-tab" id="tab-finance" onclick="switchTrack('finance',this)"><i class="bi bi-piggy-bank-fill"></i>Financial Literacy</button>
+      <button class="track-tab" id="tab-leadership" onclick="switchTrack('leadership',this)"><i class="bi bi-person-up"></i>Leadership</button>
+    </div>
+
+    <!-- TECH -->
+    <div class="track-panel active" id="panel-tech">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-tech"><i class="bi bi-globe"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-tech">Web Dev</span><h4>Build Your First Website</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Learn HTML, CSS, and basic JavaScript from scratch. By the end you'll have a live personal or business website deployed to the internet. No prior coding experience needed.</p>
+              <div class="ws-learn"><span class="learn-chip">HTML5</span><span class="learn-chip">CSS3</span><span class="learn-chip">JavaScript</span><span class="learn-chip">Hosting</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 12, 2026</span><span><i class="bi bi-clock"></i>4 sessions · 2hrs each</span><span><i class="bi bi-people"></i>16 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">10 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:37%"></span></span></div><button class="btn-register" onclick="openModal('Build Your First Website — Web Development · Apr 12')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-tech"><i class="bi bi-phone-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-tech">Mobile</span><h4>No-Code App Building</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Build real mobile apps without writing a single line of code using tools like Glide, Adalo, and Bubble. Perfect for entrepreneurs who have an app idea but no developer.</p>
+              <div class="ws-learn"><span class="learn-chip">Glide</span><span class="learn-chip">Bubble</span><span class="learn-chip">App Design</span><span class="learn-chip">Publishing</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 19, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2.5hrs</span><span><i class="bi bi-people"></i>14 max</span><span><i class="bi bi-geo-alt"></i>Computer Lab</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">5 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:64%"></span></span></div><button class="btn-register" onclick="openModal('No-Code App Building · Apr 19')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-tech"><i class="bi bi-robot"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-tech">AI Tools</span><h4>AI for Everyday Work</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Master ChatGPT, Claude, Midjourney, and other AI tools to 10× your productivity — for business, content creation, study, and ministry work.</p>
+              <div class="ws-learn"><span class="learn-chip">Prompt Engineering</span><span class="learn-chip">ChatGPT</span><span class="learn-chip">Image AI</span><span class="learn-chip">Automation</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 3, 2026</span><span><i class="bi bi-clock"></i>2 sessions · 3hrs</span><span><i class="bi bi-people"></i>20 max</span><span><i class="bi bi-geo-alt"></i>Main Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:15%"></span></span></div><button class="btn-register" onclick="openModal('AI for Everyday Work · May 3')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-tech"><i class="bi bi-bar-chart-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-tech">Data</span><h4>Excel & Data Analysis</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">From basic formulas to pivot tables, dashboards, and data visualisation. Used by professionals in every field. Includes hands-on practice with real datasets.</p>
+              <div class="ws-learn"><span class="learn-chip">Excel</span><span class="learn-chip">Google Sheets</span><span class="learn-chip">Charts</span><span class="learn-chip">Dashboards</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 10, 2026</span><span><i class="bi bi-clock"></i>4 sessions · 2hrs</span><span><i class="bi bi-people"></i>18 max</span><span><i class="bi bi-geo-alt"></i>Computer Lab</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">12 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:33%"></span></span></div><button class="btn-register" onclick="openModal('Excel & Data Analysis · May 10')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-tech"><i class="bi bi-shield-check"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-tech">Cyber</span><h4>Cybersecurity Basics</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Protect yourself, your family, and your business online. Learn about scams, phishing, safe passwords, two-factor authentication, and securing your devices.</p>
+              <div class="ws-learn"><span class="learn-chip">Passwords</span><span class="learn-chip">2FA</span><span class="learn-chip">Online Safety</span><span class="learn-chip">Scam Detection</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 17, 2026</span><span><i class="bi bi-clock"></i>1 session · 3hrs</span><span><i class="bi bi-people"></i>30 max</span><span><i class="bi bi-geo-alt"></i>Main Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:10%"></span></span></div><button class="btn-register" onclick="openModal('Cybersecurity Basics · May 17')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-tech"><i class="bi bi-laptop"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-tech">Freelance</span><h4>Freelancing with Tech Skills</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Turn your tech skills into income. Learn how to find clients on Upwork, Fiverr, and Toptal, write proposals, price your services, and deliver remotely for global clients.</p>
+              <div class="ws-learn"><span class="learn-chip">Upwork</span><span class="learn-chip">Proposals</span><span class="learn-chip">Pricing</span><span class="learn-chip">Contracts</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 24, 2026</span><span><i class="bi bi-clock"></i>2 sessions · 2hrs</span><span><i class="bi bi-people"></i>16 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">8 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:50%"></span></span></div><button class="btn-register" onclick="openModal('Freelancing with Tech Skills · May 24')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS -->
+    <div class="track-panel" id="panel-biz">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-biz"><i class="bi bi-lightbulb-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-biz">Startup</span><h4>Launch Your Business Idea</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Validate your business idea, build a lean business plan, identify your target market, and launch on a budget. From idea to first customer in 6 weeks.</p>
+              <div class="ws-learn"><span class="learn-chip">Business Plan</span><span class="learn-chip">Market Research</span><span class="learn-chip">MVP</span><span class="learn-chip">Pitching</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 5, 2026</span><span><i class="bi bi-clock"></i>6 sessions · 2hrs</span><span><i class="bi bi-people"></i>20 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">3 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:85%"></span></span></div><button class="btn-register" onclick="openModal('Launch Your Business Idea · Apr 5')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-biz"><i class="bi bi-megaphone-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-biz">Marketing</span><h4>Digital Marketing for Business</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Social media strategy, WhatsApp Business, Instagram marketing, SEO basics, and email marketing. Grow your customer base without spending a fortune on ads.</p>
+              <div class="ws-learn"><span class="learn-chip">Instagram</span><span class="learn-chip">WhatsApp Biz</span><span class="learn-chip">SEO</span><span class="learn-chip">Email Lists</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 26, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2hrs</span><span><i class="bi bi-people"></i>22 max</span><span><i class="bi bi-geo-alt"></i>Main Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:20%"></span></span></div><button class="btn-register" onclick="openModal('Digital Marketing for Business · Apr 26')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-biz"><i class="bi bi-cash-coin"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-biz">Funding</span><h4>How to Fund Your Business</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Understand grants, microfinance, angel investment, and pitch competitions available to Ghanaian entrepreneurs. Learn how to write a winning funding proposal.</p>
+              <div class="ws-learn"><span class="learn-chip">Grants</span><span class="learn-chip">Pitch Deck</span><span class="learn-chip">Microfinance</span><span class="learn-chip">Investors</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 3, 2026</span><span><i class="bi bi-clock"></i>2 sessions · 2.5hrs</span><span><i class="bi bi-people"></i>18 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">11 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:39%"></span></span></div><button class="btn-register" onclick="openModal('How to Fund Your Business · May 3')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-biz"><i class="bi bi-cart-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-biz">E-commerce</span><h4>Sell Online — From Ghana to the World</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Set up a Shopify or WooCommerce store, list on Jumia and Tonaton, process international payments, and ship products locally and globally.</p>
+              <div class="ws-learn"><span class="learn-chip">Shopify</span><span class="learn-chip">Jumia</span><span class="learn-chip">Payments</span><span class="learn-chip">Shipping</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 17, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2hrs</span><span><i class="bi bi-people"></i>16 max</span><span><i class="bi bi-geo-alt"></i>Computer Lab</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:0%"></span></span></div><button class="btn-register" onclick="openModal('Sell Online — E-commerce · May 17')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREATIVE -->
+    <div class="track-panel" id="panel-creative">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-creative"><i class="bi bi-palette2"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-creative">Design</span><h4>Graphic Design with Canva & Figma</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Create professional flyers, social media posts, branding kits, and presentations. Learn Canva for rapid design and Figma for more advanced UI/UX work.</p>
+              <div class="ws-learn"><span class="learn-chip">Canva Pro</span><span class="learn-chip">Figma</span><span class="learn-chip">Branding</span><span class="learn-chip">Typography</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 12, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2hrs</span><span><i class="bi bi-people"></i>18 max</span><span><i class="bi bi-geo-alt"></i>Computer Lab</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">7 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:61%"></span></span></div><button class="btn-register" onclick="openModal('Graphic Design with Canva & Figma · Apr 12')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-creative"><i class="bi bi-camera-video-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-creative">Video</span><h4>Video Content Creation</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Shoot, edit, and publish professional video content using just your phone. Learn scripting, lighting, CapCut editing, and optimising content for YouTube, TikTok, and Instagram.</p>
+              <div class="ws-learn"><span class="learn-chip">Phone Filming</span><span class="learn-chip">CapCut</span><span class="learn-chip">YouTube</span><span class="learn-chip">Thumbnails</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 26, 2026</span><span><i class="bi bi-clock"></i>2 sessions · 3hrs</span><span><i class="bi bi-people"></i>14 max</span><span><i class="bi bi-geo-alt"></i>Media Studio</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:14%"></span></span></div><button class="btn-register" onclick="openModal('Video Content Creation · Apr 26')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-creative"><i class="bi bi-pencil-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-creative">Writing</span><h4>Copywriting & Content Writing</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Write compelling website copy, emails, social captions, and blog posts that convert. A high-income skill that can be done remotely from anywhere in the world.</p>
+              <div class="ws-learn"><span class="learn-chip">Copywriting</span><span class="learn-chip">Blog Posts</span><span class="learn-chip">Email Copy</span><span class="learn-chip">Tone & Voice</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 10, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2hrs</span><span><i class="bi bi-people"></i>16 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:0%"></span></span></div><button class="btn-register" onclick="openModal('Copywriting & Content Writing · May 10')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCE -->
+    <div class="track-panel" id="panel-finance">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-finance"><i class="bi bi-wallet2"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-finance">Budgeting</span><h4>Personal Finance & Budgeting</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Learn how to budget, track spending, eliminate debt, and build an emergency fund. The 50/30/20 rule, envelope budgeting, and faith-based financial principles.</p>
+              <div class="ws-learn"><span class="learn-chip">Budgeting</span><span class="learn-chip">Debt Free</span><span class="learn-chip">Emergency Fund</span><span class="learn-chip">Tithing</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 19, 2026</span><span><i class="bi bi-clock"></i>2 sessions · 2.5hrs</span><span><i class="bi bi-people"></i>25 max</span><span><i class="bi bi-geo-alt"></i>Main Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:12%"></span></span></div><button class="btn-register" onclick="openModal('Personal Finance & Budgeting · Apr 19')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-finance"><i class="bi bi-graph-up"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-finance">Investing</span><h4>Introduction to Investing in Ghana</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Stocks, treasury bills, mutual funds, real estate, and Unit Trusts — how they work, the risks, and how to start with as little as GH₵100. Taught by a licensed investment advisor.</p>
+              <div class="ws-learn"><span class="learn-chip">Stocks</span><span class="learn-chip">T-Bills</span><span class="learn-chip">Mutual Funds</span><span class="learn-chip">Real Estate</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 3, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2hrs</span><span><i class="bi bi-people"></i>20 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">9 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:55%"></span></span></div><button class="btn-register" onclick="openModal('Introduction to Investing in Ghana · May 3')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-finance"><i class="bi bi-building"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-finance">Business Finance</span><h4>Financial Management for SMEs</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Cash flow management, bookkeeping basics, VAT and GRA compliance, profit margins, and reading a balance sheet — everything small business owners need to know.</p>
+              <div class="ws-learn"><span class="learn-chip">Cash Flow</span><span class="learn-chip">Bookkeeping</span><span class="learn-chip">GRA Taxes</span><span class="learn-chip">P&L</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 17, 2026</span><span><i class="bi bi-clock"></i>4 sessions · 2hrs</span><span><i class="bi bi-people"></i>18 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:5%"></span></span></div><button class="btn-register" onclick="openModal('Financial Management for SMEs · May 17')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEADERSHIP -->
+    <div class="track-panel" id="panel-leadership">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-leadership"><i class="bi bi-mic-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-leadership">Speaking</span><h4>Public Speaking & Communication</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">Conquer fear, command a room, and communicate with clarity and confidence. Practical exercises, video feedback sessions, and speaking opportunities in church.</p>
+              <div class="ws-learn"><span class="learn-chip">Storytelling</span><span class="learn-chip">Body Language</span><span class="learn-chip">Vocal Tone</span><span class="learn-chip">Presentations</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>Apr 26, 2026</span><span><i class="bi bi-clock"></i>4 sessions · 2hrs</span><span><i class="bi bi-people"></i>15 max</span><span><i class="bi bi-geo-alt"></i>Main Sanctuary</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">6 spots left<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:60%"></span></span></div><button class="btn-register" onclick="openModal('Public Speaking & Communication · Apr 26')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-leadership"><i class="bi bi-bullseye"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-leadership">Purpose</span><h4>Discovering Your God-Given Purpose</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">A 3-session workshop combining Scripture, personality assessment, and practical exercises to help you identify your gifts, calling, and the unique role God has for your life.</p>
+              <div class="ws-learn"><span class="learn-chip">DISC Profile</span><span class="learn-chip">Spiritual Gifts</span><span class="learn-chip">Vision Mapping</span><span class="learn-chip">Goal Setting</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 3, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2.5hrs</span><span><i class="bi bi-people"></i>20 max</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:20%"></span></span></div><button class="btn-register" onclick="openModal('Discovering Your God-Given Purpose · May 3')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="ws-card">
+            <div class="ws-card-top"><div class="ws-card-icon ic-leadership"><i class="bi bi-diagram-3-fill"></i></div><div class="ws-card-meta"><span class="ws-card-tag tag-leadership">Management</span><h4>Leadership & Team Management</h4></div></div>
+            <div class="ws-card-body">
+              <p class="ws-card-desc">For existing and emerging leaders — how to build a team, delegate well, navigate conflict, give feedback, and lead with the servant-heart model of Jesus Christ.</p>
+              <div class="ws-learn"><span class="learn-chip">Delegation</span><span class="learn-chip">Conflict Resolution</span><span class="learn-chip">Feedback</span><span class="learn-chip">Servant Leadership</span></div>
+              <div class="ws-card-info"><span><i class="bi bi-calendar3"></i>May 24, 2026</span><span><i class="bi bi-clock"></i>3 sessions · 2hrs</span><span><i class="bi bi-people"></i>18 max</span><span><i class="bi bi-geo-alt"></i>Conference Room</span></div>
+              <div class="ws-card-footer"><div class="ws-spots">Open<span class="ws-spots-fill"><span class="ws-spots-fill-inner" style="width:0%"></span></span></div><button class="btn-register" onclick="openModal('Leadership & Team Management · May 24')"><i class="bi bi-plus"></i>Register</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Instructor -->
+<section class="instructor-section">
+  <div class="container">
+    <span class="eyebrow">Featured Instructor</span>
+    <h2 class="section-heading" style="margin-bottom:2rem;">Learn from the Best</h2>
+    <div class="instructor-card">
+      <div class="instructor-image">
+        <div class="instructor-avatar">KA</div>
+        <div class="instructor-name">Kweku Asante-Mensah</div>
+        <div class="instructor-role">Tech Lead · Software Engineer</div>
+        <div class="instructor-socials">
+          <div class="ins-social"><i class="bi bi-linkedin"></i></div>
+          <div class="ins-social"><i class="bi bi-twitter"></i></div>
+          <div class="ins-social"><i class="bi bi-envelope"></i></div>
+        </div>
+      </div>
+      <div class="instructor-body">
+        <h3>10 Years Building Products Used by Millions</h3>
+        <p>Kweku is a Senior Software Engineer at a leading fintech company based in Accra, with experience at companies in London and Nairobi. He is a deacon at Word Transformation and believes strongly in equipping the church with digital skills that build economic empowerment for families.</p>
+        <ul class="credential-list">
+          <li><i class="bi bi-check-circle-fill"></i>BSc Computer Science, University of Ghana</li>
+          <li><i class="bi bi-check-circle-fill"></i>10+ years professional software development</li>
+          <li><i class="bi bi-check-circle-fill"></i>Former Google Developer Expert (GDE)</li>
+          <li><i class="bi bi-check-circle-fill"></i>Mentored 80+ developers across Ghana & Nigeria</li>
+        </ul>
+        <button class="btn-register" onclick="openModal('Workshop with Kweku Asante-Mensah')" style="font-size:.84rem;padding:.6rem 1.4rem;border-radius:8px;">Book a Workshop with Kweku</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming Schedule -->
+<section class="schedule-section">
+  <div class="container">
+    <span class="eyebrow">Coming Up</span>
+    <h2 class="section-heading" style="margin-bottom:2rem;">Upcoming Workshops</h2>
+    <div id="scheduleList"></div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--gold-bright);">Success Stories</span>
+    <h2 class="section-heading" style="color:var(--white);margin-bottom:2.5rem;">Lives Changed by These Skills</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="test-card">
+          <div class="test-quote">"</div>
+          <p class="test-text">I attended the Web Development workshop in January. Within 6 months I had landed my first freelance client and was earning USD income from Accra. The practical approach made it achievable even for a complete beginner like me.</p>
+          <div class="test-person"><div class="test-avatar" style="background:linear-gradient(135deg,var(--gold-bright),var(--rust));">A</div><div><div class="test-name">Abena Owusu</div><div class="test-role">Freelance Developer · Member since 2022</div></div></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="test-card">
+          <div class="test-quote">"</div>
+          <p class="test-text">The Business Launch workshop helped me take my catering idea from a dream to a real business. I now supply food to three offices in Accra. The financial literacy session taught me how to manage the money once it started coming in.</p>
+          <div class="test-person"><div class="test-avatar" style="background:linear-gradient(135deg,var(--sage),var(--forest));">K</div><div><div class="test-name">Kofi Ansah</div><div class="test-role">Business Owner · Member since 2020</div></div></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="test-card">
+          <div class="test-quote">"</div>
+          <p class="test-text">I never thought I could design. After the Canva workshop I started making flyers for our church events, then for local businesses. I now have a small design income alongside my day job — and it all started here.</p>
+          <div class="test-person"><div class="test-avatar" style="background:linear-gradient(135deg,var(--sky),var(--blue));">G</div><div><div class="test-name">Grace Mensah</div><div class="test-role">Graphic Designer · Member since 2023</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="nl-card">
+      <h3>Never Miss a Workshop</h3>
+      <p>Sign up and we'll send you the workshop schedule every month — plus early registration access before spots fill up.</p>
+      <div class="nl-form">
+        <input type="email" class="nl-input" placeholder="Your email address" id="nlEmail">
+        <button class="btn-nl" onclick="subscribeNL()"><i class="bi bi-send-fill me-1"></i>Get Notified</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Registration Modal -->
+<div class="modal-overlay" id="regModal" onclick="closeModalOnBg(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modalTitle">Register for Workshop</h3>
+      <p id="modalSubtitle">Secure your spot — spaces fill up fast.</p>
+      <button class="modal-close" onclick="closeModal()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="workshop-summary" id="workshopSummary"><strong id="summaryTitle">Workshop Title</strong><span>Secure your place by completing this form. You will receive a confirmation by email.</span></div>
+      <div class="form-row-2">
+        <div class="form-group"><label class="form-label-ws">First Name</label><input type="text" class="form-input-ws" id="regFirst" placeholder="Kwame"></div>
+        <div class="form-group"><label class="form-label-ws">Last Name</label><input type="text" class="form-input-ws" id="regLast" placeholder="Mensah"></div>
+      </div>
+      <div class="form-group"><label class="form-label-ws">Email Address</label><input type="email" class="form-input-ws" id="regEmail" placeholder="you@example.com"></div>
+      <div class="form-group"><label class="form-label-ws">Phone Number</label><input type="tel" class="form-input-ws" id="regPhone" placeholder="024 000 0000"></div>
+      <div class="form-group"><label class="form-label-ws">Current Occupation</label><input type="text" class="form-input-ws" id="regOccup" placeholder="e.g. Student, Nurse, Entrepreneur..."></div>
+      <div class="form-group"><label class="form-label-ws">What do you hope to gain?</label><textarea class="form-input-ws" id="regGoal" rows="3" placeholder="What would you like to learn or achieve from this workshop?" style="resize:vertical;line-height:1.5;"></textarea></div>
+      <button class="btn-confirm" onclick="submitReg()"><i class="bi bi-check-circle me-2"></i>Confirm Registration</button>
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon-ws">🎉</div>
+      <div class="success-title-ws">You're Registered!</div>
+      <p class="success-sub-ws">Your spot has been confirmed. A confirmation will be sent to your email. We look forward to seeing you there — come ready to learn and grow!</p>
+      <button class="btn-confirm" style="max-width:200px;margin:0 auto;" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="wsToast"><i class="bi bi-check-circle-fill"></i><span id="wsToastText">Done!</span></div>
+
+<!-- Footer -->
+<footer style="background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 0;text-align:center;">
+  <p style="font-family:var(--serif);font-style:italic;font-size:.88rem;color:rgba(255,255,255,.4);">"Whatever you do, work at it with all your heart, as working for the Lord." — Colossians 3:23</p>
+  <div style="margin-top:1rem;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <a href="index.html" style="font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;">Home</a>
+    <a href="sermons.html" style="font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;">Sermons</a>
+    <a href="biblequiz.html" style="font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;">Bible Quiz</a>
+    <a href="ministries.html" style="font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;">Ministries</a>
+    <a href="contact.html" style="font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;">Contact</a>
+  </div>
+  <p style="margin-top:1rem;font-size:.72rem;color:rgba(255,255,255,.2);">&copy; 2026 Word Transformation Church</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const SCHEDULE = [
+  {day:'05',month:'Apr',name:'Launch Your Business Idea',track:'Entrepreneurship',time:'Sat 9:00AM–11:00AM',venue:'Fellowship Hall',spots:3,color:'tag-biz'},
+  {day:'12',month:'Apr',name:'Build Your First Website',track:'Tech & Digital',time:'Sat 9:00AM–11:00AM',venue:'Computer Lab',spots:10,color:'tag-tech'},
+  {day:'19',month:'Apr',name:'No-Code App Building',track:'Tech & Digital',time:'Sat 2:00PM–4:30PM',venue:'Computer Lab',spots:5,color:'tag-tech'},
+  {day:'19',month:'Apr',name:'Personal Finance & Budgeting',track:'Financial Literacy',time:'Sun 1:00PM–3:30PM',venue:'Main Hall',spots:20,color:'tag-finance'},
+  {day:'26',month:'Apr',name:'Digital Marketing for Business',track:'Entrepreneurship',time:'Sat 9:00AM–11:00AM',venue:'Main Hall',spots:18,color:'tag-biz'},
+  {day:'26',month:'Apr',name:'Video Content Creation',track:'Creative & Design',time:'Sat 2:00PM–5:00PM',venue:'Media Studio',spots:14,color:'tag-creative'},
+  {day:'03',month:'May',name:'AI for Everyday Work',track:'Tech & Digital',time:'Sat 10:00AM–1:00PM',venue:'Main Hall',spots:20,color:'tag-tech'},
+  {day:'03',month:'May',name:'Introduction to Investing in Ghana',track:'Financial Literacy',time:'Sat 2:00PM–4:00PM',venue:'Fellowship Hall',spots:9,color:'tag-finance'},
+];
+
+function renderSchedule(){
+  document.getElementById('scheduleList').innerHTML = SCHEDULE.map(s=>`
+    <div class="schedule-item">
+      <div class="schedule-date-box"><div class="sched-day">${s.day}</div><div class="sched-month">${s.month}</div></div>
+      <div class="schedule-info">
+        <h5>${s.name}</h5>
+        <p><span class="sched-tag ${s.color}">${s.track}</span><span style="font-size:.75rem;color:var(--text-light);"><i class="bi bi-clock me-1"></i>${s.time} &nbsp;·&nbsp; <i class="bi bi-geo-alt me-1"></i>${s.venue}</span></p>
+      </div>
+      <div class="sched-action">
+        <div class="sched-spots">${s.spots > 0 ? s.spots+' spots left' : 'Full'}</div>
+        <button class="btn-sched-reg ${s.spots===0?'':'btn-sched-reg'}" onclick="openModal('${s.name} · ${s.day} ${s.month}')">${s.spots>0?'Register':'Waitlist'}</button>
+      </div>
+    </div>`).join('');
+}
+
+/* Track Switcher */
+function switchTrack(id, btn){
+  document.querySelectorAll('.track-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.track-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+/* Modal */
+let currentWorkshop='';
+function openModal(workshop){
+  currentWorkshop=workshop;
+  document.getElementById('summaryTitle').textContent=workshop;
+  document.getElementById('modalBody').style.display='block';
+  document.getElementById('modalSuccess').classList.remove('show');
+  document.getElementById('modalSuccess').style.display='none';
+  document.getElementById('regModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('regModal').classList.remove('open');document.body.style.overflow='';}
+function closeModalOnBg(e){if(e.target===document.getElementById('regModal'))closeModal();}
+
+function submitReg(){
+  const first=document.getElementById('regFirst').value.trim();
+  const email=document.getElementById('regEmail').value.trim();
+  if(!first||!email){alert('Please fill in your name and email address.');return;}
+  document.getElementById('modalBody').style.display='none';
+  const s=document.getElementById('modalSuccess');
+  s.style.display='block';s.classList.add('show');
+  showToast('Registered for "'+currentWorkshop+'"!');
+}
+
+/* Newsletter */
+function subscribeNL(){
+  const e=document.getElementById('nlEmail').value.trim();
+  if(!e||!e.includes('@')){alert('Please enter a valid email.');return;}
+  document.getElementById('nlEmail').value='';
+  showToast('Subscribed! You\'ll receive the monthly workshop schedule. 🎉');
+}
+
+/* Toast */
+function showToast(msg){
+  const t=document.getElementById('wsToast');
+  document.getElementById('wsToastText').textContent=msg;
+  t.style.opacity='1';t.style.transform='translateY(0)';
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(12px)';},3500);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{renderSchedule();});
+</script>
+</body>
+</html>
