@@ -411,7 +411,7 @@
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Membership</a>
                     <ul class="dropdown-menu">
@@ -691,7 +691,7 @@
                 <div class="col-md-4 text-md-end reveal delay-2 mt-3 mt-md-0">
                     <div style="display:flex;flex-direction:column;gap:.6rem;align-items:flex-end;">
                         <a href="workshops.html" class="btn-outline-primary">Skills Workshops</a>
-                        <a href="#" style="font-size:.78rem;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:4px;">View all events <i class="bi bi-arrow-right"></i></a>
+                        <a href="events.html" style="font-size:.78rem;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:4px;">View all events <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -1110,7 +1110,7 @@
         {title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},
         {title:"When God's Silence Is His Answer",url:'blogpost.html',icon:'bi-journal-bookmark-fill',cat:'Blog Post',iconClass:'brown',sub:'Devotional · Pastor Emmanuel'},
         {title:'Devotional',url:'devotional.html',icon:'bi-journal-bookmark-fill',cat:'Page',iconClass:'green'},
-        {title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},
+        {title:'Events',url:'events.html',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},
         {title:'Gallery',url:'gallery.html',icon:'bi-images',cat:'Page',iconClass:''},
         {title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},
         {title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},
@@ -1129,7 +1129,7 @@
     function toggleSearch(){ var o=document.getElementById('searchOverlay'); var ip=document.getElementById('searchInput'); var open=o.classList.toggle('open'); if(open){ ip.value=''; document.getElementById('searchResults').innerHTML=renderHints(); setTimeout(function(){ ip.focus(); },80); document.body.style.overflow='hidden'; } else { document.body.style.overflow=''; } }
     function handleSearchKey(e){ if(e.key==='Escape') toggleSearch(); }
     function runSearch(q){ var r=document.getElementById('searchResults'); q=q.trim().toLowerCase(); if(!q){ r.innerHTML=renderHints(); return; } var m=SITE_PAGES.filter(function(p){ return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub.toLowerCase().includes(q)); }).slice(0,7); if(!m.length){ r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+escQ(q)+'"</div>'; return; } r.innerHTML=m.map(function(p){ return '<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+highlight(p.title,q)+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>'; }).join(''); }
-    function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a><a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a></div></div>'; }
+    function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="events.html"><i class="bi bi-calendar-event-fill"></i> Events</a><a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a></div></div>'; }
     function highlight(t,q){ return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark style="background:rgba(201,168,76,.3);border-radius:3px;padding:0 2px;">$1</mark>'); }
     function escQ(s){ return s.replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
     </script>
