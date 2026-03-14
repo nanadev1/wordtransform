@@ -420,6 +420,8 @@
                             <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
                             <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
                             <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                            <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                            <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle"></i>My Account</a></li>
                             <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
@@ -797,7 +799,7 @@
                     <p class="contact-strip-sub">Whether you have a question, need prayer, or just want to know more — we are here. Reach out and a real person will respond.</p>
                     <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div><div class="contact-info-text"><strong>Find Us</strong>123 Faith Avenue, Accra, Ghana</div></div>
                     <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div><div class="contact-info-text"><strong>Call Us</strong>+233 000 000 000</div></div>
-                    <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div><div class="contact-info-text"><strong>Email Us</strong>info@wordtransformation.church</div></div>
+                    <div class="contact-info-item"><div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div><div class="contact-info-text"><strong>Email Us</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afc6c1c9c0efd8c0ddcbdbddcec1dcc9c0ddc2cedbc6c0c181ccc7daddccc7">[email&#160;protected]</a></div></div>
                     <div class="mt-4"><a href="contact.html" class="btn-outline-white">Full Contact Page</a></div>
                 </div>
                 <div class="col-lg-7 reveal-right">
@@ -944,7 +946,7 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
     // ── Navbar scroll ──
@@ -1010,6 +1012,8 @@
         {title:'Devotional',url:'devotional.html',icon:'bi-journal-bookmark-fill',cat:'Page',iconClass:'green'},
         {title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},
         {title:'Gallery',url:'gallery.html',icon:'bi-images',cat:'Page',iconClass:''},
+        {title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},
+        {title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},
         {title:'Volunteer',url:'volunteer.html',icon:'bi-hand-thumbs-up-fill',cat:'Page',iconClass:'green'},
         {title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},
         {title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},
@@ -1027,8 +1031,4 @@
     function runSearch(q){ var r=document.getElementById('searchResults'); q=q.trim().toLowerCase(); if(!q){ r.innerHTML=renderHints(); return; } var m=SITE_PAGES.filter(function(p){ return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub.toLowerCase().includes(q)); }).slice(0,7); if(!m.length){ r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+escQ(q)+'"</div>'; return; } r.innerHTML=m.map(function(p){ return '<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+highlight(p.title,q)+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>'; }).join(''); }
     function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="index.html#events"><i class="bi bi-calendar-event-fill"></i> Events</a><a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a></div></div>'; }
     function highlight(t,q){ return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark style="background:rgba(201,168,76,.3);border-radius:3px;padding:0 2px;">$1</mark>'); }
-    function escQ(s){ return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.getElementById('searchOverlay').classList.contains('open')) toggleSearch(); });
-    </script>
-</body>
-</html>
+    function escQ(s){ return
