@@ -1,663 +1,940 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Sermon Notes | Word Transformation Church</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #000000;
-            --primary-dark: #6B4A2E;
-            --secondary-color: #D4AF37;
-            --accent-color: #2C5F2D;
-            --light-bg: #F9F6F0;
-            --dark-bg: #1A1A1A;
-            --deep-brown: #4A3728;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --white: #FFFFFF;
-            --heading-font: 'Playfair Display', serif;
-            --body-font: 'Inter', sans-serif;
-            --border-radius: 8px;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
-        body { font-family: var(--body-font); color: var(--text-dark); background: var(--white); line-height: 1.6; }
-        h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); font-weight: 600; line-height: 1.3; }
-        a { text-decoration: none; transition: all 0.3s ease; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Blog — Teaching, testimony, and encouragement from Word Transformation Church, Accra.">
+<title>Blog | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+:root {
+    --black:#0A0A0A; --deep:#111111; --card:#1C1C1C; --border:rgba(255,255,255,.08);
+    --gold:#C9A84C; --gold-light:#E8C97A; --gold-pale:rgba(201,168,76,.1);
+    --light:#FFFFFF; --light-alt:#F7F4EF; --light-text:#1C1C1C;
+    --light-muted:#6B6560; --light-stone:#E8E2D9;
+    --text:#E8E4DE; --text-dim:#A09A91; --muted:#6E6861; --white:#FFFFFF;
+    --brown:#5C3D1E; --brown-mid:#8B6340; --green:#2A5E2B;
+    --display:'DM Serif Display',Georgia,serif;
+    --body:'DM Sans',system-ui,sans-serif;
+    --serif:'Lora',Georgia,serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:72px;}
+body{font-family:var(--body);color:var(--text);background:var(--deep);line-height:1.65;-webkit-font-smoothing:antialiased;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:.1s!important} .delay-2{transition-delay:.2s!important} .delay-3{transition-delay:.3s!important}
 
-        /* Navbar */
-        .navbar { background-color: var(--deep-brown); padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .navbar-brand { font-family: var(--heading-font); font-size: 1.4rem; font-weight: 600; color: var(--white) !important; }
-        .navbar-brand i { color: var(--secondary-color); margin-right: 0.5rem; }
-        .navbar-nav .nav-link { color: rgba(255,255,255,0.88) !important; font-weight: 500; padding: 0.5rem 1rem !important; border-radius: var(--border-radius); transition: all 0.3s ease; }
-        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--white) !important; background: rgba(255,255,255,0.1); }
-        .btn-give { background: var(--secondary-color); color: var(--deep-brown); border: none; padding: 0.45rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; }
-        .btn-give:hover { background: #b8972e; transform: translateY(-2px); }
-        .btn-live { background: #FF0000; color: #fff; border: none; padding: 0.45rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px; }
-        .btn-live:hover { background: #cc0000; transform: translateY(-2px); color: #fff; }
-        .live-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; flex-shrink: 0; }
-        @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+/* ── Navbar ── */
+.navbar{background:rgba(10,10,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:.9rem 0;border-bottom:1px solid rgba(201,168,76,.12);transition:background .3s ease;z-index:1030;}
+.navbar.scrolled{background:rgba(10,10,10,.98);box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.navbar-brand{font-family:var(--display);font-size:1.3rem;color:var(--white)!important;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;}
+.brand-icon{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:1rem;flex-shrink:0;}
+.brand-sub{display:block;font-family:var(--body);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);line-height:1;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.82)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;transition:all .2s ease;}
+.navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--gold)!important;background:rgba(201,168,76,.1);}
+.dropdown-menu{background:#141414;border:1px solid rgba(201,168,76,.18);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,.5);padding:.5rem;}
+.dropdown-item{color:rgba(255,255,255,.8);font-size:.87rem;padding:.55rem .9rem;border-radius:6px;transition:all .15s ease;display:flex;align-items:center;gap:8px;}
+.dropdown-item i{color:var(--gold);font-size:.85rem;}
+.dropdown-item:hover{background:rgba(201,168,76,.1);color:var(--white);}
+.dropdown-item.active{color:var(--gold)!important;background:rgba(201,168,76,.08);}
+.dropdown-divider{border-color:rgba(201,168,76,.12);margin:.35rem 0;}
+.btn-live-nav{display:inline-flex;align-items:center;gap:6px;background:#E50000;color:#fff!important;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .25s ease;}
+.btn-live-nav:hover{background:#c20000;transform:translateY(-1px);}
+.live-dot{width:7px;height:7px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.4s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.btn-give{background:var(--gold);color:var(--brown)!important;border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;transition:all .25s ease;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-give:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:991.98px){.navbar-collapse{background:#0a0a0a;padding:1rem;border-radius:10px;margin-top:.5rem;}}
 
-        /* Page Hero */
-        .page-hero { background: linear-gradient(135deg, var(--deep-brown) 0%, #2E1F14 100%); padding: 5rem 0 4rem; text-align: center; position: relative; overflow: hidden; }
-        .page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%); }
-        .page-hero-content { position: relative; }
-        .eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 1rem; display: block; }
-        .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 300; color: #F5F0E8; margin-bottom: 1rem; }
-        .page-hero p { font-size: 1.05rem; color: rgba(245,240,232,0.72); max-width: 520px; margin: 0 auto; }
-        .hero-div { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 1.5rem auto 0; max-width: 200px; }
-        .hero-div-line { flex: 1; height: 1px; background: rgba(212,175,55,0.4); }
-        .hero-div-dot { width: 5px; height: 5px; background: var(--secondary-color); border-radius: 50%; flex-shrink: 0; }
+/* ── Search overlay ── */
+.search-overlay{display:none;position:fixed;top:0;left:0;right:0;z-index:9998;flex-direction:column;}
+.search-overlay.open{display:flex;}
+.search-bar-wrap{background:rgba(10,10,10,.97);backdrop-filter:blur(20px);display:flex;align-items:center;gap:12px;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(201,168,76,.15);}
+.search-bar-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+.search-bar-input{flex:1;background:transparent;border:none;outline:none;font-size:1.1rem;color:var(--white);caret-color:var(--gold);}
+.search-bar-input::placeholder{color:rgba(255,255,255,.3);}
+.search-bar-hint{font-size:.75rem;color:rgba(255,255,255,.3);white-space:nowrap;}
+.search-bar-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;padding:4px;}
+.search-bar-close:hover{color:var(--white);}
+.search-box{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);width:100%;max-width:660px;border-radius:0 0 14px 14px;border:1px solid rgba(201,168,76,.12);border-top:none;overflow:hidden;}
+.search-results{max-height:70vh;overflow-y:auto;}
+.search-result-item{display:flex;align-items:center;gap:12px;padding:.85rem 1.25rem;text-decoration:none;transition:background .15s ease;color:var(--white);border-bottom:1px solid rgba(255,255,255,.05);}
+.search-result-item:hover{background:rgba(201,168,76,.08);}
+.search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:rgba(255,255,255,.6);}
+.search-result-icon.brown{color:var(--gold);} .search-result-icon.green{color:#5aac5c;} .search-result-icon.red{color:#ff5555;}
+.search-result-text{flex:1;}
+.search-result-title{font-size:.92rem;font-weight:500;color:var(--white);}
+.search-result-sub{font-size:.76rem;color:rgba(255,255,255,.4);}
+.search-result-arrow{color:rgba(255,255,255,.2);font-size:.75rem;}
+.search-empty{padding:2rem;text-align:center;color:rgba(255,255,255,.4);font-size:.9rem;}
+.search-hints{padding:1rem 1.25rem;}
+.search-hint-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:.6rem;}
+.search-quick-links{display:flex;flex-wrap:wrap;gap:6px;}
+.search-quick-link{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;border:1px solid rgba(201,168,76,.2);font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s ease;}
+.search-quick-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);}
+.search-backdrop{position:fixed;inset:0;z-index:-1;}
 
-        /* Filter Bar */
-        .filter-bar { background: var(--white); border-bottom: 1px solid #EDE4D3; padding: 1rem 0; position: sticky; top: 62px; z-index: 100; }
-        .filter-btn { padding: 0.4rem 1.1rem; border-radius: 50px; font-size: 0.82rem; font-weight: 500; border: 1.5px solid #D6C9B8; color: var(--text-light); background: transparent; cursor: pointer; transition: all 0.25s ease; }
-        .filter-btn:hover { border-color: var(--deep-brown); color: var(--deep-brown); }
-        .filter-btn.active { background: var(--deep-brown); border-color: var(--deep-brown); color: #F5F0E8; }
-        .search-input { border: 1.5px solid #D6C9B8; border-radius: 50px; padding: 0.4rem 1rem 0.4rem 2.5rem; font-size: 0.88rem; color: var(--text-dark); background: var(--light-bg); outline: none; transition: border-color 0.25s; width: 220px; }
-        .search-input:focus { border-color: var(--secondary-color); }
-        .search-wrap { position: relative; display: inline-block; }
-        .search-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 0.85rem; pointer-events: none; }
+/* ── Blog Hero ── */
+.blog-hero{background:var(--black);padding:5.5rem 0 4rem;position:relative;overflow:hidden;}
+.blog-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(201,168,76,.1) 0%,transparent 55%),radial-gradient(ellipse at 5% 100%,rgba(42,94,43,.07) 0%,transparent 45%);}
+.blog-hero-inner{position:relative;}
+.blog-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;}
+.blog-eyebrow-line{display:inline-block;width:28px;height:1px;background:var(--gold);opacity:.6;}
+.blog-hero h1{font-family:var(--display);font-size:clamp(2.4rem,6vw,4rem);font-weight:400;color:var(--white);line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem;}
+.blog-hero h1 em{font-style:italic;color:var(--gold);}
+.blog-hero-sub{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--text-dim);max-width:520px;line-height:1.75;margin-bottom:2rem;}
 
-        /* Featured Article */
-        .featured-section { padding: 3.5rem 0 2rem; background: var(--light-bg); }
-        .featured-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(74,55,40,0.1); display: flex; flex-direction: column; }
-        @media(min-width:768px){ .featured-card { flex-direction: row; } }
-        .featured-img { min-height: 280px; background: linear-gradient(135deg, #4A3728, #1A1008); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; overflow: hidden; }
-        @media(min-width:768px){ .featured-img { width: 45%; } }
-        .featured-img-inner { text-align: center; color: rgba(245,240,232,0.6); }
-        .featured-img-inner i { font-size: 5rem; display: block; margin-bottom: 0.5rem; }
-        .featured-badge { position: absolute; top: 16px; left: 16px; background: var(--secondary-color); color: var(--deep-brown); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; }
-        .featured-body { padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; }
-        .featured-tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.75rem; display: block; }
-        .featured-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--deep-brown); line-height: 1.25; margin-bottom: 1rem; }
-        .featured-excerpt { font-size: 0.95rem; color: var(--text-light); line-height: 1.75; margin-bottom: 1.5rem; }
-        .featured-meta { font-size: 0.78rem; color: var(--text-light); display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
-        .featured-meta i { color: var(--secondary-color); }
-        .btn-read { display: inline-flex; align-items: center; gap: 6px; background: var(--deep-brown); color: #F5F0E8; padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.88rem; font-weight: 500; transition: all 0.3s ease; }
-        .btn-read:hover { background: var(--primary-dark); color: #fff; transform: translateX(3px); }
+/* ── Category filter tabs ── */
+.cat-tabs{display:flex;flex-wrap:wrap;gap:8px;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);}
+.cat-tab{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:50px;padding:.4rem 1.1rem;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s ease;text-decoration:none;}
+.cat-tab:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25);color:var(--gold);}
+.cat-tab.active{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.4);color:var(--gold);}
+.cat-tab .cat-count{background:rgba(255,255,255,.08);border-radius:50px;padding:1px 7px;font-size:.65rem;margin-left:2px;}
+.cat-tab.active .cat-count{background:rgba(201,168,76,.2);}
 
-        /* Scripture Banner */
-        .scripture-banner { background: var(--deep-brown); padding: 2.5rem 0; text-align: center; }
-        .scripture-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; color: #F5F0E8; max-width: 700px; margin: 0 auto 0.5rem; line-height: 1.6; }
-        .scripture-ref { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-color); }
+/* ── Featured post ── */
+.featured-post{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .35s ease;text-decoration:none;}
+.featured-post:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.5);border-color:rgba(201,168,76,.3);}
+.featured-post-img{background:linear-gradient(135deg,#1a0e05 0%,#3d2010 50%,#0e1a0e 100%);min-height:380px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.featured-post-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.featured-post-img-fallback{display:flex;flex-direction:column;align-items:center;gap:1rem;position:relative;z-index:1;opacity:.4;}
+.featured-post-img-fallback i{font-size:5rem;color:var(--gold);}
+.featured-post-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 50%,rgba(0,0,0,.4) 100%);}
+.featured-tag{position:absolute;top:1.25rem;left:1.25rem;display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);border-radius:50px;padding:.3rem 1rem;font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);z-index:2;}
+.featured-post-body{padding:2.5rem 2.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;}
+.featured-label{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;display:block;}
+.featured-title{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:1rem;letter-spacing:-.01em;}
+.featured-excerpt{font-family:var(--serif);font-style:italic;font-size:.97rem;color:var(--text-dim);line-height:1.75;margin-bottom:1.75rem;flex:1;}
+.featured-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.07);}
+.featured-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.85rem;color:var(--black);flex-shrink:0;}
+.featured-author-name{font-size:.85rem;font-weight:600;color:var(--white);}
+.featured-author-role{font-size:.7rem;color:var(--muted);}
+.featured-info{display:flex;gap:1rem;margin-left:auto;flex-wrap:wrap;}
+.featured-info span{font-size:.75rem;color:var(--text-dim);display:flex;align-items:center;gap:4px;}
+.featured-info i{color:var(--gold);font-size:.7rem;}
+.btn-read{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:600;color:var(--gold);text-decoration:none;transition:all .2s ease;margin-top:1.25rem;}
+.btn-read:hover{color:var(--gold-light);gap:10px;}
+@media(max-width:767px){.featured-post{grid-template-columns:1fr;}.featured-post-img{min-height:220px;}}
 
-        /* Blog Grid */
-        .blog-section { padding: 3.5rem 0 5rem; }
-        .section-header { margin-bottom: 2.5rem; }
-        .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.5rem; display: block; }
-        .section-heading { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--deep-brown); }
+/* ── Main blog grid ── */
+.blog-section{padding:5rem 0;background:var(--deep);}
 
-        .blog-card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid #EDE4D3; box-shadow: 0 2px 8px rgba(139,94,60,0.06); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
-        .blog-card:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(139,94,60,0.13); }
-        .blog-card-img { position: relative; height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-        .blog-card-img.brown { background: linear-gradient(135deg, #F0EAE0, #E8D8C4); color: #8B5E3C; }
-        .blog-card-img.green { background: linear-gradient(135deg, #E4F0E4, #C8E0C8); color: #2C5F2D; }
-        .blog-card-img.gold  { background: linear-gradient(135deg, #FBF3DC, #F0E4A8); color: #7A5A00; }
-        .blog-card-img.navy  { background: linear-gradient(135deg, #E0E8F0, #C4D0E4); color: #1A3A5C; }
-        .blog-category-badge { position: absolute; top: 12px; left: 14px; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; }
-        .badge-sermon { background: #4A3728; color: #F5F0E8; }
-        .badge-devotion { background: #2C5F2D; color: #fff; }
-        .badge-teaching { background: #7A5A00; color: #fff; }
-        .badge-announcement { background: #1A3A5C; color: #fff; }
-        .blog-card-body { padding: 1.25rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
-        .blog-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.74rem; color: var(--text-light); margin-bottom: 0.75rem; }
-        .blog-meta i { color: var(--secondary-color); }
-        .blog-title { font-size: 1.05rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; line-height: 1.35; }
-        .blog-excerpt { font-size: 0.87rem; color: var(--text-light); line-height: 1.65; flex: 1; margin-bottom: 1rem; }
-        .scripture-tag { font-size: 0.75rem; font-weight: 500; color: var(--secondary-color); display: inline-flex; align-items: center; gap: 5px; margin-bottom: 0.75rem; }
-        .blog-read-more { font-size: 0.84rem; font-weight: 500; color: #8B5E3C; display: inline-flex; align-items: center; gap: 4px; margin-top: auto; transition: all 0.2s ease; }
-        .blog-read-more:hover { color: var(--deep-brown); gap: 8px; }
+/* Standard blog card */
+.blog-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:100%;display:flex;flex-direction:column;transition:all .3s ease;text-decoration:none;}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(0,0,0,.6);border-color:rgba(201,168,76,.3);}
+.blog-card-img{height:185px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.blog-card-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .4s ease;}
+.blog-card:hover .blog-card-img img{transform:scale(1.04);}
+.blog-img-devotional{background:linear-gradient(135deg,#1a0e05,#3d2010);}
+.blog-img-community{background:linear-gradient(135deg,#071508,#1a3d1b);}
+.blog-img-testimony{background:linear-gradient(135deg,#151000,#4a3800);}
+.blog-img-teaching{background:linear-gradient(135deg,#0a0a1a,#1a1a4a);}
+.blog-img-faith{background:linear-gradient(135deg,#0e0a14,#2a1040);}
+.blog-img-leadership{background:linear-gradient(135deg,#0a1408,#1a3d1a);}
+.blog-card-img i{font-size:3rem;opacity:.2;color:var(--white);position:relative;z-index:1;}
+.blog-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 60%);}
+.blog-cat-tag{position:absolute;top:12px;left:14px;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:50px;z-index:2;}
+.tag-devotional{background:rgba(201,168,76,.18);color:var(--gold-light);}
+.tag-community{background:rgba(42,94,43,.2);color:#5aac5c;}
+.tag-testimony{background:rgba(201,168,76,.15);color:var(--gold);}
+.tag-teaching{background:rgba(74,130,180,.15);color:#6aacdc;}
+.tag-faith{background:rgba(168,85,247,.15);color:#c084fc;}
+.tag-leadership{background:rgba(42,94,43,.18);color:#4ade80;}
+.blog-read-time{position:absolute;bottom:12px;right:14px;font-size:.65rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:3px;z-index:2;}
+.blog-card-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;}
+.blog-card-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:.73rem;color:var(--muted);margin-bottom:.75rem;align-items:center;}
+.blog-card-meta i{color:var(--gold);font-size:.7rem;}
+.blog-card-author{display:flex;align-items:center;gap:6px;}
+.blog-card-avatar{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--brown));display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--black);font-weight:700;flex-shrink:0;}
+.blog-card-title{font-family:var(--display);font-size:1.08rem;font-weight:400;color:var(--white);margin-bottom:.6rem;line-height:1.3;transition:color .2s ease;}
+.blog-card:hover .blog-card-title{color:var(--gold);}
+.blog-card-excerpt{font-family:var(--serif);font-style:italic;font-size:.87rem;color:var(--text-dim);line-height:1.65;flex:1;margin-bottom:1.1rem;}
+.blog-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.05);margin-top:auto;}
+.blog-card-read-more{font-size:.8rem;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:4px;transition:all .2s ease;}
+.blog-card:hover .blog-card-read-more{gap:8px;}
+.blog-card-likes{display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--muted);}
+.blog-card-likes i{font-size:.75rem;}
 
-        /* Sermon Notes CTA */
-        .notes-cta { background: linear-gradient(135deg, #2C5F2D, #1A3D1B); padding: 4rem 0; text-align: center; }
-        .notes-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: #F5F0E8; margin-bottom: 1rem; }
-        .notes-cta p { color: rgba(245,240,232,0.75); max-width: 520px; margin: 0 auto 1.75rem; }
-        .btn-outline-light-custom { display: inline-flex; align-items: center; gap: 8px; padding: 0.65rem 1.75rem; border: 1.5px solid rgba(245,240,232,0.5); border-radius: 50px; color: #F5F0E8; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; }
-        .btn-outline-light-custom:hover { background: rgba(245,240,232,0.1); border-color: #F5F0E8; color: #F5F0E8; }
+/* Horizontal list card (for sidebar/secondary) */
+.blog-list-item{display:flex;gap:14px;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.05);text-decoration:none;transition:all .2s ease;}
+.blog-list-item:last-child{border-bottom:none;}
+.blog-list-item:hover .blog-list-title{color:var(--gold);}
+.blog-list-thumb{width:68px;height:68px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;opacity:.65;}
+.blog-list-title{font-family:var(--display);font-size:.92rem;font-weight:400;color:var(--white);line-height:1.3;margin-bottom:.3rem;transition:color .2s ease;}
+.blog-list-meta{font-size:.7rem;color:var(--muted);}
 
-        /* Newsletter */
-        .newsletter-section { background: var(--light-bg); padding: 4rem 0; }
-        .newsletter-card { background: var(--white); border-radius: 14px; padding: 2.5rem 3rem; box-shadow: 0 4px 20px rgba(74,55,40,0.08); max-width: 680px; margin: 0 auto; text-align: center; }
-        .newsletter-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 400; color: var(--deep-brown); margin-bottom: 0.75rem; }
-        .newsletter-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; }
-        .newsletter-form { display: flex; gap: 10px; flex-wrap: wrap; }
-        .newsletter-input { flex: 1; min-width: 200px; border: 1.5px solid #D6C9B8; border-radius: 50px; padding: 0.6rem 1.2rem; font-size: 0.88rem; color: var(--text-dark); outline: none; transition: border-color 0.25s; }
-        .newsletter-input:focus { border-color: var(--secondary-color); }
-        .btn-subscribe { background: var(--secondary-color); color: var(--deep-brown); border: none; padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
-        .btn-subscribe:hover { background: #b8972e; transform: translateY(-1px); }
+/* ── Sidebar ── */
+.blog-sidebar{position:sticky;top:88px;}
+.sidebar-widget{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;}
+.sidebar-heading{font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.1rem;}
+.sidebar-cat-item{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);text-decoration:none;transition:all .2s ease;}
+.sidebar-cat-item:last-child{border-bottom:none;}
+.sidebar-cat-item:hover .sidebar-cat-name{color:var(--gold);}
+.sidebar-cat-name{font-size:.85rem;color:var(--text-dim);display:flex;align-items:center;gap:8px;transition:color .2s ease;}
+.sidebar-cat-name i{color:var(--gold);font-size:.8rem;width:16px;}
+.sidebar-cat-count{font-size:.7rem;background:rgba(255,255,255,.06);border-radius:50px;padding:2px 8px;color:var(--muted);}
+.sidebar-tag-cloud{display:flex;flex-wrap:wrap;gap:7px;}
+.sidebar-tag{display:inline-block;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:50px;padding:4px 12px;font-size:.72rem;color:var(--text-dim);text-decoration:none;transition:all .2s ease;cursor:pointer;}
+.sidebar-tag:hover{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.3);color:var(--gold);}
+.sidebar-verse{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);line-height:1.7;text-align:center;}
+.sidebar-verse cite{display:block;font-style:normal;font-size:.72rem;color:var(--gold);margin-top:.5rem;letter-spacing:.08em;}
+.nl-input-wrap{display:flex;gap:8px;margin-top:.75rem;}
+.nl-input{flex:1;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.08);border-radius:8px;padding:.6rem .9rem;font-size:.85rem;color:var(--white);outline:none;font-family:var(--body);min-width:0;}
+.nl-input:focus{border-color:rgba(201,168,76,.4);}
+.nl-input::placeholder{color:rgba(255,255,255,.2);}
+.nl-btn{background:var(--gold);color:var(--black);border:none;border-radius:8px;padding:.6rem 1rem;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s ease;flex-shrink:0;}
+.nl-btn:hover{background:var(--gold-light);}
 
-        /* Pagination */
-        .pagination-wrap { padding: 2rem 0 0; display: flex; justify-content: center; gap: 6px; }
-        .page-btn { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #D6C9B8; background: transparent; color: var(--text-light); font-size: 0.88rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; }
-        .page-btn.active, .page-btn:hover { background: var(--deep-brown); border-color: var(--deep-brown); color: #F5F0E8; }
+/* ── Load more ── */
+.load-more-wrap{text-align:center;padding-top:3rem;}
+.btn-load-more{background:transparent;border:1.5px solid rgba(201,168,76,.3);color:var(--gold);padding:.8rem 2.5rem;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:8px;}
+.btn-load-more:hover{background:rgba(201,168,76,.08);border-color:var(--gold);transform:translateY(-2px);}
+.btn-load-more.loading i{animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-        /* Footer */
-        .footer { background-color: var(--dark-bg); color: var(--white); padding: 60px 0 30px; }
-        .footer h5 { color: var(--white); margin-bottom: 1.5rem; }
-        .footer a { color: rgba(255,255,255,0.7); }
-        .footer a:hover { color: var(--secondary-color); }
-        .footer hr { opacity: 0.2; margin: 2rem 0; }
+/* ── Quote banner ── */
+.quote-banner{background:linear-gradient(135deg,var(--brown),#3d2010);padding:4rem 0;text-align:center;}
+.quote-banner blockquote{font-family:var(--display);font-style:italic;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:400;color:#F5F0E8;line-height:1.45;max-width:680px;margin:0 auto .75rem;}
+.quote-banner cite{font-style:normal;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);}
 
-        @media(max-width:768px){
-            .navbar-collapse { background: var(--deep-brown); padding: 1rem; border-radius: var(--border-radius); margin-top: 0.5rem; }
-            .featured-body { padding: 1.5rem; }
-            .newsletter-card { padding: 1.75rem 1.5rem; }
-        }
+/* ── Footer ── */
+footer{background:var(--black);padding:70px 0 30px;border-top:1px solid rgba(201,168,76,.1);}
+.footer-brand{font-family:var(--display);font-size:1.4rem;color:var(--white);margin-bottom:.75rem;display:block;}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.4);font-size:.88rem;line-height:1.6;margin-bottom:1.5rem;max-width:260px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.95rem;text-decoration:none;transition:all .2s ease;border:1px solid rgba(255,255,255,.06);}
+.footer-social a:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.footer-heading{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+footer ul{list-style:none;padding:0;}
+footer ul li{margin-bottom:.7rem;}
+footer ul li a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:color .2s ease;}
+footer ul li a:hover{color:var(--gold);}
+footer hr{border-color:rgba(255,255,255,.06);margin:2.5rem 0 1.5rem;}
+.footer-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;}
+.footer-copy{font-size:.8rem;color:rgba(255,255,255,.3);}
+.footer-legal{display:flex;gap:1.25rem;}
+.footer-legal a{font-size:.8rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s ease;}
+.footer-legal a:hover{color:var(--gold);}
 
-        /* Article Modal */
-        .article-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
-        .article-overlay.open { display: flex; }
-        .article-modal { background: var(--white); border-radius: 16px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; }
-        .article-modal-hero { background: linear-gradient(135deg, #4A3728, #1A1008); padding: 3rem 2.5rem 2rem; position: relative; }
-        .article-modal-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary-color); margin-bottom: 0.75rem; display: block; }
-        .article-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: #F5F0E8; line-height: 1.3; margin-bottom: 1rem; }
-        .article-modal-meta { font-size: 0.78rem; color: rgba(245,240,232,0.6); display: flex; gap: 1rem; flex-wrap: wrap; }
-        .article-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); border: none; color: #F5F0E8; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; transition: background 0.2s; }
-        .article-close:hover { background: rgba(255,255,255,0.2); }
-        .article-body { padding: 2rem 2.5rem; }
-        .article-scripture { background: var(--light-bg); border-left: 3px solid var(--secondary-color); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--deep-brown); line-height: 1.7; }
-        .article-scripture cite { display: block; font-size: 0.8rem; font-style: normal; font-weight: 500; color: var(--text-light); margin-top: 0.5rem; }
-        .article-text { font-size: 0.95rem; color: var(--text-dark); line-height: 1.8; margin-bottom: 1rem; }
-        .article-points { list-style: none; padding: 0; margin: 1.25rem 0; }
-        .article-points li { display: flex; gap: 10px; font-size: 0.92rem; color: var(--text-dark); padding: 0.5rem 0; border-bottom: 1px solid #EDE4D3; line-height: 1.6; }
-        .article-points li:last-child { border-bottom: none; }
-        .article-points i { color: var(--secondary-color); flex-shrink: 0; margin-top: 3px; }
-        .article-prayer { background: linear-gradient(135deg, #2C5F2D10, #2C5F2D05); border: 1px solid #2C5F2D30; border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
-        .article-prayer-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #2C5F2D; margin-bottom: 0.5rem; display: block; }
-        .article-prayer p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.75; font-style: italic; margin: 0; }
-    </style>
+/* Giving modal */
+.giving-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,10,.75);z-index:9999;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px);}
+.giving-modal{background:#FDFAF5;border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;animation:giveSlideIn .3s ease;}
+@keyframes giveSlideIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.giving-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.6rem;line-height:1;color:#8B6B4A;cursor:pointer;padding:0;z-index:10;}
+.giving-header{background:var(--brown);padding:2rem 2rem 1.5rem;border-radius:16px 16px 0 0;text-align:center;}
+.giving-title{font-family:var(--display);font-size:2rem;font-weight:400;color:#F5F0E8;margin-bottom:.4rem;}
+.giving-sub{font-family:var(--serif);font-style:italic;font-size:.88rem;color:rgba(245,240,232,.65);}
+.giving-body{padding:1.75rem 2rem 2rem;}
+.give-field{margin-bottom:1.2rem;}
+.give-label{display:block;font-size:.8rem;font-weight:600;color:#4A3728;margin-bottom:.4rem;}
+.give-input{width:100%;padding:.65rem .9rem;border:1.5px solid #E0D5C5;border-radius:8px;font-size:.95rem;color:#2A1A0E;background:#FDFAF5;outline:none;transition:border-color .2s;}
+.give-input:focus{border-color:var(--gold);}
+.give-tabs{display:flex;gap:6px;margin-bottom:.5rem;}
+.give-tab{padding:.45rem 1rem;border-radius:50px;border:1.5px solid #E0D5C5;font-size:.82rem;font-weight:500;cursor:pointer;background:#FDFAF5;color:#6B4A2E;transition:all .2s;}
+.give-tab.active{background:var(--brown);color:#F5F0E8;border-color:var(--brown);}
+.give-amount-wrap{position:relative;}
+.give-currency{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#8B6B4A;font-weight:500;}
+.give-amount-input{padding-left:2.2rem;}
+.give-next-btn{width:100%;padding:.8rem;background:var(--brown);color:#F5F0E8;border:none;border-radius:10px;font-size:1rem;font-weight:500;cursor:pointer;transition:all .3s;margin-top:.5rem;}
+.give-next-btn:hover{background:#6B4A2E;}
+.give-summary-box{display:flex;align-items:center;justify-content:space-between;background:#F0EAE0;border-radius:8px;padding:.75rem 1rem;margin-bottom:1.2rem;}
+.give-summary-tag{background:var(--brown);color:#F5F0E8;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:50px;}
+.give-summary-amount{font-size:1.1rem;color:#4A3728;}
+.give-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.2rem;}
+.give-method{display:flex;flex-direction:column;align-items:center;gap:5px;padding:1rem .5rem;background:#F0EAE0;border:1.5px solid transparent;border-radius:10px;cursor:pointer;transition:all .2s;text-align:center;}
+.give-method span{font-size:.88rem;font-weight:500;color:#4A3728;}
+.give-method small{font-size:.72rem;color:#8B6B4A;}
+.give-method:hover{background:#E8DDD0;}
+.give-method.active{background:#fff;border-color:var(--gold);}
+.give-method-icon{font-size:1.4rem;color:#8B6B4A;}
+.give-bank-info{background:#F0EAE0;border-radius:8px;padding:1rem 1.1rem;margin-bottom:1rem;}
+.give-bank-label{font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#8B6B4A;margin-bottom:.75rem;}
+.give-bank-row{display:flex;justify-content:space-between;font-size:.88rem;padding:.35rem 0;border-bottom:1px solid rgba(139,107,74,.15);color:#4A3728;}
+.give-bank-row:last-of-type{border-bottom:none;}
+.give-bank-row span{color:#8B6B4A;}
+.give-bank-note{font-size:.78rem;color:#8B6B4A;margin-top:.75rem;margin-bottom:0;font-style:italic;}
+.give-btn-row{display:flex;gap:10px;margin-top:.5rem;}
+.give-back-btn{padding:.75rem 1.25rem;background:#F0EAE0;color:#4A3728;border:none;border-radius:8px;font-size:.95rem;font-weight:500;cursor:pointer;white-space:nowrap;}
+.give-submit-btn{flex:1;padding:.75rem;background:var(--gold);color:#4A3728;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;}
+.give-success{text-align:center;padding:1rem 0;}
+.give-success-icon{width:64px;height:64px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2rem;color:#fff;}
+.give-success-title{font-family:var(--display);font-size:2rem;font-weight:400;color:#4A3728;margin-bottom:.75rem;}
+.give-success-msg{font-size:.92rem;color:#6B4A2E;line-height:1.7;}
+@media(max-width:767px){.blog-sidebar{position:static;margin-top:3rem;}}
+</style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="index.html"><i class="bi bi-church"></i> Word Transformation</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="index.html">
+            <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+            <div>Word Transformation<span class="brand-sub">Church</span></div>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="ministries.html">Ministries</a></li>
-                <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
-                <li class="nav-item"><a class="nav-link" href="devotional.html">Devotional</a></li>
+                <li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="portal.html"><i class="bi bi-person-circle me-1"></i>My Account</a></li>
-                <li class="nav-item ms-lg-2">
-                    <a class="btn-live" href="livestream.html">
-                        <span class="live-dot"></span> Join Live
-                    </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                        <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                        <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                        <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                        <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                        <li><a class="dropdown-item active" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                        <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                        <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                        <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="give.html"><i class="bi bi-heart-fill"></i>Give Online</a></li>
+                        <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                        <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-1">
+                    <button class="nav-link bg-transparent border-0" onclick="toggleSearch()" style="color:rgba(255,255,255,.7);"><i class="bi bi-search"></i></button>
                 </li>
                 <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                    <button class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</button>
+                    <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="give.html" class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Page Hero -->
-<div class="page-hero">
-    <div class="container">
-        <div class="page-hero-content">
-            <span class="eyebrow">Word Transformation Church</span>
-            <h1>Sermons & Blog</h1>
-            <p>Sermon recaps, key notes, and devotionals to deepen your walk with God.</p>
-            <div class="hero-div"><div class="hero-div-line"></div><div class="hero-div-dot"></div><div class="hero-div-line"></div></div>
-        </div>
+<!-- ===================== SEARCH OVERLAY ===================== -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-bar-wrap">
+        <i class="bi bi-search search-bar-icon"></i>
+        <input type="text" id="searchInput" class="search-bar-input" placeholder="Search posts, topics, authors…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
+        <span class="search-bar-hint d-none d-md-inline">Press Esc to close</span>
+        <button class="search-bar-close" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
     </div>
+    <div style="position:relative;display:flex;justify-content:center;padding:0 1rem;">
+        <div class="search-box"><div class="search-results" id="searchResults"></div></div>
+    </div>
+    <div class="search-backdrop" onclick="toggleSearch()"></div>
 </div>
 
-<!-- Filter Bar -->
-<div class="filter-bar">
-    <div class="container d-flex flex-wrap align-items-center gap-2 justify-content-between">
-        <div class="d-flex flex-wrap gap-2">
-            <button class="filter-btn active" onclick="filterPosts('all', this)">All</button>
-            <button class="filter-btn" onclick="filterPosts('sermon', this)">Sermon Recaps</button>
-            <button class="filter-btn" onclick="filterPosts('teaching', this)">Teachings</button>
-            <button class="filter-btn" onclick="filterPosts('devotion', this)">Devotionals</button>
-        </div>
-        <div class="search-wrap">
-            <i class="bi bi-search search-icon"></i>
-            <input type="text" class="search-input" placeholder="Search sermons..." oninput="searchPosts(this.value)">
-        </div>
-    </div>
-</div>
-
-<!-- Featured Article -->
-<section class="featured-section">
-    <div class="container">
-        <div class="featured-card">
-            <div class="featured-img">
-                <div class="featured-img-inner">
-                    <i class="bi bi-book-half"></i>
-                    <small>Featured Sermon</small>
-                </div>
-                <span class="featured-badge">✦ Featured</span>
+<!-- ===================== HERO ===================== -->
+<section class="blog-hero">
+    <div class="container blog-hero-inner">
+        <div class="row align-items-end g-4">
+            <div class="col-lg-7 reveal">
+                <p class="blog-eyebrow"><span class="blog-eyebrow-line"></span> From the Blog</p>
+                <h1>Words That <em>Feed</em><br>the Soul</h1>
+                <p class="blog-hero-sub">Teaching, testimony, and encouragement for the everyday believer — written by our pastors, elders, and church family.</p>
             </div>
-            <div class="featured-body">
-                <span class="featured-tag">Sermon Recap · Series: Walking in Faith</span>
-                <h2 class="featured-title">When God's Silence Is His Answer</h2>
-                <p class="featured-excerpt">In this powerful Sunday message, Pastor unpacks the story of Lazarus and reveals how God's delays are never denials. When we can't hear God's voice, He may be working in ways we cannot yet see — preparing a miracle greater than we asked for.</p>
-                <div class="featured-meta">
-                    <span><i class="bi bi-person-fill me-1"></i>Pastor Emmanuel Osei</span>
-                    <span><i class="bi bi-calendar3 me-1"></i>March 9, 2025</span>
-                    <span><i class="bi bi-book me-1"></i>John 11:1–44</span>
-                    <span><i class="bi bi-clock me-1"></i>8 min read</span>
+            <div class="col-lg-5 reveal delay-2">
+                <div class="cat-tabs">
+                    <a class="cat-tab active" href="#" onclick="filterCat(event,'all')"><i class="bi bi-grid-fill"></i> All Posts <span class="cat-count">24</span></a>
+                    <a class="cat-tab" href="#" onclick="filterCat(event,'devotional')"><i class="bi bi-journal-bookmark-fill"></i> Devotional <span class="cat-count">8</span></a>
+                    <a class="cat-tab" href="#" onclick="filterCat(event,'testimony')"><i class="bi bi-stars"></i> Testimony <span class="cat-count">6</span></a>
+                    <a class="cat-tab" href="#" onclick="filterCat(event,'teaching')"><i class="bi bi-book-fill"></i> Teaching <span class="cat-count">5</span></a>
+                    <a class="cat-tab" href="#" onclick="filterCat(event,'community')"><i class="bi bi-people-fill"></i> Community <span class="cat-count">5</span></a>
                 </div>
-                <a href="#" class="btn-read" onclick="openArticle('featured'); return false;">
-                    Read Full Notes <i class="bi bi-arrow-right"></i>
-                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Scripture Banner -->
-<div class="scripture-banner">
+<!-- ===================== FEATURED POST ===================== -->
+<div style="background:var(--black);padding:3rem 0 0;">
     <div class="container">
-        <p class="scripture-text">"Your word is a lamp to my feet and a light to my path."</p>
-        <span class="scripture-ref">Psalm 119:105</span>
+        <p style="font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;">Featured Post</p>
+        <a href="blogpost.html" class="featured-post reveal">
+            <div class="featured-post-img">
+                <img src="img/blog-silence.jpg" alt="Featured post image" onerror="this.style.display='none'">
+                <div class="featured-post-img-fallback">
+                    <i class="bi bi-book-fill"></i>
+                    <span style="font-family:var(--display);font-size:.9rem;color:rgba(255,255,255,.4);">John 11:1–44</span>
+                </div>
+                <div class="featured-post-img-overlay"></div>
+                <span class="featured-tag"><i class="bi bi-journal-bookmark-fill"></i> Devotional</span>
+            </div>
+            <div class="featured-post-body">
+                <span class="featured-label">Most Read This Week</span>
+                <h2 class="featured-title">When God's Silence Is His Answer</h2>
+                <p class="featured-excerpt">Sometimes the most profound thing God does is say nothing — and in that silence, He is shaping something in us that words never could. A reflection on John 11 and the mystery of holy waiting.</p>
+                <div class="featured-meta">
+                    <div class="featured-avatar">PE</div>
+                    <div>
+                        <div class="featured-author-name">Pastor Emmanuel</div>
+                        <div class="featured-author-role">Senior Pastor</div>
+                    </div>
+                    <div class="featured-info">
+                        <span><i class="bi bi-calendar3"></i> March 9, 2026</span>
+                        <span><i class="bi bi-clock"></i> 7 min read</span>
+                        <span><i class="bi bi-chat-dots"></i> 14 comments</span>
+                    </div>
+                </div>
+                <span class="btn-read">Read Full Post <i class="bi bi-arrow-right"></i></span>
+            </div>
+        </a>
     </div>
 </div>
 
-<!-- Blog Grid -->
+<!-- ===================== MAIN BLOG GRID ===================== -->
 <section class="blog-section">
     <div class="container">
-        <div class="section-header">
-            <span class="section-label">Recent Posts</span>
-            <h2 class="section-heading">Sermon Recaps & Notes</h2>
-        </div>
+        <div class="row g-5">
 
-        <div class="row g-4" id="blog-grid">
-
-            <!-- Post 1 -->
-            <div class="col-md-6 col-lg-4 blog-post" data-category="sermon">
-                <div class="blog-card">
-                    <div class="blog-card-img brown">
-                        <i class="bi bi-lightning-fill"></i>
-                        <span class="blog-category-badge badge-sermon">Sermon</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i>March 2, 2025</span>
-                            <span><i class="bi bi-clock me-1"></i>6 min read</span>
-                        </div>
-                        <div class="scripture-tag"><i class="bi bi-book"></i> Romans 8:28</div>
-                        <h3 class="blog-title">All Things Work Together: Finding Purpose in Pain</h3>
-                        <p class="blog-excerpt">God's redemptive plan doesn't exclude our suffering — it includes it. Key takeaways from Sunday's message on trusting God in every season.</p>
-                        <a href="#" class="blog-read-more" onclick="openArticle('post1'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+            <!-- ── Posts grid ── -->
+            <div class="col-lg-8" id="postsGrid">
+                <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                    <h4 style="font-family:var(--display);font-size:1.15rem;font-weight:400;color:var(--white);margin:0;" id="gridHeading">All Posts</h4>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:.75rem;color:var(--muted);">Sort by:</span>
+                        <select onchange="sortPosts(this.value)" style="background:var(--card);border:1px solid var(--border);color:var(--text-dim);border-radius:6px;padding:.3rem .7rem;font-size:.78rem;outline:none;cursor:pointer;">
+                            <option value="newest">Newest first</option>
+                            <option value="popular">Most popular</option>
+                            <option value="comments">Most commented</option>
+                        </select>
                     </div>
                 </div>
-            </div>
 
-            <!-- Post 2 -->
-            <div class="col-md-6 col-lg-4 blog-post" data-category="teaching">
-                <div class="blog-card">
-                    <div class="blog-card-img green">
-                        <i class="bi bi-tree-fill"></i>
-                        <span class="blog-category-badge badge-teaching">Teaching</span>
+                <div class="row g-4" id="cardsContainer">
+
+                    <!-- Card 1 -->
+                    <div class="col-md-6 reveal delay-1" data-cat="devotional">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-devotional">
+                                <i class="bi bi-journal-bookmark-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-devotional">Devotional</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 7 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar">PE</div><span>Pastor Emmanuel</span></div>
+                                    <span><i class="bi bi-calendar3"></i> March 9, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">When God's Silence Is His Answer</h4>
+                                <p class="blog-card-excerpt">Sometimes the most profound thing God does is say nothing — and in that silence He is shaping something that words never could.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 47</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i>Feb 23, 2025</span>
-                            <span><i class="bi bi-clock me-1"></i>5 min read</span>
-                        </div>
-                        <div class="scripture-tag"><i class="bi bi-book"></i> Psalm 1:1–3</div>
-                        <h3 class="blog-title">Rooted and Fruitful: The Power of Meditating on God's Word</h3>
-                        <p class="blog-excerpt">What does it mean to meditate day and night? This midweek teaching explores practical disciplines for staying planted in Scripture.</p>
-                        <a href="#" class="blog-read-more" onclick="openArticle('post2'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-6 reveal delay-2" data-cat="community">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-community">
+                                <i class="bi bi-people-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-community">Community</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 5 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar" style="background:linear-gradient(135deg,#2A5E2B,#4a9e4a);">ES</div><span>Elder Sarah</span></div>
+                                    <span><i class="bi bi-calendar3"></i> March 4, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">Why Community Is at the Heart of the Gospel</h4>
+                                <p class="blog-card-excerpt">We were never meant to do life alone. From Genesis to Revelation, Scripture calls us into deep, life-giving fellowship.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 31</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-6 reveal delay-1" data-cat="testimony">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-testimony">
+                                <i class="bi bi-stars"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-testimony">Testimony</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 6 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar" style="background:linear-gradient(135deg,#7a5a00,#c9a84c);">SA</div><span>Sis. Abena</span></div>
+                                    <span><i class="bi bi-calendar3"></i> Feb 24, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">How God Turned My Season of Waiting Into a Miracle</h4>
+                                <p class="blog-card-excerpt">For three years I prayed the same prayer. I almost gave up — until the morning everything changed and I understood why the wait was necessary.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 62</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="col-md-6 reveal delay-2" data-cat="teaching">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-teaching">
+                                <i class="bi bi-book-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-teaching">Teaching</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 9 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar">PE</div><span>Pastor Emmanuel</span></div>
+                                    <span><i class="bi bi-calendar3"></i> Feb 16, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">All Things Work Together — Understanding Romans 8:28</h4>
+                                <p class="blog-card-excerpt">Paul's declaration is not a promise that life will be easy. It is a promise that God wastes nothing — not your pain, your failure, or your past.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 54</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="col-md-6 reveal delay-1" data-cat="devotional">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-faith">
+                                <i class="bi bi-brightness-high-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-faith">Faith</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 5 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar" style="background:linear-gradient(135deg,#1a3d1b,#2a5e2b);">PJ</div><span>Pastor James</span></div>
+                                    <span><i class="bi bi-calendar3"></i> Feb 10, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">Walking in Faith When the Road Is Unclear</h4>
+                                <p class="blog-card-excerpt">Faith is not the absence of uncertainty — it is the courage to keep walking even when you cannot see the next step. God honours that kind of trust.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 38</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="col-md-6 reveal delay-2" data-cat="testimony">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-community">
+                                <i class="bi bi-heart-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-community">Testimony</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 4 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar" style="background:linear-gradient(135deg,#1A3A5C,#2E6EA6);">KM</div><span>Kwame &amp; Mary</span></div>
+                                    <span><i class="bi bi-calendar3"></i> Jan 28, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">Our Marriage Was Dying — Until We Walked Through These Doors</h4>
+                                <p class="blog-card-excerpt">We came to Word Transformation as a last resort. What we found was not a programme — it was a community that refused to let us walk out.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 89</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="col-md-6 reveal delay-1" data-cat="teaching">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-leadership">
+                                <i class="bi bi-award-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-leadership">Leadership</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 8 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar">PE</div><span>Pastor Emmanuel</span></div>
+                                    <span><i class="bi bi-calendar3"></i> Jan 14, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">The Servant Leader: What Jesus Redefined About Power</h4>
+                                <p class="blog-card-excerpt">In a world obsessed with influence, Jesus redefined greatness. The towel and the basin were not symbols of weakness — they were a manifesto of the Kingdom.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 41</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="col-md-6 reveal delay-2" data-cat="devotional">
+                        <a href="blogpost.html" class="blog-card">
+                            <div class="blog-card-img blog-img-devotional">
+                                <i class="bi bi-moon-stars-fill"></i>
+                                <div class="blog-img-overlay"></div>
+                                <span class="blog-cat-tag tag-devotional">Devotional</span>
+                                <span class="blog-read-time"><i class="bi bi-clock"></i> 4 min</span>
+                            </div>
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-author"><div class="blog-card-avatar" style="background:linear-gradient(135deg,#1a3d1b,#2a5e2b);">PJ</div><span>Pastor James</span></div>
+                                    <span><i class="bi bi-calendar3"></i> Jan 5, 2026</span>
+                                </div>
+                                <h4 class="blog-card-title">Trusting God in the Dark — Psalm 23 for Hard Seasons</h4>
+                                <p class="blog-card-excerpt">The valley of the shadow of death is not a destination. It is a passage. And the Shepherd walks it with you — every single step.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-read-more">Read more <i class="bi bi-arrow-right"></i></span>
+                                    <span class="blog-card-likes"><i class="bi bi-heart"></i> 55</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div><!-- /row cards -->
+
+                <!-- Load more -->
+                <div class="load-more-wrap">
+                    <button class="btn-load-more" id="loadMoreBtn" onclick="loadMore()">
+                        <i class="bi bi-arrow-clockwise"></i> Load More Posts
+                    </button>
                 </div>
-            </div>
 
-            <!-- Post 3 -->
-            <div class="col-md-6 col-lg-4 blog-post" data-category="devotion">
-                <div class="blog-card">
-                    <div class="blog-card-img gold">
-                        <i class="bi bi-sunrise-fill"></i>
-                        <span class="blog-category-badge badge-devotion">Devotional</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i>Feb 19, 2025</span>
-                            <span><i class="bi bi-clock me-1"></i>3 min read</span>
+            </div><!-- /col-lg-8 -->
+
+            <!-- ── Sidebar ── -->
+            <div class="col-lg-4">
+                <aside class="blog-sidebar">
+
+                    <!-- Search -->
+                    <div class="sidebar-widget">
+                        <p class="sidebar-heading">Search Posts</p>
+                        <div style="position:relative;">
+                            <input type="text" id="postSearch" class="nl-input" style="width:100%;padding-right:2.5rem;" placeholder="Search by topic or keyword…" oninput="filterBySearch(this.value)">
+                            <i class="bi bi-search" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:.85rem;pointer-events:none;"></i>
                         </div>
-                        <div class="scripture-tag"><i class="bi bi-book"></i> Isaiah 40:31</div>
-                        <h3 class="blog-title">Renewed Strength: A Morning Devotional for the Weary Soul</h3>
-                        <p class="blog-excerpt">When weariness sets in, God's invitation remains open. A short but powerful devotion to start your week anchored in His promises.</p>
-                        <a href="#" class="blog-read-more" onclick="openArticle('post3'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
                     </div>
-                </div>
-            </div>
 
-            <!-- Post 4 -->
-            <div class="col-md-6 col-lg-4 blog-post" data-category="sermon">
-                <div class="blog-card">
-                    <div class="blog-card-img navy">
-                        <i class="bi bi-water"></i>
-                        <span class="blog-category-badge badge-sermon">Sermon</span>
+                    <!-- Categories -->
+                    <div class="sidebar-widget">
+                        <p class="sidebar-heading">Browse by Category</p>
+                        <a class="sidebar-cat-item" href="#" onclick="filterCat(event,'devotional')">
+                            <span class="sidebar-cat-name"><i class="bi bi-journal-bookmark-fill"></i> Devotional</span>
+                            <span class="sidebar-cat-count">8</span>
+                        </a>
+                        <a class="sidebar-cat-item" href="#" onclick="filterCat(event,'testimony')">
+                            <span class="sidebar-cat-name"><i class="bi bi-stars"></i> Testimony</span>
+                            <span class="sidebar-cat-count">6</span>
+                        </a>
+                        <a class="sidebar-cat-item" href="#" onclick="filterCat(event,'teaching')">
+                            <span class="sidebar-cat-name"><i class="bi bi-book-fill"></i> Teaching</span>
+                            <span class="sidebar-cat-count">5</span>
+                        </a>
+                        <a class="sidebar-cat-item" href="#" onclick="filterCat(event,'community')">
+                            <span class="sidebar-cat-name"><i class="bi bi-people-fill"></i> Community</span>
+                            <span class="sidebar-cat-count">5</span>
+                        </a>
+                        <a class="sidebar-cat-item" href="#" onclick="filterCat(event,'all')">
+                            <span class="sidebar-cat-name"><i class="bi bi-grid-fill"></i> All Posts</span>
+                            <span class="sidebar-cat-count">24</span>
+                        </a>
                     </div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i>Feb 16, 2025</span>
-                            <span><i class="bi bi-clock me-1"></i>7 min read</span>
+
+                    <!-- Recent posts -->
+                    <div class="sidebar-widget">
+                        <p class="sidebar-heading">Recent Posts</p>
+                        <a href="blogpost.html" class="blog-list-item">
+                            <div class="blog-list-thumb blog-img-devotional"><i class="bi bi-journal-bookmark-fill"></i></div>
+                            <div>
+                                <div class="blog-list-title">When God's Silence Is His Answer</div>
+                                <div class="blog-list-meta">March 9, 2026 · 7 min read</div>
+                            </div>
+                        </a>
+                        <a href="blogpost.html" class="blog-list-item">
+                            <div class="blog-list-thumb blog-img-community"><i class="bi bi-people-fill"></i></div>
+                            <div>
+                                <div class="blog-list-title">Why Community Is at the Heart of the Gospel</div>
+                                <div class="blog-list-meta">March 4, 2026 · 5 min read</div>
+                            </div>
+                        </a>
+                        <a href="blogpost.html" class="blog-list-item">
+                            <div class="blog-list-thumb blog-img-testimony"><i class="bi bi-stars"></i></div>
+                            <div>
+                                <div class="blog-list-title">How God Turned My Season of Waiting Into a Miracle</div>
+                                <div class="blog-list-meta">Feb 24, 2026 · 6 min read</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Today's verse -->
+                    <div class="sidebar-widget" style="background:linear-gradient(135deg,rgba(92,61,30,.3),rgba(201,168,76,.07));border-color:rgba(201,168,76,.2);">
+                        <p class="sidebar-heading">Today's Verse</p>
+                        <p class="sidebar-verse">"Your word is a lamp for my feet, a light on my path."<cite>— Psalm 119:105</cite></p>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="sidebar-widget">
+                        <p class="sidebar-heading">Popular Tags</p>
+                        <div class="sidebar-tag-cloud">
+                            <span class="sidebar-tag" onclick="filterCat(event,'devotional')">Prayer</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'teaching')">Romans 8</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'devotional')">Waiting on God</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'teaching')">John 11</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'community')">Small Groups</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'testimony')">Healing</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'teaching')">Faith</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'community')">Marriage</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'teaching')">Leadership</span>
+                            <span class="sidebar-tag" onclick="filterCat(event,'devotional')">Psalms</span>
                         </div>
-                        <div class="scripture-tag"><i class="bi bi-book"></i> Matthew 14:22–33</div>
-                        <h3 class="blog-title">Step Out of the Boat: Faith That Moves in the Storm</h3>
-                        <p class="blog-excerpt">Peter's walk on water teaches us that miracles happen at the intersection of faith and obedience. Full recap and three action points.</p>
-                        <a href="#" class="blog-read-more" onclick="openArticle('post4'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
                     </div>
-                </div>
-            </div>
 
-            <!-- Post 5 -->
-            <div class="col-md-6 col-lg-4 blog-post" data-category="teaching">
-                <div class="blog-card">
-                    <div class="blog-card-img brown">
-                        <i class="bi bi-shield-fill"></i>
-                        <span class="blog-category-badge badge-teaching">Teaching</span>
-                    </div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i>Feb 9, 2025</span>
-                            <span><i class="bi bi-clock me-1"></i>6 min read</span>
+                    <!-- Newsletter -->
+                    <div class="sidebar-widget" style="background:rgba(42,94,43,.12);border-color:rgba(42,94,43,.25);">
+                        <p class="sidebar-heading">Never Miss a Post</p>
+                        <p style="font-family:var(--serif);font-style:italic;font-size:.85rem;color:var(--text-dim);line-height:1.6;margin-bottom:.5rem;">Get new posts delivered straight to your inbox every week.</p>
+                        <div class="nl-input-wrap">
+                            <input type="email" id="nlEmail" class="nl-input" placeholder="your@email.com">
+                            <button class="nl-btn" onclick="subscribeNL()">Subscribe</button>
                         </div>
-                        <div class="scripture-tag"><i class="bi bi-book"></i> Ephesians 6:10–18</div>
-                        <h3 class="blog-title">The Full Armor of God: Understanding Your Spiritual Equipment</h3>
-                        <p class="blog-excerpt">A verse-by-verse breakdown of the armor of God — what each piece means and how to put it on daily for spiritual victory.</p>
-                        <a href="#" class="blog-read-more" onclick="openArticle('post5'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
                     </div>
-                </div>
-            </div>
 
-            <!-- Post 6 -->
-            <div class="col-md-6 col-lg-4 blog-post" data-category="devotion">
-                <div class="blog-card">
-                    <div class="blog-card-img green">
-                        <i class="bi bi-heart-fill"></i>
-                        <span class="blog-category-badge badge-devotion">Devotional</span>
+                    <!-- Give CTA -->
+                    <div class="sidebar-widget" style="background:var(--brown);border-color:rgba(201,168,76,.2);text-align:center;">
+                        <i class="bi bi-heart-fill" style="font-size:1.5rem;color:var(--gold-light);display:block;margin-bottom:.75rem;"></i>
+                        <h6 style="font-family:var(--display);font-size:1.05rem;font-weight:400;color:#F5F0E8;margin-bottom:.5rem;">Support This Ministry</h6>
+                        <p style="font-family:var(--serif);font-style:italic;font-size:.8rem;color:rgba(245,240,232,.6);margin-bottom:1rem;line-height:1.6;">Your giving makes messages like these possible.</p>
+                        <a href="give.html" style="display:block;background:var(--gold);color:var(--brown);border:none;padding:.6rem 1.5rem;border-radius:50px;font-weight:600;font-size:.85rem;text-decoration:none;text-align:center;">
+                            <i class="bi bi-heart-fill me-1"></i> Give Online
+                        </a>
                     </div>
-                    <div class="blog-card-body">
-                        <div class="blog-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i>Feb 5, 2025</span>
-                            <span><i class="bi bi-clock me-1"></i>4 min read</span>
-                        </div>
-                        <div class="scripture-tag"><i class="bi bi-book"></i> Jeremiah 29:11</div>
-                        <h3 class="blog-title">God Has a Plan for You: Holding Onto Hope in Uncertainty</h3>
-                        <p class="blog-excerpt">Written for those in a season of waiting — this devotional is a reminder that God's plans for you are good, even when the path is unclear.</p>
-                        <a href="#" class="blog-read-more" onclick="openArticle('post6'); return false;">Read Notes <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
 
-        </div>
+                </aside>
+            </div><!-- /col-lg-4 -->
 
-        <!-- Empty State -->
-        <div id="empty-state" style="display:none; text-align:center; padding:3rem 0; color:var(--text-light);">
-            <i class="bi bi-search" style="font-size:2.5rem; display:block; margin-bottom:1rem; color:#D6C9B8;"></i>
-            <p>No posts found. Try a different search or filter.</p>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination-wrap">
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn"><i class="bi bi-chevron-right"></i></button>
-        </div>
+        </div><!-- /row -->
     </div>
 </section>
 
-<!-- Sermon Notes CTA -->
-<div class="notes-cta">
+<!-- ===================== QUOTE BANNER ===================== -->
+<section class="quote-banner">
     <div class="container">
-        <h2>Never Miss a Message</h2>
-        <p>Join us live every Sunday at 9:00 AM or stream the service on YouTube from anywhere in the world.</p>
-        <div class="d-flex flex-wrap gap-3 justify-content-center">
-            <a href="livestream.html" class="btn-read" style="background:#FF0000;">
-                <i class="bi bi-youtube me-1"></i> Watch Live on YouTube
-            </a>
-            <a href="index.html#services" class="btn-outline-light-custom">
-                <i class="bi bi-calendar3"></i> View Service Times
-            </a>
-        </div>
-    </div>
-</div>
-
-<!-- Newsletter -->
-<section class="newsletter-section">
-    <div class="container">
-        <div class="newsletter-card">
-            <i class="bi bi-envelope-heart-fill" style="font-size:2rem; color:var(--secondary-color); margin-bottom:0.75rem; display:block;"></i>
-            <h3>Get Sermon Notes in Your Inbox</h3>
-            <p>Subscribe and receive weekly sermon recaps, key scriptures, and devotionals straight to your email.</p>
-            <div class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Enter your email address">
-                <button class="btn-subscribe"><i class="bi bi-send-fill me-1"></i> Subscribe</button>
-            </div>
-        </div>
+        <blockquote>"The entrance of your words gives light; it gives understanding to the simple."</blockquote>
+        <cite>— Psalm 119:130</cite>
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
+<!-- ===================== FOOTER ===================== -->
+<footer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5>Word Transformation Church</h5>
-                <p class="text-white-50">Transforming lives through the power of God's Word.</p>
-            </div>
-            <div class="col-md-2 mb-4">
-                <h5>Links</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="index.html">Home</a></li>
-                    <li class="mb-2"><a href="index.html#about">About</a></li>
-                    <li class="mb-2"><a href="ministries.html">Ministries</a></li>
-                    <li class="mb-2"><a href="blog.html">Blog</a></li>
-                    <li class="mb-2"><a href="livestream.html">Live Stream</a></li>
-                    <li class="mb-2"><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h5>Service Times</h5>
-                <ul class="list-unstyled text-white-50">
-                    <li class="mb-2">Sunday: 9:00 AM & 11:00 AM</li>
-                    <li class="mb-2">Wednesday: 7:00 PM</li>
-                    <li class="mb-2">Friday: 6:30 PM</li>
-                </ul>
-            </div>
-            <div class="col-md-3 mb-4">
-                <h5>Follow Us</h5>
-                <div class="d-flex gap-2">
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm"><i class="bi bi-youtube"></i></a>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <span class="footer-brand">Word <span>Transformation</span></span>
+                <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
+                <div class="footer-social">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="livestream.html"><i class="bi bi-youtube"></i></a>
                 </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Explore</p>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="sermons.html">Sermons</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="biblequiz.html">Bible Quiz</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Ministry</p>
+                <ul>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="smallgroups.html">Small Groups</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="prayer.html">Prayer Wall</a></li>
+                    <li><a href="devotional.html">Devotional</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">My Church</p>
+                <ul>
+                    <li><a href="give.html"><i class="bi bi-heart-fill me-1" style="color:var(--gold);font-size:.7rem;"></i>Give Online</a></li>
+                    <li><a href="memberdashboard.html"><i class="bi bi-person-circle me-1" style="color:var(--gold);font-size:.7rem;"></i>My Dashboard</a></li>
+                    <li><a href="blogpost.html">Latest Post</a></li>
+                    <li><a href="livestream.html">Watch Live</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <p class="footer-heading">Service Times</p>
+                <ul>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-book me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Wednesday</strong> — 7:00 PM Bible Study</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:1.5rem;"><i class="bi bi-chat-heart me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Friday</strong> — 6:30 PM Prayer Night</li>
+                </ul>
+                <a href="livestream.html" class="btn-live-nav" style="width:fit-content;"><span class="live-dot"></span> Watch Live Online</a>
             </div>
         </div>
         <hr>
-        <div class="text-center">
-            <p class="text-white-50 mb-0">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="sitemap.html">Sitemap</a>
+            </div>
         </div>
     </div>
 </footer>
 
-<!-- Article Modal -->
-<div class="article-overlay" id="articleOverlay" onclick="closeArticleOnBg(event)">
-    <div class="article-modal" id="articleModal">
-        <div class="article-modal-hero">
-            <button class="article-close" onclick="closeArticle()"><i class="bi bi-x-lg"></i></button>
-            <span class="article-modal-tag" id="modal-tag">Sermon Recap</span>
-            <h2 class="article-modal-title" id="modal-title"></h2>
-            <div class="article-modal-meta" id="modal-meta"></div>
+<!-- ===================== GIVING MODAL ===================== -->
+<div id="givingModal" class="giving-overlay" onclick="if(event.target===this)closeGiving()">
+    <div class="giving-modal">
+        <button class="giving-close" onclick="closeGiving()">&times;</button>
+        <div class="giving-header">
+            <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto .75rem"><rect x="11" y="0" width="6" height="34" rx="2" fill="#C9A84C"/><rect x="0" y="10" width="28" height="6" rx="2" fill="#C9A84C"/></svg>
+            <h2 class="giving-title">Give Online</h2>
+            <p class="giving-sub">"Each of you should give what you have decided in your heart." — 2 Cor 9:7</p>
         </div>
-        <div class="article-body" id="modal-body"></div>
+        <div class="giving-body">
+            <div class="give-step" id="step-1">
+                <div class="give-field"><label class="give-label">Giving category</label><div class="give-tabs"><button class="give-tab active" onclick="selectTab(this,'Tithe')">Tithe</button><button class="give-tab" onclick="selectTab(this,'Offering')">Offering</button><button class="give-tab" onclick="selectTab(this,'Missions')">Missions</button></div><input type="hidden" id="give-category" value="Tithe"></div>
+                <div class="give-field"><label class="give-label">Amount (GH₵)</label><div class="give-amount-wrap"><span class="give-currency">GH₵</span><input type="number" id="give-amount" class="give-input give-amount-input" placeholder="0.00" min="1" step="0.01"></div></div>
+                <div class="give-field"><label class="give-label">Your name</label><input type="text" id="give-name" class="give-input" placeholder="Full name"></div>
+                <div class="give-field"><label class="give-label">Email address</label><input type="email" id="give-email" class="give-input" placeholder="you@example.com"></div>
+                <button class="give-next-btn" onclick="goToStep2()">Continue <i class="bi bi-arrow-right ms-1"></i></button>
+            </div>
+            <div class="give-step" id="step-2" style="display:none">
+                <div class="give-summary-box"><span id="summary-category" class="give-summary-tag">Tithe</span><span class="give-summary-amount">GH₵ <strong id="summary-amount">0.00</strong></span></div>
+                <div class="give-field"><label class="give-label">Payment method</label><div class="give-method-grid"><button class="give-method active" onclick="selectMethod(this,'momo')"><i class="bi bi-phone-fill give-method-icon"></i><span>Mobile Money</span><small>MTN · Vodafone · AirtelTigo</small></button><button class="give-method" onclick="selectMethod(this,'bank')"><i class="bi bi-bank give-method-icon"></i><span>Bank Transfer</span><small>Direct deposit</small></button></div><input type="hidden" id="give-method" value="momo"></div>
+                <div id="momo-fields"><div class="give-field"><label class="give-label">Network</label><select id="give-network" class="give-input"><option value="">Select network</option><option>MTN Mobile Money</option><option>Vodafone Cash</option><option>AirtelTigo Money</option></select></div><div class="give-field"><label class="give-label">MoMo number</label><input type="tel" id="give-phone" class="give-input" placeholder="024 000 0000"></div></div>
+                <div id="bank-fields" style="display:none"><div class="give-bank-info"><p class="give-bank-label">Transfer to</p><div class="give-bank-row"><span>Bank</span><strong>GCB Bank Ghana</strong></div><div class="give-bank-row"><span>Account</span><strong>Word Transformation Church</strong></div><div class="give-bank-row"><span>Number</span><strong>1234567890</strong></div><p class="give-bank-note">Use your name as reference then enter the transaction number below.</p></div><div class="give-field"><label class="give-label">Transaction reference</label><input type="text" id="give-reference" class="give-input" placeholder="TXN123456789"></div></div>
+                <div class="give-btn-row"><button class="give-back-btn" onclick="goToStep1()"><i class="bi bi-arrow-left me-1"></i> Back</button><button class="give-submit-btn" onclick="submitGiving()"><i class="bi bi-heart-fill me-1"></i> Complete Gift</button></div>
+            </div>
+            <div class="give-step" id="step-3" style="display:none"><div class="give-success"><div class="give-success-icon"><i class="bi bi-check-lg"></i></div><h3 class="give-success-title">God bless you!</h3><p class="give-success-msg">Your gift of <strong>GH₵ <span id="confirm-amount"></span></strong> for <strong><span id="confirm-category"></span></strong> has been received. Confirmation sent to <span id="confirm-email"></span>.</p><button class="give-next-btn" onclick="closeGiving()" style="margin-top:1.5rem">Close</button></div></div>
+        </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-const articles = {
-    featured: {
-        tag: 'Sermon Recap · Series: Walking in Faith',
-        title: 'When God\'s Silence Is His Answer',
-        meta: '<span><i class="bi bi-person-fill me-1"></i>Pastor Emmanuel Osei</span><span><i class="bi bi-calendar3 me-1"></i>March 9, 2025</span><span><i class="bi bi-book me-1"></i>John 11:1–44</span>',
-        body: `
-            <blockquote class="article-scripture">"When Jesus heard that, he said, This sickness is not unto death, but for the glory of God, that the Son of God might be glorified thereby." <cite>— John 11:4</cite></blockquote>
-            <p class="article-text">This Sunday's message challenged us to reconsider what we call God's "silence." When Lazarus fell ill, Jesus received the news and deliberately stayed two more days. To those waiting, it looked like absence. But Jesus called it purpose.</p>
-            <p class="article-text"><strong>3 Key Truths from the Message:</strong></p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span><strong>God's delays are not denials.</strong> The same God who could have prevented the death chose resurrection instead — because He had a greater miracle in mind.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Silence is not absence.</strong> Jesus said "I am the resurrection" — present tense. He is never far, even when you can't feel Him.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Your testimony is being prepared.</strong> Lazarus's story didn't end at death. Neither will yours. Trust the Author.</span></li>
-            </ul>
-            <p class="article-text">The sermon closed with an altar call for those in "a four-day situation" — seasons that seem too far gone. The church responded powerfully in prayer and worship.</p>
-            <div class="article-prayer">
-                <span class="article-prayer-label">This Week's Prayer</span>
-                <p>Lord, when I cannot hear You, help me trust that You are still working. Teach me to rest in Your silence, knowing that resurrection is on the way. Amen.</p>
-            </div>`
-    },
-    post1: {
-        tag: 'Sermon Recap',
-        title: 'All Things Work Together: Finding Purpose in Pain',
-        meta: '<span><i class="bi bi-calendar3 me-1"></i>March 2, 2025</span><span><i class="bi bi-book me-1"></i>Romans 8:28</span>',
-        body: `
-            <blockquote class="article-scripture">"And we know that all things work together for good to them that love God, to them who are the called according to his purpose." <cite>— Romans 8:28</cite></blockquote>
-            <p class="article-text">Sunday's message brought tremendous comfort to hearts in pain. The truth of Romans 8:28 is not that God causes suffering — but that He redeems it. Every broken piece of your story is in His hands.</p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span>God doesn't waste any experience in your life — even the ones that hurt the most.</span></li>
-                <li><i class="bi bi-gem"></i><span>Purpose and pain can coexist. The cross is proof of that.</span></li>
-                <li><i class="bi bi-gem"></i><span>The phrase "we know" is an anchor — not a feeling but a conviction built on God's track record.</span></li>
-            </ul>
-            <div class="article-prayer"><span class="article-prayer-label">Prayer</span><p>Father, I surrender my pain to You. I trust that You are weaving it into something beautiful. Help me to see Your hand even in what I don't understand. Amen.</p></div>`
-    },
-    post2: {
-        tag: 'Teaching',
-        title: 'Rooted and Fruitful: The Power of Meditating on God\'s Word',
-        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 23, 2025</span><span><i class="bi bi-book me-1"></i>Psalm 1:1–3</span>',
-        body: `
-            <blockquote class="article-scripture">"But his delight is in the law of the Lord; and in his law doth he meditate day and night. And he shall be like a tree planted by the rivers of water..." <cite>— Psalm 1:2–3</cite></blockquote>
-            <p class="article-text">Midweek teaching unpacked what true meditation on God's Word looks like — and it's not emptying your mind, but filling it with truth. The blessed person of Psalm 1 is defined by what they delight in and dwell on.</p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span><strong>Meditate = murmur.</strong> The Hebrew word for "meditate" is hagah — to murmur or whisper. Read Scripture aloud to yourself.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Day and night</strong> — not occasional, but rhythmic. Build morning and evening time with the Word.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Fruit comes in season.</strong> Don't rush. Stay planted and trust the process.</span></li>
-            </ul>
-            <div class="article-prayer"><span class="article-prayer-label">This Week's Challenge</span><p>Pick one verse this week. Read it morning and evening. Write it on a card. Let it sink deep. Watch what begins to grow.</p></div>`
-    },
-    post3: {
-        tag: 'Devotional',
-        title: 'Renewed Strength: A Morning Devotional for the Weary Soul',
-        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 19, 2025</span><span><i class="bi bi-book me-1"></i>Isaiah 40:31</span>',
-        body: `
-            <blockquote class="article-scripture">"But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles..." <cite>— Isaiah 40:31</cite></blockquote>
-            <p class="article-text">Some mornings you wake up tired — not just in body, but in spirit. God wrote this verse for you. Waiting on the Lord is not passive resignation; it's active expectation, like a soldier at attention.</p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span><strong>Wait</strong> — qavah in Hebrew means to bind together, like a rope twisted for strength. Your waiting braids you with God.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Renew</strong> — a fresh exchange. You bring your weariness; He gives His strength.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Mount up</strong> — eagles don't flap to rise. They spread their wings and let the wind carry them. Let the Spirit carry you today.</span></li>
-            </ul>
-            <div class="article-prayer"><span class="article-prayer-label">Morning Prayer</span><p>Lord, I am tired, but I am Yours. Today I choose to wait on You. Exchange my weakness for Your strength. Let me soar on wings I did not earn. Amen.</p></div>`
-    },
-    post4: {
-        tag: 'Sermon Recap',
-        title: 'Step Out of the Boat: Faith That Moves in the Storm',
-        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 16, 2025</span><span><i class="bi bi-book me-1"></i>Matthew 14:22–33</span>',
-        body: `
-            <blockquote class="article-scripture">"And Peter answered him and said, Lord, if it be thou, bid me come unto thee on the water. And he said, Come." <cite>— Matthew 14:28–29</cite></blockquote>
-            <p class="article-text">Peter's walk on water is often remembered for the sinking — but let's not forget the walking. Of twelve disciples, only Peter stepped out. He is the only human in history to walk on water, and it happened in a storm.</p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span>Faith requires a "Come." Are you waiting for God's invitation before you step? He gives it when you ask.</span></li>
-                <li><i class="bi bi-gem"></i><span>You can walk on what should swallow you — if your eyes are on Jesus.</span></li>
-                <li><i class="bi bi-gem"></i><span>Even when you sink, Jesus reaches. His hand is faster than the wave.</span></li>
-            </ul>
-            <div class="article-prayer"><span class="article-prayer-label">Action Points</span><p>1. Identify the boat you're afraid to leave. 2. Ask Jesus for a "Come." 3. Step — and keep your gaze on Him, not the storm around you.</p></div>`
-    },
-    post5: {
-        tag: 'Teaching',
-        title: 'The Full Armor of God: Understanding Your Spiritual Equipment',
-        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 9, 2025</span><span><i class="bi bi-book me-1"></i>Ephesians 6:10–18</span>',
-        body: `
-            <blockquote class="article-scripture">"Put on the whole armour of God, that ye may be able to stand against the wiles of the devil." <cite>— Ephesians 6:11</cite></blockquote>
-            <p class="article-text">Paul wrote this from prison, surrounded by Roman soldiers — and he used what he saw to teach the church. Every piece of Roman armor became a metaphor for spiritual readiness.</p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span><strong>Belt of Truth</strong> — Truth is foundational. Without it, everything else shifts.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Breastplate of Righteousness</strong> — Protects the heart. Your standing before God is your protection.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Shield of Faith</strong> — Quenches fiery darts. Every doubt, fear, and accusation — faith deflects them.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Helmet of Salvation</strong> — Guards your mind. Know who you are in Christ.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>Sword of the Spirit</strong> — The Word of God. The only offensive weapon. Use it daily.</span></li>
-            </ul>
-            <div class="article-prayer"><span class="article-prayer-label">Daily Declaration</span><p>I put on the full armor of God today. I stand in His truth, His righteousness, His peace, His faith, His salvation, and His Word. No weapon formed against me shall prosper. Amen.</p></div>`
-    },
-    post6: {
-        tag: 'Devotional',
-        title: 'God Has a Plan for You: Holding Onto Hope in Uncertainty',
-        meta: '<span><i class="bi bi-calendar3 me-1"></i>Feb 5, 2025</span><span><i class="bi bi-book me-1"></i>Jeremiah 29:11</span>',
-        body: `
-            <blockquote class="article-scripture">"For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end." <cite>— Jeremiah 29:11</cite></blockquote>
-            <p class="article-text">This verse was written to people in exile — far from home, confused, and waiting. It was not written to people who had it all figured out. It was written for you, right where you are.</p>
-            <ul class="article-points">
-                <li><i class="bi bi-gem"></i><span><strong>"I know"</strong> — God doesn't guess. He is intimately aware of your situation, your fear, and your future.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>"Thoughts of peace"</strong> — His intentions toward you are good. Always have been. Always will be.</span></li>
-                <li><i class="bi bi-gem"></i><span><strong>"Expected end"</strong> — Hope and a future. Not just survival — a destination worth anticipating.</span></li>
-            </ul>
-            <div class="article-prayer"><span class="article-prayer-label">Prayer for the Waiting Season</span><p>Lord, I don't always understand the path, but I trust the One who holds it. Your plans for me are good. I choose hope today. Lead me forward in Your peace. Amen.</p></div>`
-    }
-};
+// Navbar scroll
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);});
 
-function openArticle(id) {
-    const a = articles[id];
-    if (!a) return;
-    document.getElementById('modal-tag').textContent = a.tag;
-    document.getElementById('modal-title').textContent = a.title;
-    document.getElementById('modal-meta').innerHTML = a.meta;
-    document.getElementById('modal-body').innerHTML = a.body;
-    document.getElementById('articleOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-function closeArticle() {
-    document.getElementById('articleOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-}
-function closeArticleOnBg(e) {
-    if (e.target === document.getElementById('articleOverlay')) closeArticle();
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
+// Scroll reveals
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-function filterPosts(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const posts = document.querySelectorAll('.blog-post');
-    let visible = 0;
-    posts.forEach(p => {
-        const show = cat === 'all' || p.dataset.category === cat;
-        p.style.display = show ? '' : 'none';
-        if (show) visible++;
+// Category filter
+function filterCat(e, cat) {
+    if(e && e.preventDefault) e.preventDefault();
+    // Update tab pills
+    document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active');});
+    var allTabs = document.querySelectorAll('.cat-tab');
+    allTabs.forEach(function(t){
+        if(cat==='all'&&t.textContent.includes('All')) t.classList.add('active');
+        if(cat==='devotional'&&t.textContent.includes('Devotional')) t.classList.add('active');
+        if(cat==='testimony'&&t.textContent.includes('Testimony')) t.classList.add('active');
+        if(cat==='teaching'&&t.textContent.includes('Teaching')) t.classList.add('active');
+        if(cat==='community'&&t.textContent.includes('Community')) t.classList.add('active');
     });
-    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+    // Filter cards
+    var cards = document.querySelectorAll('#cardsContainer > [data-cat]');
+    cards.forEach(function(c){
+        var show = cat==='all' || c.getAttribute('data-cat')===cat;
+        c.style.display = show ? '' : 'none';
+    });
+    // Update heading
+    var labels={all:'All Posts',devotional:'Devotional',testimony:'Testimony',teaching:'Teaching',community:'Community'};
+    document.getElementById('gridHeading').textContent = labels[cat]||'All Posts';
+    // Scroll to grid
+    document.getElementById('postsGrid').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function searchPosts(q) {
-    const posts = document.querySelectorAll('.blog-post');
-    let visible = 0;
-    posts.forEach(p => {
-        const text = p.textContent.toLowerCase();
-        const show = text.includes(q.toLowerCase());
-        p.style.display = show ? '' : 'none';
-        if (show) visible++;
+// Search filter
+function filterBySearch(q){
+    q=q.toLowerCase().trim();
+    document.querySelectorAll('#cardsContainer > [data-cat]').forEach(function(c){
+        var title=c.querySelector('.blog-card-title');
+        var excerpt=c.querySelector('.blog-card-excerpt');
+        var text=(title?title.textContent:'')+(excerpt?excerpt.textContent:'');
+        c.style.display=(!q||text.toLowerCase().includes(q))?'':'none';
     });
-    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
 }
+
+// Sort (visual demo — reorders DOM)
+function sortPosts(val){
+    var container=document.getElementById('cardsContainer');
+    var cards=Array.from(container.querySelectorAll('[data-cat]'));
+    cards.sort(function(a,b){
+        if(val==='popular'){
+            var al=parseInt(a.querySelector('.blog-card-likes')?.textContent)||0;
+            var bl=parseInt(b.querySelector('.blog-card-likes')?.textContent)||0;
+            return bl-al;
+        }
+        return 0; // newest = default order
+    });
+    cards.forEach(function(c){container.appendChild(c);});
+}
+
+// Load more (demo)
+function loadMore(){
+    var btn=document.getElementById('loadMoreBtn');
+    btn.classList.add('loading');
+    btn.innerHTML='<i class="bi bi-arrow-clockwise"></i> Loading…';
+    setTimeout(function(){
+        btn.classList.remove('loading');
+        btn.innerHTML='<i class="bi bi-check-circle"></i> All posts loaded';
+        btn.disabled=true;
+        btn.style.opacity='.5';
+    },1800);
+}
+
+// Newsletter
+function subscribeNL(){
+    var e=document.getElementById('nlEmail').value.trim();
+    if(!e||!e.includes('@')){alert('Please enter a valid email address.');return;}
+    document.getElementById('nlEmail').value='';
+    var btn=document.querySelector('.nl-btn');
+    btn.textContent='✓ Done!';
+    setTimeout(function(){btn.textContent='Subscribe';},2500);
+}
+
+// Giving modal
+function closeGiving(){document.getElementById('givingModal').style.display='none';resetGiving();}
+function resetGiving(){document.getElementById('step-1').style.display='block';document.getElementById('step-2').style.display='none';document.getElementById('step-3').style.display='none';['give-amount','give-name','give-email','give-phone','give-reference'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});document.getElementById('give-network').value='';document.getElementById('give-category').value='Tithe';document.getElementById('give-method').value='momo';document.querySelectorAll('.give-tab').forEach(function(t,i){t.classList.toggle('active',i===0);});document.querySelectorAll('.give-method').forEach(function(m,i){m.classList.toggle('active',i===0);});document.getElementById('momo-fields').style.display='block';document.getElementById('bank-fields').style.display='none';}
+function selectTab(el,v){document.querySelectorAll('.give-tab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');document.getElementById('give-category').value=v;}
+function selectMethod(el,v){document.querySelectorAll('.give-method').forEach(function(m){m.classList.remove('active');});el.classList.add('active');document.getElementById('give-method').value=v;document.getElementById('momo-fields').style.display=v==='momo'?'block':'none';document.getElementById('bank-fields').style.display=v==='bank'?'block':'none';}
+function goToStep2(){if(!document.getElementById('give-amount').value||parseFloat(document.getElementById('give-amount').value)<=0){alert('Please enter a valid amount.');return;}if(!document.getElementById('give-name').value.trim()){alert('Please enter your name.');return;}var e=document.getElementById('give-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email.');return;}document.getElementById('summary-amount').textContent=parseFloat(document.getElementById('give-amount').value).toFixed(2);document.getElementById('summary-category').textContent=document.getElementById('give-category').value;document.getElementById('step-1').style.display='none';document.getElementById('step-2').style.display='block';}
+function goToStep1(){document.getElementById('step-2').style.display='none';document.getElementById('step-1').style.display='block';}
+function submitGiving(){if(document.getElementById('give-method').value==='momo'){if(!document.getElementById('give-network').value){alert('Please select your network.');return;}if(!document.getElementById('give-phone').value.trim()){alert('Please enter your MoMo number.');return;}}else{if(!document.getElementById('give-reference').value.trim()){alert('Please enter your transaction reference.');return;}}document.getElementById('confirm-amount').textContent=parseFloat(document.getElementById('give-amount').value).toFixed(2);document.getElementById('confirm-category').textContent=document.getElementById('give-category').value;document.getElementById('confirm-email').textContent=document.getElementById('give-email').value.trim();document.getElementById('step-2').style.display='none';document.getElementById('step-3').style.display='block';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGiving();});
+
+// Site search
+var SITE_PAGES=[{title:'Home',url:'index.html',icon:'bi-house-fill',cat:'Page',iconClass:'brown'},{title:'About Us',url:'about.html',icon:'bi-info-circle-fill',cat:'Page',iconClass:'brown'},{title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},{title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},{title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},{title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},{title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},{title:'Give Online',url:'give.html',icon:'bi-heart-fill',cat:'Page',iconClass:'red'},{title:'My Account',url:'memberdashboard.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},{title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},{title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},{title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},{title:"When God's Silence Is His Answer",url:'blogpost.html',icon:'bi-journal-bookmark-fill',cat:'Post',iconClass:'brown',sub:'Devotional · Pastor Emmanuel'}];
+function toggleSearch(){var o=document.getElementById('searchOverlay');var ip=document.getElementById('searchInput');var open=o.classList.toggle('open');if(open){ip.value='';document.getElementById('searchResults').innerHTML=renderHints();setTimeout(function(){ip.focus();},80);document.body.style.overflow='hidden';}else{document.body.style.overflow='';}}
+function handleSearchKey(e){if(e.key==='Escape')toggleSearch();}
+function runSearch(q){var r=document.getElementById('searchResults');q=q.trim().toLowerCase();if(!q){r.innerHTML=renderHints();return;}var m=SITE_PAGES.filter(function(p){return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub.toLowerCase().includes(q));}).slice(0,7);if(!m.length){r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+q+'"</div>';return;}r.innerHTML=m.map(function(p){return'<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+p.title+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>';}).join('');}
+function renderHints(){return'<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="blogpost.html"><i class="bi bi-journal-bookmark-fill"></i> Latest Post</a><a class="search-quick-link" href="give.html"><i class="bi bi-heart-fill"></i> Give</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a></div></div>';}
 </script>
 </body>
 </html>
