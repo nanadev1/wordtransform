@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Upcoming Events — Word Transformation Church, Accra. Services, conferences, outreach, and more.">
+<title>Events | Word Transformation Church</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   DESIGN TOKENS — identical to index.html
+   ========================================================= */
+:root {
+    --black:#0A0A0A; --deep:#111111; --card:#1C1C1C; --border:rgba(255,255,255,.08);
+    --gold:#C9A84C; --gold-light:#E8C97A; --gold-pale:rgba(201,168,76,.1);
+    --light:#FFFFFF; --light-alt:#F7F4EF; --light-text:#1C1C1C;
+    --light-muted:#6B6560; --light-stone:#E8E2D9;
+    --text:#E8E4DE; --text-dim:#A09A91; --muted:#6E6861; --white:#FFFFFF;
+    --brown:#5C3D1E; --brown-mid:#8B6340; --green:#2A5E2B; --green-light:#4CAF50;
+    --display:'DM Serif Display',Georgia,serif;
+    --body:'DM Sans',system-ui,sans-serif;
+    --serif:'Lora',Georgia,serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:72px;}
+body{font-family:var(--body);color:var(--text);background:var(--deep);line-height:1.65;-webkit-font-smoothing:antialiased;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:.1s!important} .delay-2{transition-delay:.2s!important} .delay-3{transition-delay:.3s!important}
+
+/* ── Navbar ── */
+.navbar{background:rgba(10,10,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:.9rem 0;border-bottom:1px solid rgba(201,168,76,.12);transition:background .3s ease;z-index:1030;}
+.navbar.scrolled{background:rgba(10,10,10,.98);box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.navbar-brand{font-family:var(--display);font-size:1.3rem;color:var(--white)!important;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;}
+.brand-icon{width:32px;height:32px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:1rem;flex-shrink:0;}
+.brand-sub{display:block;font-family:var(--body);font-size:.65rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);line-height:1;}
+.navbar-nav .nav-link{color:rgba(255,255,255,.82)!important;font-size:.875rem;font-weight:500;padding:.5rem .9rem!important;border-radius:6px;transition:all .2s ease;}
+.navbar-nav .nav-link:hover,.navbar-nav .nav-link.active{color:var(--gold)!important;background:rgba(201,168,76,.1);}
+.dropdown-menu{background:#141414;border:1px solid rgba(201,168,76,.18);border-radius:10px;box-shadow:0 16px 48px rgba(0,0,0,.5);padding:.5rem;}
+.dropdown-item{color:rgba(255,255,255,.8);font-size:.87rem;padding:.55rem .9rem;border-radius:6px;transition:all .15s ease;display:flex;align-items:center;gap:8px;}
+.dropdown-item i{color:var(--gold);font-size:.85rem;}
+.dropdown-item:hover{background:rgba(201,168,76,.1);color:var(--white);}
+.dropdown-item.active{color:var(--gold)!important;background:rgba(201,168,76,.08);}
+.dropdown-divider{border-color:rgba(201,168,76,.12);margin:.35rem 0;}
+.btn-live-nav{display:inline-flex;align-items:center;gap:6px;background:#E50000;color:#fff!important;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .25s ease;}
+.btn-live-nav:hover{background:#c20000;transform:translateY(-1px);}
+.live-dot{width:7px;height:7px;background:#fff;border-radius:50%;display:inline-block;animation:livePulse 1.4s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.btn-give{background:var(--gold);color:var(--brown)!important;border:none;padding:.42rem 1.1rem;border-radius:50px;font-weight:600;font-size:.85rem;transition:all .25s ease;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;}
+.btn-give:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:991.98px){.navbar-collapse{background:#0a0a0a;padding:1rem;border-radius:10px;margin-top:.5rem;}}
+
+/* ── Search overlay ── */
+.search-overlay{display:none;position:fixed;top:0;left:0;right:0;z-index:9998;flex-direction:column;}
+.search-overlay.open{display:flex;}
+.search-bar-wrap{background:rgba(10,10,10,.97);backdrop-filter:blur(20px);display:flex;align-items:center;gap:12px;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(201,168,76,.15);}
+.search-bar-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+.search-bar-input{flex:1;background:transparent;border:none;outline:none;font-size:1.1rem;color:var(--white);caret-color:var(--gold);}
+.search-bar-input::placeholder{color:rgba(255,255,255,.3);}
+.search-bar-hint{font-size:.75rem;color:rgba(255,255,255,.3);white-space:nowrap;}
+.search-bar-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;padding:4px;}
+.search-bar-close:hover{color:var(--white);}
+.search-box{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);width:100%;max-width:660px;border-radius:0 0 14px 14px;border:1px solid rgba(201,168,76,.12);border-top:none;overflow:hidden;}
+.search-results{max-height:70vh;overflow-y:auto;}
+.search-result-item{display:flex;align-items:center;gap:12px;padding:.85rem 1.25rem;text-decoration:none;transition:background .15s ease;color:var(--white);border-bottom:1px solid rgba(255,255,255,.05);}
+.search-result-item:hover{background:rgba(201,168,76,.08);}
+.search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:rgba(255,255,255,.6);}
+.search-result-icon.brown{color:var(--gold);} .search-result-icon.green{color:#5aac5c;} .search-result-icon.red{color:#ff5555;}
+.search-result-text{flex:1;}
+.search-result-title{font-size:.92rem;font-weight:500;color:var(--white);}
+.search-result-sub{font-size:.76rem;color:rgba(255,255,255,.4);}
+.search-result-arrow{color:rgba(255,255,255,.2);font-size:.75rem;}
+.search-empty{padding:2rem;text-align:center;color:rgba(255,255,255,.4);font-size:.9rem;}
+.search-hints{padding:1rem 1.25rem;}
+.search-hint-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:.6rem;}
+.search-quick-links{display:flex;flex-wrap:wrap;gap:6px;}
+.search-quick-link{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;border:1px solid rgba(201,168,76,.2);font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s ease;}
+.search-quick-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);}
+.search-backdrop{position:fixed;inset:0;z-index:-1;}
+
+/* ── Events Hero ── */
+.events-hero{background:var(--black);padding:5.5rem 0 4rem;position:relative;overflow:hidden;}
+.events-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 0%,rgba(201,168,76,.11) 0%,transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(42,94,43,.08) 0%,transparent 50%);}
+.events-hero-inner{position:relative;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;}
+.hero-eyebrow-line{display:inline-block;width:28px;height:1px;background:var(--gold);opacity:.6;}
+.events-hero h1{font-family:var(--display);font-size:clamp(2.4rem,6vw,4rem);font-weight:400;color:var(--white);line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem;}
+.events-hero h1 em{font-style:italic;color:var(--gold);}
+.events-hero-sub{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--text-dim);max-width:520px;line-height:1.75;margin-bottom:2rem;}
+
+/* Hero stats strip */
+.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);}
+.hero-stat-num{font-family:var(--display);font-size:1.9rem;color:var(--gold);line-height:1;display:block;}
+.hero-stat-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:3px;}
+
+/* ── Filter bar ── */
+.filter-bar{background:var(--black);border-bottom:1px solid rgba(201,168,76,.08);padding:1rem 0;position:sticky;top:70px;z-index:100;}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filter-tab{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:50px;padding:.4rem 1.1rem;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s ease;text-decoration:none;white-space:nowrap;}
+.filter-tab:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25);color:var(--gold);}
+.filter-tab.active{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.4);color:var(--gold);}
+.filter-tab .tab-count{background:rgba(255,255,255,.08);border-radius:50px;padding:1px 7px;font-size:.62rem;margin-left:2px;}
+.filter-tab.active .tab-count{background:rgba(201,168,76,.2);}
+.filter-search{margin-left:auto;position:relative;flex-shrink:0;}
+.filter-search input{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:50px;padding:.4rem 1rem .4rem 2.1rem;font-size:.78rem;color:var(--white);outline:none;width:200px;transition:all .2s ease;font-family:var(--body);}
+.filter-search input:focus{border-color:rgba(201,168,76,.4);width:240px;background:rgba(255,255,255,.07);}
+.filter-search input::placeholder{color:rgba(255,255,255,.25);}
+.filter-search i{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:.78rem;pointer-events:none;}
+@media(max-width:767px){.filter-search{width:100%;margin-left:0;margin-top:.5rem;}.filter-search input{width:100%;}}
+
+/* ── Featured Event Banner ── */
+.featured-event{background:linear-gradient(135deg,#1a0e05 0%,#2d1a08 50%,#071508 100%);border:1px solid rgba(201,168,76,.2);border-radius:20px;overflow:hidden;margin-bottom:3rem;position:relative;}
+.featured-event::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(201,168,76,.08) 0%,transparent 60%);}
+.featured-event-inner{position:relative;padding:2.5rem 3rem;display:grid;grid-template-columns:auto 1fr auto;gap:2.5rem;align-items:center;}
+.featured-date-block{text-align:center;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:14px;padding:1.25rem 1.5rem;flex-shrink:0;}
+.featured-date-day{font-family:var(--display);font-size:3rem;color:var(--gold);line-height:1;display:block;}
+.featured-date-month{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.featured-badge{position:absolute;top:1.25rem;left:1.25rem;background:linear-gradient(90deg,var(--gold),var(--gold-light));color:var(--black);font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:50px;}
+.featured-event-title{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:400;color:var(--white);margin-bottom:.6rem;line-height:1.15;}
+.featured-event-desc{font-family:var(--serif);font-style:italic;font-size:.97rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.25rem;max-width:560px;}
+.featured-event-meta{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.8rem;color:var(--text-dim);}
+.featured-event-meta span{display:flex;align-items:center;gap:5px;}
+.featured-event-meta i{color:var(--gold);}
+.featured-cta{display:flex;flex-direction:column;gap:10px;align-items:flex-end;flex-shrink:0;}
+.btn-rsvp-primary{background:var(--gold);color:var(--black);border:none;padding:.75rem 1.75rem;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .3s ease;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;}
+.btn-rsvp-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3);}
+.btn-rsvp-primary.rsvped{background:rgba(42,94,43,.3);color:var(--green-light);border:1px solid var(--green-light);}
+.btn-calendar{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:.55rem 1.25rem;border-radius:50px;font-size:.78rem;cursor:pointer;transition:all .2s ease;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
+.btn-calendar:hover{border-color:rgba(201,168,76,.3);color:var(--gold);}
+@media(max-width:767px){.featured-event-inner{grid-template-columns:1fr;gap:1.5rem;padding:1.75rem;}.featured-cta{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}}
+
+/* ── Event card ── */
+.event-card{background:var(--white);border:1px solid var(--light-stone);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;height:100%;transition:all .3s ease;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.event-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.12);border-color:var(--gold);}
+.event-card-top{background:var(--black);padding:1.1rem 1.25rem .9rem;display:flex;align-items:flex-start;justify-content:space-between;}
+.event-date-block{display:flex;flex-direction:column;}
+.event-day{font-family:var(--display);font-size:2.6rem;color:var(--gold);line-height:1;}
+.event-month{font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.event-tag{display:inline-flex;align-items:center;gap:4px;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:50px;background:rgba(201,168,76,.18);color:var(--gold);}
+.event-tag-green{background:rgba(42,94,43,.2);color:#22c55e;}
+.event-tag-gold{background:rgba(201,168,76,.18);color:var(--brown);}
+.event-tag-blue{background:rgba(26,58,92,.25);color:#60a5fa;}
+.event-tag-purple{background:rgba(168,85,247,.15);color:#c084fc;}
+.event-tag-red{background:rgba(220,38,38,.15);color:#f87171;}
+.event-card-body{padding:1.25rem 1.4rem 1.4rem;flex:1;display:flex;flex-direction:column;}
+.event-card-title{font-family:var(--display);font-size:1.08rem;font-weight:400;color:var(--light-text);margin-bottom:.6rem;line-height:1.3;}
+.event-card-desc{font-family:var(--serif);font-size:.88rem;color:var(--light-muted);line-height:1.65;flex:1;margin-bottom:1rem;}
+.event-card-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:.75rem;color:var(--brown-mid);border-top:1px solid var(--light-stone);padding-top:.85rem;margin-top:auto;}
+.event-card-meta span{display:flex;align-items:center;gap:4px;}
+.event-card-meta i{color:var(--brown-mid);font-size:.75rem;}
+.event-card-footer{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.4rem 1.1rem;border-top:1px solid var(--light-stone);background:rgba(0,0,0,.02);}
+.btn-rsvp-card{background:var(--black);color:var(--white);border:none;padding:.45rem 1.1rem;border-radius:50px;font-size:.76rem;font-weight:600;cursor:pointer;transition:all .25s ease;display:inline-flex;align-items:center;gap:5px;}
+.btn-rsvp-card:hover{background:var(--brown);}
+.btn-rsvp-card.rsvped{background:rgba(42,94,43,.15);color:var(--green);border:1px solid rgba(42,94,43,.3);cursor:default;}
+.event-spots{font-size:.68rem;color:var(--light-muted);display:flex;align-items:center;gap:4px;}
+.spots-bar{display:inline-block;width:50px;height:3px;background:var(--light-stone);border-radius:2px;margin-left:4px;vertical-align:middle;overflow:hidden;}
+.spots-bar-fill{height:100%;border-radius:2px;background:var(--gold);}
+
+/* ── Calendar View ── */
+.calendar-section{background:var(--light-alt);padding:5rem 0;border-top:1px solid var(--light-stone);}
+.calendar-wrap{background:var(--white);border-radius:20px;border:1px solid var(--light-stone);overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,.07);}
+.calendar-header{background:var(--black);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.calendar-month{font-family:var(--display);font-size:1.2rem;font-weight:400;color:var(--white);}
+.cal-nav-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;font-size:.9rem;}
+.cal-nav-btn:hover{background:rgba(201,168,76,.15);color:var(--gold);border-color:rgba(201,168,76,.3);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+.cal-day-label{text-align:center;padding:.65rem;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--light-muted);border-bottom:1px solid var(--light-stone);}
+.cal-cell{min-height:80px;border-right:1px solid var(--light-stone);border-bottom:1px solid var(--light-stone);padding:.5rem;position:relative;cursor:default;}
+.cal-cell:nth-child(7n){border-right:none;}
+.cal-cell.other-month{background:#fafafa;}
+.cal-cell.other-month .cal-num{opacity:.3;}
+.cal-cell.today{background:rgba(201,168,76,.05);}
+.cal-cell.today .cal-num{background:var(--gold);color:var(--black);border-radius:50%;}
+.cal-cell.has-event{cursor:pointer;}
+.cal-cell.has-event:hover{background:rgba(201,168,76,.04);}
+.cal-num{width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:500;color:var(--light-text);}
+.cal-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin:1px;}
+.cal-dot.gold{background:var(--gold);}
+.cal-dot.green{background:#22c55e;}
+.cal-dot.blue{background:#60a5fa;}
+.cal-event-chip{font-size:.58rem;font-weight:600;padding:2px 6px;border-radius:4px;margin-top:2px;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:1.4;}
+.cal-event-chip.gold{background:rgba(201,168,76,.15);color:var(--brown);}
+.cal-event-chip.green{background:rgba(42,94,43,.1);color:#166534;}
+.cal-event-chip.blue{background:rgba(26,58,92,.1);color:#1e3a5f;}
+@media(max-width:575px){.cal-cell{min-height:50px;padding:.3rem;}.cal-event-chip{display:none;}}
+
+/* ── Schedule list view ── */
+.schedule-section{background:var(--deep);padding:5rem 0;}
+.schedule-month-heading{font-family:var(--display);font-size:1.5rem;font-weight:400;color:var(--white);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid rgba(201,168,76,.12);display:flex;align-items:center;gap:10px;}
+.schedule-month-heading i{color:var(--gold);font-size:1rem;}
+.sched-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;display:grid;grid-template-columns:72px 1fr auto;gap:1.25rem;align-items:center;margin-bottom:.75rem;transition:all .25s ease;}
+.sched-item:hover{border-color:rgba(201,168,76,.2);transform:translateX(4px);}
+.sched-date-box{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:10px;text-align:center;padding:.65rem .5rem;}
+.sched-day{font-family:var(--display);font-size:1.7rem;color:var(--gold);line-height:1;}
+.sched-month{font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.sched-title{font-family:var(--display);font-size:.97rem;font-weight:400;color:var(--white);margin-bottom:.3rem;}
+.sched-meta{font-size:.75rem;color:var(--text-dim);display:flex;flex-wrap:wrap;gap:.75rem;}
+.sched-meta i{color:var(--gold);font-size:.7rem;}
+.sched-tag{font-size:.6rem;font-weight:700;padding:2px 9px;border-radius:50px;letter-spacing:.06em;text-transform:uppercase;}
+.sched-tag.gold{background:rgba(201,168,76,.12);color:var(--gold);}
+.sched-tag.green{background:rgba(42,94,43,.15);color:#22c55e;}
+.sched-tag.blue{background:rgba(26,58,92,.18);color:#60a5fa;}
+.sched-tag.purple{background:rgba(168,85,247,.15);color:#c084fc;}
+.btn-sched-rsvp{background:transparent;border:1.5px solid rgba(201,168,76,.3);color:var(--gold);padding:.4rem 1rem;border-radius:50px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s ease;white-space:nowrap;}
+.btn-sched-rsvp:hover{background:rgba(201,168,76,.08);}
+.btn-sched-rsvp.rsvped{background:rgba(42,94,43,.1);border-color:var(--green-light);color:var(--green-light);cursor:default;}
+@media(max-width:575px){.sched-item{grid-template-columns:60px 1fr;}.btn-sched-rsvp{display:none;}}
+
+/* ── View toggle ── */
+.view-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;}
+.view-btn{background:none;border:none;color:rgba(255,255,255,.4);padding:.4rem .75rem;font-size:.85rem;cursor:pointer;transition:all .2s ease;}
+.view-btn.active{background:rgba(201,168,76,.15);color:var(--gold);}
+.view-btn:hover:not(.active){color:rgba(255,255,255,.7);}
+
+/* ── Subscribe banner ── */
+.subscribe-banner{background:linear-gradient(135deg,var(--brown),#3d2010);padding:4.5rem 0;text-align:center;}
+.subscribe-banner h2{font-family:var(--display);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:400;color:#F5F0E8;margin-bottom:.6rem;}
+.subscribe-banner p{font-family:var(--serif);font-style:italic;font-size:1rem;color:rgba(245,240,232,.65);margin-bottom:2rem;}
+.subscribe-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:480px;margin:0 auto;}
+.subscribe-input{flex:1;min-width:200px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:50px;padding:.75rem 1.25rem;font-size:.9rem;color:var(--white);outline:none;font-family:var(--body);}
+.subscribe-input:focus{border-color:rgba(255,255,255,.5);}
+.subscribe-input::placeholder{color:rgba(255,255,255,.4);}
+.btn-subscribe{background:var(--gold);color:var(--black);border:none;padding:.75rem 1.75rem;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .3s ease;white-space:nowrap;}
+.btn-subscribe:hover{background:var(--gold-light);}
+
+/* ── RSVP Modal ── */
+.rsvp-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,10,.75);z-index:9999;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px);}
+.rsvp-overlay.open{display:flex;}
+.rsvp-modal{background:var(--light-alt);border-radius:16px;width:100%;max-width:460px;overflow:hidden;animation:modalIn .3s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.rsvp-modal-header{background:var(--black);padding:1.5rem 2rem;position:relative;border-bottom:1px solid rgba(201,168,76,.15);}
+.rsvp-modal-header h3{font-family:var(--display);font-size:1.25rem;font-weight:400;color:var(--white);margin-bottom:.2rem;}
+.rsvp-modal-header p{font-size:.78rem;color:rgba(255,255,255,.45);margin:0;}
+.rsvp-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:rgba(255,255,255,.5);font-size:1.2rem;cursor:pointer;transition:color .2s ease;}
+.rsvp-close:hover{color:var(--white);}
+.rsvp-modal-body{padding:1.75rem 2rem;}
+.rf-label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brown-mid);margin-bottom:.4rem;}
+.rf-input{width:100%;padding:.65rem 1rem;border:1.5px solid var(--light-stone);border-radius:10px;font-size:.92rem;color:var(--light-text);background:var(--white);outline:none;transition:border-color .2s ease;font-family:var(--body);margin-bottom:1rem;}
+.rf-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.12);}
+.rf-input::placeholder{color:var(--light-muted);}
+.btn-confirm-rsvp{width:100%;padding:.85rem;background:var(--black);color:var(--white);border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-confirm-rsvp:hover{background:var(--brown);}
+.rsvp-success{text-align:center;padding:1.5rem 0;}
+.rsvp-success-icon{width:64px;height:64px;background:rgba(42,94,43,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2rem;}
+.rsvp-success-title{font-family:var(--display);font-size:1.75rem;font-weight:400;color:var(--light-text);margin-bottom:.5rem;}
+.rsvp-success-msg{font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--light-muted);line-height:1.7;}
+
+/* ── Footer ── */
+footer{background:var(--black);padding:70px 0 30px;border-top:1px solid rgba(201,168,76,.1);}
+.footer-brand{font-family:var(--display);font-size:1.4rem;color:var(--white);margin-bottom:.75rem;display:block;}
+.footer-brand span{color:var(--gold);}
+.footer-tagline{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.4);font-size:.88rem;line-height:1.6;margin-bottom:1.5rem;max-width:260px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.95rem;text-decoration:none;transition:all .2s ease;border:1px solid rgba(255,255,255,.06);}
+.footer-social a:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.footer-heading{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.2rem;}
+footer ul{list-style:none;padding:0;}
+footer ul li{margin-bottom:.7rem;}
+footer ul li a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;transition:color .2s ease;}
+footer ul li a:hover{color:var(--gold);}
+footer hr{border-color:rgba(255,255,255,.06);margin:2.5rem 0 1.5rem;}
+.footer-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;}
+.footer-copy{font-size:.8rem;color:rgba(255,255,255,.3);}
+.footer-legal{display:flex;gap:1.25rem;}
+.footer-legal a{font-size:.8rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s ease;}
+.footer-legal a:hover{color:var(--gold);}
+
+/* Toast */
+.toast-evt{position:fixed;bottom:2rem;right:2rem;background:var(--green);color:#fff;padding:.75rem 1.25rem;border-radius:10px;font-size:.86rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(12px);transition:all .35s ease;z-index:10000;pointer-events:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+            <div>Word Transformation<span class="brand-sub">Church</span></div>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Membership</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="membership.html"><i class="bi bi-person-badge-fill"></i>Become a Member</a></li>
+                        <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-speedometer2"></i>Member Dashboard</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                        <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                        <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                        <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                        <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                        <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                        <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                        <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                        <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                        <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="give.html"><i class="bi bi-heart-fill"></i>Give Online</a></li>
+                        <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                        <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-1">
+                    <button class="nav-link bg-transparent border-0" onclick="toggleSearch()" style="color:rgba(255,255,255,.7);"><i class="bi bi-search"></i></button>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                </li>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a href="give.html" class="btn-give"><i class="bi bi-heart-fill me-1"></i> Give</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Search overlay -->
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-bar-wrap">
+        <i class="bi bi-search search-bar-icon"></i>
+        <input type="text" id="searchInput" class="search-bar-input" placeholder="Search events, sermons, ministries…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
+        <span class="search-bar-hint d-none d-md-inline">Press Esc to close</span>
+        <button class="search-bar-close" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div style="position:relative;display:flex;justify-content:center;padding:0 1rem;">
+        <div class="search-box"><div class="search-results" id="searchResults"></div></div>
+    </div>
+    <div class="search-backdrop" onclick="toggleSearch()"></div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="events-hero">
+    <div class="container events-hero-inner">
+        <div class="row align-items-end g-4">
+            <div class="col-lg-7 reveal">
+                <p class="hero-eyebrow"><span class="hero-eyebrow-line"></span> What's Happening</p>
+                <h1>Life Happens in <em>Community</em></h1>
+                <p class="events-hero-sub">From Sunday worship to outreach days, conferences to prayer nights — here's everything God has on the calendar for us. Come as you are.</p>
+                <div class="hero-stats">
+                    <div><span class="hero-stat-num">12</span><span class="hero-stat-lbl">Events this month</span></div>
+                    <div><span class="hero-stat-num">6</span><span class="hero-stat-lbl">Recurring gatherings</span></div>
+                    <div><span class="hero-stat-num">500+</span><span class="hero-stat-lbl">Expected attendees</span></div>
+                </div>
+            </div>
+            <div class="col-lg-5 reveal delay-2 text-lg-end">
+                <div style="display:flex;flex-direction:column;gap:.75rem;align-items:flex-start;align-items:flex-end;">
+                    <a href="workshops.html" style="display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:50px;padding:.5rem 1.25rem;font-size:.82rem;font-weight:600;color:var(--gold);text-decoration:none;transition:all .2s ease;" onmouseover="this.style.background='rgba(201,168,76,.18)'" onmouseout="this.style.background='rgba(201,168,76,.1)'"><i class="bi bi-tools"></i> Skills Workshops</a>
+                    <a href="#calendar-section" style="display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><i class="bi bi-calendar3"></i> View Calendar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FILTER BAR ===================== -->
+<div class="filter-bar" id="filterBar">
+    <div class="container">
+        <div class="filter-tabs">
+            <a class="filter-tab active" href="#" onclick="filterEvents(event,'all')"><i class="bi bi-grid-fill"></i> All <span class="tab-count">12</span></a>
+            <a class="filter-tab" href="#" onclick="filterEvents(event,'worship')"><i class="bi bi-music-note-beamed"></i> Worship <span class="tab-count">4</span></a>
+            <a class="filter-tab" href="#" onclick="filterEvents(event,'community')"><i class="bi bi-people-fill"></i> Community <span class="tab-count">3</span></a>
+            <a class="filter-tab" href="#" onclick="filterEvents(event,'conference')"><i class="bi bi-award-fill"></i> Conference <span class="tab-count">2</span></a>
+            <a class="filter-tab" href="#" onclick="filterEvents(event,'outreach')"><i class="bi bi-globe2"></i> Outreach <span class="tab-count">2</span></a>
+            <a class="filter-tab" href="#" onclick="filterEvents(event,'youth')"><i class="bi bi-lightning-fill"></i> Youth <span class="tab-count">1</span></a>
+            <div class="filter-search">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search events…" oninput="searchEvents(this.value)">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== FEATURED EVENT ===================== -->
+<div style="background:var(--deep);padding:3.5rem 0 0;">
+    <div class="container">
+        <p style="font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;">Featured — Don't Miss</p>
+        <div class="featured-event reveal">
+            <span class="featured-badge">⭐ Special Event</span>
+            <div class="featured-event-inner">
+                <div class="featured-date-block">
+                    <span class="featured-date-day">20</span>
+                    <span class="featured-date-month">Apr</span>
+                    <div style="margin-top:.5rem;font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:.1em;">2026</div>
+                </div>
+                <div>
+                    <h2 class="featured-event-title">Easter Sunday Celebration</h2>
+                    <p class="featured-event-desc">Celebrate the resurrection of our Lord Jesus Christ with our most powerful service of the year. Two packed services, special music, and a message that will stay with you all year.</p>
+                    <div class="featured-event-meta">
+                        <span><i class="bi bi-clock-fill"></i> 8:00 AM &amp; 10:30 AM</span>
+                        <span><i class="bi bi-geo-alt-fill"></i> Main Sanctuary + Overflow</span>
+                        <span><i class="bi bi-people-fill"></i> All welcome — bring a friend</span>
+                        <span><i class="bi bi-broadcast"></i> Also streaming live</span>
+                    </div>
+                </div>
+                <div class="featured-cta">
+                    <button class="btn-rsvp-primary" id="featuredRsvpBtn" onclick="openRsvp('Easter Sunday Celebration · 20 Apr', this)">
+                        <i class="bi bi-calendar-plus-fill"></i> RSVP Now
+                    </button>
+                    <button class="btn-calendar" onclick="showToast('Added to your calendar!')">
+                        <i class="bi bi-calendar3"></i> Add to Calendar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== EVENTS GRID ===================== -->
+<section style="background:var(--deep);padding:3rem 0 5rem;">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
+            <h3 style="font-family:var(--display);font-size:1.3rem;font-weight:400;color:var(--white);margin:0;" id="gridHeading">All Upcoming Events</h3>
+            <div class="view-toggle">
+                <button class="view-btn active" onclick="setView('grid',this)" title="Grid view"><i class="bi bi-grid-3x3-gap-fill"></i></button>
+                <button class="view-btn" onclick="setView('list',this)" title="List view"><i class="bi bi-list-ul"></i></button>
+            </div>
+        </div>
+
+        <div class="row g-4" id="eventsGrid">
+
+            <!-- Event 1 -->
+            <div class="col-lg-4 col-md-6 reveal delay-1" data-cat="worship">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">16</span><span class="event-month">Mar</span></div>
+                        <span class="event-tag"><i class="bi bi-sun-fill"></i> Worship</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Sunday Worship Service</h4>
+                        <p class="event-card-desc">Join us every Sunday for powerful praise, Spirit-filled worship, and life-changing messages from God's Word. Children's church runs simultaneously.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 9:00 AM &amp; 11:00 AM</span>
+                            <span><i class="bi bi-geo-alt"></i> Main Sanctuary</span>
+                            <span><i class="bi bi-arrow-repeat"></i> Every Sunday</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card rsvped"><i class="bi bi-check-circle-fill"></i> Recurring</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> Open to all</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="col-lg-4 col-md-6 reveal delay-2" data-cat="worship">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">19</span><span class="event-month">Mar</span></div>
+                        <span class="event-tag"><i class="bi bi-book-fill"></i> Worship</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Wednesday Bible Study</h4>
+                        <p class="event-card-desc">An intimate, interactive mid-week gathering where we dig deep into Scripture together. Ask questions, bring your doubts — you are safe here.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 7:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Fellowship Hall</span>
+                            <span><i class="bi bi-arrow-repeat"></i> Every Wednesday</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Wednesday Bible Study · 19 Mar', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 40 seats<span class="spots-bar"><span class="spots-bar-fill" style="width:60%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="col-lg-4 col-md-6 reveal delay-3" data-cat="worship">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">21</span><span class="event-month">Mar</span></div>
+                        <span class="event-tag"><i class="bi bi-moon-stars-fill"></i> Worship</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Friday Prayer Night</h4>
+                        <p class="event-card-desc">We believe prayer changes things. Our Friday nights are alive with intercession, testimony, and the tangible presence of God. Come with your burdens.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 6:30 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Main Sanctuary</span>
+                            <span><i class="bi bi-arrow-repeat"></i> Every Friday</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Friday Prayer Night · 21 Mar', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> Open to all</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="col-lg-4 col-md-6 reveal delay-1" data-cat="worship">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">29</span><span class="event-month">Mar</span></div>
+                        <span class="event-tag event-tag-red"><i class="bi bi-heart-fill"></i> Good Friday</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Good Friday Night of Prayer</h4>
+                        <p class="event-card-desc">A special evening of solemn worship and prayer as we remember the sacrifice of Christ on the cross. A deeply moving and meaningful service.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 7:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Main Sanctuary</span>
+                            <span><i class="bi bi-calendar3"></i> One night only</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Good Friday Night of Prayer · 29 Mar', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 8 spots left<span class="spots-bar"><span class="spots-bar-fill" style="width:85%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="col-lg-4 col-md-6 reveal delay-2" data-cat="conference">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">05</span><span class="event-month">Apr</span></div>
+                        <span class="event-tag event-tag-gold"><i class="bi bi-award-fill"></i> Conference</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Annual Men's Conference</h4>
+                        <p class="event-card-desc">A powerful one-day conference for men, focused on purpose, identity, leadership, and spiritual growth. Guest speakers, workshops, and fellowship included.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 8:00 AM – 5:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Fellowship Hall</span>
+                            <span><i class="bi bi-ticket-fill"></i> Registration required</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Annual Men\'s Conference · 5 Apr', this)"><i class="bi bi-calendar-plus"></i> Register</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 20 spots left<span class="spots-bar"><span class="spots-bar-fill" style="width:70%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="col-lg-4 col-md-6 reveal delay-3" data-cat="youth">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">12</span><span class="event-month">Apr</span></div>
+                        <span class="event-tag event-tag-green"><i class="bi bi-lightning-fill"></i> Youth</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Youth Rally &amp; Game Night</h4>
+                        <p class="event-card-desc">An exciting evening for young people to connect, have fun, and encounter God together. Games, worship, and a short but powerful message for the next generation.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 5:00 PM – 8:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Youth Centre</span>
+                            <span><i class="bi bi-person-fill"></i> Ages 13–25</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Youth Rally &amp; Game Night · 12 Apr', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 15 spots left<span class="spots-bar"><span class="spots-bar-fill" style="width:50%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 7 -->
+            <div class="col-lg-4 col-md-6 reveal delay-1" data-cat="community">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">19</span><span class="event-month">Apr</span></div>
+                        <span class="event-tag event-tag-purple"><i class="bi bi-cup-hot-fill"></i> Community</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Women's Prayer Breakfast</h4>
+                        <p class="event-card-desc">Ladies, come and be refreshed! A morning of prayer, fellowship, and encouragement over breakfast. Special guest speaker, ministry time, and more.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 8:00 AM – 11:00 AM</span>
+                            <span><i class="bi bi-geo-alt"></i> Fellowship Hall</span>
+                            <span><i class="bi bi-person-fill"></i> Women only</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Women\'s Prayer Breakfast · 19 Apr', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 12 spots left<span class="spots-bar"><span class="spots-bar-fill" style="width:75%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 8 -->
+            <div class="col-lg-4 col-md-6 reveal delay-2" data-cat="outreach">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">26</span><span class="event-month">Apr</span></div>
+                        <span class="event-tag event-tag-blue"><i class="bi bi-globe2"></i> Outreach</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Community Outreach Day</h4>
+                        <p class="event-card-desc">We're going into the streets of Accra! Join us as we serve our community with food, prayer, and the Gospel. Every pair of hands makes a difference.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 9:00 AM – 2:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> City Centre, Accra</span>
+                            <span><i class="bi bi-people"></i> Volunteers needed</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Community Outreach Day · 26 Apr', this)"><i class="bi bi-calendar-plus"></i> Volunteer</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 30 spots left<span class="spots-bar"><span class="spots-bar-fill" style="width:40%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 9 -->
+            <div class="col-lg-4 col-md-6 reveal delay-3" data-cat="conference">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">03</span><span class="event-month">May</span></div>
+                        <span class="event-tag event-tag-gold"><i class="bi bi-award-fill"></i> Conference</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Married Couples Retreat</h4>
+                        <p class="event-card-desc">A one-day enrichment retreat for married couples. Sessions on communication, intimacy, and building a God-centred home. Bring your spouse and invest in your marriage.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 9:00 AM – 6:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Retreat Centre, Tema</span>
+                            <span><i class="bi bi-ticket-fill"></i> Couples only</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Married Couples Retreat · 3 May', this)"><i class="bi bi-calendar-plus"></i> Register</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 10 couples left<span class="spots-bar"><span class="spots-bar-fill" style="width:60%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 10 -->
+            <div class="col-lg-4 col-md-6 reveal delay-1" data-cat="community">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">10</span><span class="event-month">May</span></div>
+                        <span class="event-tag event-tag-green"><i class="bi bi-people-fill"></i> Community</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">New Members Welcome Sunday</h4>
+                        <p class="event-card-desc">Just joined? This is for you. A relaxed afternoon where new members meet the pastoral team, learn about the church's vision, and connect with each other.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 1:00 PM – 3:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Pastors' Hall</span>
+                            <span><i class="bi bi-person-plus"></i> New members</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('New Members Welcome Sunday · 10 May', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> Open to all</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 11 -->
+            <div class="col-lg-4 col-md-6 reveal delay-2" data-cat="outreach">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">17</span><span class="event-month">May</span></div>
+                        <span class="event-tag event-tag-blue"><i class="bi bi-mortarboard-fill"></i> Outreach</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">School Outreach — East Legon Primary</h4>
+                        <p class="event-card-desc">Our annual visit to a local primary school — bringing books, food packages, and a team of volunteers to spend the day with the children.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 8:00 AM – 1:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> East Legon, Accra</span>
+                            <span><i class="bi bi-people"></i> Volunteers welcome</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('School Outreach · 17 May', this)"><i class="bi bi-calendar-plus"></i> Volunteer</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> 25 spots left<span class="spots-bar"><span class="spots-bar-fill" style="width:30%;"></span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 12 -->
+            <div class="col-lg-4 col-md-6 reveal delay-3" data-cat="community">
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-date-block"><span class="event-day">31</span><span class="event-month">May</span></div>
+                        <span class="event-tag event-tag-gold"><i class="bi bi-balloon-fill"></i> Community</span>
+                    </div>
+                    <div class="event-card-body">
+                        <h4 class="event-card-title">Church Anniversary Celebration</h4>
+                        <p class="event-card-desc">15 years of Word Transformation Church! Join us for a special anniversary service, family fun day, and thanksgiving dinner. A day to celebrate what God has done.</p>
+                        <div class="event-card-meta">
+                            <span><i class="bi bi-clock"></i> 10:00 AM – 6:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i> Church Grounds</span>
+                            <span><i class="bi bi-stars"></i> Major celebration</span>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <button class="btn-rsvp-card" onclick="openRsvp('Church Anniversary Celebration · 31 May', this)"><i class="bi bi-calendar-plus"></i> RSVP</button>
+                        <span class="event-spots"><i class="bi bi-people"></i> Open to all</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /row -->
+    </div>
+</section>
+
+<!-- ===================== CALENDAR VIEW ===================== -->
+<section class="calendar-section" id="calendar-section">
+    <div class="container">
+        <div class="text-center mb-4 reveal">
+            <p style="font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;">Plan Ahead</p>
+            <h2 style="font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:var(--light-text);">Monthly Calendar</h2>
+        </div>
+        <div class="calendar-wrap reveal">
+            <div class="calendar-header">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="bi bi-chevron-left"></i></button>
+                    <span class="calendar-month" id="calMonthLabel">April 2026</span>
+                    <button class="cal-nav-btn" onclick="changeMonth(1)"><i class="bi bi-chevron-right"></i></button>
+                </div>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                    <span style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:rgba(255,255,255,.4);"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;"></span>Worship</span>
+                    <span style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:rgba(255,255,255,.4);"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Community</span>
+                    <span style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:rgba(255,255,255,.4);"><span style="width:8px;height:8px;border-radius:50%;background:#60a5fa;display:inline-block;"></span>Outreach</span>
+                </div>
+            </div>
+            <div class="cal-grid" id="calGrid">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SCHEDULE LIST ===================== -->
+<section class="schedule-section">
+    <div class="container">
+        <div class="text-center mb-5 reveal">
+            <p style="font-size:.68rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;">Full Schedule</p>
+            <h2 style="font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;color:var(--white);">What's Coming Up</h2>
+        </div>
+
+        <!-- March -->
+        <h5 class="schedule-month-heading reveal"><i class="bi bi-calendar3-fill"></i> March 2026</h5>
+        <div class="sched-item reveal delay-1">
+            <div class="sched-date-box"><div class="sched-day">16</div><div class="sched-month">Mar</div></div>
+            <div><div class="sched-title">Sunday Worship Service <span class="sched-tag gold">Worship</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>9:00 AM &amp; 11:00 AM</span><span><i class="bi bi-geo-alt"></i>Main Sanctuary</span><span><i class="bi bi-arrow-repeat"></i>Weekly</span></div></div>
+            <button class="btn-sched-rsvp rsvped"><i class="bi bi-check-circle-fill me-1"></i>Recurring</button>
+        </div>
+        <div class="sched-item reveal delay-2">
+            <div class="sched-date-box"><div class="sched-day">19</div><div class="sched-month">Mar</div></div>
+            <div><div class="sched-title">Wednesday Bible Study <span class="sched-tag gold">Worship</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>7:00 PM</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Wednesday Bible Study · 19 Mar', this)">RSVP</button>
+        </div>
+        <div class="sched-item reveal delay-3">
+            <div class="sched-date-box"><div class="sched-day">29</div><div class="sched-month">Mar</div></div>
+            <div><div class="sched-title">Good Friday Night of Prayer <span class="sched-tag" style="background:rgba(220,38,38,.12);color:#f87171;">Special</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>7:00 PM</span><span><i class="bi bi-geo-alt"></i>Main Sanctuary</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Good Friday Night of Prayer · 29 Mar', this)">RSVP</button>
+        </div>
+
+        <!-- April -->
+        <h5 class="schedule-month-heading reveal mt-4"><i class="bi bi-calendar3-fill"></i> April 2026</h5>
+        <div class="sched-item reveal delay-1">
+            <div class="sched-date-box"><div class="sched-day">20</div><div class="sched-month">Apr</div></div>
+            <div><div class="sched-title">Easter Sunday Celebration <span class="sched-tag" style="background:rgba(201,168,76,.2);color:var(--gold);">⭐ Featured</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>8:00 AM &amp; 10:30 AM</span><span><i class="bi bi-geo-alt"></i>Main Sanctuary</span><span><i class="bi bi-broadcast"></i>Live streamed</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Easter Sunday Celebration · 20 Apr', this)">RSVP</button>
+        </div>
+        <div class="sched-item reveal delay-2">
+            <div class="sched-date-box"><div class="sched-day">05</div><div class="sched-month">Apr</div></div>
+            <div><div class="sched-title">Annual Men's Conference <span class="sched-tag gold">Conference</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>8:00 AM – 5:00 PM</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Annual Men\'s Conference · 5 Apr', this)">Register</button>
+        </div>
+        <div class="sched-item reveal delay-3">
+            <div class="sched-date-box"><div class="sched-day">12</div><div class="sched-month">Apr</div></div>
+            <div><div class="sched-title">Youth Rally &amp; Game Night <span class="sched-tag green">Youth</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>5:00 PM</span><span><i class="bi bi-geo-alt"></i>Youth Centre</span><span><i class="bi bi-person-fill"></i>Ages 13–25</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Youth Rally · 12 Apr', this)">RSVP</button>
+        </div>
+        <div class="sched-item reveal delay-1">
+            <div class="sched-date-box"><div class="sched-day">19</div><div class="sched-month">Apr</div></div>
+            <div><div class="sched-title">Women's Prayer Breakfast <span class="sched-tag purple">Community</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>8:00 AM</span><span><i class="bi bi-geo-alt"></i>Fellowship Hall</span><span><i class="bi bi-person-fill"></i>Women only</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Women\'s Prayer Breakfast · 19 Apr', this)">RSVP</button>
+        </div>
+        <div class="sched-item reveal delay-2">
+            <div class="sched-date-box"><div class="sched-day">26</div><div class="sched-month">Apr</div></div>
+            <div><div class="sched-title">Community Outreach Day <span class="sched-tag blue">Outreach</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>9:00 AM</span><span><i class="bi bi-geo-alt"></i>City Centre, Accra</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Community Outreach Day · 26 Apr', this)">Volunteer</button>
+        </div>
+
+        <!-- May -->
+        <h5 class="schedule-month-heading reveal mt-4"><i class="bi bi-calendar3-fill"></i> May 2026</h5>
+        <div class="sched-item reveal delay-1">
+            <div class="sched-date-box"><div class="sched-day">03</div><div class="sched-month">May</div></div>
+            <div><div class="sched-title">Married Couples Retreat <span class="sched-tag gold">Conference</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>9:00 AM – 6:00 PM</span><span><i class="bi bi-geo-alt"></i>Retreat Centre, Tema</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Married Couples Retreat · 3 May', this)">Register</button>
+        </div>
+        <div class="sched-item reveal delay-2">
+            <div class="sched-date-box"><div class="sched-day">31</div><div class="sched-month">May</div></div>
+            <div><div class="sched-title">Church Anniversary Celebration <span class="sched-tag" style="background:rgba(201,168,76,.15);color:var(--gold);">🎉 15 Years</span></div><div class="sched-meta"><span><i class="bi bi-clock"></i>10:00 AM – 6:00 PM</span><span><i class="bi bi-geo-alt"></i>Church Grounds</span></div></div>
+            <button class="btn-sched-rsvp" onclick="openRsvp('Church Anniversary · 31 May', this)">RSVP</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===================== SUBSCRIBE BANNER ===================== -->
+<section class="subscribe-banner">
+    <div class="container">
+        <h2>Never Miss an Event</h2>
+        <p>Subscribe to receive the monthly events calendar straight to your inbox — no spam, just what God has planned for us.</p>
+        <div class="subscribe-form">
+            <input type="email" id="subscribeEmail" class="subscribe-input" placeholder="your@email.com">
+            <button class="btn-subscribe" onclick="subscribeEvents()"><i class="bi bi-envelope-fill me-1"></i> Subscribe</button>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <span class="footer-brand">Word <span>Transformation</span></span>
+                <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
+                <div class="footer-social">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="livestream.html"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Explore</p>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="sermons.html">Sermons</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="biblequiz.html">Bible Quiz</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">Ministry</p>
+                <ul>
+                    <li><a href="ministries.html">Ministries</a></li>
+                    <li><a href="smallgroups.html">Small Groups</a></li>
+                    <li><a href="volunteer.html">Volunteer</a></li>
+                    <li><a href="prayer.html">Prayer Wall</a></li>
+                    <li><a href="devotional.html">Devotional</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6">
+                <p class="footer-heading">My Church</p>
+                <ul>
+                    <li><a href="give.html"><i class="bi bi-heart-fill me-1" style="color:var(--gold);font-size:.7rem;"></i>Give Online</a></li>
+                    <li><a href="memberdashboard.html"><i class="bi bi-person-circle me-1" style="color:var(--gold);font-size:.7rem;"></i>My Dashboard</a></li>
+                    <li><a href="blogpost.html">Latest Post</a></li>
+                    <li><a href="events.html">All Events</a></li>
+                    <li><a href="livestream.html">Watch Live</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <p class="footer-heading">Service Times</p>
+                <ul>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-book me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Wednesday</strong> — 7:00 PM Bible Study</li>
+                    <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:1.5rem;"><i class="bi bi-chat-heart me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Friday</strong> — 6:30 PM Prayer Night</li>
+                </ul>
+                <a href="livestream.html" class="btn-live-nav" style="width:fit-content;"><span class="live-dot"></span> Watch Live Online</a>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2025 Word Transformation Church. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms &amp; Conditions</a>
+                <a href="sitemap.html">Sitemap</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===================== RSVP MODAL ===================== -->
+<div class="rsvp-overlay" id="rsvpOverlay" onclick="if(event.target===this)closeRsvp()">
+    <div class="rsvp-modal">
+        <div class="rsvp-modal-header">
+            <h3>RSVP for Event</h3>
+            <p id="rsvpEventName">Event name</p>
+            <button class="rsvp-close" onclick="closeRsvp()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="rsvp-modal-body" id="rsvpBody">
+            <div id="rsvpForm">
+                <label class="rf-label">Full Name</label>
+                <input type="text" class="rf-input" id="rsvpName" placeholder="e.g. Kwame Mensah">
+                <label class="rf-label">Email Address</label>
+                <input type="email" class="rf-input" id="rsvpEmail" placeholder="you@example.com">
+                <label class="rf-label">Phone Number (optional)</label>
+                <input type="tel" class="rf-input" id="rsvpPhone" placeholder="024 000 0000">
+                <label class="rf-label">Number of Guests</label>
+                <select class="rf-input" id="rsvpGuests" style="cursor:pointer;">
+                    <option value="1">Just me</option>
+                    <option value="2">Me + 1 guest</option>
+                    <option value="3">Me + 2 guests</option>
+                    <option value="4">Me + 3 guests</option>
+                </select>
+                <button class="btn-confirm-rsvp" onclick="submitRsvp()">
+                    <i class="bi bi-calendar-check-fill"></i> Confirm My RSVP
+                </button>
+            </div>
+            <div class="rsvp-success" id="rsvpSuccess" style="display:none;">
+                <div class="rsvp-success-icon">🎉</div>
+                <h4 class="rsvp-success-title">You're confirmed!</h4>
+                <p class="rsvp-success-msg">Your RSVP has been received. A confirmation will be sent to your email. We can't wait to see you there — God has something special planned!</p>
+                <button onclick="closeRsvp()" style="margin-top:1.5rem;background:var(--black);color:var(--white);border:none;padding:.65rem 1.75rem;border-radius:50px;font-weight:600;cursor:pointer;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-evt" id="evtToast"><i class="bi bi-check-circle-fill"></i><span id="evtToastMsg">Done!</span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Navbar scroll
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60);});
+
+// Scroll reveals
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// ── Filter events by category ──
+function filterEvents(e,cat){
+    if(e&&e.preventDefault)e.preventDefault();
+    document.querySelectorAll('.filter-tab').forEach(function(t){t.classList.remove('active');});
+    event.currentTarget.classList.add('active');
+    document.querySelectorAll('#eventsGrid>[data-cat]').forEach(function(c){
+        c.style.display=(cat==='all'||c.getAttribute('data-cat')===cat)?'':'none';
+    });
+    var labels={all:'All Upcoming Events',worship:'Worship Events',community:'Community Events',conference:'Conferences',outreach:'Outreach Events',youth:'Youth Events'};
+    document.getElementById('gridHeading').textContent=labels[cat]||'All Upcoming Events';
+    document.getElementById('eventsGrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── Search filter ──
+function searchEvents(q){
+    q=q.toLowerCase().trim();
+    document.querySelectorAll('#eventsGrid>[data-cat]').forEach(function(c){
+        var title=c.querySelector('.event-card-title');
+        var desc=c.querySelector('.event-card-desc');
+        var text=(title?title.textContent:'')+(desc?desc.textContent:'');
+        c.style.display=(!q||text.toLowerCase().includes(q))?'':'none';
+    });
+}
+
+// ── Grid / List view toggle ──
+function setView(view,btn){
+    document.querySelectorAll('.view-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var grid=document.getElementById('eventsGrid');
+    if(view==='list'){
+        grid.classList.remove('row-cols-1','row-cols-md-2','row-cols-lg-3');
+        grid.querySelectorAll('[data-cat]').forEach(function(c){c.className='col-12 reveal';});
+        grid.querySelectorAll('.event-card').forEach(function(c){
+            c.style.flexDirection='row'; c.style.borderRadius='12px';
+        });
+    } else {
+        grid.querySelectorAll('[data-cat]').forEach(function(c,i){
+            c.className='col-lg-4 col-md-6 reveal delay-'+(i%3+1);
+        });
+        grid.querySelectorAll('.event-card').forEach(function(c){
+            c.style.flexDirection=''; c.style.borderRadius='';
+        });
+    }
+}
+
+// ── RSVP modal ──
+var currentRsvpBtn=null;
+function openRsvp(eventName,btn){
+    document.getElementById('rsvpEventName').textContent=eventName;
+    document.getElementById('rsvpForm').style.display='block';
+    document.getElementById('rsvpSuccess').style.display='none';
+    ['rsvpName','rsvpEmail','rsvpPhone'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+    document.getElementById('rsvpGuests').value='1';
+    document.getElementById('rsvpOverlay').classList.add('open');
+    document.body.style.overflow='hidden';
+    currentRsvpBtn=btn;
+}
+function closeRsvp(){
+    document.getElementById('rsvpOverlay').classList.remove('open');
+    document.body.style.overflow='';
+}
+function submitRsvp(){
+    var name=document.getElementById('rsvpName').value.trim();
+    var email=document.getElementById('rsvpEmail').value.trim();
+    if(!name){alert('Please enter your name.');return;}
+    if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
+    document.getElementById('rsvpForm').style.display='none';
+    document.getElementById('rsvpSuccess').style.display='block';
+    if(currentRsvpBtn){
+        currentRsvpBtn.classList.add('rsvped');
+        currentRsvpBtn.innerHTML='<i class="bi bi-check-circle-fill"></i> RSVP\'d';
+        currentRsvpBtn.onclick=null;
+    }
+    showToast('RSVP confirmed! See you there 🙌');
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeRsvp();});
+
+// ── Toast ──
+function showToast(msg){
+    var t=document.getElementById('evtToast');
+    document.getElementById('evtToastMsg').textContent=msg;
+    t.style.opacity='1';t.style.transform='translateY(0)';
+    setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';},3500);
+}
+
+// ── Subscribe ──
+function subscribeEvents(){
+    var e=document.getElementById('subscribeEmail').value.trim();
+    if(!e||!e.includes('@')){alert('Please enter a valid email address.');return;}
+    document.getElementById('subscribeEmail').value='';
+    showToast('Subscribed! Monthly events calendar coming your way 📅');
+}
+
+// ── Calendar ──
+var calYear=2026, calMonth=3; // 0-indexed: April
+var EVENTS_MAP={
+    '2026-3-5':[{label:'Men\'s Conference',cls:'gold'}],
+    '2026-3-12':[{label:'Youth Rally',cls:'green'}],
+    '2026-3-16':[{label:'Sunday Service',cls:'gold'},{label:'Easter Sunday',cls:'gold'}],
+    '2026-3-19':[{label:'Bible Study',cls:'gold'},{label:'Women\'s Breakfast',cls:'green'}],
+    '2026-3-20':[{label:'Easter Sunday',cls:'gold'}],
+    '2026-3-21':[{label:'Prayer Night',cls:'gold'}],
+    '2026-3-26':[{label:'Community Outreach',cls:'blue'}],
+};
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function renderCalendar(){
+    document.getElementById('calMonthLabel').textContent=MONTHS[calMonth]+' '+calYear;
+    var grid=document.getElementById('calGrid');
+    var html='';
+    DAYS.forEach(function(d){html+='<div class="cal-day-label">'+d+'</div>';});
+    var first=new Date(calYear,calMonth,1).getDay();
+    var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+    var prevDays=new Date(calYear,calMonth,0).getDate();
+    var today=new Date();
+    var cells=42;
+    for(var i=0;i<cells;i++){
+        var day,isOther=false;
+        if(i<first){day=prevDays-(first-1-i);isOther=true;}
+        else if(i>=first+daysInMonth){day=i-first-daysInMonth+1;isOther=true;}
+        else{day=i-first+1;}
+        var isToday=!isOther&&day===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
+        var key=calYear+'-'+calMonth+'-'+day;
+        var evts=(!isOther&&EVENTS_MAP[key])||[];
+        var cls='cal-cell'+(isOther?' other-month':'')+(isToday?' today':'')+(evts.length?' has-event':'');
+        html+='<div class="'+cls+'" onclick="'+(evts.length&&!isOther?'showToast(\''+evts.map(function(e){return e.label;}).join(', ')+'\')'  :'')+'"><span class="cal-num">'+day+'</span>';
+        evts.slice(0,2).forEach(function(e){html+='<span class="cal-event-chip '+e.cls+'">'+e.label+'</span>';});
+        html+='</div>';
+    }
+    grid.innerHTML=html;
+}
+function changeMonth(dir){
+    calMonth+=dir;
+    if(calMonth>11){calMonth=0;calYear++;}
+    if(calMonth<0){calMonth=11;calYear--;}
+    renderCalendar();
+}
+renderCalendar();
+
+// Site search
+var SITE_PAGES=[{title:'Home',url:'index.html',icon:'bi-house-fill',cat:'Page',iconClass:'brown'},{title:'Events',url:'events.html',icon:'bi-calendar-event-fill',cat:'Page',iconClass:'green'},{title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},{title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},{title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},{title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},{title:'Give Online',url:'give.html',icon:'bi-heart-fill',cat:'Page',iconClass:'red'},{title:'My Account',url:'memberdashboard.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},{title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},{title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},{title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},{title:'Easter Sunday Celebration',url:'events.html',icon:'bi-calendar-event-fill',cat:'Event',iconClass:'green',sub:'20 Apr 2026 · Main Sanctuary'},{title:"Men's Conference",url:'events.html',icon:'bi-award-fill',cat:'Event',iconClass:'brown',sub:'5 Apr 2026 · Fellowship Hall'},{title:'Community Outreach Day',url:'events.html',icon:'bi-globe2',cat:'Event',iconClass:'green',sub:'26 Apr 2026 · City Centre'}];
+function toggleSearch(){var o=document.getElementById('searchOverlay');var ip=document.getElementById('searchInput');var open=o.classList.toggle('open');if(open){ip.value='';document.getElementById('searchResults').innerHTML=renderHints();setTimeout(function(){ip.focus();},80);document.body.style.overflow='hidden';}else{document.body.style.overflow='';}}
+function handleSearchKey(e){if(e.key==='Escape')toggleSearch();}
+function runSearch(q){var r=document.getElementById('searchResults');q=q.trim().toLowerCase();if(!q){r.innerHTML=renderHints();return;}var m=SITE_PAGES.filter(function(p){return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub.toLowerCase().includes(q));}).slice(0,7);if(!m.length){r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+q+'"</div>';return;}r.innerHTML=m.map(function(p){return'<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+p.title+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>';}).join('');}
+function renderHints(){return'<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="events.html"><i class="bi bi-calendar-event-fill"></i> All Events</a><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="give.html"><i class="bi bi-heart-fill"></i> Give</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="workshops.html"><i class="bi bi-tools"></i> Workshops</a></div></div>';}
+</script>
+</body>
+</html>
