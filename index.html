@@ -373,6 +373,11 @@
     .search-quick-link:hover { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,.06); }
     .search-backdrop { position:fixed; inset:0; z-index:-1; }
 
+    /* ── Feature strip (new pages) ── */
+    #feature-strip .section-title { color:var(--white); }
+    #feature-strip .section-eyebrow { color:var(--gold); }
+    #feature-strip .section-lead { color:var(--text-dim); }
+
     /* ── Utility buttons ── */
     .btn-outline-primary { border:1.5px solid rgba(201,168,76,.4); color:var(--gold); border-radius:50px; font-weight:500; font-size:.9rem; padding:.65rem 1.75rem; transition:all .3s ease; background:transparent; text-decoration:none; display:inline-block; }
     .btn-outline-primary:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
@@ -423,7 +428,8 @@
                             <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
                             <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="portal.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                            <li><a class="dropdown-item" href="give.html"><i class="bi bi-heart-fill"></i>Give Online</a></li>
+                            <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-person-circle"></i>My Account</a></li>
                             <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
                         </ul>
                     </li>
@@ -436,9 +442,9 @@
                         <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
                     </li>
                     <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                        <button class="btn-give" onclick="document.getElementById('givingModal').style.display='flex'">
+                        <a href="give.html" class="btn-give">
                             <i class="bi bi-heart-fill me-1"></i> Give
-                        </button>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -490,6 +496,12 @@
                             <div class="hero-time-item"><span class="hero-time-dot"></span><span><strong>Sunday</strong> 9:00 AM &amp; 11:00 AM</span></div>
                             <div class="hero-time-item"><span class="hero-time-dot"></span><span><strong>Wednesday</strong> 7:00 PM Bible Study</span></div>
                             <div class="hero-time-item"><span class="hero-time-dot"></span><span><strong>Friday</strong> 6:30 PM Prayer Night</span></div>
+                            <div class="hero-time-item" style="margin-left:auto;">
+                                <a href="give.html" style="display:inline-flex;align-items:center;gap:5px;color:var(--gold);font-size:.8rem;font-weight:600;text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'"><i class="bi bi-heart-fill"></i> Give Online</a>
+                            </div>
+                            <div class="hero-time-item">
+                                <a href="memberdashboard.html" style="display:inline-flex;align-items:center;gap:5px;color:rgba(255,255,255,.6);font-size:.8rem;font-weight:500;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,.6)'"><i class="bi bi-person-circle"></i> My Account</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -656,7 +668,7 @@
                 </div>
             </div>
             <div class="text-center mt-5 reveal delay-2">
-                <a href="blog.html" class="btn-outline-primary">Read More Testimonies</a>
+                <a href="blogpost.html" class="btn-outline-primary">Read Our Latest Post</a>
             </div>
         </div>
     </section>
@@ -671,7 +683,10 @@
                     <p class="section-lead mt-2">Life happens in community. Here's what God has on the calendar for us.</p>
                 </div>
                 <div class="col-md-4 text-md-end reveal delay-2 mt-3 mt-md-0">
-                    <a href="#" class="btn-outline-primary">View all events</a>
+                    <div style="display:flex;flex-direction:column;gap:.6rem;align-items:flex-end;">
+                        <a href="workshops.html" class="btn-outline-primary">Skills Workshops</a>
+                        <a href="#" style="font-size:.78rem;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:4px;">View all events <i class="bi bi-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="row g-4">
@@ -739,6 +754,71 @@
         </div>
     </section>
 
+    <!-- ===================== FEATURE STRIP (new pages) ===================== -->
+    <section id="feature-strip" style="background:var(--black);padding:80px 0;border-top:1px solid rgba(201,168,76,.08);border-bottom:1px solid rgba(201,168,76,.08);">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <p class="section-eyebrow"><span class="section-eyebrow-line"></span> More From Us</p>
+                <h2 class="section-title" style="color:var(--white);">Grow, <span class="gold-accent">Give</span> &amp; Connect</h2>
+                <p class="section-lead mx-auto mt-3">Everything you need to go deeper in your faith, your finances, and your community — all in one place.</p>
+            </div>
+            <div class="row g-4">
+
+                <!-- Blog Post -->
+                <div class="col-lg-4 col-md-6 reveal delay-1">
+                    <a href="blogpost.html" style="text-decoration:none;display:block;height:100%;">
+                        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:100%;transition:all .3s ease;display:flex;flex-direction:column;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(201,168,76,.35)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.5)';" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow='';">
+                            <div style="background:linear-gradient(135deg,#1a0e05,#3d2010);height:160px;display:flex;align-items:center;justify-content:center;position:relative;">
+                                <i class="bi bi-journal-bookmark-fill" style="font-size:3rem;color:var(--gold);opacity:.5;"></i>
+                                <span style="position:absolute;top:14px;left:14px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);">Devotional</span>
+                            </div>
+                            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
+                                <h4 style="font-family:var(--display);font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:.6rem;line-height:1.3;">When God's Silence Is His Answer</h4>
+                                <p style="font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);line-height:1.65;flex:1;margin-bottom:1.25rem;">Sometimes the most profound thing God does is say nothing — and in that silence, He is shaping something in us that words never could.</p>
+                                <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--gold);font-weight:600;">Read Post <i class="bi bi-arrow-right"></i></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Give Online -->
+                <div class="col-lg-4 col-md-6 reveal delay-2">
+                    <a href="give.html" style="text-decoration:none;display:block;height:100%;">
+                        <div style="background:linear-gradient(160deg,rgba(92,61,30,.35),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.2);border-radius:16px;overflow:hidden;height:100%;transition:all .3s ease;display:flex;flex-direction:column;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(201,168,76,.5)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.5)';" onmouseout="this.style.transform='';this.style.borderColor='rgba(201,168,76,.2)';this.style.boxShadow='';">
+                            <div style="background:linear-gradient(135deg,var(--brown),#3d2010);height:160px;display:flex;align-items:center;justify-content:center;position:relative;">
+                                <i class="bi bi-heart-fill" style="font-size:3rem;color:var(--gold-light);opacity:.6;"></i>
+                                <span style="position:absolute;top:14px;left:14px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);">Giving</span>
+                            </div>
+                            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
+                                <h4 style="font-family:var(--display);font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:.6rem;">Give to the Work of God</h4>
+                                <p style="font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);line-height:1.65;flex:1;margin-bottom:1.25rem;">Give your Tithe, Offering, Missions, Building Fund and more — securely via Mobile Money or bank transfer.</p>
+                                <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--gold);font-weight:600;">Give Now <i class="bi bi-arrow-right"></i></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Member Dashboard -->
+                <div class="col-lg-4 col-md-6 reveal delay-3">
+                    <a href="memberdashboard.html" style="text-decoration:none;display:block;height:100%;">
+                        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:100%;transition:all .3s ease;display:flex;flex-direction:column;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(201,168,76,.35)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.5)';" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow='';">
+                            <div style="background:linear-gradient(135deg,#071508,#1a3d1b);height:160px;display:flex;align-items:center;justify-content:center;position:relative;">
+                                <i class="bi bi-person-circle" style="font-size:3rem;color:#5aac5c;opacity:.5;"></i>
+                                <span style="position:absolute;top:14px;left:14px;background:rgba(42,94,43,.2);border:1px solid rgba(42,94,43,.4);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5aac5c;">Member Portal</span>
+                            </div>
+                            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
+                                <h4 style="font-family:var(--display);font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:.6rem;">Your Member Dashboard</h4>
+                                <p style="font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);line-height:1.65;flex:1;margin-bottom:1.25rem;">Track your giving, RSVP for events, join small groups, save sermons, and manage your church life — all in one place.</p>
+                                <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--gold);font-weight:600;">Open Dashboard <i class="bi bi-arrow-right"></i></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- ===================== BLOG ===================== -->
     <section id="blog">
         <div class="container">
@@ -760,7 +840,7 @@
                             <div class="blog-meta"><span><i class="bi bi-person me-1"></i>Pastor James</span><span><i class="bi bi-calendar3 me-1"></i>March 10, 2026</span></div>
                             <h4 class="blog-title">Walking in Faith When the Road is Unclear</h4>
                             <p class="blog-excerpt">Faith is not the absence of uncertainty — it is the courage to keep walking even when you cannot see the next step...</p>
-                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
+                            <a href="blogpost.html" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -771,7 +851,7 @@
                             <div class="blog-meta"><span><i class="bi bi-person me-1"></i>Elder Sarah</span><span><i class="bi bi-calendar3 me-1"></i>March 4, 2026</span></div>
                             <h4 class="blog-title">Why Community is at the Heart of the Gospel</h4>
                             <p class="blog-excerpt">We were never meant to do life alone. From Genesis to Revelation, Scripture calls us into deep, life-giving fellowship...</p>
-                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
+                            <a href="blogpost.html" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -782,7 +862,7 @@
                             <div class="blog-meta"><span><i class="bi bi-person me-1"></i>Sis. Abena</span><span><i class="bi bi-calendar3 me-1"></i>Feb 24, 2026</span></div>
                             <h4 class="blog-title">How God Turned My Season of Waiting into a Miracle</h4>
                             <p class="blog-excerpt">For three years I prayed the same prayer. I almost gave up — until the morning everything changed and I understood why...</p>
-                            <a href="#" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
+                            <a href="blogpost.html" class="blog-read-more">Read more <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -819,7 +899,7 @@
     <footer>
         <div class="container">
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <span class="footer-brand">Word <span>Transformation</span></span>
                     <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
                     <div class="footer-social">
@@ -836,6 +916,8 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="sermons.html">Sermons</a></li>
                         <li><a href="blog.html">Blog</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="biblequiz.html">Bible Quiz</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -851,7 +933,18 @@
                         <li><a href="membership.html">Membership</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-2 col-md-3 col-6">
+                    <p class="footer-heading">My Church</p>
+                    <ul>
+                        <li><a href="give.html"><i class="bi bi-heart-fill me-1" style="color:var(--gold);font-size:.7rem;"></i>Give Online</a></li>
+                        <li><a href="memberdashboard.html"><i class="bi bi-person-circle me-1" style="color:var(--gold);font-size:.7rem;"></i>My Dashboard</a></li>
+                        <li><a href="blogpost.html">Latest Post</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="biblequiz.html">Bible Quiz</a></li>
+                        <li><a href="livestream.html">Watch Live</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
                     <p class="footer-heading">Service Times</p>
                     <ul>
                         <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
@@ -1009,6 +1102,7 @@
         {title:'Small Groups',url:'smallgroups.html',icon:'bi-diagram-3-fill',cat:'Page',iconClass:'green'},
         {title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},
         {title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},
+        {title:"When God's Silence Is His Answer",url:'blogpost.html',icon:'bi-journal-bookmark-fill',cat:'Blog Post',iconClass:'brown',sub:'Devotional · Pastor Emmanuel'},
         {title:'Devotional',url:'devotional.html',icon:'bi-journal-bookmark-fill',cat:'Page',iconClass:'green'},
         {title:'Events',url:'index.html#events',icon:'bi-calendar-event-fill',cat:'Section',iconClass:''},
         {title:'Gallery',url:'gallery.html',icon:'bi-images',cat:'Page',iconClass:''},
@@ -1018,8 +1112,8 @@
         {title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},
         {title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},
         {title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},
-        {title:'Give Online',url:'#give',icon:'bi-heart-fill',cat:'Action',iconClass:'red'},
-        {title:'My Account',url:'portal.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},
+        {title:'Give Online',url:'give.html',icon:'bi-heart-fill',cat:'Action',iconClass:'red'},
+        {title:'My Account',url:'memberdashboard.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},
         {title:"When God's Silence Is His Answer",url:'blog.html',icon:'bi-book-fill',cat:'Sermon',iconClass:'brown',sub:'John 11:1–44'},
         {title:'All Things Work Together',url:'blog.html',icon:'bi-book-fill',cat:'Sermon',iconClass:'brown',sub:'Romans 8:28'},
         {title:'Sunday Service — 9:00 AM',url:'index.html#services',icon:'bi-clock-fill',cat:'Service',iconClass:'green'},
