@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WTC Outreach — The community development and humanitarian arm of Word Transformation Church, serving Accra and beyond.">
+    <meta name="keywords" content="NGO, community outreach, Word Transformation Church, Accra, Ghana, humanitarian, welfare">
+    <meta name="author" content="Word Transformation Church">
+    <title>WTC Outreach | Word Transformation Church</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts: DM Serif Display + DM Sans + Lora -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+    <style>
+    /* =========================================================
+       WORD TRANSFORMATION CHURCH — NGO / OUTREACH PAGE
+       Matching the site aesthetic: warm editorial, modern sacred
+       ========================================================= */
+
+    :root {
+        --black:      #0A0A0A;
+        --deep:       #111111;
+        --card:       #1C1C1C;
+        --border:     rgba(255,255,255,0.08);
+        --gold:       #C9A84C;
+        --gold-light: #E8C97A;
+        --gold-pale:  rgba(201,168,76,0.1);
+        --light:      #FFFFFF;
+        --light-alt:  #F7F4EF;
+        --light-text: #1C1C1C;
+        --light-muted:#6B6560;
+        --light-stone:#E8E2D9;
+        --text:       #E8E4DE;
+        --text-dim:   #A09A91;
+        --muted:      #6E6861;
+        --white:      #FFFFFF;
+        --brown:      #5C3D1E;
+        --brown-mid:  #8B6340;
+        --green:      #2A5E2B;
+        --green-light:#3a7d3b;
+        --display:    'DM Serif Display', Georgia, serif;
+        --body:       'DM Sans', system-ui, sans-serif;
+        --serif:      'Lora', Georgia, serif;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:72px; }
+    body { font-family:var(--body); color:var(--text); background:var(--deep); line-height:1.65; -webkit-font-smoothing:antialiased; }
+
+    /* ── Scroll animations ── */
+    .reveal { opacity:0; transform:translateY(36px); transition:opacity .75s ease,transform .75s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left  { opacity:0; transform:translateX(-40px); transition:opacity .75s ease,transform .75s ease; }
+    .reveal-right { opacity:0; transform:translateX(40px);  transition:opacity .75s ease,transform .75s ease; }
+    .reveal-left.visible,.reveal-right.visible { opacity:1; transform:translateX(0); }
+    .delay-1{transition-delay:.1s!important} .delay-2{transition-delay:.2s!important}
+    .delay-3{transition-delay:.3s!important} .delay-4{transition-delay:.4s!important}
+
+    /* ── Navbar ── */
+    .navbar {
+        background:rgba(10,10,10,.92);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+        padding:.9rem 0;
+        border-bottom:1px solid rgba(201,168,76,.12);
+        transition:background .3s ease; z-index:1030;
+    }
+    .navbar.scrolled { background:rgba(10,10,10,.98); box-shadow:0 4px 30px rgba(0,0,0,.4); }
+    .navbar-brand {
+        font-family:var(--display); font-size:1.3rem;
+        color:var(--white)!important; letter-spacing:-.01em;
+        display:flex; align-items:center; gap:10px;
+    }
+    .brand-icon {
+        width:32px; height:32px; background:var(--gold); border-radius:6px;
+        display:flex; align-items:center; justify-content:center;
+        color:var(--black); font-size:1rem; flex-shrink:0;
+    }
+    .brand-sub { display:block; font-family:var(--body); font-size:.65rem; font-weight:300; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); line-height:1; }
+    .navbar-nav .nav-link { color:rgba(255,255,255,.82)!important; font-size:.875rem; font-weight:500; padding:.5rem .9rem!important; border-radius:6px; transition:all .2s ease; }
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color:var(--gold)!important; background:rgba(201,168,76,.1); }
+    .dropdown-menu { background:#141414; border:1px solid rgba(201,168,76,.18); border-radius:10px; box-shadow:0 16px 48px rgba(0,0,0,.5); padding:.5rem; }
+    .dropdown-item { color:rgba(255,255,255,.8); font-size:.87rem; padding:.55rem .9rem; border-radius:6px; transition:all .15s ease; display:flex; align-items:center; gap:8px; }
+    .dropdown-item i { color:var(--gold); font-size:.85rem; }
+    .dropdown-item:hover { background:rgba(201,168,76,.1); color:var(--white); }
+    .dropdown-divider { border-color:rgba(201,168,76,.12); margin:.35rem 0; }
+    .btn-live-nav { display:inline-flex; align-items:center; gap:6px; background:#E50000; color:#fff!important; padding:.42rem 1.1rem; border-radius:50px; font-weight:600; font-size:.85rem; text-decoration:none; transition:all .25s ease; }
+    .btn-live-nav:hover { background:#c20000; transform:translateY(-1px); }
+    .live-dot { width:7px; height:7px; background:#fff; border-radius:50%; display:inline-block; animation:livePulse 1.4s ease-in-out infinite; }
+    @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+    .btn-give { background:white; color:var(--brown)!important; border:none; padding:.42rem 1.1rem; border-radius:50px; font-weight:600; font-size:.85rem; transition:all .25s ease; cursor:pointer; text-decoration:none; display:inline-block; }
+    .btn-give:hover { background:var(--gold-light); transform:translateY(-1px); }
+    @media(max-width:991.98px){.navbar-collapse{background:#0a0a0a;padding:1rem;border-radius:10px;margin-top:.5rem;}}
+
+    /* ── Search ── */
+    .search-overlay{display:none;position:fixed;top:0;left:0;right:0;z-index:9998;flex-direction:column;}
+    .search-overlay.open{display:flex;}
+    .search-bar-wrap{background:rgba(10,10,10,.97);backdrop-filter:blur(20px);display:flex;align-items:center;gap:12px;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(201,168,76,.15);}
+    .search-bar-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+    .search-bar-input{flex:1;background:transparent;border:none;outline:none;font-size:1.1rem;color:var(--white);caret-color:var(--gold);}
+    .search-bar-input::placeholder{color:rgba(255,255,255,.3);}
+    .search-bar-hint{font-size:.75rem;color:rgba(255,255,255,.3);white-space:nowrap;}
+    .search-bar-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.1rem;cursor:pointer;padding:4px;transition:color .2s ease;}
+    .search-bar-close:hover{color:var(--white);}
+    .search-box{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);width:100%;max-width:660px;border-radius:0 0 14px 14px;border:1px solid rgba(201,168,76,.12);border-top:none;overflow:hidden;}
+    .search-results{max-height:70vh;overflow-y:auto;}
+    .search-result-item{display:flex;align-items:center;gap:12px;padding:.85rem 1.25rem;text-decoration:none;transition:background .15s ease;color:var(--white);border-bottom:1px solid rgba(255,255,255,.05);}
+    .search-result-item:hover{background:rgba(201,168,76,.08);}
+    .search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:rgba(255,255,255,.6);}
+    .search-result-icon.brown{color:var(--gold);}
+    .search-result-icon.green{color:#5aac5c;}
+    .search-result-icon.red{color:#ff5555;}
+    .search-result-text{flex:1;}
+    .search-result-title{font-size:.92rem;font-weight:500;color:var(--white);}
+    .search-result-sub{font-size:.76rem;color:rgba(255,255,255,.4);}
+    .search-result-arrow{color:rgba(255,255,255,.2);font-size:.75rem;}
+    .search-empty{padding:2rem;text-align:center;color:rgba(255,255,255,.4);font-size:.9rem;}
+    .search-hints{padding:1rem 1.25rem;}
+    .search-hint-label{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:.6rem;}
+    .search-quick-links{display:flex;flex-wrap:wrap;gap:6px;}
+    .search-quick-link{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;border:1px solid rgba(201,168,76,.2);font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s ease;}
+    .search-quick-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06);}
+    .search-backdrop{position:fixed;inset:0;z-index:-1;}
+
+    /* ── HERO ── */
+    .ngo-hero {
+        background:var(--black);
+        padding:6rem 0 5rem;
+        position:relative;
+        overflow:hidden;
+        text-align:center;
+    }
+    .ngo-hero::before {
+        content:'';
+        position:absolute;
+        inset:0;
+        background:
+            radial-gradient(ellipse at 30% 0%, rgba(42,94,43,.18) 0%, transparent 55%),
+            radial-gradient(ellipse at 70% 100%, rgba(201,168,76,.1) 0%, transparent 55%);
+    }
+    .ngo-hero-inner { position:relative; z-index:2; }
+    .ngo-eyebrow {
+        display:inline-flex; align-items:center; gap:8px;
+        background:rgba(42,94,43,.15); border:1px solid rgba(42,94,43,.4);
+        border-radius:50px; padding:.3rem 1.1rem;
+        font-size:.68rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
+        color:#6dc96f; margin-bottom:1.5rem;
+    }
+    .ngo-hero h1 {
+        font-family:var(--display); font-size:clamp(2.5rem,6.5vw,4.5rem);
+        font-weight:400; color:var(--white); line-height:1.08; letter-spacing:-.02em;
+        margin-bottom:1.1rem;
+    }
+    .ngo-hero h1 em { font-style:italic; color:var(--gold); }
+    .ngo-hero-sub {
+        font-family:var(--serif); font-style:italic; font-size:1.1rem;
+        color:var(--text-dim); max-width:560px; margin:0 auto 2.5rem; line-height:1.75;
+    }
+    .ngo-hero-actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:3.5rem; }
+    .btn-ngo-primary {
+        background:var(--green); color:#fff; padding:.85rem 2rem; border-radius:50px;
+        font-weight:600; font-size:.95rem; text-decoration:none; border:none;
+        transition:all .3s ease; cursor:pointer;
+    }
+    .btn-ngo-primary:hover { background:var(--green-light); transform:translateY(-2px); box-shadow:0 8px 24px rgba(42,94,43,.4); color:#fff; }
+    .btn-ngo-ghost {
+        background:transparent; color:var(--white); padding:.85rem 2rem; border-radius:50px;
+        font-weight:500; font-size:.95rem; text-decoration:none;
+        border:1.5px solid rgba(255,255,255,.35); transition:all .3s ease;
+        display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn-ngo-ghost:hover { border-color:var(--gold); color:var(--gold); }
+    .ngo-stats-row {
+        display:flex; justify-content:center; gap:3.5rem; flex-wrap:wrap;
+        padding-top:2.5rem; border-top:1px solid rgba(255,255,255,.07);
+        max-width:640px; margin:0 auto;
+    }
+    .ngo-stat-num { font-family:var(--display); font-size:2rem; color:var(--gold); line-height:1; display:block; }
+    .ngo-stat-lbl { font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; margin-top:4px; }
+
+    /* ── Section commons ── */
+    .section-eyebrow { display:inline-flex; align-items:center; gap:10px; font-size:.7rem; font-weight:500; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
+    .section-eyebrow-line { display:inline-block; width:28px; height:1px; background:var(--gold); opacity:.6; }
+    .section-title { font-family:var(--display); font-size:clamp(2rem,4.5vw,3rem); font-weight:400; line-height:1.15; letter-spacing:-.02em; color:var(--white); }
+    .section-title.dark { color:var(--light-text); }
+    .section-lead { font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--text-dim); line-height:1.7; margin-top:.75rem; }
+    .section-lead.dark { color:var(--light-muted); }
+    .gold-accent { color:var(--gold); }
+    .green-accent { color:#5aac5c; }
+
+    /* ── MISSION PILLARS (dark section) ── */
+    #mission { background:var(--deep); padding:100px 0; }
+    .pillar-card {
+        background:var(--card); border:1px solid var(--border); border-radius:16px;
+        padding:2rem 1.75rem; height:100%;
+        transition:all .35s ease; position:relative; overflow:hidden;
+    }
+    .pillar-card::before {
+        content:''; position:absolute; top:0; left:0; right:0; height:3px;
+        background:linear-gradient(90deg, transparent, var(--gold), transparent);
+        opacity:0; transition:opacity .3s ease;
+    }
+    .pillar-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(0,0,0,.5); border-color:rgba(201,168,76,.3); }
+    .pillar-card:hover::before { opacity:1; }
+    .pillar-icon {
+        width:52px; height:52px; border-radius:12px;
+        display:flex; align-items:center; justify-content:center;
+        font-size:1.4rem; margin-bottom:1.25rem; flex-shrink:0;
+    }
+    .pillar-icon.green { background:rgba(42,94,43,.2); color:#6dc96f; }
+    .pillar-icon.gold  { background:rgba(201,168,76,.12); color:var(--gold); }
+    .pillar-icon.brown { background:rgba(92,61,30,.25); color:var(--brown-mid); }
+    .pillar-icon.blue  { background:rgba(50,100,180,.2); color:#7ab0f5; }
+    .pillar-title { font-family:var(--display); font-size:1.18rem; font-weight:400; color:var(--white); margin-bottom:.6rem; }
+    .pillar-desc { font-size:.88rem; color:var(--text-dim); line-height:1.7; }
+    .pillar-tag { display:inline-block; margin-top:1rem; font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(201,168,76,.25); border-radius:50px; padding:2px 10px; }
+
+    /* ── ABOUT NGO (light section) ── */
+    #about-ngo { background:var(--light-alt); padding:100px 0; border-top:1px solid var(--light-stone); border-bottom:1px solid var(--light-stone); }
+    #about-ngo .section-eyebrow { color:var(--gold); }
+    .about-ngo-visual {
+        background:linear-gradient(135deg, #071508 0%, #1a3d1b 60%, #0d2910 100%);
+        border-radius:18px; height:420px; display:flex; align-items:center; justify-content:center;
+        position:relative; overflow:hidden;
+    }
+    .about-ngo-visual::after {
+        content:''; position:absolute; inset:0;
+        background:radial-gradient(ellipse at 50% 80%, rgba(201,168,76,.12) 0%, transparent 60%);
+    }
+    .about-ngo-icon { font-size:5rem; color:rgba(255,255,255,.08); position:relative; z-index:1; }
+    .about-ngo-badge {
+        position:absolute; bottom:1.5rem; left:1.5rem; z-index:2;
+        background:rgba(10,10,10,.85); backdrop-filter:blur(12px);
+        border:1px solid rgba(201,168,76,.2); border-radius:12px; padding:.8rem 1.1rem;
+        display:flex; align-items:center; gap:10px;
+    }
+    .about-ngo-badge-icon { width:36px; height:36px; background:var(--green); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:.95rem; }
+    .about-ngo-badge-text { font-size:.78rem; color:rgba(255,255,255,.6); line-height:1.4; }
+    .about-ngo-badge-text strong { color:var(--white); display:block; }
+    .ngo-values-list { list-style:none; padding:0; margin:1.5rem 0; }
+    .ngo-values-list li { display:flex; align-items:flex-start; gap:12px; margin-bottom:1rem; font-size:.92rem; color:var(--light-muted); line-height:1.6; }
+    .ngo-values-list li i { color:var(--green); font-size:.85rem; margin-top:.2rem; flex-shrink:0; }
+    .ngo-values-list li strong { color:var(--light-text); }
+
+    /* ── PROGRAMMES (dark section) ── */
+    #programmes { background:var(--black); padding:100px 0; }
+    .prog-card {
+        background:var(--card); border:1px solid var(--border); border-radius:14px;
+        overflow:hidden; height:100%; display:flex; flex-direction:column;
+        transition:all .3s ease;
+    }
+    .prog-card:hover { transform:translateY(-5px); box-shadow:0 14px 40px rgba(0,0,0,.6); border-color:rgba(201,168,76,.25); }
+    .prog-img {
+        height:160px; display:flex; align-items:center; justify-content:center;
+        font-size:2.8rem; position:relative; overflow:hidden;
+    }
+    .prog-img-education { background:linear-gradient(135deg,#0a1628 0%,#1a2d50 100%); color:rgba(122,176,245,.25); }
+    .prog-img-welfare   { background:linear-gradient(135deg,#1a0a03 0%,#3d2410 100%); color:rgba(201,168,76,.2); }
+    .prog-img-health    { background:linear-gradient(135deg,#071508 0%,#1a3d1b 100%); color:rgba(109,201,111,.2); }
+    .prog-img-women     { background:linear-gradient(135deg,#180d24 0%,#3d1a5a 100%); color:rgba(180,120,220,.2); }
+    .prog-img-env       { background:linear-gradient(135deg,#061410 0%,#143d2a 100%); color:rgba(80,200,140,.2); }
+    .prog-img-skills    { background:linear-gradient(135deg,#1a1000 0%,#4a3000 100%); color:rgba(220,180,80,.2); }
+    .prog-img-tag {
+        position:absolute; top:12px; left:14px; font-size:.62rem; font-weight:600;
+        letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:50px;
+        background:rgba(255,255,255,.1); backdrop-filter:blur(8px); color:rgba(255,255,255,.8);
+    }
+    .prog-card-body { padding:1.35rem; flex:1; display:flex; flex-direction:column; }
+    .prog-title { font-family:var(--display); font-size:1.05rem; font-weight:400; color:var(--white); margin-bottom:.5rem; line-height:1.3; }
+    .prog-desc { font-size:.86rem; color:var(--text-dim); line-height:1.65; flex:1; margin-bottom:1rem; }
+    .prog-meta { display:flex; gap:14px; flex-wrap:wrap; font-size:.74rem; color:var(--muted); border-top:1px solid var(--border); padding-top:.85rem; margin-top:auto; }
+    .prog-meta span { display:flex; align-items:center; gap:5px; }
+    .prog-meta i { color:var(--gold); }
+
+    /* ── IMPACT (light section) ── */
+    #impact { background:var(--light-alt); padding:100px 0; border-top:1px solid var(--light-stone); }
+    #impact .section-title { color:var(--light-text); }
+    #impact .section-eyebrow { color:var(--gold); }
+    #impact .section-lead { color:var(--light-muted); }
+    .impact-num {
+        font-family:var(--display); font-size:clamp(2.5rem,5vw,3.5rem); font-weight:400;
+        color:var(--brown); display:block; line-height:1; margin-bottom:.4rem;
+    }
+    .impact-lbl { font-size:.82rem; color:var(--light-muted); line-height:1.5; display:block; margin-bottom:.85rem; }
+    .impact-bar { height:4px; background:var(--light-stone); border-radius:50px; overflow:hidden; }
+    .impact-bar-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light)); border-radius:50px; transition:width 1.2s ease; }
+    .impact-divider { height:100%; width:1px; background:var(--light-stone); }
+
+    /* ── GET INVOLVED (dark CTA) ── */
+    #get-involved { background:var(--deep); padding:100px 0; }
+    .involve-card {
+        background:var(--card); border:1px solid var(--border); border-radius:16px;
+        padding:2.25rem 2rem; text-align:center; height:100%;
+        transition:all .3s ease;
+    }
+    .involve-card:hover { transform:translateY(-5px); border-color:rgba(201,168,76,.3); box-shadow:0 12px 40px rgba(0,0,0,.5); }
+    .involve-card-icon {
+        width:64px; height:64px; border-radius:16px; margin:0 auto 1.25rem;
+        display:flex; align-items:center; justify-content:center; font-size:1.7rem;
+    }
+    .involve-card-icon.green { background:rgba(42,94,43,.2); color:#6dc96f; }
+    .involve-card-icon.gold  { background:rgba(201,168,76,.12); color:var(--gold); }
+    .involve-card-icon.brown { background:rgba(92,61,30,.2); color:var(--brown-mid); }
+    .involve-card h4 { font-family:var(--display); font-size:1.25rem; font-weight:400; color:var(--white); margin-bottom:.6rem; }
+    .involve-card p { font-size:.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:1.5rem; }
+    .btn-involve {
+        display:inline-flex; align-items:center; gap:6px;
+        font-size:.86rem; font-weight:600; text-decoration:none;
+        padding:.6rem 1.4rem; border-radius:50px; transition:all .25s ease;
+    }
+    .btn-involve.green { background:rgba(42,94,43,.2); color:#6dc96f; border:1px solid rgba(42,94,43,.4); }
+    .btn-involve.green:hover { background:var(--green); color:#fff; }
+    .btn-involve.gold  { background:var(--gold-pale); color:var(--gold); border:1px solid rgba(201,168,76,.3); }
+    .btn-involve.gold:hover  { background:var(--gold); color:var(--black); }
+    .btn-involve.brown { background:rgba(92,61,30,.15); color:var(--brown-mid); border:1px solid rgba(92,61,30,.3); }
+    .btn-involve.brown:hover { background:var(--brown); color:#F5F0E8; }
+
+    /* ── PARTNER STRIP (light section) ── */
+    #partners { background:var(--light); padding:70px 0; border-top:1px solid var(--light-stone); border-bottom:1px solid var(--light-stone); }
+    .partner-strip-title { font-family:var(--display); font-size:clamp(1.6rem,3.5vw,2.2rem); font-weight:400; color:var(--light-text); line-height:1.2; }
+    .partner-strip-title em { font-style:italic; color:var(--brown); }
+    .partner-logo-row { display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:2rem; }
+    .partner-logo {
+        height:48px; padding:0 1.5rem; background:var(--light-alt); border:1px solid var(--light-stone);
+        border-radius:10px; display:flex; align-items:center; justify-content:center;
+        font-size:.78rem; font-weight:600; color:var(--light-muted); letter-spacing:.05em;
+        transition:all .2s ease;
+    }
+    .partner-logo:hover { border-color:var(--gold); color:var(--brown); }
+
+    /* ── SCRIPTURE STRIP ── */
+    .scripture-strip {
+        background:var(--brown); padding:60px 0; text-align:center;
+    }
+    .scripture-strip blockquote {
+        font-family:var(--display); font-size:clamp(1.5rem,3.5vw,2.2rem);
+        font-weight:400; color:#F5F0E8; line-height:1.35; max-width:700px;
+        margin:0 auto .75rem; font-style:italic;
+    }
+    .scripture-strip cite { font-size:.82rem; color:rgba(245,240,232,.55); letter-spacing:.1em; font-style:normal; }
+
+    /* ── CONTACT FORM (dark section) ── */
+    #ngo-contact { background:var(--black); padding:100px 0; }
+    .ngo-contact-card {
+        background:var(--card); border:1px solid var(--border); border-radius:20px;
+        overflow:hidden;
+    }
+    .ngo-contact-header {
+        background:linear-gradient(135deg, var(--green), #0f2e10);
+        padding:2.5rem; text-align:center; position:relative; overflow:hidden;
+    }
+    .ngo-contact-header::before {
+        content:''; position:absolute; inset:0;
+        background:radial-gradient(ellipse at 50% -20%, rgba(201,168,76,.2) 0%, transparent 60%);
+    }
+    .ngo-contact-header h3 { font-family:var(--display); font-size:1.8rem; font-weight:400; color:#F5F0E8; margin-bottom:.35rem; position:relative; }
+    .ngo-contact-header p { font-family:var(--serif); font-style:italic; font-size:.9rem; color:rgba(245,240,232,.6); position:relative; }
+    .ngo-form-body { padding:2.5rem; }
+    .ngo-label { display:block; font-size:.76rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.45rem; }
+    .ngo-input {
+        width:100%; padding:.7rem 1rem; border:1.5px solid rgba(255,255,255,.08);
+        border-radius:10px; font-size:.92rem; color:var(--text); background:rgba(255,255,255,.04);
+        outline:none; transition:border-color .2s ease, box-shadow .2s ease; font-family:var(--body);
+    }
+    .ngo-input::placeholder { color:var(--muted); }
+    .ngo-input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(42,94,43,.15); }
+    .ngo-input select { color:var(--text); }
+    .btn-ngo-submit {
+        width:100%; padding:.9rem; background:var(--green); color:#fff;
+        border:none; border-radius:12px; font-size:.97rem; font-weight:600;
+        cursor:pointer; transition:all .3s ease; display:flex; align-items:center;
+        justify-content:center; gap:8px;
+    }
+    .btn-ngo-submit:hover { background:var(--green-light); transform:translateY(-2px); box-shadow:0 8px 24px rgba(42,94,43,.35); }
+    .ngo-contact-info { padding:2.5rem; border-top:1px solid var(--border); display:flex; flex-wrap:wrap; gap:2rem; }
+    .ngo-contact-item { display:flex; align-items:flex-start; gap:12px; flex:1; min-width:180px; }
+    .ngo-contact-icon { width:38px; height:38px; background:rgba(42,94,43,.2); border-radius:10px; display:flex; align-items:center; justify-content:center; color:#6dc96f; font-size:.95rem; flex-shrink:0; }
+    .ngo-contact-text strong { display:block; font-size:.82rem; font-weight:600; color:var(--text); margin-bottom:2px; }
+    .ngo-contact-text span { font-size:.82rem; color:var(--text-dim); }
+
+    /* ── Footer ── */
+    footer { background:var(--black); padding:70px 0 30px; border-top:1px solid rgba(201,168,76,.1); }
+    .footer-brand { font-family:var(--display); font-size:1.4rem; color:var(--white); margin-bottom:.75rem; display:block; }
+    .footer-brand span { color:var(--gold); }
+    .footer-tagline { font-family:var(--serif); font-style:italic; color:rgba(255,255,255,.4); font-size:.88rem; line-height:1.6; margin-bottom:1.5rem; max-width:260px; }
+    .footer-social { display:flex; gap:8px; }
+    .footer-social a { width:36px; height:36px; background:rgba(255,255,255,.06); border-radius:8px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.5); font-size:.95rem; text-decoration:none; transition:all .2s ease; border:1px solid rgba(255,255,255,.06); }
+    .footer-social a:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
+    .footer-heading { font-size:.68rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:1.2rem; }
+    footer ul { list-style:none; padding:0; }
+    footer ul li { margin-bottom:.7rem; }
+    footer ul li a { color:rgba(255,255,255,.5); text-decoration:none; font-size:.88rem; transition:color .2s ease; }
+    footer ul li a:hover { color:var(--gold); }
+    footer hr { border-color:rgba(255,255,255,.06); margin:2.5rem 0 1.5rem; }
+    .footer-bottom { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; }
+    .footer-copy { font-size:.8rem; color:rgba(255,255,255,.3); }
+    .footer-legal { display:flex; gap:1.25rem; }
+    .footer-legal a { font-size:.8rem; color:rgba(255,255,255,.3); text-decoration:none; transition:color .2s ease; }
+    .footer-legal a:hover { color:var(--gold); }
+
+    /* ── Utility ── */
+    .btn-outline-primary { border:1.5px solid rgba(201,168,76,.4); color:var(--gold); border-radius:50px; font-weight:500; font-size:.9rem; padding:.65rem 1.75rem; transition:all .3s ease; background:transparent; text-decoration:none; display:inline-block; }
+    .btn-outline-primary:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
+    .btn-outline-green { border:1.5px solid rgba(42,94,43,.5); color:#6dc96f; border-radius:50px; font-weight:500; font-size:.9rem; padding:.65rem 1.75rem; background:transparent; text-decoration:none; transition:all .3s ease; display:inline-block; }
+    .btn-outline-green:hover { background:var(--green); color:#fff; border-color:var(--green); }
+
+    @media(max-width:768px){
+        #mission,#programmes,#impact,#get-involved,#ngo-contact,#about-ngo { padding:70px 0; }
+        .ngo-hero { padding:5rem 0 4rem; }
+        .ngo-hero-actions { flex-direction:column; align-items:center; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <div class="brand-icon"><i class="bi bi-cross-fill"></i></div>
+                <div>
+                    Word Transformation
+                    <span class="brand-sub">Church</span>
+                </div>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Membership</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="membership.html"><i class="bi bi-person-badge-fill"></i>Become a Member</a></li>
+                            <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-speedometer2"></i>Member Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="ngo.html"><i class="bi bi-globe-americas me-1" style="color:var(--gold);font-size:.8rem;"></i>Outreach</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="about.html"><i class="bi bi-info-circle-fill"></i>About Us</a></li>
+                            <li><a class="dropdown-item" href="ministries.html"><i class="bi bi-people-fill"></i>Ministries</a></li>
+                            <li><a class="dropdown-item" href="smallgroups.html"><i class="bi bi-diagram-3-fill"></i>Small Groups</a></li>
+                            <li><a class="dropdown-item" href="devotional.html"><i class="bi bi-journal-bookmark-fill"></i>Devotional</a></li>
+                            <li><a class="dropdown-item" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i>Prayer</a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="bi bi-journal-text"></i>Blog</a></li>
+                            <li><a class="dropdown-item" href="volunteer.html"><i class="bi bi-hand-thumbs-up-fill"></i>Volunteer</a></li>
+                            <li><a class="dropdown-item" href="gallery.html"><i class="bi bi-images"></i>Gallery</a></li>
+                            <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
+                            <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="ngo.html"><i class="bi bi-globe-americas"></i>WTC Outreach / NGO</a></li>
+                            <li><a class="dropdown-item" href="give.html"><i class="bi bi-heart-fill"></i>Give Online</a></li>
+                            <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-person-circle"></i>My Account</a></li>
+                            <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-1">
+                        <button class="nav-link bg-transparent border-0" onclick="toggleSearch()" style="color:rgba(255,255,255,.7);">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a href="livestream.html" class="btn-live-nav"><span class="live-dot"></span> Join Live</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a href="give.html" class="btn-give">
+                            <i class="bi bi-heart-fill me-1"></i> Give
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== SEARCH OVERLAY ===================== -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-bar-wrap">
+            <i class="bi bi-search search-bar-icon"></i>
+            <input type="text" id="searchInput" class="search-bar-input" placeholder="Search sermons, events, outreach…" oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)" autocomplete="off">
+            <span class="search-bar-hint d-none d-md-inline">Press Esc to close</span>
+            <button class="search-bar-close" onclick="toggleSearch()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div style="position:relative;display:flex;justify-content:center;padding:0 1rem;">
+            <div class="search-box"><div class="search-results" id="searchResults"></div></div>
+        </div>
+        <div class="search-backdrop" onclick="toggleSearch()"></div>
+    </div>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="ngo-hero">
+        <div class="container">
+            <div class="ngo-hero-inner reveal">
+                <p class="ngo-eyebrow"><i class="bi bi-globe-americas"></i> WTC Outreach</p>
+                <h1>Faith in Action,<br><em>Community</em> at Heart</h1>
+                <p class="ngo-hero-sub">Our NGO arm exists because the Gospel is not just proclaimed — it is lived. We serve the vulnerable, uplift the marginalised, and build communities where every person can flourish.</p>
+                <div class="ngo-hero-actions">
+                    <a href="#get-involved" class="btn-ngo-primary"><i class="bi bi-hand-thumbs-up-fill me-2"></i> Get Involved</a>
+                    <a href="#programmes" class="btn-ngo-ghost"><i class="bi bi-grid-fill"></i> Our Programmes</a>
+                    <a href="#ngo-contact" class="btn-ngo-ghost"><i class="bi bi-envelope-fill"></i> Partner With Us</a>
+                </div>
+                <div class="ngo-stats-row">
+                    <div class="text-center">
+                        <span class="ngo-stat-num">2,400+</span>
+                        <span class="ngo-stat-lbl">Lives Reached</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="ngo-stat-num">6</span>
+                        <span class="ngo-stat-lbl">Active Programmes</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="ngo-stat-num">8</span>
+                        <span class="ngo-stat-lbl">Communities Served</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="ngo-stat-num">12</span>
+                        <span class="ngo-stat-lbl">Years of Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== MISSION PILLARS ===================== -->
+    <section id="mission">
+        <div class="container">
+            <div class="row justify-content-between align-items-end mb-5">
+                <div class="col-lg-6 reveal">
+                    <p class="section-eyebrow"><span class="section-eyebrow-line"></span> What We Stand For</p>
+                    <h2 class="section-title">Our Mission <span class="gold-accent">Pillars</span></h2>
+                    <p class="section-lead">Every programme we run is anchored in these four convictions — that lasting change is holistic, relational, and rooted in dignity.</p>
+                </div>
+                <div class="col-lg-4 reveal text-lg-end mt-3 mt-lg-0">
+                    <a href="volunteer.html" class="btn-outline-primary">Volunteer With Us</a>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3 reveal delay-1">
+                    <div class="pillar-card">
+                        <div class="pillar-icon green"><i class="bi bi-heart-pulse-fill"></i></div>
+                        <h4 class="pillar-title">Dignity & Welfare</h4>
+                        <p class="pillar-desc">No family in our community should go without food, shelter, or basic care. We provide emergency relief and long-term welfare support to those in greatest need.</p>
+                        <span class="pillar-tag">Core Value</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal delay-2">
+                    <div class="pillar-card">
+                        <div class="pillar-icon gold"><i class="bi bi-book-fill"></i></div>
+                        <h4 class="pillar-title">Education & Skills</h4>
+                        <p class="pillar-desc">We equip the next generation and the unemployed with vocational training, scholarships, and mentorship to break cycles of poverty through knowledge.</p>
+                        <span class="pillar-tag">Core Value</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal delay-3">
+                    <div class="pillar-card">
+                        <div class="pillar-icon brown"><i class="bi bi-people-fill"></i></div>
+                        <h4 class="pillar-title">Community Building</h4>
+                        <p class="pillar-desc">Strong communities are not built alone. We create spaces for dialogue, reconciliation, and collaboration across social and economic divides.</p>
+                        <span class="pillar-tag">Core Value</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal delay-4">
+                    <div class="pillar-card">
+                        <div class="pillar-icon blue"><i class="bi bi-globe2"></i></div>
+                        <h4 class="pillar-title">Sustainable Impact</h4>
+                        <p class="pillar-desc">Short-term help matters, but lasting transformation is our goal. Every intervention is designed to build local capacity and reduce dependency over time.</p>
+                        <span class="pillar-tag">Core Value</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ABOUT NGO ===================== -->
+    <section id="about-ngo">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal-left">
+                    <div class="about-ngo-visual">
+                        <i class="bi bi-globe-americas about-ngo-icon"></i>
+                        <div class="about-ngo-badge">
+                            <div class="about-ngo-badge-icon"><i class="bi bi-award-fill"></i></div>
+                            <div class="about-ngo-badge-text">
+                                <strong>Registered NGO</strong>
+                                Ghana Department of Social Welfare
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal-right">
+                    <p class="section-eyebrow"><span class="section-eyebrow-line"></span> About WTC Outreach</p>
+                    <h2 class="section-title dark mb-3">More Than a Church — <span style="color:var(--brown);">A Movement</span></h2>
+                    <p style="color:var(--light-muted);font-size:.95rem;line-height:1.75;margin-bottom:1rem;">WTC Outreach is the registered NGO and community development arm of Word Transformation Church. Established in 2013, we exist to translate the values of the Gospel into concrete, life-changing action for families across Accra and the Greater Accra Region.</p>
+                    <p style="color:var(--light-muted);font-size:.95rem;line-height:1.75;margin-bottom:1.5rem;">We operate independently from church giving, partnering with government agencies, international donors, and civic organisations to fund and deliver programmes that are transparent, accountable, and community-led.</p>
+                    <ul class="ngo-values-list">
+                        <li><i class="bi bi-check-circle-fill"></i><span><strong>Registered with the Ghana Department of Social Welfare</strong> — fully compliant and accountable</span></li>
+                        <li><i class="bi bi-check-circle-fill"></i><span><strong>Community-led governance</strong> — decisions made with the people we serve, not for them</span></li>
+                        <li><i class="bi bi-check-circle-fill"></i><span><strong>Open financial reporting</strong> — annual reports published for every stakeholder</span></li>
+                        <li><i class="bi bi-check-circle-fill"></i><span><strong>Faith-inspired, not faith-exclusive</strong> — we serve all regardless of belief</span></li>
+                    </ul>
+                    <a href="#ngo-contact" class="btn-outline-green">Request Our Annual Report</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROGRAMMES ===================== -->
+    <section id="programmes">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <p class="section-eyebrow" style="justify-content:center;"><span class="section-eyebrow-line"></span> What We Do <span class="section-eyebrow-line"></span></p>
+                <h2 class="section-title">Our Active <span class="gold-accent">Programmes</span></h2>
+                <p class="section-lead" style="max-width:540px;margin:0 auto;">Six focused initiatives, each designed to address a specific gap in our community with measurable, lasting outcomes.</p>
+            </div>
+            <div class="row g-4">
+                <!-- Education -->
+                <div class="col-md-6 col-lg-4 reveal delay-1">
+                    <div class="prog-card">
+                        <div class="prog-img prog-img-education">
+                            <i class="bi bi-mortarboard-fill"></i>
+                            <span class="prog-img-tag">Education</span>
+                        </div>
+                        <div class="prog-card-body">
+                            <h4 class="prog-title">WTC Scholarship Fund</h4>
+                            <p class="prog-desc">Providing annual scholarships to bright but financially constrained secondary and tertiary students from low-income homes across Accra. Recipients receive tuition, mentorship, and career guidance.</p>
+                            <div class="prog-meta">
+                                <span><i class="bi bi-people-fill"></i> 85 students active</span>
+                                <span><i class="bi bi-calendar3"></i> Since 2015</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skills -->
+                <div class="col-md-6 col-lg-4 reveal delay-2">
+                    <div class="prog-card">
+                        <div class="prog-img prog-img-skills">
+                            <i class="bi bi-tools"></i>
+                            <span class="prog-img-tag">Skills</span>
+                        </div>
+                        <div class="prog-card-body">
+                            <h4 class="prog-title">Vocational Skills Hub</h4>
+                            <p class="prog-desc">Free 3–6 month training in tailoring, hairdressing, electrical work, catering, and digital literacy for unemployed youth and women transitioning out of poverty.</p>
+                            <div class="prog-meta">
+                                <span><i class="bi bi-people-fill"></i> 240 graduated</span>
+                                <span><i class="bi bi-calendar3"></i> Since 2016</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Welfare -->
+                <div class="col-md-6 col-lg-4 reveal delay-3">
+                    <div class="prog-card">
+                        <div class="prog-img prog-img-welfare">
+                            <i class="bi bi-basket2-fill"></i>
+                            <span class="prog-img-tag">Welfare</span>
+                        </div>
+                        <div class="prog-card-body">
+                            <h4 class="prog-title">Family Welfare & Relief</h4>
+                            <p class="prog-desc">Monthly food packages, utility support, and emergency cash grants for widows, elderly persons without family support, and households in crisis situations.</p>
+                            <div class="prog-meta">
+                                <span><i class="bi bi-house-fill"></i> 60+ families</span>
+                                <span><i class="bi bi-calendar3"></i> Since 2013</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Health -->
+                <div class="col-md-6 col-lg-4 reveal delay-1">
+                    <div class="prog-card">
+                        <div class="prog-img prog-img-health">
+                            <i class="bi bi-hospital-fill"></i>
+                            <span class="prog-img-tag">Health</span>
+                        </div>
+                        <div class="prog-card-body">
+                            <h4 class="prog-title">Community Health Outreach</h4>
+                            <p class="prog-desc">Quarterly free medical screening camps, NHIS registration drives, hygiene education, and referral support in partnership with district health services.</p>
+                            <div class="prog-meta">
+                                <span><i class="bi bi-people-fill"></i> 600+ screened/yr</span>
+                                <span><i class="bi bi-calendar3"></i> Since 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Women -->
+                <div class="col-md-6 col-lg-4 reveal delay-2">
+                    <div class="prog-card">
+                        <div class="prog-img prog-img-women">
+                            <i class="bi bi-gender-female"></i>
+                            <span class="prog-img-tag">Women</span>
+                        </div>
+                        <div class="prog-card-body">
+                            <h4 class="prog-title">Women's Economic Empowerment</h4>
+                            <p class="prog-desc">Micro-loan schemes, business development training, and savings cooperatives for women entrepreneurs — building financial independence from the ground up.</p>
+                            <div class="prog-meta">
+                                <span><i class="bi bi-people-fill"></i> 120 women enrolled</span>
+                                <span><i class="bi bi-calendar3"></i> Since 2020</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Environment -->
+                <div class="col-md-6 col-lg-4 reveal delay-3">
+                    <div class="prog-card">
+                        <div class="prog-img prog-img-env">
+                            <i class="bi bi-tree-fill"></i>
+                            <span class="prog-img-tag">Environment</span>
+                        </div>
+                        <div class="prog-card-body">
+                            <h4 class="prog-title">Clean Community Initiative</h4>
+                            <p class="prog-desc">Community clean-up drives, tree planting campaigns, waste management education, and advocacy for a healthier environment in underserved neighbourhoods.</p>
+                            <div class="prog-meta">
+                                <span><i class="bi bi-geo-alt-fill"></i> 8 communities</span>
+                                <span><i class="bi bi-calendar3"></i> Since 2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== IMPACT ===================== -->
+    <section id="impact">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <p class="section-eyebrow" style="justify-content:center;color:var(--gold);"><span class="section-eyebrow-line"></span> The Numbers Behind the Work <span class="section-eyebrow-line"></span></p>
+                <h2 class="section-title dark">2026 Impact <span style="color:var(--brown);">at a Glance</span></h2>
+                <p class="section-lead dark" style="max-width:500px;margin:0 auto;">Every figure represents a real person whose life has been touched through your giving and our work together.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-6 col-lg-3 reveal delay-1">
+                    <span class="impact-num">2,400+</span>
+                    <span class="impact-lbl">Total lives directly served across all programmes</span>
+                    <div class="impact-bar"><div class="impact-bar-fill" style="width:85%;"></div></div>
+                </div>
+                <div class="col-6 col-lg-3 reveal delay-2">
+                    <span class="impact-num">85</span>
+                    <span class="impact-lbl">Students on active scholarship this academic year</span>
+                    <div class="impact-bar"><div class="impact-bar-fill" style="width:70%;"></div></div>
+                </div>
+                <div class="col-6 col-lg-3 reveal delay-3">
+                    <span class="impact-num">GH₵ 480k</span>
+                    <span class="impact-lbl">Value of welfare and relief distributed since 2013</span>
+                    <div class="impact-bar"><div class="impact-bar-fill" style="width:60%;"></div></div>
+                </div>
+                <div class="col-6 col-lg-3 reveal delay-4">
+                    <span class="impact-num">92%</span>
+                    <span class="impact-lbl">Vocational graduates employed within 6 months</span>
+                    <div class="impact-bar"><div class="impact-bar-fill" style="width:92%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== GET INVOLVED ===================== -->
+    <section id="get-involved">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <p class="section-eyebrow" style="justify-content:center;"><span class="section-eyebrow-line"></span> Join the Work <span class="section-eyebrow-line"></span></p>
+                <h2 class="section-title">Three Ways to <span class="gold-accent">Make a Difference</span></h2>
+                <p class="section-lead" style="max-width:480px;margin:0 auto;">Whether you give, serve, or partner — every contribution fuels real transformation in real communities.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4 reveal delay-1">
+                    <div class="involve-card">
+                        <div class="involve-card-icon green"><i class="bi bi-hand-thumbs-up-fill"></i></div>
+                        <h4>Volunteer Your Time</h4>
+                        <p>Join our outreach teams on the ground. From teaching skills to packing food parcels — your hands and hours change lives directly.</p>
+                        <a href="volunteer.html" class="btn-involve green"><i class="bi bi-arrow-right"></i> Sign Up to Volunteer</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal delay-2">
+                    <div class="involve-card">
+                        <div class="involve-card-icon gold"><i class="bi bi-heart-fill"></i></div>
+                        <h4>Give to the Outreach Fund</h4>
+                        <p>100% of dedicated outreach donations go directly to programme costs. Every cedi helps a student, feeds a family, or trains a future entrepreneur.</p>
+                        <a href="give.html" class="btn-involve gold"><i class="bi bi-arrow-right"></i> Give to Outreach</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal delay-3">
+                    <div class="involve-card">
+                        <div class="involve-card-icon brown"><i class="bi bi-briefcase-fill"></i></div>
+                        <h4>Become a Partner</h4>
+                        <p>Businesses, NGOs, and institutions can partner with us for co-funded programmes, CSR initiatives, and community engagement projects across Accra.</p>
+                        <a href="#ngo-contact" class="btn-involve brown"><i class="bi bi-arrow-right"></i> Partner With Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PARTNERS ===================== -->
+    <section id="partners">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-4 reveal-left">
+                    <p class="section-eyebrow" style="color:var(--gold);"><span class="section-eyebrow-line"></span> Our Partners</p>
+                    <h2 class="partner-strip-title">Working Together for <em>Greater Good</em></h2>
+                    <p style="color:var(--light-muted);font-size:.9rem;line-height:1.7;margin-top:1rem;">We collaborate with government bodies, faith communities, NGOs, and businesses who share our commitment to community transformation.</p>
+                </div>
+                <div class="col-lg-8 reveal-right">
+                    <div class="partner-logo-row">
+                        <div class="partner-logo">Ghana Dept. of Social Welfare</div>
+                        <div class="partner-logo">Ghana Health Service</div>
+                        <div class="partner-logo">Accra Metro Assembly</div>
+                        <div class="partner-logo">LEAP Programme</div>
+                        <div class="partner-logo">National Youth Authority</div>
+                        <div class="partner-logo">Local NGO Network</div>
+                    </div>
+                    <p style="font-size:.8rem;color:var(--light-muted);margin-top:1.25rem;font-style:italic;">Interested in partnering? <a href="#ngo-contact" style="color:var(--brown);text-decoration:none;font-weight:600;">Contact us today →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SCRIPTURE STRIP ===================== -->
+    <div class="scripture-strip">
+        <div class="container">
+            <blockquote>"Speak up for those who cannot speak for themselves, for the rights of all who are destitute."</blockquote>
+            <cite>— Proverbs 31:8</cite>
+        </div>
+    </div>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="ngo-contact">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <p class="section-eyebrow" style="justify-content:center;"><span class="section-eyebrow-line"></span> Reach Out <span class="section-eyebrow-line"></span></p>
+                <h2 class="section-title">Get in <span class="gold-accent">Touch</span></h2>
+                <p class="section-lead" style="max-width:460px;margin:0 auto;">Whether you want to refer a family in need, partner with us, or simply learn more — we'd love to hear from you.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="ngo-contact-card reveal">
+                        <div class="ngo-contact-header">
+                            <h3>WTC Outreach Enquiry</h3>
+                            <p>Fill in the form and our outreach coordinator will respond within 2 business days.</p>
+                        </div>
+                        <div class="ngo-form-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="ngo-label">Full Name</label>
+                                    <input type="text" class="ngo-input" placeholder="Your name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="ngo-label">Email Address</label>
+                                    <input type="email" class="ngo-input" placeholder="your@email.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="ngo-label">Phone Number</label>
+                                    <input type="tel" class="ngo-input" placeholder="+233 ...">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="ngo-label">Enquiry Type</label>
+                                    <select class="ngo-input" style="color:var(--text-dim);">
+                                        <option value="">Select a reason…</option>
+                                        <option>Refer a family / person in need</option>
+                                        <option>Apply for scholarship</option>
+                                        <option>Enrol in vocational training</option>
+                                        <option>Partnership / CSR enquiry</option>
+                                        <option>Volunteer interest</option>
+                                        <option>Donation / funding enquiry</option>
+                                        <option>Media / press enquiry</option>
+                                        <option>General question</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="ngo-label">Message</label>
+                                    <textarea class="ngo-input" rows="5" placeholder="Tell us how we can help, or what you'd like to know…"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn-ngo-submit" onclick="alert('Thank you! Your message has been received. We will be in touch within 2 business days.')">
+                                        <i class="bi bi-send-fill"></i> Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ngo-contact-info">
+                            <div class="ngo-contact-item">
+                                <div class="ngo-contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                                <div class="ngo-contact-text">
+                                    <strong>Email</strong>
+                                    <span>outreach@wtcghana.org</span>
+                                </div>
+                            </div>
+                            <div class="ngo-contact-item">
+                                <div class="ngo-contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                                <div class="ngo-contact-text">
+                                    <strong>Phone</strong>
+                                    <span>+233 30 000 0000</span>
+                                </div>
+                            </div>
+                            <div class="ngo-contact-item">
+                                <div class="ngo-contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                                <div class="ngo-contact-text">
+                                    <strong>Office</strong>
+                                    <span>WTC Community Centre, Accra</span>
+                                </div>
+                            </div>
+                            <div class="ngo-contact-item">
+                                <div class="ngo-contact-icon"><i class="bi bi-clock-fill"></i></div>
+                                <div class="ngo-contact-text">
+                                    <strong>Office Hours</strong>
+                                    <span>Mon–Fri, 8:00 AM – 5:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <span class="footer-brand">Word <span>Transformation</span></span>
+                    <p class="footer-tagline">"Your word is a lamp for my feet, a light on my path." — Psalm 119:105</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="livestream.html"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <p class="footer-heading">Explore</p>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="ngo.html">WTC Outreach</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <p class="footer-heading">Ministry</p>
+                    <ul>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="smallgroups.html">Small Groups</a></li>
+                        <li><a href="volunteer.html">Volunteer</a></li>
+                        <li><a href="prayer.html">Prayer Wall</a></li>
+                        <li><a href="devotional.html">Devotional</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <p class="footer-heading">Service Times</p>
+                    <ul>
+                        <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-sun me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Sunday</strong> — 9:00 AM &amp; 11:00 AM</li>
+                        <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:.7rem;"><i class="bi bi-book me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Wednesday</strong> — 7:00 PM Bible Study</li>
+                        <li style="color:rgba(255,255,255,.45);font-size:.88rem;margin-bottom:1.5rem;"><i class="bi bi-chat-heart me-2" style="color:var(--gold)"></i><strong style="color:rgba(255,255,255,.7)">Friday</strong> — 6:30 PM Prayer Night</li>
+                    </ul>
+                    <a href="livestream.html" class="btn-live-nav" style="width:fit-content;"><span class="live-dot"></span> Watch Live Online</a>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <p class="footer-copy">&copy; 2025 Word Transformation Church &amp; WTC Outreach. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms &amp; Conditions</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function(){ document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 60); });
+
+    // Scroll reveals
+    var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){ obs.observe(el); });
+
+    // Site search
+    var SITE_PAGES = [
+        {title:'Home',url:'index.html',icon:'bi-house-fill',cat:'Page',iconClass:'brown'},
+        {title:'About Us',url:'about.html',icon:'bi-info-circle-fill',cat:'Page',iconClass:'brown'},
+        {title:'Ministries',url:'ministries.html',icon:'bi-people-fill',cat:'Page',iconClass:'green'},
+        {title:'Small Groups',url:'smallgroups.html',icon:'bi-diagram-3-fill',cat:'Page',iconClass:'green'},
+        {title:'Sermons',url:'sermons.html',icon:'bi-mic-fill',cat:'Page',iconClass:'brown'},
+        {title:'Blog',url:'blog.html',icon:'bi-journal-text',cat:'Page',iconClass:''},
+        {title:'Devotional',url:'devotional.html',icon:'bi-journal-bookmark-fill',cat:'Page',iconClass:'green'},
+        {title:'Events',url:'events.html',icon:'bi-calendar-event-fill',cat:'Page',iconClass:''},
+        {title:'Gallery',url:'gallery.html',icon:'bi-images',cat:'Page',iconClass:''},
+        {title:'Workshops',url:'workshops.html',icon:'bi-tools',cat:'Page',iconClass:'brown'},
+        {title:'Bible Quiz',url:'biblequiz.html',icon:'bi-patch-question-fill',cat:'Page',iconClass:'green'},
+        {title:'Volunteer',url:'volunteer.html',icon:'bi-hand-thumbs-up-fill',cat:'Page',iconClass:'green'},
+        {title:'Contact Us',url:'contact.html',icon:'bi-envelope-fill',cat:'Page',iconClass:'brown'},
+        {title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},
+        {title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},
+        {title:'Give Online',url:'give.html',icon:'bi-heart-fill',cat:'Action',iconClass:'red'},
+        {title:'WTC Outreach / NGO',url:'ngo.html',icon:'bi-globe-americas',cat:'Page',iconClass:'green'},
+        {title:'My Account',url:'memberdashboard.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},
+    ];
+    function toggleSearch(){ var o=document.getElementById('searchOverlay'); var ip=document.getElementById('searchInput'); var open=o.classList.toggle('open'); if(open){ ip.value=''; document.getElementById('searchResults').innerHTML=renderHints(); setTimeout(function(){ ip.focus(); },80); document.body.style.overflow='hidden'; } else { document.body.style.overflow=''; } }
+    function handleSearchKey(e){ if(e.key==='Escape') toggleSearch(); }
+    function runSearch(q){ var r=document.getElementById('searchResults'); q=q.trim().toLowerCase(); if(!q){ r.innerHTML=renderHints(); return; } var m=SITE_PAGES.filter(function(p){ return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub&&p.sub.toLowerCase().includes(q)); }).slice(0,7); if(!m.length){ r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+q+'"</div>'; return; } r.innerHTML=m.map(function(p){ return '<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+p.title+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>'; }).join(''); }
+    function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="ngo.html"><i class="bi bi-globe-americas"></i> Outreach</a><a class="search-quick-link" href="give.html"><i class="bi bi-heart-fill"></i> Give</a><a class="search-quick-link" href="events.html"><i class="bi bi-calendar-event-fill"></i> Events</a></div></div>'; }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') { var o=document.getElementById('searchOverlay'); if(o.classList.contains('open')) toggleSearch(); } });
+    </script>
+</body>
+</html>
