@@ -409,16 +409,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
                     <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Membership</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="membership.html"><i class="bi bi-person-badge-fill"></i>Become a Member</a></li>
-                        <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-speedometer2"></i>Member Dashboard</a></li>
-                    </ul>
-                </li>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Membership</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="membership.html"><i class="bi bi-person-badge-fill"></i>Become a Member</a></li>
+                            <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-speedometer2"></i>Member Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ngo.html"><i class="bi bi-globe-americas me-1" style="color:var(--gold);font-size:.8rem;"></i>NGO</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">More</a>
@@ -434,6 +437,7 @@
                             <li><a class="dropdown-item" href="workshops.html"><i class="bi bi-tools"></i>Workshops</a></li>
                             <li><a class="dropdown-item" href="biblequiz.html"><i class="bi bi-patch-question-fill"></i>Bible Quiz</a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="ngo.html"><i class="bi bi-globe-americas"></i>WTC NGO / Outreach</a></li>
                             <li><a class="dropdown-item" href="give.html"><i class="bi bi-heart-fill"></i>Give Online</a></li>
                             <li><a class="dropdown-item" href="memberdashboard.html"><i class="bi bi-person-circle"></i>My Account</a></li>
                             <li><a class="dropdown-item" href="livestream.html"><i class="bi bi-youtube"></i>Live Stream</a></li>
@@ -804,13 +808,30 @@
                     </a>
                 </div>
 
-                <!-- Member Dashboard -->
+                <!-- NGO / Outreach -->
                 <div class="col-lg-4 col-md-6 reveal delay-3">
+                    <a href="ngo.html" style="text-decoration:none;display:block;height:100%;">
+                        <div style="background:linear-gradient(160deg,rgba(42,94,43,.25),rgba(42,94,43,.06));border:1px solid rgba(42,94,43,.3);border-radius:16px;overflow:hidden;height:100%;transition:all .3s ease;display:flex;flex-direction:column;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(42,94,43,.6)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.5)';" onmouseout="this.style.transform='';this.style.borderColor='rgba(42,94,43,.3)';this.style.boxShadow='';">
+                            <div style="background:linear-gradient(135deg,#071508,#1a3d1b);height:160px;display:flex;align-items:center;justify-content:center;position:relative;">
+                                <i class="bi bi-globe-americas" style="font-size:3rem;color:#5aac5c;opacity:.5;"></i>
+                                <span style="position:absolute;top:14px;left:14px;background:rgba(42,94,43,.25);border:1px solid rgba(42,94,43,.5);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6dc96f;">NGO &amp; Outreach</span>
+                            </div>
+                            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
+                                <h4 style="font-family:var(--display);font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:.6rem;">WTC NGO — Faith in Action</h4>
+                                <p style="font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);line-height:1.65;flex:1;margin-bottom:1.25rem;">Scholarships, welfare support, vocational skills, health outreach — see how your church is transforming 2,400+ lives across Accra.</p>
+                                <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:#6dc96f;font-weight:600;">Learn More <i class="bi bi-arrow-right"></i></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Member Dashboard -->
+                <div class="col-lg-4 col-md-6 reveal delay-4">
                     <a href="memberdashboard.html" style="text-decoration:none;display:block;height:100%;">
                         <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:100%;transition:all .3s ease;display:flex;flex-direction:column;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(201,168,76,.35)';this.style.boxShadow='0 16px 40px rgba(0,0,0,.5)';" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow='';">
-                            <div style="background:linear-gradient(135deg,#071508,#1a3d1b);height:160px;display:flex;align-items:center;justify-content:center;position:relative;">
-                                <i class="bi bi-person-circle" style="font-size:3rem;color:#5aac5c;opacity:.5;"></i>
-                                <span style="position:absolute;top:14px;left:14px;background:rgba(42,94,43,.2);border:1px solid rgba(42,94,43,.4);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#5aac5c;">Member Portal</span>
+                            <div style="background:linear-gradient(135deg,#0a0a14,#1a1a3d);height:160px;display:flex;align-items:center;justify-content:center;position:relative;">
+                                <i class="bi bi-person-circle" style="font-size:3rem;color:#7ab0f5;opacity:.5;"></i>
+                                <span style="position:absolute;top:14px;left:14px;background:rgba(50,100,180,.2);border:1px solid rgba(50,100,180,.4);border-radius:50px;padding:3px 12px;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7ab0f5;">Member Portal</span>
                             </div>
                             <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;">
                                 <h4 style="font-family:var(--display);font-size:1.15rem;font-weight:400;color:var(--white);margin-bottom:.6rem;">Your Member Dashboard</h4>
@@ -922,8 +943,8 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="sermons.html">Sermons</a></li>
                         <li><a href="blog.html">Blog</a></li>
+                        <li><a href="ngo.html"><i class="bi bi-globe-americas me-1" style="color:var(--gold);font-size:.7rem;"></i>WTC NGO</a></li>
                         <li><a href="workshops.html">Workshops</a></li>
-                        <li><a href="biblequiz.html">Bible Quiz</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -1119,6 +1140,7 @@
         {title:'Prayer Wall',url:'prayer.html',icon:'bi-hand-index-thumb-fill',cat:'Page',iconClass:'green'},
         {title:'Join Live Stream',url:'livestream.html',icon:'bi-youtube',cat:'Page',iconClass:'red'},
         {title:'Give Online',url:'give.html',icon:'bi-heart-fill',cat:'Action',iconClass:'red'},
+        {title:'WTC NGO / Outreach',url:'ngo.html',icon:'bi-globe-americas',cat:'Page',iconClass:'green',sub:'Community Outreach · NGO'},
         {title:'My Account',url:'memberdashboard.html',icon:'bi-person-circle',cat:'Page',iconClass:'brown'},
         {title:"When God's Silence Is His Answer",url:'blog.html',icon:'bi-book-fill',cat:'Sermon',iconClass:'brown',sub:'John 11:1–44'},
         {title:'All Things Work Together',url:'blog.html',icon:'bi-book-fill',cat:'Sermon',iconClass:'brown',sub:'Romans 8:28'},
@@ -1129,7 +1151,7 @@
     function toggleSearch(){ var o=document.getElementById('searchOverlay'); var ip=document.getElementById('searchInput'); var open=o.classList.toggle('open'); if(open){ ip.value=''; document.getElementById('searchResults').innerHTML=renderHints(); setTimeout(function(){ ip.focus(); },80); document.body.style.overflow='hidden'; } else { document.body.style.overflow=''; } }
     function handleSearchKey(e){ if(e.key==='Escape') toggleSearch(); }
     function runSearch(q){ var r=document.getElementById('searchResults'); q=q.trim().toLowerCase(); if(!q){ r.innerHTML=renderHints(); return; } var m=SITE_PAGES.filter(function(p){ return p.title.toLowerCase().includes(q)||(p.cat&&p.cat.toLowerCase().includes(q))||(p.sub&&p.sub.toLowerCase().includes(q)); }).slice(0,7); if(!m.length){ r.innerHTML='<div class="search-empty"><i class="bi bi-search"></i> No results for "'+escQ(q)+'"</div>'; return; } r.innerHTML=m.map(function(p){ return '<a class="search-result-item" href="'+p.url+'"><div class="search-result-icon '+(p.iconClass||'')+'"><i class="bi '+p.icon+'"></i></div><div class="search-result-text"><div class="search-result-title">'+highlight(p.title,q)+'</div><div class="search-result-sub">'+(p.sub||p.cat)+'</div></div><i class="bi bi-arrow-right search-result-arrow"></i></a>'; }).join(''); }
-    function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="events.html"><i class="bi bi-calendar-event-fill"></i> Events</a><a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a></div></div>'; }
+    function renderHints(){ return '<div class="search-hints"><span class="search-hint-label">Quick Links</span><div class="search-quick-links"><a class="search-quick-link" href="sermons.html"><i class="bi bi-mic-fill"></i> Sermons</a><a class="search-quick-link" href="prayer.html"><i class="bi bi-hand-index-thumb-fill"></i> Prayer</a><a class="search-quick-link" href="livestream.html"><i class="bi bi-youtube"></i> Live</a><a class="search-quick-link" href="ngo.html"><i class="bi bi-globe-americas"></i> NGO</a><a class="search-quick-link" href="blog.html"><i class="bi bi-journal-text"></i> Blog</a><a class="search-quick-link" href="events.html"><i class="bi bi-calendar-event-fill"></i> Events</a><a class="search-quick-link" href="ministries.html"><i class="bi bi-people-fill"></i> Ministries</a></div></div>'; }
     function highlight(t,q){ return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark style="background:rgba(201,168,76,.3);border-radius:3px;padding:0 2px;">$1</mark>'); }
     function escQ(s){ return s.replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
     </script>
